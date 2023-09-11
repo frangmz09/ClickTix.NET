@@ -32,11 +32,11 @@
             this.addsucursal_btn = new System.Windows.Forms.Button();
             this.label_titulo = new System.Windows.Forms.Label();
             this.input_nombre = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_direccion = new System.Windows.Forms.Label();
             this.input_direccion = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_cuit = new System.Windows.Forms.Label();
             this.input_cuit = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label_salas = new System.Windows.Forms.Label();
             this.input_salas = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.input_salas)).BeginInit();
             this.SuspendLayout();
@@ -80,16 +80,16 @@
             this.input_nombre.Size = new System.Drawing.Size(268, 20);
             this.input_nombre.TabIndex = 57;
             // 
-            // label1
+            // label_direccion
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(140, 147);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 14);
-            this.label1.TabIndex = 60;
-            this.label1.Text = "Direccion";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_direccion.AutoSize = true;
+            this.label_direccion.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_direccion.Location = new System.Drawing.Point(140, 147);
+            this.label_direccion.Name = "label_direccion";
+            this.label_direccion.Size = new System.Drawing.Size(51, 14);
+            this.label_direccion.TabIndex = 60;
+            this.label_direccion.Text = "Direccion";
+            this.label_direccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // input_direccion
             // 
@@ -98,16 +98,16 @@
             this.input_direccion.Size = new System.Drawing.Size(268, 20);
             this.input_direccion.TabIndex = 59;
             // 
-            // label2
+            // label_cuit
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(140, 196);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 14);
-            this.label2.TabIndex = 62;
-            this.label2.Text = "Cuit";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_cuit.AutoSize = true;
+            this.label_cuit.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_cuit.Location = new System.Drawing.Point(140, 196);
+            this.label_cuit.Name = "label_cuit";
+            this.label_cuit.Size = new System.Drawing.Size(27, 14);
+            this.label_cuit.TabIndex = 62;
+            this.label_cuit.Text = "Cuit";
+            this.label_cuit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // input_cuit
             // 
@@ -116,16 +116,16 @@
             this.input_cuit.Size = new System.Drawing.Size(268, 20);
             this.input_cuit.TabIndex = 61;
             // 
-            // label3
+            // label_salas
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(205, 253);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 14);
-            this.label3.TabIndex = 64;
-            this.label3.Text = "Numero de salas";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_salas.AutoSize = true;
+            this.label_salas.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_salas.Location = new System.Drawing.Point(205, 253);
+            this.label_salas.Name = "label_salas";
+            this.label_salas.Size = new System.Drawing.Size(86, 14);
+            this.label_salas.TabIndex = 64;
+            this.label_salas.Text = "Numero de salas";
+            this.label_salas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // input_salas
             // 
@@ -139,10 +139,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.input_salas);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label_salas);
+            this.Controls.Add(this.label_cuit);
             this.Controls.Add(this.input_cuit);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label_direccion);
             this.Controls.Add(this.input_direccion);
             this.Controls.Add(this.label_titulo);
             this.Controls.Add(this.input_nombre);
@@ -162,11 +162,11 @@
         private System.Windows.Forms.Button addsucursal_btn;
         private System.Windows.Forms.Label label_titulo;
         private System.Windows.Forms.TextBox input_nombre;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_direccion;
         private System.Windows.Forms.TextBox input_direccion;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_cuit;
         private System.Windows.Forms.TextBox input_cuit;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label_salas;
         private System.Windows.Forms.NumericUpDown input_salas;
     }
 }
