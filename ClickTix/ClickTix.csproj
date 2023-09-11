@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserControls\BIENVENIDA_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\BIENVENIDA_UC.Designer.cs">
+      <DependentUpon>BIENVENIDA_UC.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\EMPLEADOS_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     <Compile Include="UserControls\FUNCIONES_UC.Designer.cs">
       <DependentUpon>FUNCIONES_UC.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\BIENVENIDA_UC.resx">
+      <DependentUpon>BIENVENIDA_UC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\EMPLEADOS_UC.resx">
       <DependentUpon>EMPLEADOS_UC.cs</DependentUpon>
     </EmbeddedResource>

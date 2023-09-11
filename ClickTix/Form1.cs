@@ -46,5 +46,10 @@ namespace ClickTix
             txt_pw.Text = pw;
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

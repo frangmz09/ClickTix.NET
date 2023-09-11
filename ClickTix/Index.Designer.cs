@@ -30,7 +30,7 @@
         {
             this.btn_peliculas = new System.Windows.Forms.Button();
             this.btn_sucur = new System.Windows.Forms.Button();
-            this.btn_candy = new System.Windows.Forms.Button();
+            this.btn_empleado = new System.Windows.Forms.Button();
             this.btn_funciones = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
@@ -55,14 +55,15 @@
             this.btn_sucur.UseVisualStyleBackColor = true;
             this.btn_sucur.Click += new System.EventHandler(this.btn_sucur_Click);
             // 
-            // btn_candy
+            // btn_empleado
             // 
-            this.btn_candy.Location = new System.Drawing.Point(12, 252);
-            this.btn_candy.Name = "btn_candy";
-            this.btn_candy.Size = new System.Drawing.Size(125, 51);
-            this.btn_candy.TabIndex = 2;
-            this.btn_candy.Text = "Candy";
-            this.btn_candy.UseVisualStyleBackColor = true;
+            this.btn_empleado.Location = new System.Drawing.Point(12, 252);
+            this.btn_empleado.Name = "btn_empleado";
+            this.btn_empleado.Size = new System.Drawing.Size(125, 51);
+            this.btn_empleado.TabIndex = 2;
+            this.btn_empleado.Text = "Empleado";
+            this.btn_empleado.UseVisualStyleBackColor = true;
+            this.btn_empleado.Click += new System.EventHandler(this.btn_candy_Click);
             // 
             // btn_funciones
             // 
@@ -88,11 +89,12 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_funciones);
-            this.Controls.Add(this.btn_candy);
+            this.Controls.Add(this.btn_empleado);
             this.Controls.Add(this.btn_sucur);
             this.Controls.Add(this.btn_peliculas);
             this.Name = "Index";
             this.Text = "Index";
+            this.Load += new System.EventHandler(this.Index_Load);
             this.ResumeLayout(false);
 
         }
@@ -101,7 +103,7 @@
 
         private System.Windows.Forms.Button btn_peliculas;
         private System.Windows.Forms.Button btn_sucur;
-        private System.Windows.Forms.Button btn_candy;
+        private System.Windows.Forms.Button btn_empleado;
         private System.Windows.Forms.Button btn_funciones;
         private System.Windows.Forms.Panel panel1;
     }
