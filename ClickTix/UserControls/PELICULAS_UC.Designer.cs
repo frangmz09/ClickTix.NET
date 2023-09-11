@@ -53,10 +53,10 @@
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(63, 38);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(452, 24);
+            this.title.Size = new System.Drawing.Size(484, 25);
             this.title.TabIndex = 2;
             this.title.Text = "INGRESE DATOS PARA AGREGAR UNA PELICULA";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -82,7 +82,7 @@
             // 
             this.input_descripcion.Location = new System.Drawing.Point(223, 274);
             this.input_descripcion.Name = "input_descripcion";
-            this.input_descripcion.Size = new System.Drawing.Size(268, 20);
+            this.input_descripcion.Size = new System.Drawing.Size(267, 20);
             this.input_descripcion.TabIndex = 48;
             // 
             // textBox3
@@ -122,14 +122,15 @@
             this.input_clasificacion.Name = "input_clasificacion";
             this.input_clasificacion.Size = new System.Drawing.Size(71, 21);
             this.input_clasificacion.TabIndex = 53;
+            this.input_clasificacion.SelectedIndexChanged += new System.EventHandler(this.input_clasificacion_SelectedIndexChanged);
             // 
             // input_estreno
             // 
-            this.input_estreno.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.input_estreno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.input_estreno.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.input_estreno.Location = new System.Drawing.Point(222, 235);
             this.input_estreno.Name = "input_estreno";
-            this.input_estreno.Size = new System.Drawing.Size(86, 21);
+            this.input_estreno.Size = new System.Drawing.Size(86, 20);
             this.input_estreno.TabIndex = 54;
             // 
             // pictureBox1
@@ -143,10 +144,10 @@
             // label_titulo
             // 
             this.label_titulo.AutoSize = true;
-            this.label_titulo.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_titulo.Location = new System.Drawing.Point(219, 91);
             this.label_titulo.Name = "label_titulo";
-            this.label_titulo.Size = new System.Drawing.Size(35, 14);
+            this.label_titulo.Size = new System.Drawing.Size(37, 15);
             this.label_titulo.TabIndex = 56;
             this.label_titulo.Text = "Titulo";
             this.label_titulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -154,10 +155,10 @@
             // label_director
             // 
             this.label_director.AutoSize = true;
-            this.label_director.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_director.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_director.Location = new System.Drawing.Point(220, 131);
             this.label_director.Name = "label_director";
-            this.label_director.Size = new System.Drawing.Size(45, 14);
+            this.label_director.Size = new System.Drawing.Size(50, 15);
             this.label_director.TabIndex = 57;
             this.label_director.Text = "Director";
             this.label_director.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -165,10 +166,10 @@
             // label_duracion
             // 
             this.label_duracion.AutoSize = true;
-            this.label_duracion.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_duracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_duracion.Location = new System.Drawing.Point(220, 170);
             this.label_duracion.Name = "label_duracion";
-            this.label_duracion.Size = new System.Drawing.Size(50, 14);
+            this.label_duracion.Size = new System.Drawing.Size(57, 15);
             this.label_duracion.TabIndex = 58;
             this.label_duracion.Text = "Duracion";
             this.label_duracion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -176,10 +177,10 @@
             // label_categoria
             // 
             this.label_categoria.AutoSize = true;
-            this.label_categoria.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_categoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_categoria.Location = new System.Drawing.Point(283, 170);
             this.label_categoria.Name = "label_categoria";
-            this.label_categoria.Size = new System.Drawing.Size(40, 14);
+            this.label_categoria.Size = new System.Drawing.Size(48, 15);
             this.label_categoria.TabIndex = 59;
             this.label_categoria.Text = "Genero";
             this.label_categoria.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -187,10 +188,10 @@
             // label_clasificacion
             // 
             this.label_clasificacion.AutoSize = true;
-            this.label_clasificacion.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_clasificacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_clasificacion.Location = new System.Drawing.Point(356, 170);
             this.label_clasificacion.Name = "label_clasificacion";
-            this.label_clasificacion.Size = new System.Drawing.Size(69, 14);
+            this.label_clasificacion.Size = new System.Drawing.Size(76, 15);
             this.label_clasificacion.TabIndex = 60;
             this.label_clasificacion.Text = "Clasificacion";
             this.label_clasificacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -198,10 +199,10 @@
             // label_estreno
             // 
             this.label_estreno.AutoSize = true;
-            this.label_estreno.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_estreno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_estreno.Location = new System.Drawing.Point(219, 218);
             this.label_estreno.Name = "label_estreno";
-            this.label_estreno.Size = new System.Drawing.Size(87, 14);
+            this.label_estreno.Size = new System.Drawing.Size(102, 15);
             this.label_estreno.TabIndex = 61;
             this.label_estreno.Text = "Fecha de estreno";
             this.label_estreno.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -209,10 +210,10 @@
             // label_descripcion
             // 
             this.label_descripcion.AutoSize = true;
-            this.label_descripcion.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_descripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_descripcion.Location = new System.Drawing.Point(221, 259);
             this.label_descripcion.Name = "label_descripcion";
-            this.label_descripcion.Size = new System.Drawing.Size(62, 14);
+            this.label_descripcion.Size = new System.Drawing.Size(72, 15);
             this.label_descripcion.TabIndex = 62;
             this.label_descripcion.Text = "Descripcion";
             this.label_descripcion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

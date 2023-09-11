@@ -9,12 +9,12 @@ public class ConexionMySql : Conexion
 	private string cadenaConexion;
 	public ConexionMySql()
 	{
-		cadenaConexion = "Database=" + database +
-			";DataSource=" + server +
-			";User Id= " + user +
-			";Password=" + password;
+        cadenaConexion = "Server=" + server +
+                 ";Database=" + database +
+                 ";User Id=" + user +
+                 ";Password=" + password;
 
-		connection = new MySqlConnection(cadenaConexion);
+        connection = new MySqlConnection(cadenaConexion);
 	}
 
 	public MySqlConnection getConnection()

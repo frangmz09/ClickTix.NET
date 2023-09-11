@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,13 @@ namespace ClickTix.UserControls
 {
     public partial class PELICULAS_UC : UserControl
     {
+        public ConexionMySql conexion;
+
         public PELICULAS_UC()
         {
             InitializeComponent();
+
+            conexion = new ConexionMySql();
         }
 
         private void PELICULAS_UC_Load(object sender, EventArgs e)
@@ -29,12 +34,85 @@ namespace ClickTix.UserControls
 
         private void addpelicula_btn_Click(object sender, EventArgs e)
         {
-
+            InsertarPelicula("ok", "ok", 123, 1, 1, "ok", 123);
         }
 
         private void input_genero_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            LlenarComboBox("generos",input_genero);
         }
+
+        private void input_clasificacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            LlenarComboBox("clasificacion",input_clasificacion);
+        }
+
+
+
+
+        private void LlenarComboBox(string nombreTabla, ComboBox comboBox)
+        {
+            try
+            {
+                using (MySqlConnection connection = conexion.getConnection())
+                {
+                    connection.Open();
+
+                    string query = "SELECT nombre FROM "+nombreTabla;
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string item = reader["nombre"].ToString();
+                                comboBox.Items.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al llenar el ComboBox: " + ex.Message);
+            }
+        }
+
+        private bool InsertarPelicula(string titulo, string director, int duracion, int genero, int clasificacion, string imagen, int fechaEstreno)
+        {
+            try
+            {
+                MySqlConnection con = conexion.getConnection();
+                string consulta = "INSERT INTO pelicula (titulo, director, duracion, genero, clasificacion, imagen, fecha_de_estreno) " +
+                                  "VALUES (@titulo, @director, @duracion, @genero, @clasificacion, @imagen, @fechaEstreno)";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta, con))
+                {
+                    cmd.Parameters.AddWithValue("@titulo", titulo);
+                    cmd.Parameters.AddWithValue("@director", director);
+                    cmd.Parameters.AddWithValue("@duracion", duracion);
+                    cmd.Parameters.AddWithValue("@genero", genero);
+                    cmd.Parameters.AddWithValue("@clasificacion", clasificacion);
+                    cmd.Parameters.AddWithValue("@imagen", imagen);
+                    cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
+
+                    cmd.ExecuteNonQuery();
+                    return true; // Éxito
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al insertar el registro: " + ex.Message);
+                return false; // Error
+            }
+           
+        }
+
+
+
+
+
     }
 }
