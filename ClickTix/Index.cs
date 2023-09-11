@@ -48,5 +48,25 @@ namespace ClickTix
             panel1.Controls.Add(funciones_uc);
             funciones_uc.BringToFront();
         }
+
+        private void Index_Load(object sender, EventArgs e)
+        {
+            BIENVENIDA_UC funciones_uc = new BIENVENIDA_UC();
+
+            funciones_uc.Dock = DockStyle.Fill;
+            panel1.Controls.Clear();
+            panel1.Controls.Add(funciones_uc);
+            funciones_uc.BringToFront();
+        }
+
+        private void btn_candy_Click(object sender, EventArgs e)
+        {
+            EMPLEADOS_UC empleados_uc = new EMPLEADOS_UC();
+
+            empleados_uc.Dock = DockStyle.Fill;
+            panel1.Controls.Clear();
+            panel1.Controls.Add(empleados_uc);
+            empleados_uc.BringToFront();
+        }
     }
 }

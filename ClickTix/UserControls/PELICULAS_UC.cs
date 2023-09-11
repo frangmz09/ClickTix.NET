@@ -16,5 +16,25 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
         }
+
+        private void PELICULAS_UC_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addpelicula_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void input_genero_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

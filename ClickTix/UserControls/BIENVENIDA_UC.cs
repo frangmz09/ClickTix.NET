@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClickTix.UserControls
+namespace ClickTix
 {
-    public partial class FUNCIONES_UC : UserControl
+    public partial class BIENVENIDA_UC : UserControl
     {
-        public FUNCIONES_UC()
+        public BIENVENIDA_UC()
         {
             InitializeComponent();
         }
 
-        private void FUNCIONES_UC_Load(object sender, EventArgs e)
+        private void BIENVENIDA_UC_Load(object sender, EventArgs e)
         {
 
         }
