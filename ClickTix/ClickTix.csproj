@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelo\Pelicula.cs" />
     <Compile Include="UserControls\BIENVENIDA_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
