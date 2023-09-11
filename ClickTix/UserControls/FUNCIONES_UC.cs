@@ -16,5 +16,10 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
         }
+
+        private void FUNCIONES_UC_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

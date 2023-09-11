@@ -93,6 +93,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\FUNCIONES_UC.resx">
+      <DependentUpon>FUNCIONES_UC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PELICULAS_UC.resx">
+      <DependentUpon>PELICULAS_UC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SUCURSALES_UC.resx">
       <DependentUpon>SUCURSALES_UC.cs</DependentUpon>
     </EmbeddedResource>
