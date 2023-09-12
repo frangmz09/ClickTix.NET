@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conexion\ConexionMySql.cs" />
     <Compile Include="Modelo\Pelicula.cs" />
     <Compile Include="UserControls\BIENVENIDA_UC.cs">
       <SubType>UserControl</SubType>
@@ -125,8 +126,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Conexion\Conexion.cs" />
-    <Compile Include="Conexion\ConexionMySql.cs" />
     <Compile Include="UserControls\SUCURSALES_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>

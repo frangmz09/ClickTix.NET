@@ -1,38 +1,62 @@
-﻿using MySql.Data.MySqlClient;
+﻿using ClickTix.Conexion;
+using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-public class ConexionMySql : Conexion
+namespace ClickTix.Conexion
 {
-	
-	private MySqlConnection connection;
-	private string cadenaConexion;
-	public ConexionMySql()
-	{
-        cadenaConexion = "Server=" + server +
-                 ";Database=" + database +
-                 ";User Id=" + user +
-                 ";Password=" + password;
+    
+    internal class ConexionMySql
+    {
+        private static ConexionMySql instancia = null;
+        private static readonly object bloqueo = new object();
+        private MySqlConnection conexion;
 
-        connection = new MySqlConnection(cadenaConexion);
-	}
+        private ConexionMySql()
+        {
+            
+            string cadenaConexion = "Server=localhost;Database=boleteria;Uid=root;Pwd=;";
+            conexion = new MySqlConnection(cadenaConexion);
+        }
+        public static ConexionMySql Instancia
+        {
+            get
+            {
+                if (instancia == null)
+                {
+                    lock (bloqueo)
+                    {
+                        if (instancia == null)
+                        {
+                            instancia = new ConexionMySql();
+                        }
+                    }
+                }
+                return instancia;
+            }
+        }
+        public MySqlConnection ObtenerConexion()
+        {
+            if (conexion.State != System.Data.ConnectionState.Open)
+            {
+                conexion.Open();
+            }
+            return conexion;
+        }
 
-	public MySqlConnection getConnection()
-	{
-		try
-		{ 
-			if (connection.State != System.Data.ConnectionState.Open)
-			{
-				connection.Open();
-			}
-		} 
-		
-		catch(Exception e)
-		{
-			MessageBox.Show(e.ToString());
-		}
-		return connection;
-	}
+        public void CerrarConexion()
+        {
+            if (conexion.State == System.Data.ConnectionState.Open)
+            {
+                conexion.Close();
+            }
+        }
 
+
+    }
 
 }

@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using ClickTix.Conexion;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,13 @@ namespace ClickTix.UserControls
 {
     public partial class PELICULAS_UC : UserControl
     {
-        public ConexionMySql conexion;
+        private ConexionMySql conexion;
 
         public PELICULAS_UC()
         {
             InitializeComponent();
 
-            conexion = new ConexionMySql();
+            
         }
 
         private void PELICULAS_UC_Load(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace ClickTix.UserControls
 
         }
 
-        private void addpelicula_btn_Click(object sender, EventArgs e)
+        private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
             InsertarPelicula("ok", "ok", 123, 1, 1, "ok", 123);
         }
@@ -55,7 +56,7 @@ namespace ClickTix.UserControls
         {
             try
             {
-                using (MySqlConnection connection = conexion.getConnection())
+                using (MySqlConnection connection = conexion.ObtenerConexion())
                 {
                     connection.Open();
 
@@ -84,11 +85,11 @@ namespace ClickTix.UserControls
         {
             try
             {
-                MySqlConnection con = conexion.getConnection();
-                string consulta = "INSERT INTO pelicula (titulo, director, duracion, genero, clasificacion, imagen, fecha_de_estreno) " +
+               
+                string consulta = "INSERT INTO peliculas (titulo, director, duracion, genero, clasificacion, imagen, fecha_de_estreno) " +
                                   "VALUES (@titulo, @director, @duracion, @genero, @clasificacion, @imagen, @fechaEstreno)";
 
-                using (MySqlCommand cmd = new MySqlCommand(consulta, con))
+                using (MySqlCommand cmd = new MySqlCommand(consulta, conexion.ObtenerConexion()))
                 {
                     cmd.Parameters.AddWithValue("@titulo", titulo);
                     cmd.Parameters.AddWithValue("@director", director);
@@ -99,13 +100,13 @@ namespace ClickTix.UserControls
                     cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
 
                     cmd.ExecuteNonQuery();
-                    return true; // Éxito
+                    return true; 
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al insertar el registro: " + ex.Message);
-                return false; // Error
+                return false; 
             }
            
         }
