@@ -14,7 +14,7 @@ namespace ClickTix.UserControls
 {
     public partial class PELICULAS_UC : UserControl
     {
-        private ConexionMySql conexion;
+        MySqlConnection conexion = ConexionMySql.Instancia.ObtenerConexion();
 
         public PELICULAS_UC()
         {
@@ -56,13 +56,11 @@ namespace ClickTix.UserControls
         {
             try
             {
-                using (MySqlConnection connection = conexion.ObtenerConexion())
-                {
-                    connection.Open();
+               
 
                     string query = "SELECT nombre FROM "+nombreTabla;
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                     {
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
@@ -73,7 +71,7 @@ namespace ClickTix.UserControls
                             }
                         }
                     }
-                }
+                
             }
             catch (Exception ex)
             {
@@ -88,8 +86,8 @@ namespace ClickTix.UserControls
                
                 string consulta = "INSERT INTO peliculas (titulo, director, duracion, genero, clasificacion, imagen, fecha_de_estreno) " +
                                   "VALUES (@titulo, @director, @duracion, @genero, @clasificacion, @imagen, @fechaEstreno)";
-
-                using (MySqlCommand cmd = new MySqlCommand(consulta, conexion.ObtenerConexion()))
+                
+                using (MySqlCommand cmd = new MySqlCommand(consulta, conexion))
                 {
                     cmd.Parameters.AddWithValue("@titulo", titulo);
                     cmd.Parameters.AddWithValue("@director", director);

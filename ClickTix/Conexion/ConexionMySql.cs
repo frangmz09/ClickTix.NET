@@ -13,32 +13,33 @@ namespace ClickTix.Conexion
     internal class ConexionMySql
     {
         private static ConexionMySql instancia = null;
-        private static readonly object bloqueo = new object();
         private MySqlConnection conexion;
+
+        private string servidor = "localhost";
+        private string baseDeDatos = "boleteria";
+        private string usuario = "root";
+        private string contraseña = "tiago26";
 
         private ConexionMySql()
         {
-            
-            string cadenaConexion = "Server=localhost;Database=boleteria;Uid=root;Pwd=;";
+            string cadenaConexion = $"Server={servidor};Database={baseDeDatos};Uid={usuario};Pwd={contraseña};";
             conexion = new MySqlConnection(cadenaConexion);
         }
+
         public static ConexionMySql Instancia
         {
             get
             {
                 if (instancia == null)
                 {
-                    lock (bloqueo)
-                    {
-                        if (instancia == null)
-                        {
+                    
                             instancia = new ConexionMySql();
-                        }
-                    }
+                    
                 }
                 return instancia;
             }
         }
+
         public MySqlConnection ObtenerConexion()
         {
             if (conexion.State != System.Data.ConnectionState.Open)
@@ -56,7 +57,5 @@ namespace ClickTix.Conexion
             }
         }
 
-
     }
-
 }

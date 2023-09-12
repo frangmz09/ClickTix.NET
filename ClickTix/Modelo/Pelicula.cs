@@ -8,6 +8,8 @@ namespace ClickTix.Modelo
 {
     internal class Pelicula
     {
+
+        Pelicula() { }
         public int id { get; set; }
         public string titulo { get; set; }
         public string director { get; set; }
