@@ -17,7 +17,6 @@ namespace ClickTix.Modelo
         public string imagen { get; set; }
         public int Genero { get; set; }
         public int Clasificacion {  get; set; }
-        public DateTime fechaEstreno { get; set; }
         public string descripcion { get; set; }
         
     }
