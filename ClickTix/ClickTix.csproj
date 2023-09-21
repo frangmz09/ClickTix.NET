@@ -100,6 +100,24 @@
   <ItemGroup>
     <Compile Include="Conexion\MyConexion.cs" />
     <Compile Include="Modelo\Pelicula.cs" />
+    <Compile Include="UserControls\ABMEMPLEADOS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMEMPLEADOS.Designer.cs">
+      <DependentUpon>ABMEMPLEADOS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ABM_FUNCION_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABM_FUNCION_UC.Designer.cs">
+      <DependentUpon>ABM_FUNCION_UC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ABM_SUCURSALES_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABM_SUCURSALES_UC.Designer.cs">
+      <DependentUpon>ABM_SUCURSALES_UC.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\BIENVENIDA_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,6 +168,15 @@
     <Compile Include="UserControls\ABMPELICULAS_UC.Designer.cs">
       <DependentUpon>ABMPELICULAS_UC.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\ABMEMPLEADOS.resx">
+      <DependentUpon>ABMEMPLEADOS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ABM_FUNCION_UC.resx">
+      <DependentUpon>ABM_FUNCION_UC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ABM_SUCURSALES_UC.resx">
+      <DependentUpon>ABM_SUCURSALES_UC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\BIENVENIDA_UC.resx">
       <DependentUpon>BIENVENIDA_UC.cs</DependentUpon>
     </EmbeddedResource>

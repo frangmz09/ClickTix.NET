@@ -21,5 +21,11 @@ namespace ClickTix.UserControls
         {
 
         }
+
+        private void back_pelicula_Click(object sender, EventArgs e)
+        {
+            ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
+            Index.addUserControl(abmfuncion);
+        }
     }
 }

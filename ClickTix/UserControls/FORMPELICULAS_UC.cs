@@ -117,9 +117,10 @@ namespace ClickTix.UserControls
            
         }
 
-
-
-
-
+        private void back_pelicula_Click(object sender, EventArgs e)
+        {
+            ABMPELICULAS_UC abmpeliculas = new ABMPELICULAS_UC();
+            Index.addUserControl(abmpeliculas);
+        }
     }
 }

@@ -31,5 +31,11 @@ namespace ClickTix.UserControls
         {
 
         }
+
+        private void back_pelicula_Click(object sender, EventArgs e)
+        {
+            ABM_SUCURSALES_UC sucursales_uc = new ABM_SUCURSALES_UC();
+            Index.addUserControl(sucursales_uc);
+        }
     }
 }

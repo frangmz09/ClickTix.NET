@@ -34,25 +34,25 @@ namespace ClickTix
 
         private void btn_sucur_Click(object sender, EventArgs e)
         {
-            FORMSUCURSALES_UC sucursales_uc = new FORMSUCURSALES_UC();
+            ABM_SUCURSALES_UC sucursales_uc = new ABM_SUCURSALES_UC();
             addUserControl(sucursales_uc);
         }
 
         private void btn_funciones_Click(object sender, EventArgs e)
         {
-            FORMFUNCIONES_UC funciones_uc = new FORMFUNCIONES_UC();
+            ABM_FUNCION_UC funciones_uc = new ABM_FUNCION_UC();
             addUserControl(funciones_uc);
         }
 
 
         private void btn_empleado_Click(object sender, EventArgs e)
         {
-            FORMEMPLEADOS_UC empleados_uc = new FORMEMPLEADOS_UC();
+            ABMEMPLEADOS empleados_uc = new ABMEMPLEADOS();
             addUserControl(empleados_uc);
 
         }
 
-        public void addUserControl(UserControl uc)
+        public static void addUserControl(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
             panel1.Controls.Clear();

@@ -38,6 +38,7 @@
             this.input_cuit = new System.Windows.Forms.TextBox();
             this.label_salas = new System.Windows.Forms.Label();
             this.input_salas = new System.Windows.Forms.NumericUpDown();
+            this.back_pelicula = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.input_salas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             // 
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.title.Location = new System.Drawing.Point(71, 37);
+            this.title.Location = new System.Drawing.Point(71, 22);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(416, 24);
             this.title.TabIndex = 3;
@@ -55,7 +56,7 @@
             // 
             // addsucursal_btn
             // 
-            this.addsucursal_btn.Location = new System.Drawing.Point(222, 300);
+            this.addsucursal_btn.Location = new System.Drawing.Point(222, 285);
             this.addsucursal_btn.Name = "addsucursal_btn";
             this.addsucursal_btn.Size = new System.Drawing.Size(111, 25);
             this.addsucursal_btn.TabIndex = 33;
@@ -66,7 +67,7 @@
             // 
             this.label_titulo.AutoSize = true;
             this.label_titulo.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_titulo.Location = new System.Drawing.Point(140, 103);
+            this.label_titulo.Location = new System.Drawing.Point(140, 88);
             this.label_titulo.Name = "label_titulo";
             this.label_titulo.Size = new System.Drawing.Size(44, 14);
             this.label_titulo.TabIndex = 58;
@@ -75,7 +76,7 @@
             // 
             // input_nombre
             // 
-            this.input_nombre.Location = new System.Drawing.Point(143, 120);
+            this.input_nombre.Location = new System.Drawing.Point(143, 105);
             this.input_nombre.Name = "input_nombre";
             this.input_nombre.Size = new System.Drawing.Size(268, 20);
             this.input_nombre.TabIndex = 57;
@@ -84,7 +85,7 @@
             // 
             this.label_direccion.AutoSize = true;
             this.label_direccion.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_direccion.Location = new System.Drawing.Point(140, 147);
+            this.label_direccion.Location = new System.Drawing.Point(140, 132);
             this.label_direccion.Name = "label_direccion";
             this.label_direccion.Size = new System.Drawing.Size(51, 14);
             this.label_direccion.TabIndex = 60;
@@ -93,7 +94,7 @@
             // 
             // input_direccion
             // 
-            this.input_direccion.Location = new System.Drawing.Point(143, 164);
+            this.input_direccion.Location = new System.Drawing.Point(143, 149);
             this.input_direccion.Name = "input_direccion";
             this.input_direccion.Size = new System.Drawing.Size(268, 20);
             this.input_direccion.TabIndex = 59;
@@ -102,7 +103,7 @@
             // 
             this.label_cuit.AutoSize = true;
             this.label_cuit.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_cuit.Location = new System.Drawing.Point(140, 196);
+            this.label_cuit.Location = new System.Drawing.Point(140, 181);
             this.label_cuit.Name = "label_cuit";
             this.label_cuit.Size = new System.Drawing.Size(27, 14);
             this.label_cuit.TabIndex = 62;
@@ -111,7 +112,7 @@
             // 
             // input_cuit
             // 
-            this.input_cuit.Location = new System.Drawing.Point(143, 213);
+            this.input_cuit.Location = new System.Drawing.Point(143, 198);
             this.input_cuit.Name = "input_cuit";
             this.input_cuit.Size = new System.Drawing.Size(268, 20);
             this.input_cuit.TabIndex = 61;
@@ -120,7 +121,7 @@
             // 
             this.label_salas.AutoSize = true;
             this.label_salas.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_salas.Location = new System.Drawing.Point(205, 253);
+            this.label_salas.Location = new System.Drawing.Point(205, 238);
             this.label_salas.Name = "label_salas";
             this.label_salas.Size = new System.Drawing.Size(86, 14);
             this.label_salas.TabIndex = 64;
@@ -129,15 +130,26 @@
             // 
             // input_salas
             // 
-            this.input_salas.Location = new System.Drawing.Point(297, 251);
+            this.input_salas.Location = new System.Drawing.Point(297, 236);
             this.input_salas.Name = "input_salas";
             this.input_salas.Size = new System.Drawing.Size(45, 20);
             this.input_salas.TabIndex = 65;
             // 
-            // SUCURSALES_UC
+            // back_pelicula
+            // 
+            this.back_pelicula.Location = new System.Drawing.Point(17, 16);
+            this.back_pelicula.Name = "back_pelicula";
+            this.back_pelicula.Size = new System.Drawing.Size(30, 30);
+            this.back_pelicula.TabIndex = 66;
+            this.back_pelicula.Text = "<";
+            this.back_pelicula.UseVisualStyleBackColor = true;
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
+            // 
+            // FORMSUCURSALES_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.input_salas);
             this.Controls.Add(this.label_salas);
             this.Controls.Add(this.label_cuit);
@@ -148,7 +160,7 @@
             this.Controls.Add(this.input_nombre);
             this.Controls.Add(this.addsucursal_btn);
             this.Controls.Add(this.title);
-            this.Name = "SUCURSALES_UC";
+            this.Name = "FORMSUCURSALES_UC";
             this.Size = new System.Drawing.Size(560, 373);
             ((System.ComponentModel.ISupportInitialize)(this.input_salas)).EndInit();
             this.ResumeLayout(false);
@@ -168,5 +180,6 @@
         private System.Windows.Forms.TextBox input_cuit;
         private System.Windows.Forms.Label label_salas;
         private System.Windows.Forms.NumericUpDown input_salas;
+        private System.Windows.Forms.Button back_pelicula;
     }
 }

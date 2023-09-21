@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClickTix.UserControls
 {
-    public partial class ABMPELICULAS_UC : UserControl
+    public partial class ABMEMPLEADOS : UserControl
     {
-        public ABMPELICULAS_UC()
+        public ABMEMPLEADOS()
         {
             InitializeComponent();
         }
@@ -22,15 +22,15 @@ namespace ClickTix.UserControls
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void add_empleado_Click(object sender, EventArgs e)
         {
-
+            FORMEMPLEADOS_UC formempleados_uc = new FORMEMPLEADOS_UC();
+            Index.addUserControl(formempleados_uc);
         }
 
-        private void add_pelicula_Click_1(object sender, EventArgs e)
+        private void grid_empleados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            FORMPELICULAS_UC formpeliculas_uc = new FORMPELICULAS_UC();
-            Index.addUserControl(formpeliculas_uc);
+
         }
     }
 }

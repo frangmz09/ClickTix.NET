@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClickTix.UserControls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace ClickTix
         public FORMEMPLEADOS_UC()
         {
             InitializeComponent();
+        }
+
+        private void back_pelicula_Click(object sender, EventArgs e)
+        {
+            ABMEMPLEADOS abmempleados = new ABMEMPLEADOS();
+            Index.addUserControl(abmempleados);
         }
     }
 }
