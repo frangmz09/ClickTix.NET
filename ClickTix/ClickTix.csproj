@@ -106,11 +106,11 @@
     <Compile Include="UserControls\BIENVENIDA_UC.Designer.cs">
       <DependentUpon>BIENVENIDA_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\EMPLEADOS_UC.cs">
+    <Compile Include="UserControls\FORMEMPLEADOS_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\EMPLEADOS_UC.Designer.cs">
-      <DependentUpon>EMPLEADOS_UC.cs</DependentUpon>
+    <Compile Include="UserControls\FORMEMPLEADOS_UC.Designer.cs">
+      <DependentUpon>FORMEMPLEADOS_UC.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -126,29 +126,35 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\SUCURSALES_UC.cs">
+    <Compile Include="UserControls\FORMSUCURSALES_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\SUCURSALES_UC.Designer.cs">
-      <DependentUpon>SUCURSALES_UC.cs</DependentUpon>
+    <Compile Include="UserControls\FORMSUCURSALES_UC.Designer.cs">
+      <DependentUpon>FORMSUCURSALES_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\PELICULAS_UC.cs">
+    <Compile Include="UserControls\FORMPELICULAS_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\PELICULAS_UC.Designer.cs">
-      <DependentUpon>PELICULAS_UC.cs</DependentUpon>
+    <Compile Include="UserControls\FORMPELICULAS_UC.Designer.cs">
+      <DependentUpon>FORMPELICULAS_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\FUNCIONES_UC.cs">
+    <Compile Include="UserControls\FORMFUNCIONES_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\FUNCIONES_UC.Designer.cs">
-      <DependentUpon>FUNCIONES_UC.cs</DependentUpon>
+    <Compile Include="UserControls\FORMFUNCIONES_UC.Designer.cs">
+      <DependentUpon>FORMFUNCIONES_UC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ABMPELICULAS_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ABMPELICULAS_UC.Designer.cs">
+      <DependentUpon>ABMPELICULAS_UC.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="UserControls\BIENVENIDA_UC.resx">
       <DependentUpon>BIENVENIDA_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\EMPLEADOS_UC.resx">
-      <DependentUpon>EMPLEADOS_UC.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\FORMEMPLEADOS_UC.resx">
+      <DependentUpon>FORMEMPLEADOS_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -165,14 +171,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControls\FUNCIONES_UC.resx">
-      <DependentUpon>FUNCIONES_UC.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\FORMFUNCIONES_UC.resx">
+      <DependentUpon>FORMFUNCIONES_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\PELICULAS_UC.resx">
-      <DependentUpon>PELICULAS_UC.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\FORMPELICULAS_UC.resx">
+      <DependentUpon>FORMPELICULAS_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\SUCURSALES_UC.resx">
-      <DependentUpon>SUCURSALES_UC.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\FORMSUCURSALES_UC.resx">
+      <DependentUpon>FORMSUCURSALES_UC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ABMPELICULAS_UC.resx">
+      <DependentUpon>ABMPELICULAS_UC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ClickTix.UserControls
 {
-    public partial class SUCURSALES_UC : UserControl
+    public partial class ABMPELICULAS_UC : UserControl
     {
-        public SUCURSALES_UC()
+        public ABMPELICULAS_UC()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void title_Click(object sender, EventArgs e)
@@ -27,9 +22,13 @@ namespace ClickTix.UserControls
 
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        private void add_pelicula_Click(object sender, EventArgs e)
         {
+            FORMPELICULAS_UC formpeliculas_uc = new FORMPELICULAS_UC();
+            ///Index.addUserControl(formpeliculas_uc);
 
         }
+
+
     }
 }

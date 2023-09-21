@@ -1,6 +1,6 @@
 ﻿namespace ClickTix.UserControls
 {
-    partial class FUNCIONES_UC
+    partial class FORMFUNCIONES_UC
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

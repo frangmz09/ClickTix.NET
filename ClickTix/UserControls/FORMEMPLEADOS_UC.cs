@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClickTix
 {
-    public partial class EMPLEADOS_UC : UserControl
+    public partial class FORMEMPLEADOS_UC : UserControl
     {
-        public EMPLEADOS_UC()
+        public FORMEMPLEADOS_UC()
         {
             InitializeComponent();
         }

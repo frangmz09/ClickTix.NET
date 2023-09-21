@@ -63,7 +63,7 @@
             this.btn_empleado.TabIndex = 2;
             this.btn_empleado.Text = "Empleado";
             this.btn_empleado.UseVisualStyleBackColor = true;
-            this.btn_empleado.Click += new System.EventHandler(this.btn_candy_Click);
+            this.btn_empleado.Click += new System.EventHandler(this.btn_empleado_Click);
             // 
             // btn_funciones
             // 
@@ -105,6 +105,6 @@
         private System.Windows.Forms.Button btn_sucur;
         private System.Windows.Forms.Button btn_empleado;
         private System.Windows.Forms.Button btn_funciones;
-        private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Panel panel1;
     }
 }

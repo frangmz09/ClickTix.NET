@@ -1,6 +1,6 @@
 ﻿namespace ClickTix.UserControls
 {
-    partial class PELICULAS_UC
+    partial class FORMPELICULAS_UC
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

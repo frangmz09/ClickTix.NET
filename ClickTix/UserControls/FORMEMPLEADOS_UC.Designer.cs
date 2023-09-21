@@ -1,6 +1,6 @@
 ﻿namespace ClickTix
 {
-    partial class EMPLEADOS_UC
+    partial class FORMEMPLEADOS_UC
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

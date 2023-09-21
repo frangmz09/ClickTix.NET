@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace ClickTix.UserControls
 {
-    public partial class PELICULAS_UC : UserControl
+    public partial class FORMPELICULAS_UC : UserControl
     {
 
         MyConexion c = new MyConexion("localhost", "boleteria", "root", "tiago26");
-        public PELICULAS_UC()
+        public FORMPELICULAS_UC()
         {
             InitializeComponent();
             
@@ -37,6 +37,11 @@ namespace ClickTix.UserControls
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
             InsertarPelicula("ok", "ok", 123, 1, 1, "ok", 123);
+
+
+
+
+
         }
 
         private void input_genero_SelectedIndexChanged(object sender, EventArgs e)

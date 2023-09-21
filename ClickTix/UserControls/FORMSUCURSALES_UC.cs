@@ -10,14 +10,24 @@ using System.Windows.Forms;
 
 namespace ClickTix.UserControls
 {
-    public partial class FUNCIONES_UC : UserControl
+    public partial class FORMSUCURSALES_UC : UserControl
     {
-        public FUNCIONES_UC()
+        public FORMSUCURSALES_UC()
         {
             InitializeComponent();
         }
 
-        private void FUNCIONES_UC_Load(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void title_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
         }

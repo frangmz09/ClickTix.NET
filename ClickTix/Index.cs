@@ -18,55 +18,46 @@ namespace ClickTix
             InitializeComponent();
         }
 
+
+        private void Index_Load(object sender, EventArgs e)
+        {
+            BIENVENIDA_UC bienvenida_uc = new BIENVENIDA_UC();
+            addUserControl(bienvenida_uc);
+        }
+
         private void btn_peliculas_Click(object sender, EventArgs e)
         {
-            PELICULAS_UC peliculas_uc = new PELICULAS_UC();
-
-            peliculas_uc.Dock = DockStyle.Fill;
-            panel1.Controls.Clear();
-            panel1.Controls.Add(peliculas_uc);
-            peliculas_uc.BringToFront();
+            ABMPELICULAS_UC abmpeliculas_uc = new ABMPELICULAS_UC();
+            addUserControl(abmpeliculas_uc);
 
         }
 
         private void btn_sucur_Click(object sender, EventArgs e)
         {
-            SUCURSALES_UC sucursales_uc = new SUCURSALES_UC();
-
-            sucursales_uc.Dock = DockStyle.Fill;
-            panel1.Controls.Clear();
-            panel1.Controls.Add(sucursales_uc);
-            sucursales_uc.BringToFront();
+            FORMSUCURSALES_UC sucursales_uc = new FORMSUCURSALES_UC();
+            addUserControl(sucursales_uc);
         }
 
         private void btn_funciones_Click(object sender, EventArgs e)
         {
-            FUNCIONES_UC funciones_uc = new FUNCIONES_UC();
-
-            funciones_uc.Dock = DockStyle.Fill;
-            panel1.Controls.Clear();
-            panel1.Controls.Add(funciones_uc);
-            funciones_uc.BringToFront();
+            FORMFUNCIONES_UC funciones_uc = new FORMFUNCIONES_UC();
+            addUserControl(funciones_uc);
         }
 
-        private void Index_Load(object sender, EventArgs e)
-        {
-            BIENVENIDA_UC funciones_uc = new BIENVENIDA_UC();
 
-            funciones_uc.Dock = DockStyle.Fill;
-            panel1.Controls.Clear();
-            panel1.Controls.Add(funciones_uc);
-            funciones_uc.BringToFront();
+        private void btn_empleado_Click(object sender, EventArgs e)
+        {
+            FORMEMPLEADOS_UC empleados_uc = new FORMEMPLEADOS_UC();
+            addUserControl(empleados_uc);
+
         }
 
-        private void btn_candy_Click(object sender, EventArgs e)
+        public void addUserControl(UserControl uc)
         {
-            EMPLEADOS_UC empleados_uc = new EMPLEADOS_UC();
-
-            empleados_uc.Dock = DockStyle.Fill;
+            uc.Dock = DockStyle.Fill;
             panel1.Controls.Clear();
-            panel1.Controls.Add(empleados_uc);
-            empleados_uc.BringToFront();
+            panel1.Controls.Add(uc);
+            uc.BringToFront();
         }
     }
 }
