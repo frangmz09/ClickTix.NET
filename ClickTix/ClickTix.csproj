@@ -100,22 +100,22 @@
   <ItemGroup>
     <Compile Include="Conexion\MyConexion.cs" />
     <Compile Include="Modelo\Pelicula.cs" />
-    <Compile Include="UserControls\ABMEMPLEADOS.cs">
+    <Compile Include="UserControls\ABMs\ABM_EMPLEADOS_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ABMEMPLEADOS.Designer.cs">
-      <DependentUpon>ABMEMPLEADOS.cs</DependentUpon>
+    <Compile Include="UserControls\ABMs\ABM_EMPLEADOS_UC.Designer.cs">
+      <DependentUpon>ABM_EMPLEADOS_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ABM_FUNCION_UC.cs">
+    <Compile Include="UserControls\ABMs\ABM_FUNCION_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ABM_FUNCION_UC.Designer.cs">
+    <Compile Include="UserControls\ABMs\ABM_FUNCION_UC.Designer.cs">
       <DependentUpon>ABM_FUNCION_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ABM_SUCURSALES_UC.cs">
+    <Compile Include="UserControls\ABMs\ABM_SUCURSALES_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ABM_SUCURSALES_UC.Designer.cs">
+    <Compile Include="UserControls\ABMs\ABM_SUCURSALES_UC.Designer.cs">
       <DependentUpon>ABM_SUCURSALES_UC.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\BIENVENIDA_UC.cs">
@@ -124,10 +124,10 @@
     <Compile Include="UserControls\BIENVENIDA_UC.Designer.cs">
       <DependentUpon>BIENVENIDA_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\FORMEMPLEADOS_UC.cs">
+    <Compile Include="UserControls\Formularios\FORMEMPLEADOS_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\FORMEMPLEADOS_UC.Designer.cs">
+    <Compile Include="UserControls\Formularios\FORMEMPLEADOS_UC.Designer.cs">
       <DependentUpon>FORMEMPLEADOS_UC.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
@@ -144,43 +144,43 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\FORMSUCURSALES_UC.cs">
+    <Compile Include="UserControls\Formularios\FORMSUCURSALES_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\FORMSUCURSALES_UC.Designer.cs">
+    <Compile Include="UserControls\Formularios\FORMSUCURSALES_UC.Designer.cs">
       <DependentUpon>FORMSUCURSALES_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\FORMPELICULAS_UC.cs">
+    <Compile Include="UserControls\Formularios\FORMPELICULAS_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\FORMPELICULAS_UC.Designer.cs">
+    <Compile Include="UserControls\Formularios\FORMPELICULAS_UC.Designer.cs">
       <DependentUpon>FORMPELICULAS_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\FORMFUNCIONES_UC.cs">
+    <Compile Include="UserControls\Formularios\FORMFUNCIONES_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\FORMFUNCIONES_UC.Designer.cs">
+    <Compile Include="UserControls\Formularios\FORMFUNCIONES_UC.Designer.cs">
       <DependentUpon>FORMFUNCIONES_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ABMPELICULAS_UC.cs">
+    <Compile Include="UserControls\ABMs\ABM_PELICULAS_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ABMPELICULAS_UC.Designer.cs">
-      <DependentUpon>ABMPELICULAS_UC.cs</DependentUpon>
+    <Compile Include="UserControls\ABMs\ABM_PELICULAS_UC.Designer.cs">
+      <DependentUpon>ABM_PELICULAS_UC.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControls\ABMEMPLEADOS.resx">
-      <DependentUpon>ABMEMPLEADOS.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\ABMs\ABM_EMPLEADOS_UC.resx">
+      <DependentUpon>ABM_EMPLEADOS_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ABM_FUNCION_UC.resx">
+    <EmbeddedResource Include="UserControls\ABMs\ABM_FUNCION_UC.resx">
       <DependentUpon>ABM_FUNCION_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ABM_SUCURSALES_UC.resx">
+    <EmbeddedResource Include="UserControls\ABMs\ABM_SUCURSALES_UC.resx">
       <DependentUpon>ABM_SUCURSALES_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\BIENVENIDA_UC.resx">
       <DependentUpon>BIENVENIDA_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\FORMEMPLEADOS_UC.resx">
+    <EmbeddedResource Include="UserControls\Formularios\FORMEMPLEADOS_UC.resx">
       <DependentUpon>FORMEMPLEADOS_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
@@ -198,17 +198,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControls\FORMFUNCIONES_UC.resx">
+    <EmbeddedResource Include="UserControls\Formularios\FORMFUNCIONES_UC.resx">
       <DependentUpon>FORMFUNCIONES_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\FORMPELICULAS_UC.resx">
+    <EmbeddedResource Include="UserControls\Formularios\FORMPELICULAS_UC.resx">
       <DependentUpon>FORMPELICULAS_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\FORMSUCURSALES_UC.resx">
+    <EmbeddedResource Include="UserControls\Formularios\FORMSUCURSALES_UC.resx">
       <DependentUpon>FORMSUCURSALES_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ABMPELICULAS_UC.resx">
-      <DependentUpon>ABMPELICULAS_UC.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\ABMs\ABM_PELICULAS_UC.resx">
+      <DependentUpon>ABM_PELICULAS_UC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

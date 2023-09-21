@@ -62,7 +62,7 @@
             this.add_funcion.TabIndex = 12;
             this.add_funcion.Text = "Agregar";
             this.add_funcion.UseVisualStyleBackColor = true;
-            this.add_funcion.Click += new System.EventHandler(this.add_funcion_Click_1);
+            this.add_funcion.Click += new System.EventHandler(this.add_funcion_Click);
             // 
             // grid_funciones
             // 

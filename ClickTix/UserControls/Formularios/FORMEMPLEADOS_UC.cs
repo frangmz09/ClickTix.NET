@@ -20,7 +20,7 @@ namespace ClickTix
 
         private void back_pelicula_Click(object sender, EventArgs e)
         {
-            ABMEMPLEADOS abmempleados = new ABMEMPLEADOS();
+            ABM_EMPLEADOS_UC abmempleados = new ABM_EMPLEADOS_UC();
             Index.addUserControl(abmempleados);
         }
     }

@@ -28,7 +28,7 @@ namespace ClickTix.UserControls
 
         }
 
-        private void add_funcion_Click_1(object sender, EventArgs e)
+        private void add_funcion_Click(object sender, EventArgs e)
         {
             FORMFUNCIONES_UC formfunciones_uc = new FORMFUNCIONES_UC();
             Index.addUserControl(formfunciones_uc);

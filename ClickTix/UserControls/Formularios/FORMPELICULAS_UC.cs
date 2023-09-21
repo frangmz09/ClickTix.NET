@@ -119,7 +119,7 @@ namespace ClickTix.UserControls
 
         private void back_pelicula_Click(object sender, EventArgs e)
         {
-            ABMPELICULAS_UC abmpeliculas = new ABMPELICULAS_UC();
+            ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
             Index.addUserControl(abmpeliculas);
         }
     }

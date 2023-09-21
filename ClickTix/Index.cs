@@ -27,7 +27,7 @@ namespace ClickTix
 
         private void btn_peliculas_Click(object sender, EventArgs e)
         {
-            ABMPELICULAS_UC abmpeliculas_uc = new ABMPELICULAS_UC();
+            ABM_PELICULAS_UC abmpeliculas_uc = new ABM_PELICULAS_UC();
             addUserControl(abmpeliculas_uc);
 
         }
@@ -47,7 +47,7 @@ namespace ClickTix
 
         private void btn_empleado_Click(object sender, EventArgs e)
         {
-            ABMEMPLEADOS empleados_uc = new ABMEMPLEADOS();
+            ABM_EMPLEADOS_UC empleados_uc = new ABM_EMPLEADOS_UC();
             addUserControl(empleados_uc);
 
         }

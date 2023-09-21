@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClickTix.UserControls
 {
-    public partial class ABMEMPLEADOS : UserControl
+    public partial class ABM_EMPLEADOS_UC : UserControl
     {
-        public ABMEMPLEADOS()
+        public ABM_EMPLEADOS_UC()
         {
             InitializeComponent();
         }
@@ -26,6 +26,7 @@ namespace ClickTix.UserControls
         {
             FORMEMPLEADOS_UC formempleados_uc = new FORMEMPLEADOS_UC();
             Index.addUserControl(formempleados_uc);
+
         }
 
         private void grid_empleados_CellContentClick(object sender, DataGridViewCellEventArgs e)
