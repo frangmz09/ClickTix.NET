@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClickTix.Empleado;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,10 +33,15 @@ namespace ClickTix
         {
 
             validarUsuario(txt_user.Text, txt_pw.Text);
-            
-            
-            Index_Admin index = new Index_Admin();
+
+            Index_User index = new Index_User();            
+
+
+            //Index_Admin index = new Index_Admin();
             index.Show();
+
+
+
             this.Hide();    
         }
 

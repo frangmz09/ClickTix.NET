@@ -105,6 +105,12 @@
     <Compile Include="Empleado\Index_User.Designer.cs">
       <DependentUpon>Index_User.cs</DependentUpon>
     </Compile>
+    <Compile Include="Empleado\UserControls\BUTACAS_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Empleado\UserControls\BUTACAS_UC.Designer.cs">
+      <DependentUpon>BUTACAS_UC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Empleado\UserControls\QR\LECTORQR_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -209,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\Index_User.resx">
       <DependentUpon>Index_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Empleado\UserControls\BUTACAS_UC.resx">
+      <DependentUpon>BUTACAS_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\UserControls\QR\LECTORQR_UC.resx">
       <DependentUpon>LECTORQR_UC.cs</DependentUpon>

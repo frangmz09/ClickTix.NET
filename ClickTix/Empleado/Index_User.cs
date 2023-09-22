@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClickTix.Empleado.UserControls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +20,16 @@ namespace ClickTix.Empleado
 
         private void Index_User_Load(object sender, EventArgs e)
         {
+            BUTACAS_UC butacas = new BUTACAS_UC();
+            Index_User.addUserControl(butacas);
+        }
 
+        public static void addUserControl(UserControl uc)
+        {
+            uc.Dock = DockStyle.Fill;
+            panel2.Controls.Clear();
+            panel2.Controls.Add(uc);
+            uc.BringToFront();
         }
     }
 }
