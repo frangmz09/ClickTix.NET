@@ -19,8 +19,8 @@ namespace ClickTix.UserControls
 
         private void add_sucursal_Click(object sender, EventArgs e)
         {
-            FORMSUCURSALES_UC formsucursales_uc = new FORMSUCURSALES_UC();
-            Index.addUserControl(formsucursales_uc);
+            FORM_SUCURSALES_UC formsucursales_uc = new FORM_SUCURSALES_UC();
+            Index_Admin.addUserControl(formsucursales_uc);
         }
     }
 }

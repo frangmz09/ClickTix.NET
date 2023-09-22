@@ -29,8 +29,8 @@ namespace ClickTix.UserControls
 
         private void add_pelicula_Click(object sender, EventArgs e)
         {
-            FORMPELICULAS_UC formpeliculas_uc = new FORMPELICULAS_UC();
-            Index.addUserControl(formpeliculas_uc);
+            FORM_PELICULAS_UC formpeliculas_uc = new FORM_PELICULAS_UC();
+            Index_Admin.addUserControl(formpeliculas_uc);
         }
     }
 }

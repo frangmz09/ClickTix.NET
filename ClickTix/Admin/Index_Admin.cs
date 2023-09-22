@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ClickTix
 {
-    public partial class Index : Form
+    public partial class Index_Admin : Form
     {
-        public Index()
+        public Index_Admin()
         {
             InitializeComponent();
         }

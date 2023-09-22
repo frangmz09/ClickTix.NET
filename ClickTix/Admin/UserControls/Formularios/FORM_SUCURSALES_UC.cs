@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClickTix.UserControls
 {
-    public partial class FORMSUCURSALES_UC : UserControl
+    public partial class FORM_SUCURSALES_UC : UserControl
     {
-        public FORMSUCURSALES_UC()
+        public FORM_SUCURSALES_UC()
         {
             InitializeComponent();
         }
@@ -35,7 +35,7 @@ namespace ClickTix.UserControls
         private void back_pelicula_Click(object sender, EventArgs e)
         {
             ABM_SUCURSALES_UC sucursales_uc = new ABM_SUCURSALES_UC();
-            Index.addUserControl(sucursales_uc);
+            Index_Admin.addUserControl(sucursales_uc);
         }
     }
 }

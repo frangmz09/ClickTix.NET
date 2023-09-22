@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace ClickTix.UserControls
 {
-    public partial class FORMPELICULAS_UC : UserControl
+    public partial class FORM_PELICULAS_UC : UserControl
     {
 
         MyConexion c = new MyConexion("localhost", "boleteria", "root", "tiago26");
-        public FORMPELICULAS_UC()
+        public FORM_PELICULAS_UC()
         {
             InitializeComponent();
             
@@ -120,7 +120,7 @@ namespace ClickTix.UserControls
         private void back_pelicula_Click(object sender, EventArgs e)
         {
             ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
-            Index.addUserControl(abmpeliculas);
+            Index_Admin.addUserControl(abmpeliculas);
         }
     }
 }

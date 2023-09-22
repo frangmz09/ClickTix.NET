@@ -30,8 +30,8 @@ namespace ClickTix.UserControls
 
         private void add_funcion_Click(object sender, EventArgs e)
         {
-            FORMFUNCIONES_UC formfunciones_uc = new FORMFUNCIONES_UC();
-            Index.addUserControl(formfunciones_uc);
+            FORM_FUNCIONES_UC formfunciones_uc = new FORM_FUNCIONES_UC();
+            Index_Admin.addUserControl(formfunciones_uc);
         }
 
         private void title_Click(object sender, EventArgs e)

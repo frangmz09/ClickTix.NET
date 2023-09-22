@@ -1,6 +1,6 @@
 ﻿namespace ClickTix.UserControls
 {
-    partial class FORMSUCURSALES_UC
+    partial class FORM_SUCURSALES_UC
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

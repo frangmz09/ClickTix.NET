@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClickTix.UserControls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,24 +9,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClickTix.UserControls
+namespace ClickTix
 {
-    public partial class FORMFUNCIONES_UC : UserControl
+    public partial class FORM_EMPLEADOS_UC : UserControl
     {
-        public FORMFUNCIONES_UC()
+        public FORM_EMPLEADOS_UC()
         {
             InitializeComponent();
         }
 
-        private void FUNCIONES_UC_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void back_pelicula_Click(object sender, EventArgs e)
         {
-            ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
-            Index.addUserControl(abmfuncion);
+            ABM_EMPLEADOS_UC abmempleados = new ABM_EMPLEADOS_UC();
+            Index_Admin.addUserControl(abmempleados);
         }
     }
 }

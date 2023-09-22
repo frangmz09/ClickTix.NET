@@ -24,8 +24,8 @@ namespace ClickTix.UserControls
 
         private void add_empleado_Click(object sender, EventArgs e)
         {
-            FORMEMPLEADOS_UC formempleados_uc = new FORMEMPLEADOS_UC();
-            Index.addUserControl(formempleados_uc);
+            FORM_EMPLEADOS_UC formempleados_uc = new FORM_EMPLEADOS_UC();
+            Index_Admin.addUserControl(formempleados_uc);
 
         }
 

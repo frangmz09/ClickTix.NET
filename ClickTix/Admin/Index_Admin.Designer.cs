@@ -1,6 +1,6 @@
 ﻿namespace ClickTix
 {
-    partial class Index
+    partial class Index_Admin
     {
         /// <summary>
         /// Required designer variable.

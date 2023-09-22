@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ClickTix
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
-        public Form1()
+        public Login()
         {
             InitializeComponent();
         }
@@ -34,7 +34,7 @@ namespace ClickTix
             validarUsuario(txt_user.Text, txt_pw.Text);
             
             
-            Index index = new Index();
+            Index_Admin index = new Index_Admin();
             index.Show();
             this.Hide();    
         }
