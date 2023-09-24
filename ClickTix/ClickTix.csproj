@@ -141,6 +141,8 @@
     <Compile Include="Empleado\UserControls\QR\TIKCETQR_UC.Designer.cs">
       <DependentUpon>TIKCETQR_UC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\Asiento.cs" />
+    <Compile Include="Modelo\Asiento_Controller.cs" />
     <Compile Include="Modelo\Pelicula.cs" />
     <Compile Include="Admin\UserControls\ABMs\ABM_EMPLEADOS_UC.cs">
       <SubType>UserControl</SubType>
@@ -260,6 +262,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Admin\UserControls\Formularios\FORM_FUNCIONES_UC.resx">
       <DependentUpon>FORM_FUNCIONES_UC.cs</DependentUpon>
@@ -287,6 +290,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\butaca.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

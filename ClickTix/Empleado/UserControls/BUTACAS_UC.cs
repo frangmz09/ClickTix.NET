@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ClickTix.Conexion;
+using ClickTix.Modelo;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Relational;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,26 +22,60 @@ namespace ClickTix.Empleado.UserControls
         }
 
         private void BUTACAS_UC_Load(object sender, EventArgs e)
+
+
         {
-            int numFilas = 5; // Número de filas de butacas
-            int numColumnas = 6; // Número de columnas de butacas
+            flowLayoutPanel1.Controls.Clear();
+            int numFilas=2;
+            int numColumnas=2;
+            MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
 
-            for (int fila = 0; fila < numFilas; fila++)
+
+            using (MySqlConnection mysqlConnection = c.ObtenerConexion())
             {
-                for (int columna = 0; columna < numColumnas; columna++)
+                mysqlConnection.Open();
+                string query = "select filas,columnas from sala s inner join funcion f on f.id_sala=s.id inner join asiento a on f.id = a.id_funcion where f.id = 1;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    Button butaca = new Button();
-                    butaca.Width = 50; 
-                    butaca.Height = 50; 
-                    butaca.Text = $"Fila {fila + 1}, Asiento {columna + 1}";
-                    butaca.Name = $"btnButaca_{fila}_{columna}";
-                    butaca.BackColor = Color.Green; // Color para las butacas disponibles
-                    butaca.Margin = new Padding(5); // Espaciado entre botones
+                    MySqlDataReader reader = command.ExecuteReader();
 
-                    butaca.Click += Butaca_Click;
+                    while (reader.Read())
+                    {
+                        numFilas = reader.GetInt32(0);
+                        numColumnas = reader.GetInt32(1);
+                    }
 
-                    // Agrega el botón al FlowLayoutPanel
-                    flowLayoutPanel1.Controls.Add(butaca);
+                    reader.Close();
+                    mysqlConnection.Close();
+
+                    List<Asiento> list = new List<Asiento>();
+                    list = Asiento_Controller.obtenerPorFuncion(1);
+                    Image imagenButaca = Properties.Resources.butaca;
+                    foreach (Asiento asiento in list)
+                    {
+
+                        Button butaca = new Button();
+                        butaca.Width = 50;
+                        butaca.Height = 50;
+                        butaca.Name = $"btnButaca_{asiento.Fila} _ {asiento.Columna}";
+                        butaca.BackgroundImage = imagenButaca;
+                        butaca.BackgroundImageLayout = ImageLayout.Stretch;
+
+
+                        butaca.BackColor = Color.LightGray;
+                        butaca.Margin = new Padding(5); 
+
+                        if (asiento.Disponible == false)
+                        {
+                            butaca.BackColor = Color.Red;
+                            butaca.Enabled = false;
+                        }
+                        butaca.Click += Butaca_Click;
+
+                        flowLayoutPanel1.Controls.Add(butaca);
+
+                    }
                 }
             }
         }
@@ -50,17 +88,13 @@ namespace ClickTix.Empleado.UserControls
         {
             Button clickedButton = (Button)sender;
 
-            // Realiza acciones comunes para todas las butacas aquí
-            // Por ejemplo, puedes cambiar el color de fondo del botón o realizar otras operaciones.
-
-            // Ejemplo: Cambiar el color de fondo del botón al hacer clic
-            if (clickedButton.BackColor == Color.Green)
+            if (clickedButton.BackColor == Color.LightGray)
             {
-                clickedButton.BackColor = Color.Red; // Cambiar el color a rojo si la butaca está disponible
+                clickedButton.BackColor = Color.Green; 
             }
             else
             {
-                clickedButton.BackColor = Color.Green; // Cambiar el color a verde si la butaca está ocupada
+                clickedButton.BackColor = Color.LightGray; 
             }
         }
     }

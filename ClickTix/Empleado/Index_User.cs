@@ -1,4 +1,5 @@
-﻿using ClickTix.Empleado.UserControls;
+﻿using ClickTix.Conexion;
+using ClickTix.Empleado.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,8 @@ namespace ClickTix.Empleado
 {
     public partial class Index_User : Form
     {
+        MyConexion c;
+
         public Index_User()
         {
             InitializeComponent();
@@ -20,6 +23,7 @@ namespace ClickTix.Empleado
 
         private void Index_User_Load(object sender, EventArgs e)
         {
+            c = new MyConexion("localhost", "clicktix", "root", "");
             BUTACAS_UC butacas = new BUTACAS_UC();
             Index_User.addUserControl(butacas);
         }
