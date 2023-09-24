@@ -54,10 +54,10 @@
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(62, 21);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(452, 24);
+            this.title.Size = new System.Drawing.Size(484, 25);
             this.title.TabIndex = 2;
             this.title.Text = "INGRESE DATOS PARA AGREGAR UNA PELICULA";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -103,6 +103,8 @@
             // input_genero
             // 
             this.input_genero.FormattingEnabled = true;
+            this.input_genero.Items.AddRange(new object[] {
+            "TERROR"});
             this.input_genero.Location = new System.Drawing.Point(281, 161);
             this.input_genero.Name = "input_genero";
             this.input_genero.Size = new System.Drawing.Size(71, 21);
@@ -119,6 +121,11 @@
             // input_clasificacion
             // 
             this.input_clasificacion.FormattingEnabled = true;
+            this.input_clasificacion.Items.AddRange(new object[] {
+            "+13",
+            "+16",
+            "+18",
+            "ATP"});
             this.input_clasificacion.Location = new System.Drawing.Point(358, 161);
             this.input_clasificacion.Name = "input_clasificacion";
             this.input_clasificacion.Size = new System.Drawing.Size(71, 21);
@@ -229,7 +236,7 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
-            // FORMPELICULAS_UC
+            // FORM_PELICULAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -252,7 +259,7 @@
             this.Controls.Add(this.input_titulo);
             this.Controls.Add(this.addpelicula_btn);
             this.Controls.Add(this.title);
-            this.Name = "FORMPELICULAS_UC";
+            this.Name = "FORM_PELICULAS_UC";
             this.Size = new System.Drawing.Size(560, 373);
             this.Load += new System.EventHandler(this.PELICULAS_UC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.input_duracion)).EndInit();

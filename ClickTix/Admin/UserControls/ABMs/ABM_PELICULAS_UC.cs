@@ -132,7 +132,10 @@ namespace ClickTix.UserControls
             }
         }
 
+        private void ABM_PELICULAS_UC_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 

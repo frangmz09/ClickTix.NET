@@ -36,11 +36,8 @@ namespace ClickTix.UserControls
 
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
-            InsertarPelicula("czczxc", "oxzczczxck", 123, 1, 1, "ok", 123);
 
-
-
-
+            InsertarPelicula(input_titulo.Text,input_director.Text, input_duracion.Value,input_descripcion.Text,10,10,"imagen",input_estreno.Text);
 
         }
 
@@ -86,23 +83,24 @@ namespace ClickTix.UserControls
             }
         }
 
-        private bool InsertarPelicula(string titulo, string director, int duracion, int genero, int clasificacion, string imagen, int fechaEstreno)
+        private bool InsertarPelicula(string titulo, string director, decimal duracion, string descripcion,int categoria, int clasificacion, string portada, string fechaEstreno)
         {
 
             try
             {
                
-                string consulta = "INSERT INTO pelicula (titulo, director, duracion, genero, clasificacion, imagen, fecha_estreno) " +
-                                  "VALUES (@titulo, @director, @duracion, @genero, @clasificacion, @imagen, @fechaEstreno)";
+                string consulta = "INSERT INTO pelicula (titulo, director, duracion,descripcion, categoria, clasificacion, portada, fecha_estreno) " +
+                                  "VALUES (@titulo, @director, @duracion, @categoria, @clasificacion, @portada, @fechaEstreno)";
                 c.AbrirConexion();
                 using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
                 {
                     cmd.Parameters.AddWithValue("@titulo", titulo);
                     cmd.Parameters.AddWithValue("@director", director);
                     cmd.Parameters.AddWithValue("@duracion", duracion);
-                    cmd.Parameters.AddWithValue("@genero", genero);
-                    cmd.Parameters.AddWithValue("@clasificacion", clasificacion);
-                    cmd.Parameters.AddWithValue("@imagen", imagen);
+                    cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                    cmd.Parameters.AddWithValue("@id_categoria", categoria);
+                    cmd.Parameters.AddWithValue("@id_clasificacion", clasificacion);
+                    cmd.Parameters.AddWithValue("@portada", portada);
                     cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
 
                     cmd.ExecuteNonQuery();
