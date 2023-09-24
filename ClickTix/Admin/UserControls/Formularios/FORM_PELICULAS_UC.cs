@@ -64,7 +64,7 @@ namespace ClickTix.UserControls
             {
                
                 string consulta = "INSERT INTO pelicula (titulo, director, duracion,descripcion, categoria, clasificacion, portada, fecha_estreno) " +
-                                  "VALUES (@titulo, @director, @duracion,@descripcion ,@categoria, @clasificacion, @portada, @fechaEstreno)";
+                                  "VALUES (@titulo, @director, @duracion,@descripcion ,@id_categoria, @id_clasificacion, @portada, @fechaEstreno)";
                 c.AbrirConexion();
                 using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
                 {
