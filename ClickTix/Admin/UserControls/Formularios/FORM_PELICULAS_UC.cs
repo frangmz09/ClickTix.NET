@@ -18,12 +18,12 @@ namespace ClickTix.UserControls
     {
 
         MyConexion c ;
-        private int id;
+        private int idDelPanel;
 
         public FORM_PELICULAS_UC()
         {
             InitializeComponent();
-            c = new MyConexion("localhost", "clicktix", "root", "");
+            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
 
 
         }
@@ -32,6 +32,8 @@ namespace ClickTix.UserControls
 
             public FORM_PELICULAS_UC(int id)
             {
+
+                this.idDelPanel = id;
 
                 int peliculaID = id;
                 c = new MyConexion("localhost", "clicktix", "root", "tiago26");
@@ -68,8 +70,9 @@ namespace ClickTix.UserControls
 
         private void Addpelicula_btn_Click2(object sender, EventArgs e)
         {
-
-            int idpelicula = this.id;
+           
+            int idpelicula = idDelPanel;
+            MessageBox.Show("id : " + idpelicula);
             ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
 
         }
