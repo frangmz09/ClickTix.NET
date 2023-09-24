@@ -72,8 +72,8 @@ namespace ClickTix.UserControls
                     cmd.Parameters.AddWithValue("@director", director);
                     cmd.Parameters.AddWithValue("@duracion", duracion);
                     cmd.Parameters.AddWithValue("@descripcion", descripcion);
-                    cmd.Parameters.AddWithValue("@id_categoria", categoria);
-                    cmd.Parameters.AddWithValue("@id_clasificacion", clasificacion);
+                    cmd.Parameters.AddWithValue("@categoria", categoria);
+                    cmd.Parameters.AddWithValue("@clasificacion", clasificacion);
                     cmd.Parameters.AddWithValue("@portada", portada);
                     cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
 
