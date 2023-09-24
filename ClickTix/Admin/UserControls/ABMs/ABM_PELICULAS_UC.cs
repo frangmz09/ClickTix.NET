@@ -48,24 +48,24 @@ namespace ClickTix.UserControls
 
         private void Form1_Load(DataGridView tabla)
         {
-            // Abre la conexión a MySQL
+            
             c.AbrirConexion();
 
-            // Consulta SQL
+            
             string query = "SELECT  id,titulo, director FROM peliculas";
 
             using (MySqlConnection mysqlConnection = c.ObtenerConexion())
             {
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    // Crea un adaptador para llenar un DataTable
+                    
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                     DataTable dt = new DataTable();
 
-                    // Llena el DataTable con los resultados de la consulta
+                    
                     adapter.Fill(dt);
 
-                    // Enlaza el DataGridView al DataTable
+               
                     tabla.DataSource = dt;
                 }
             }

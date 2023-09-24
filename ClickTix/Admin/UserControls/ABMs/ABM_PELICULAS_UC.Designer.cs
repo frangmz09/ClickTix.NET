@@ -31,10 +31,6 @@
             this.title = new System.Windows.Forms.Label();
             this.add_pelicula = new System.Windows.Forms.Button();
             this.grid_peliculas = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Director = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_peliculas)).BeginInit();
@@ -65,10 +61,6 @@
             // 
             this.grid_peliculas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_peliculas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.Nombre,
-            this.Director,
-            this.emision,
             this.Modificar,
             this.Borrar});
             this.grid_peliculas.Location = new System.Drawing.Point(23, 52);
@@ -76,35 +68,7 @@
             this.grid_peliculas.Size = new System.Drawing.Size(524, 303);
             this.grid_peliculas.TabIndex = 5;
             this.grid_peliculas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_peliculas_CellContentClick);
-            // 
-            // ID
-            // 
-            this.ID.FillWeight = 195.2002F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ID.Width = 50;
-            // 
-            // Nombre
-            // 
-            this.Nombre.FillWeight = 82.47423F;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 125;
-            // 
-            // Director
-            // 
-            this.Director.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Director.FillWeight = 61.16275F;
-            this.Director.HeaderText = "Director";
-            this.Director.Name = "Director";
-            // 
-            // emision
-            // 
-            this.emision.FillWeight = 61.16275F;
-            this.emision.HeaderText = "En emision";
-            this.emision.Name = "emision";
-            this.emision.Width = 90;
+            
             // 
             // Modificar
             // 
