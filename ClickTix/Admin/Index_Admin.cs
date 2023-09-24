@@ -1,4 +1,5 @@
-﻿using ClickTix.UserControls;
+﻿using ClickTix.Admin.UserControls.ABMs;
+using ClickTix.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,6 +53,12 @@ namespace ClickTix
 
         }
 
+        private void btn_dimensiones_Click(object sender, EventArgs e)
+        {
+            ABM_PRECIODIMENSION_UC preciodimension_uc = new ABM_PRECIODIMENSION_UC();
+            addUserControl(preciodimension_uc);
+        }
+
         public static void addUserControl(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
@@ -59,5 +66,6 @@ namespace ClickTix
             panel1.Controls.Add(uc);
             uc.BringToFront();
         }
+
     }
 }
