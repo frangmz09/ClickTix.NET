@@ -34,10 +34,10 @@ namespace ClickTix
 
             validarUsuario(txt_user.Text, txt_pw.Text);
 
-            Index_User index = new Index_User();            
+            // Index_User index = new Index_User();            
 
 
-            //Index_Admin index = new Index_Admin();
+            Index_Admin index = new Index_Admin();
             index.Show();
 
 
