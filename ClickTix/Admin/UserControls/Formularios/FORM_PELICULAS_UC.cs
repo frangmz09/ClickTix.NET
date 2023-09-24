@@ -26,16 +26,19 @@ namespace ClickTix.UserControls
 
         }
 
-        public FORM_PELICULAS_UC(int id)
-        {
-            InitializeComponent();
-            this.id = id;
-
-            addpelicula_btn.Text = "Modificar";
-
-        }
-
         
+
+            public FORM_PELICULAS_UC(int id)
+            {
+                InitializeComponent();
+                int peliculaID = id; 
+                                
+                CargarDatosPelicula(peliculaID);
+            }
+
+         
+
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -180,9 +183,47 @@ namespace ClickTix.UserControls
             }
         }
 
-        private void FORM_PELICULAS_UC_Load(object sender, EventArgs e)
+        private void CargarDatosPelicula(int peliculaID)
         {
+            try
+            {
+               
+                string consulta = "SELECT titulo, director, duracion, descripcion, id_categoria, id_clasificacion, portada, fecha_estreno FROM pelicula WHERE id = @id";
 
+                
+                c.AbrirConexion();
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
+                {
+                    cmd.Parameters.AddWithValue("@id", peliculaID);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read()) 
+                        {
+                            
+                            input_titulo.Text = reader["titulo"].ToString();
+                            input_director.Text = reader["director"].ToString();
+                            input_duracion.Value = Convert.ToDecimal(reader["duracion"]);
+                            input_descripcion.Text = reader["descripcion"].ToString();
+                            
+                            if (DateTime.TryParse(reader["fecha_estreno"].ToString(), out DateTime fechaEstreno))
+                            {
+                                input_estreno.Value = fechaEstreno;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró la película con el ID proporcionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos de la película: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 

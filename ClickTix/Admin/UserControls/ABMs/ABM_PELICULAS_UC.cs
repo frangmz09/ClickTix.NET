@@ -42,21 +42,24 @@ namespace ClickTix.UserControls
 
         private void grid_peliculas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             if (e.ColumnIndex == grid_peliculas.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
-                
                 int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["id"].Value);
 
-                
+                // Abrir FORM_PELICULAS_UC con el ID de la película seleccionada
                 FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC(id);
 
-                formModificarPelicula.Show();
-
-
-                
+                // Mostrar el formulario en algún contenedor o de la manera que lo necesites
+                // Por ejemplo, si deseas abrirlo en un formulario principal:
+                if (this.ParentForm is Form principalForm)
+                {
+                    principalForm.Controls.Clear(); // Limpia cualquier otro control en el formulario principal
+                    principalForm.Controls.Add(formModificarPelicula);
+                    formModificarPelicula.Dock = DockStyle.Fill;
+                }
             }
-            
+
             else if (e.ColumnIndex == grid_peliculas.Columns["Borrar"].Index && e.RowIndex >= 0)
             {
                 
