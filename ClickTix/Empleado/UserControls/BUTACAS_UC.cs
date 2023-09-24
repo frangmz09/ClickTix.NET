@@ -34,6 +34,8 @@ namespace ClickTix.Empleado.UserControls
                     butaca.BackColor = Color.Green; // Color para las butacas disponibles
                     butaca.Margin = new Padding(5); // Espaciado entre botones
 
+                    butaca.Click += Butaca_Click;
+
                     // Agrega el botón al FlowLayoutPanel
                     flowLayoutPanel1.Controls.Add(butaca);
                 }
@@ -43,6 +45,23 @@ namespace ClickTix.Empleado.UserControls
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+        private void Butaca_Click(object sender, EventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+
+            // Realiza acciones comunes para todas las butacas aquí
+            // Por ejemplo, puedes cambiar el color de fondo del botón o realizar otras operaciones.
+
+            // Ejemplo: Cambiar el color de fondo del botón al hacer clic
+            if (clickedButton.BackColor == Color.Green)
+            {
+                clickedButton.BackColor = Color.Red; // Cambiar el color a rojo si la butaca está disponible
+            }
+            else
+            {
+                clickedButton.BackColor = Color.Green; // Cambiar el color a verde si la butaca está ocupada
+            }
         }
     }
 }
