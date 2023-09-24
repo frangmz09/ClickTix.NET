@@ -43,10 +43,10 @@
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(219, 18);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(114, 24);
+            this.title.Size = new System.Drawing.Size(122, 25);
             this.title.TabIndex = 7;
             this.title.Text = "PELICULAS";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -75,6 +75,7 @@
             this.grid_peliculas.Name = "grid_peliculas";
             this.grid_peliculas.Size = new System.Drawing.Size(524, 303);
             this.grid_peliculas.TabIndex = 5;
+            this.grid_peliculas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_peliculas_CellContentClick);
             // 
             // ID
             // 
@@ -119,14 +120,14 @@
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Borrar.Width = 75;
             // 
-            // ABMPELICULAS_UC
+            // ABM_PELICULAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.title);
             this.Controls.Add(this.add_pelicula);
             this.Controls.Add(this.grid_peliculas);
-            this.Name = "ABMPELICULAS_UC";
+            this.Name = "ABM_PELICULAS_UC";
             this.Size = new System.Drawing.Size(570, 373);
             ((System.ComponentModel.ISupportInitialize)(this.grid_peliculas)).EndInit();
             this.ResumeLayout(false);
