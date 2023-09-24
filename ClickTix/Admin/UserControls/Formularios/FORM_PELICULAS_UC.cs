@@ -1,10 +1,12 @@
 ﻿using ClickTix.Conexion;
+using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,10 +32,17 @@ namespace ClickTix.UserControls
 
             public FORM_PELICULAS_UC(int id)
             {
+
+                int peliculaID = id;
+                c = new MyConexion("localhost", "clicktix", "root", "tiago26");
                 InitializeComponent();
-                int peliculaID = id; 
+                addpelicula_btn.Click += new EventHandler(this.Addpelicula_btn_Click2);
+                addpelicula_btn.Text = "modificar";
+                
                                 
                 CargarDatosPelicula(peliculaID);
+
+                
             }
 
          
@@ -54,6 +63,13 @@ namespace ClickTix.UserControls
 
         }
 
+        private void Addpelicula_btn_Click2(object sender, EventArgs e)
+        {
+
+            int idpelicula = this.id;
+            ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
+
+        }
         private void input_genero_SelectedIndexChanged(object sender, EventArgs e)
         {
             
@@ -144,7 +160,7 @@ namespace ClickTix.UserControls
         }
 
 
-        private bool ActualizarPelicula(int id, string titulo, string director, decimal duracion, string descripcion, int categoria, int clasificacion, string portada, DateTime fechaEstreno)
+        private bool ActualizarPelicula(int idParaActualizar, string titulo, string director, decimal duracion, string descripcion, int categoria, int clasificacion, string portada, DateTime fechaEstreno)
         {
             try
             {
@@ -153,7 +169,7 @@ namespace ClickTix.UserControls
                 c.AbrirConexion();
                 using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@id", idParaActualizar);
                     cmd.Parameters.AddWithValue("@titulo", titulo);
                     cmd.Parameters.AddWithValue("@director", director);
                     cmd.Parameters.AddWithValue("@duracion", duracion);
@@ -167,19 +183,19 @@ namespace ClickTix.UserControls
 
                     if (filasActualizadas > 0)
                     {
-                        return true; // Actualización exitosa
+                        return true;
                     }
                     else
                     {
                         MessageBox.Show("No se encontró ningún registro para actualizar.");
-                        return false; // No se encontraron registros para actualizar
+                        return false; 
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al actualizar el registro: " + ex.Message);
-                return false; // Error en la actualización
+                return false;
             }
         }
 
