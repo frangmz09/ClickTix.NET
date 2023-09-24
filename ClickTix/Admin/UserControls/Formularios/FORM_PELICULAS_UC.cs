@@ -37,7 +37,7 @@ namespace ClickTix.UserControls
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
 
-            InsertarPelicula(input_titulo.Text,input_director.Text, input_duracion.Value,input_descripcion.Text,10,10,"imagen",input_estreno.Text);
+            InsertarPelicula(input_titulo.Text,input_director.Text, input_duracion.Value,input_descripcion.Text,10,10,"imagen",input_estreno.Value);
 
         }
 
@@ -57,7 +57,7 @@ namespace ClickTix.UserControls
 
         
 
-        private bool InsertarPelicula(string titulo, string director, decimal duracion, string descripcion,int categoria, int clasificacion, string portada, string fechaEstreno)
+        private bool InsertarPelicula(string titulo, string director, decimal duracion, string descripcion,int categoria, int clasificacion, string portada, DateTime fechaEstreno)
         {
 
             try
