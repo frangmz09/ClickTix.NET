@@ -261,7 +261,7 @@
             this.Controls.Add(this.title);
             this.Name = "FORM_PELICULAS_UC";
             this.Size = new System.Drawing.Size(560, 373);
-            this.Load += new System.EventHandler(this.PELICULAS_UC_Load);
+            
             ((System.ComponentModel.ISupportInitialize)(this.input_duracion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

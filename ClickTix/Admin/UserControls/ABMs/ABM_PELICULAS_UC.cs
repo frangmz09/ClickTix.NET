@@ -49,8 +49,8 @@ namespace ClickTix.UserControls
                 int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["id"].Value);
 
                 
-                FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC(id);
-               formModificarPelicula.Show();
+                //FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC();
+               //formModificarPelicula.Show();
 
 
                 Pelicula_Load(grid_peliculas);
@@ -132,7 +132,10 @@ namespace ClickTix.UserControls
             }
         }
 
-        
+        private void ABM_PELICULAS_UC_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

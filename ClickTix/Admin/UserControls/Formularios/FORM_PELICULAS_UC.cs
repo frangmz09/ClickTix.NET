@@ -26,19 +26,16 @@ namespace ClickTix.UserControls
 
         }
 
-        public FORM_PELICULAS_UC(int id)
-        {
+        //public FORM_PELICULAS_UC(int id)
+        //{
     
-            this.id = id;
+            //this.id = id;
 
-            addpelicula_btn.Text = "Modificar";
+            //addpelicula_btn.Text = "Modificar";
             
-        }
+        //}
 
-        private void PELICULAS_UC_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void label1_Click(object sender, EventArgs e)
         {
