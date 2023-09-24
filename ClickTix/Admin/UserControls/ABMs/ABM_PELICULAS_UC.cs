@@ -19,7 +19,7 @@ namespace ClickTix.UserControls
         public ABM_PELICULAS_UC()
         {
             InitializeComponent();
-            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
+            c = new MyConexion("localhost", "clicktix", "root", "");
 
             Form1_Load(grid_peliculas);
         }
