@@ -50,10 +50,11 @@ namespace ClickTix.UserControls
 
                 
                 FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC(id);
-               formModificarPelicula.Show();
+
+                formModificarPelicula.Show();
 
 
-                Pelicula_Load(grid_peliculas);
+                
             }
             
             else if (e.ColumnIndex == grid_peliculas.Columns["Borrar"].Index && e.RowIndex >= 0)
@@ -133,6 +134,11 @@ namespace ClickTix.UserControls
         }
 
         private void ABM_PELICULAS_UC_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ABM_PELICULAS_UC_Load_1(object sender, EventArgs e)
         {
 
         }

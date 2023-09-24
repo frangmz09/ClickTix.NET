@@ -180,49 +180,10 @@ namespace ClickTix.UserControls
             }
         }
 
+        private void FORM_PELICULAS_UC_Load(object sender, EventArgs e)
+        {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
     }
 
    
