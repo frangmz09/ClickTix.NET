@@ -43,45 +43,19 @@ namespace ClickTix.UserControls
 
         private void input_genero_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LlenarComboBox("generos",input_genero);
+            
         }
 
         private void input_clasificacion_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-            LlenarComboBox("clasificacion",input_clasificacion);
+            
         }
 
 
 
 
-        private void LlenarComboBox(string nombreTabla, ComboBox comboBox)
-        {
-            try
-            {
-               
-
-                    string query = "SELECT nombre FROM "+nombreTabla;
-
-                     c.AbrirConexion();
-                    using (MySqlCommand cmd = new MySqlCommand(query, c.ObtenerConexion()))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string item = reader["nombre"].ToString();
-                                comboBox.Items.Add(item);
-                            }
-                        }
-                    }
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al llenar el ComboBox: " + ex.Message);
-            }
-        }
+        
 
         private bool InsertarPelicula(string titulo, string director, decimal duracion, string descripcion,int categoria, int clasificacion, string portada, string fechaEstreno)
         {
