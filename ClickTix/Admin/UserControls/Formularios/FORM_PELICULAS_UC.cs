@@ -26,14 +26,14 @@ namespace ClickTix.UserControls
 
         }
 
-        //public FORM_PELICULAS_UC(int id)
-        //{
-    
-            //this.id = id;
+        public FORM_PELICULAS_UC(int id)
+        {
+            InitializeComponent();
+            this.id = id;
 
-            //addpelicula_btn.Text = "Modificar";
-            
-        //}
+            addpelicula_btn.Text = "Modificar";
+
+        }
 
         
 
