@@ -36,7 +36,7 @@ namespace ClickTix.UserControls
 
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
-            InsertarPelicula("ok", "ok", 123, 1, 1, "ok", 123);
+            InsertarPelicula("czczxc", "oxzczczxck", 123, 1, 1, "ok", 123);
 
 
 

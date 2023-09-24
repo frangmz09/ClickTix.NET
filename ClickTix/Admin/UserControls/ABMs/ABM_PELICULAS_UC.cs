@@ -20,6 +20,8 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
             c = new MyConexion("localhost", "boleteria", "root", "tiago26");
+
+            Form1_Load(grid_peliculas);
         }
 
         private void title_Click(object sender, EventArgs e)
@@ -40,7 +42,7 @@ namespace ClickTix.UserControls
 
         private void grid_peliculas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Form1_Load(grid_peliculas);
+            
 
         }
 
@@ -50,7 +52,7 @@ namespace ClickTix.UserControls
             c.AbrirConexion();
 
             // Consulta SQL
-            string query = "SELECT id, nombre, director, en_emision FROM peliculas";
+            string query = "SELECT  id,titulo, director FROM peliculas";
 
             using (MySqlConnection mysqlConnection = c.ObtenerConexion())
             {
