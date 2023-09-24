@@ -31,10 +31,6 @@
             this.title = new System.Windows.Forms.Label();
             this.add_pelicula = new System.Windows.Forms.Button();
             this.grid_peliculas = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Director = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_peliculas)).BeginInit();
@@ -43,10 +39,10 @@
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(219, 18);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(114, 24);
+            this.title.Size = new System.Drawing.Size(122, 25);
             this.title.TabIndex = 7;
             this.title.Text = "PELICULAS";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -65,50 +61,19 @@
             // 
             this.grid_peliculas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_peliculas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.Nombre,
-            this.Director,
-            this.emision,
             this.Modificar,
             this.Borrar});
-            this.grid_peliculas.Location = new System.Drawing.Point(23, 52);
+            this.grid_peliculas.Location = new System.Drawing.Point(23, 49);
             this.grid_peliculas.Name = "grid_peliculas";
             this.grid_peliculas.Size = new System.Drawing.Size(524, 303);
             this.grid_peliculas.TabIndex = 5;
-            // 
-            // ID
-            // 
-            this.ID.FillWeight = 195.2002F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ID.Width = 50;
-            // 
-            // Nombre
-            // 
-            this.Nombre.FillWeight = 82.47423F;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 125;
-            // 
-            // Director
-            // 
-            this.Director.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Director.FillWeight = 61.16275F;
-            this.Director.HeaderText = "Director";
-            this.Director.Name = "Director";
-            // 
-            // emision
-            // 
-            this.emision.FillWeight = 61.16275F;
-            this.emision.HeaderText = "En emision";
-            this.emision.Name = "emision";
-            this.emision.Width = 90;
+            this.grid_peliculas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_peliculas_CellContentClick);
             // 
             // Modificar
             // 
             this.Modificar.HeaderText = "Modificar";
             this.Modificar.Name = "Modificar";
+            this.Modificar.Text = "MODIFICAR";
             this.Modificar.Width = 75;
             // 
             // Borrar
@@ -117,17 +82,19 @@
             this.Borrar.Name = "Borrar";
             this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Borrar.Text = "BORRAR";
             this.Borrar.Width = 75;
             // 
-            // ABMPELICULAS_UC
+            // ABM_PELICULAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.title);
             this.Controls.Add(this.add_pelicula);
             this.Controls.Add(this.grid_peliculas);
-            this.Name = "ABMPELICULAS_UC";
+            this.Name = "ABM_PELICULAS_UC";
             this.Size = new System.Drawing.Size(570, 373);
+            this.Load += new System.EventHandler(this.ABM_PELICULAS_UC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_peliculas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

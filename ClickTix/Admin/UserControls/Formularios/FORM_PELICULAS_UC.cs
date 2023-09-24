@@ -15,12 +15,12 @@ namespace ClickTix.UserControls
     public partial class FORM_PELICULAS_UC : UserControl
     {
 
-        MyConexion c = new MyConexion("localhost", "boleteria", "root", "tiago26");
+        MyConexion c ;
         public FORM_PELICULAS_UC()
         {
             InitializeComponent();
-            
-            
+            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
+
 
         }
 
@@ -36,73 +36,45 @@ namespace ClickTix.UserControls
 
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
-            InsertarPelicula("ok", "ok", 123, 1, 1, "ok", 123);
 
-
-
-
+            InsertarPelicula(input_titulo.Text,input_director.Text, input_duracion.Value,input_descripcion.Text,10,10,"imagen",input_estreno.Text);
 
         }
 
         private void input_genero_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LlenarComboBox("generos",input_genero);
+            
         }
 
         private void input_clasificacion_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-            LlenarComboBox("clasificacion",input_clasificacion);
+            
         }
 
 
 
 
-        private void LlenarComboBox(string nombreTabla, ComboBox comboBox)
-        {
-            try
-            {
-               
+        
 
-                    string query = "SELECT nombre FROM "+nombreTabla;
-
-                     c.AbrirConexion();
-                    using (MySqlCommand cmd = new MySqlCommand(query, c.ObtenerConexion()))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string item = reader["nombre"].ToString();
-                                comboBox.Items.Add(item);
-                            }
-                        }
-                    }
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al llenar el ComboBox: " + ex.Message);
-            }
-        }
-
-        private bool InsertarPelicula(string titulo, string director, int duracion, int genero, int clasificacion, string imagen, int fechaEstreno)
+        private bool InsertarPelicula(string titulo, string director, decimal duracion, string descripcion,int categoria, int clasificacion, string portada, string fechaEstreno)
         {
 
             try
             {
                
-                string consulta = "INSERT INTO peliculas (titulo, director, duracion, genero, clasificacion, imagen, fecha_estreno) " +
-                                  "VALUES (@titulo, @director, @duracion, @genero, @clasificacion, @imagen, @fechaEstreno)";
+                string consulta = "INSERT INTO pelicula (titulo, director, duracion,descripcion, id_categoria, id_clasificacion, portada, fecha_estreno) " +
+                                  "VALUES (@titulo, @director, @duracion,@descripcion ,@categoria, @clasificacion, @portada, @fechaEstreno)";
                 c.AbrirConexion();
                 using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
                 {
                     cmd.Parameters.AddWithValue("@titulo", titulo);
                     cmd.Parameters.AddWithValue("@director", director);
                     cmd.Parameters.AddWithValue("@duracion", duracion);
-                    cmd.Parameters.AddWithValue("@genero", genero);
-                    cmd.Parameters.AddWithValue("@clasificacion", clasificacion);
-                    cmd.Parameters.AddWithValue("@imagen", imagen);
+                    cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                    cmd.Parameters.AddWithValue("@id_categoria", categoria);
+                    cmd.Parameters.AddWithValue("@id_clasificacion", clasificacion);
+                    cmd.Parameters.AddWithValue("@portada", portada);
                     cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
 
                     cmd.ExecuteNonQuery();
@@ -123,4 +95,9 @@ namespace ClickTix.UserControls
             Index_Admin.addUserControl(abmpeliculas);
         }
     }
+
+   
+
+   
 }
+
