@@ -21,7 +21,7 @@ namespace ClickTix.UserControls
             InitializeComponent();
             c = new MyConexion("localhost", "clicktix", "root", "tiago26");
 
-            Form1_Load(grid_peliculas);
+            Pelicula_Load(grid_peliculas);
         }
 
         private void title_Click(object sender, EventArgs e)
@@ -49,11 +49,11 @@ namespace ClickTix.UserControls
                 int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["id"].Value);
 
                 
-                FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC();
+                FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC(id);
                formModificarPelicula.Show();
 
-               
-                Form1_Load(grid_peliculas);
+
+                Pelicula_Load(grid_peliculas);
             }
             
             else if (e.ColumnIndex == grid_peliculas.Columns["Borrar"].Index && e.RowIndex >= 0)
@@ -66,13 +66,13 @@ namespace ClickTix.UserControls
 
                 if (result == DialogResult.Yes)
                 {
-                    EliminarRegistro(id); 
-                    Form1_Load(grid_peliculas);
+                    EliminarRegistro(id);
+                    Pelicula_Load(grid_peliculas);
                 }
             }
         }
 
-        private void Form1_Load(DataGridView tabla)
+        private void Pelicula_Load(DataGridView tabla)
         {
             
             c.AbrirConexion();
@@ -132,10 +132,7 @@ namespace ClickTix.UserControls
             }
         }
 
-        private void ABM_PELICULAS_UC_Load(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
 

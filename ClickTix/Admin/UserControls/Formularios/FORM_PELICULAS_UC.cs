@@ -16,12 +16,23 @@ namespace ClickTix.UserControls
     {
 
         MyConexion c ;
+        private int id;
+
         public FORM_PELICULAS_UC()
         {
             InitializeComponent();
             c = new MyConexion("localhost", "clicktix", "root", "tiago26");
 
 
+        }
+
+        public FORM_PELICULAS_UC(int id)
+        {
+    
+            this.id = id;
+
+            addpelicula_btn.Text = "Modificar";
+            
         }
 
         private void PELICULAS_UC_Load(object sender, EventArgs e)
@@ -37,7 +48,9 @@ namespace ClickTix.UserControls
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
 
-            InsertarPelicula(input_titulo.Text,input_director.Text, input_duracion.Value,input_descripcion.Text,10,10,"imagen",input_estreno.Value);
+            int id = GetMaxID() + 1;
+
+            InsertarPelicula(id,input_titulo.Text,input_director.Text, input_duracion.Value,input_descripcion.Text,1,1,"imagen",input_estreno.Value);
 
         }
 
@@ -57,17 +70,18 @@ namespace ClickTix.UserControls
 
         
 
-        private bool InsertarPelicula(string titulo, string director, decimal duracion, string descripcion,int categoria, int clasificacion, string portada, DateTime fechaEstreno)
+        private bool InsertarPelicula(int id,string titulo, string director, decimal duracion, string descripcion,int categoria, int clasificacion, string portada, DateTime fechaEstreno)
         {
 
             try
             {
                
-                string consulta = "INSERT INTO pelicula (titulo, director, duracion,descripcion, id_categoria, id_clasificacion, portada, fecha_estreno) " +
-                                  "VALUES (@titulo, @director, @duracion,@descripcion ,@categoria, @clasificacion, @portada, @fechaEstreno)";
+                string consulta = "INSERT INTO pelicula (id,titulo, director, duracion,descripcion, id_categoria, id_clasificacion, portada, fecha_estreno) " +
+                                  "VALUES (@id,@titulo, @director, @duracion,@descripcion ,@categoria, @clasificacion, @portada, @fechaEstreno)";
                 c.AbrirConexion();
                 using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
                 {
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@titulo", titulo);
                     cmd.Parameters.AddWithValue("@director", director);
                     cmd.Parameters.AddWithValue("@duracion", duracion);
@@ -89,11 +103,129 @@ namespace ClickTix.UserControls
            
         }
 
+
+        
+
+
+
         private void back_pelicula_Click(object sender, EventArgs e)
         {
             ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
             Index_Admin.addUserControl(abmpeliculas);
         }
+
+        public int GetMaxID()
+        {
+            int maxID = -1; 
+            
+            
+                try
+                {
+                c.AbrirConexion();
+
+                    string query = "SELECT MAX(id) FROM pelicula"; 
+
+                    MySqlCommand command = new MySqlCommand(query, c.ObtenerConexion());
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        maxID = Convert.ToInt32(result);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    Console.WriteLine("Error al obtener el ID máximo: " + ex.Message);
+                }
+            
+
+            return maxID;
+        }
+
+
+        private bool ActualizarPelicula(int id, string titulo, string director, decimal duracion, string descripcion, int categoria, int clasificacion, string portada, DateTime fechaEstreno)
+        {
+            try
+            {
+                string consulta = "UPDATE pelicula SET titulo = @titulo, director = @director, duracion = @duracion, descripcion = @descripcion, id_categoria = @categoria, id_clasificacion = @clasificacion, portada = @portada, fecha_estreno = @fechaEstreno WHERE id = @id";
+
+                c.AbrirConexion();
+                using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@titulo", titulo);
+                    cmd.Parameters.AddWithValue("@director", director);
+                    cmd.Parameters.AddWithValue("@duracion", duracion);
+                    cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                    cmd.Parameters.AddWithValue("@categoria", categoria);
+                    cmd.Parameters.AddWithValue("@clasificacion", clasificacion);
+                    cmd.Parameters.AddWithValue("@portada", portada);
+                    cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
+
+                    int filasActualizadas = cmd.ExecuteNonQuery();
+
+                    if (filasActualizadas > 0)
+                    {
+                        return true; // Actualización exitosa
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró ningún registro para actualizar.");
+                        return false; // No se encontraron registros para actualizar
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el registro: " + ex.Message);
+                return false; // Error en la actualización
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
    
