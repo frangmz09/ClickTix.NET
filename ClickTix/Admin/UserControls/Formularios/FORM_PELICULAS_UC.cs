@@ -21,12 +21,12 @@ namespace ClickTix.UserControls
         public FORM_PELICULAS_UC()
         {
             InitializeComponent();
-            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
+            c = new MyConexion("localhost", "clicktix", "root", "");
 
 
         }
 
-        
+ 
 
             public FORM_PELICULAS_UC(int id)
             {
@@ -36,9 +36,12 @@ namespace ClickTix.UserControls
                 CargarDatosPelicula(peliculaID);
             }
 
-         
 
 
+        private void FORM_PELICULAS_UC_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {
