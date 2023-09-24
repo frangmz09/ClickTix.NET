@@ -1,4 +1,6 @@
-﻿namespace ClickTix.UserControls
+﻿using System;
+
+namespace ClickTix.UserControls
 {
     partial class ABM_PELICULAS_UC
     {
@@ -94,7 +96,7 @@
             this.Controls.Add(this.grid_peliculas);
             this.Name = "ABM_PELICULAS_UC";
             this.Size = new System.Drawing.Size(570, 373);
-            this.Load += new System.EventHandler(this.ABM_PELICULAS_UC_Load);
+            this.Load += new System.EventHandler(this.ABM_PELICULAS_UC_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.grid_peliculas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -112,5 +114,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn emision;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
-    }
+
+       
+}
 }

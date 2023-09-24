@@ -17,7 +17,7 @@ namespace ClickTix
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Index_User());
+            Application.Run(new Login());
         }
     }
 }

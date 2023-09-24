@@ -21,7 +21,7 @@ namespace ClickTix.UserControls
             InitializeComponent();
             c = new MyConexion("localhost", "clicktix", "root", "");
 
-            Form1_Load(grid_peliculas);
+            Pelicula_Load(grid_peliculas);
         }
 
         private void title_Click(object sender, EventArgs e)
@@ -42,20 +42,24 @@ namespace ClickTix.UserControls
 
         private void grid_peliculas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             if (e.ColumnIndex == grid_peliculas.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
-                
                 int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["id"].Value);
 
-                
-                FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC();
-               formModificarPelicula.Show();
+                // Abrir FORM_PELICULAS_UC con el ID de la película seleccionada
+                FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC(id);
 
-               
-                Form1_Load(grid_peliculas);
+                // Mostrar el formulario en algún contenedor o de la manera que lo necesites
+                // Por ejemplo, si deseas abrirlo en un formulario principal:
+                if (this.ParentForm is Form principalForm)
+                {
+                    principalForm.Controls.Clear(); // Limpia cualquier otro control en el formulario principal
+                    principalForm.Controls.Add(formModificarPelicula);
+                    formModificarPelicula.Dock = DockStyle.Fill;
+                }
             }
-            
+
             else if (e.ColumnIndex == grid_peliculas.Columns["Borrar"].Index && e.RowIndex >= 0)
             {
                 
@@ -66,13 +70,13 @@ namespace ClickTix.UserControls
 
                 if (result == DialogResult.Yes)
                 {
-                    EliminarRegistro(id); 
-                    Form1_Load(grid_peliculas);
+                    EliminarRegistro(id);
+                    Pelicula_Load(grid_peliculas);
                 }
             }
         }
 
-        private void Form1_Load(DataGridView tabla)
+        private void Pelicula_Load(DataGridView tabla)
         {
             
             c.AbrirConexion();
@@ -133,6 +137,11 @@ namespace ClickTix.UserControls
         }
 
         private void ABM_PELICULAS_UC_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ABM_PELICULAS_UC_Load_1(object sender, EventArgs e)
         {
 
         }
