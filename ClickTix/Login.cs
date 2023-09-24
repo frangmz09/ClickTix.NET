@@ -1,4 +1,5 @@
-﻿using ClickTix.Empleado;
+﻿using ClickTix.Conexion;
+using ClickTix.Empleado;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,14 +32,33 @@ namespace ClickTix
 
         private void btn_login_Click(object sender, EventArgs e)
         {
+            if (Usuario_Controller.autenticar(txt_user.Text, txt_pw.Text, true))
+            {
+               /* if (MantenerSesion.Checked)
+                {
+                    Usuario_Controller.persistirUsuario(Program.logeado);
+                }*/
+                if (Program.logeado.Is_admin == 1)
+                {
+                    Index_Admin index_Admin = new Index_Admin();
+                    index_Admin.Show();
+                }
+                else
+                {
+                    Index_User index_User = new Index_User();
+                    index_User.Show();
+                }
+                this.Hide();
+            }
+
 
             validarUsuario(txt_user.Text, txt_pw.Text);
 
             // Index_User index = new Index_User();            
 
 
-            Index_Admin index = new Index_Admin();
-            index.Show();
+           // Index_Admin index = new Index_Admin();
+           // index.Show();
 
 
 

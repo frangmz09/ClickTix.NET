@@ -17,6 +17,7 @@ namespace ClickTix
         public Index_Admin()
         {
             InitializeComponent();
+
         }
 
 

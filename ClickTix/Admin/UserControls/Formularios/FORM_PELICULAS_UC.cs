@@ -163,6 +163,27 @@ namespace ClickTix.UserControls
             
 
             return maxID;
+
+                    string query = "SELECT nombre FROM "+nombreTabla;
+
+                     MyConexion.AbrirConexion();
+                    using (MySqlCommand cmd = new MySqlCommand(query, MyConexion.ObtenerConexion()))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string item = reader["nombre"].ToString();
+                                comboBox.Items.Add(item);
+                            }
+                        }
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al llenar el ComboBox: " + ex.Message);
+            }
         }
 
 
@@ -170,6 +191,11 @@ namespace ClickTix.UserControls
         {
             try
             {
+               
+                string consulta = "INSERT INTO peliculas (titulo, director, duracion, genero, clasificacion, imagen, fecha_estreno) " +
+                                  "VALUES (@titulo, @director, @duracion, @genero, @clasificacion, @imagen, @fechaEstreno)";
+                MyConexion.AbrirConexion();
+                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
                 string consulta = "UPDATE pelicula SET titulo = @titulo, director = @director, duracion = @duracion, descripcion = @descripcion, id_categoria = @categoria, id_clasificacion = @clasificacion, portada = @portada, fecha_estreno = @fechaEstreno WHERE id = @idParaActualizar";
 
                 c.AbrirConexion();

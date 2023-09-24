@@ -11,7 +11,7 @@ namespace ClickTix.Conexion
     internal class MyConexion
     {
         private string cadenaConexion;
-        private MySqlConnection conexion;
+        public static MySqlConnection conexion;
 
         public MyConexion(string servidor, string baseDeDatos, string usuario, string contraseña)
         {
@@ -20,7 +20,7 @@ namespace ClickTix.Conexion
             conexion = new MySqlConnection(cadenaConexion);
         }
 
-        public void AbrirConexion()
+        public static void AbrirConexion()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace ClickTix.Conexion
             }
         }
 
-        public MySqlConnection ObtenerConexion()
+        public static MySqlConnection ObtenerConexion()
         {
             return conexion;
         }
