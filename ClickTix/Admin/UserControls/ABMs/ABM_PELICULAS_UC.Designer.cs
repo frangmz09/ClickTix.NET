@@ -96,7 +96,7 @@ namespace ClickTix.UserControls
             this.Controls.Add(this.grid_peliculas);
             this.Name = "ABM_PELICULAS_UC";
             this.Size = new System.Drawing.Size(570, 373);
-            this.Load += new System.EventHandler(this.ABM_PELICULAS_UC_Load_1);
+            this.Load += new System.EventHandler(this.ABM_PELICULAS_UC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_peliculas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

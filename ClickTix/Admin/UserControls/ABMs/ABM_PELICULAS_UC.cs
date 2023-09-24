@@ -19,7 +19,7 @@ namespace ClickTix.UserControls
         public ABM_PELICULAS_UC()
         {
             InitializeComponent();
-            c = new MyConexion("localhost", "clicktix", "root", "");
+            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
 
             Pelicula_Load(grid_peliculas);
         }
@@ -47,14 +47,13 @@ namespace ClickTix.UserControls
             {
                 int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["id"].Value);
 
-                // Abrir FORM_PELICULAS_UC con el ID de la película seleccionada
+               
                 FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC(id);
 
-                // Mostrar el formulario en algún contenedor o de la manera que lo necesites
-                // Por ejemplo, si deseas abrirlo en un formulario principal:
+               
                 if (this.ParentForm is Form principalForm)
                 {
-                    principalForm.Controls.Clear(); // Limpia cualquier otro control en el formulario principal
+                    principalForm.Controls.Clear(); 
                     principalForm.Controls.Add(formModificarPelicula);
                     formModificarPelicula.Dock = DockStyle.Fill;
                 }
@@ -136,15 +135,7 @@ namespace ClickTix.UserControls
             }
         }
 
-        private void ABM_PELICULAS_UC_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ABM_PELICULAS_UC_Load_1(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
 
