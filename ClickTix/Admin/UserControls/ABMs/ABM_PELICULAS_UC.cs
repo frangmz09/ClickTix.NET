@@ -19,7 +19,7 @@ namespace ClickTix.UserControls
         public ABM_PELICULAS_UC()
         {
             InitializeComponent();
-            c = new MyConexion("localhost", "boleteria", "root", "tiago26");
+            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
 
             Form1_Load(grid_peliculas);
         }
@@ -42,35 +42,32 @@ namespace ClickTix.UserControls
 
         private void grid_peliculas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verifica si se hizo clic en el botón "Modificar"
+            
             if (e.ColumnIndex == grid_peliculas.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
-                // Obtén el ID del registro seleccionado
+                
                 int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["id"].Value);
 
-                // Abre un formulario o ventana para modificar el registro
-                // Puedes pasar el ID como parámetro al formulario de modificación
-                //FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC(id);
-               // formModificarPelicula.ShowDialog();
+                
+                FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC();
+               formModificarPelicula.Show();
 
-                // Después de modificar el registro, actualiza la vista si es necesario
-                // Puedes volver a cargar los datos en el DataGridView o actualizar la fila modificada
-                Form1_Load(grid_peliculas); // Llama a la función de carga nuevamente
+               
+                Form1_Load(grid_peliculas);
             }
-            // Verifica si se hizo clic en el botón "Borrar"
+            
             else if (e.ColumnIndex == grid_peliculas.Columns["Borrar"].Index && e.RowIndex >= 0)
             {
-                // Obtén el ID del registro seleccionado
+                
                 int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["id"].Value);
 
-                // Aquí debes implementar la lógica para eliminar el registro según el ID
-                // Puedes mostrar un mensaje de confirmación antes de la eliminación
+                
                 DialogResult result = MessageBox.Show("¿Estás seguro de eliminar este registro?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    EliminarRegistro(id); // Reemplaza con tu propia función de eliminación
-                    Form1_Load(grid_peliculas); // Actualiza la vista después de la eliminación
+                    EliminarRegistro(id); 
+                    Form1_Load(grid_peliculas);
                 }
             }
         }
@@ -81,7 +78,7 @@ namespace ClickTix.UserControls
             c.AbrirConexion();
 
             
-            string query = "SELECT  id,titulo, director FROM peliculas";
+            string query = "SELECT  id,titulo, director FROM pelicula";
 
             using (MySqlConnection mysqlConnection = c.ObtenerConexion())
             {
@@ -108,7 +105,7 @@ namespace ClickTix.UserControls
                 using (MySqlConnection mysqlConnection = c.ObtenerConexion())
                 {
                     mysqlConnection.Open();
-                    string query = "DELETE FROM peliculas WHERE id = @id";
+                    string query = "DELETE FROM pelicula WHERE id = @id";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {

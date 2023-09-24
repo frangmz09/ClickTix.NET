@@ -74,6 +74,7 @@
             // 
             this.Modificar.HeaderText = "Modificar";
             this.Modificar.Name = "Modificar";
+            this.Modificar.Text = "MODIFICAR";
             this.Modificar.Width = 75;
             // 
             // Borrar
@@ -83,6 +84,7 @@
             this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Borrar.Width = 75;
+            this.Borrar.Text = "BORRAR";
             // 
             // ABM_PELICULAS_UC
             // 

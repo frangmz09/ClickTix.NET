@@ -15,12 +15,12 @@ namespace ClickTix.UserControls
     public partial class FORM_PELICULAS_UC : UserControl
     {
 
-        MyConexion c = new MyConexion("localhost", "boleteria", "root", "tiago26");
+        MyConexion c ;
         public FORM_PELICULAS_UC()
         {
             InitializeComponent();
-            
-            
+            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
+
 
         }
 
@@ -92,7 +92,7 @@ namespace ClickTix.UserControls
             try
             {
                
-                string consulta = "INSERT INTO peliculas (titulo, director, duracion, genero, clasificacion, imagen, fecha_estreno) " +
+                string consulta = "INSERT INTO pelicula (titulo, director, duracion, genero, clasificacion, imagen, fecha_estreno) " +
                                   "VALUES (@titulo, @director, @duracion, @genero, @clasificacion, @imagen, @fechaEstreno)";
                 c.AbrirConexion();
                 using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
@@ -123,4 +123,9 @@ namespace ClickTix.UserControls
             Index_Admin.addUserControl(abmpeliculas);
         }
     }
+
+   
+
+   
 }
+
