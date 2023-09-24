@@ -33,6 +33,7 @@
             this.btn_empleado = new System.Windows.Forms.Button();
             this.btn_funciones = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
+            this.btn_dimensiones = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_peliculas
@@ -82,17 +83,28 @@
             panel1.Size = new System.Drawing.Size(560, 373);
             panel1.TabIndex = 4;
             // 
-            // Index
+            // btn_dimensiones
+            // 
+            this.btn_dimensiones.Location = new System.Drawing.Point(12, 323);
+            this.btn_dimensiones.Name = "btn_dimensiones";
+            this.btn_dimensiones.Size = new System.Drawing.Size(125, 51);
+            this.btn_dimensiones.TabIndex = 5;
+            this.btn_dimensiones.Text = "Precios/Dimensiones";
+            this.btn_dimensiones.UseVisualStyleBackColor = true;
+            this.btn_dimensiones.Click += new System.EventHandler(this.btn_dimensiones_Click);
+            // 
+            // Index_Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_dimensiones);
             this.Controls.Add(panel1);
             this.Controls.Add(this.btn_funciones);
             this.Controls.Add(this.btn_empleado);
             this.Controls.Add(this.btn_sucur);
             this.Controls.Add(this.btn_peliculas);
-            this.Name = "Index";
+            this.Name = "Index_Admin";
             this.Text = "Index";
             this.Load += new System.EventHandler(this.Index_Load);
             this.ResumeLayout(false);
@@ -105,6 +117,7 @@
         private System.Windows.Forms.Button btn_sucur;
         private System.Windows.Forms.Button btn_empleado;
         private System.Windows.Forms.Button btn_funciones;
+        private System.Windows.Forms.Button btn_dimensiones;
         public static System.Windows.Forms.Panel panel1;
     }
 }
