@@ -17,35 +17,35 @@ namespace ClickTix.UserControls
     public partial class FORM_PELICULAS_UC : UserControl
     {
 
-        MyConexion c ;
+        MyConexion c;
         private int idDelPanel;
 
         public FORM_PELICULAS_UC()
         {
             InitializeComponent();
-            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
+            c = new MyConexion("localhost", "clicktix", "root", "");
 
 
         }
 
- 
 
-            public FORM_PELICULAS_UC(int id)
-            {
 
-                this.idDelPanel = id;
+        public FORM_PELICULAS_UC(int id)
+        {
 
-                int peliculaID = id;
-                c = new MyConexion("localhost", "clicktix", "root", "tiago26");
-                InitializeComponent();
-                addpelicula_btn.Click += new EventHandler(this.Addpelicula_btn_Click2);
-                addpelicula_btn.Text = "modificar";
-                
-                                
-                CargarDatosPelicula(peliculaID);
+            this.idDelPanel = id;
 
-                
-            }
+            int peliculaID = id;
+            c = new MyConexion("localhost", "clicktix", "root", "");
+            InitializeComponent();
+            addpelicula_btn.Click += new EventHandler(this.Addpelicula_btn_Click2);
+            addpelicula_btn.Text = "modificar";
+
+
+            CargarDatosPelicula(peliculaID);
+
+
+        }
 
 
 
@@ -64,13 +64,13 @@ namespace ClickTix.UserControls
 
             int id = GetMaxID() + 1;
 
-            InsertarPelicula(id,input_titulo.Text,input_director.Text, input_duracion.Value,input_descripcion.Text,1,1,"imagen",input_estreno.Value);
+            InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
 
         }
 
         private void Addpelicula_btn_Click2(object sender, EventArgs e)
         {
-           
+
             int idpelicula = idDelPanel;
             MessageBox.Show("id : " + idpelicula);
             ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
@@ -78,30 +78,30 @@ namespace ClickTix.UserControls
         }
         private void input_genero_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void input_clasificacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            
+
+
         }
 
 
 
 
-        
 
-        private bool InsertarPelicula(int id,string titulo, string director, decimal duracion, string descripcion,int categoria, int clasificacion, string portada, DateTime fechaEstreno)
+
+        private bool InsertarPelicula(int id, string titulo, string director, decimal duracion, string descripcion, int categoria, int clasificacion, string portada, DateTime fechaEstreno)
         {
 
             try
             {
-               
+
                 string consulta = "INSERT INTO pelicula (id,titulo, director, duracion,descripcion, id_categoria, id_clasificacion, portada, fecha_estreno) " +
                                   "VALUES (@id,@titulo, @director, @duracion,@descripcion ,@categoria, @clasificacion, @portada, @fechaEstreno)";
-                c.AbrirConexion();
-                using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
+                MyConexion.AbrirConexion();
+                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@titulo", titulo);
@@ -114,19 +114,19 @@ namespace ClickTix.UserControls
                     cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
 
                     cmd.ExecuteNonQuery();
-                    return true; 
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al insertar el registro: " + ex.Message);
-                return false; 
+                return false;
             }
-           
+
         }
 
 
-        
+
 
 
 
@@ -138,68 +138,47 @@ namespace ClickTix.UserControls
 
         public int GetMaxID()
         {
-            int maxID = -1; 
-            
-            
-                try
+            int maxID = -1;
+
+
+            try
+            {
+                MyConexion.AbrirConexion();
+
+                string query = "SELECT MAX(id) FROM pelicula";
+
+                MySqlCommand command = new MySqlCommand(query, MyConexion.ObtenerConexion());
+                object result = command.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
                 {
-                c.AbrirConexion();
-
-                    string query = "SELECT MAX(id) FROM pelicula"; 
-
-                    MySqlCommand command = new MySqlCommand(query, c.ObtenerConexion());
-                    object result = command.ExecuteScalar();
-
-                    if (result != null && result != DBNull.Value)
-                    {
-                        maxID = Convert.ToInt32(result);
-                    }
+                    maxID = Convert.ToInt32(result);
                 }
-                catch (Exception ex)
-                {
-                    
-                    Console.WriteLine("Error al obtener el ID máximo: " + ex.Message);
-                }
-            
-
-            return maxID;
-
-                    string query = "SELECT nombre FROM "+nombreTabla;
-
-                     MyConexion.AbrirConexion();
-                    using (MySqlCommand cmd = new MySqlCommand(query, MyConexion.ObtenerConexion()))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string item = reader["nombre"].ToString();
-                                comboBox.Items.Add(item);
-                            }
-                        }
-                    }
-                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al llenar el ComboBox: " + ex.Message);
-            }
-        }
 
+                Console.WriteLine("Error al obtener el ID máximo: " + ex.Message);
+            }
+
+
+            return maxID;
+        }
 
         private bool ActualizarPelicula(int idParaActualizar, string titulo, string director, decimal duracion, string descripcion, int categoria, int clasificacion, string portada, DateTime fechaEstreno)
         {
             try
             {
-               
+
                 string consulta = "INSERT INTO peliculas (titulo, director, duracion, genero, clasificacion, imagen, fecha_estreno) " +
                                   "VALUES (@titulo, @director, @duracion, @genero, @clasificacion, @imagen, @fechaEstreno)";
                 MyConexion.AbrirConexion();
                 using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
-                string consulta = "UPDATE pelicula SET titulo = @titulo, director = @director, duracion = @duracion, descripcion = @descripcion, id_categoria = @categoria, id_clasificacion = @clasificacion, portada = @portada, fecha_estreno = @fechaEstreno WHERE id = @idParaActualizar";
 
-                c.AbrirConexion();
-                using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
+                    consulta = "UPDATE pelicula SET titulo = @titulo, director = @director, duracion = @duracion, descripcion = @descripcion, id_categoria = @categoria, id_clasificacion = @clasificacion, portada = @portada, fecha_estreno = @fechaEstreno WHERE id = @idParaActualizar";
+
+                MyConexion.AbrirConexion();
+                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
                 {
                     cmd.Parameters.AddWithValue("@idParaActualizar", idParaActualizar);
                     cmd.Parameters.AddWithValue("@titulo", titulo);
@@ -220,7 +199,7 @@ namespace ClickTix.UserControls
                     else
                     {
                         MessageBox.Show("No se encontró ningún registro para actualizar.");
-                        return false; 
+                        return false;
                     }
                 }
             }
@@ -231,30 +210,31 @@ namespace ClickTix.UserControls
             }
         }
 
+
         private void CargarDatosPelicula(int peliculaID)
         {
             try
             {
-               
+
                 string consulta = "SELECT titulo, director, duracion, descripcion, id_categoria, id_clasificacion, portada, fecha_estreno FROM pelicula WHERE id = @id";
 
-                
-                c.AbrirConexion();
 
-                using (MySqlCommand cmd = new MySqlCommand(consulta, c.ObtenerConexion()))
+                MyConexion.AbrirConexion();
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
                 {
                     cmd.Parameters.AddWithValue("@id", peliculaID);
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read()) 
+                        if (reader.Read())
                         {
-                            
+
                             input_titulo.Text = reader["titulo"].ToString();
                             input_director.Text = reader["director"].ToString();
                             input_duracion.Value = Convert.ToDecimal(reader["duracion"]);
                             input_descripcion.Text = reader["descripcion"].ToString();
-                            
+
                             if (DateTime.TryParse(reader["fecha_estreno"].ToString(), out DateTime fechaEstreno))
                             {
                                 input_estreno.Value = fechaEstreno;
@@ -263,7 +243,7 @@ namespace ClickTix.UserControls
                         else
                         {
                             MessageBox.Show("No se encontró la película con el ID proporcionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            
+
                         }
                     }
                 }
@@ -274,11 +254,12 @@ namespace ClickTix.UserControls
             }
         }
 
-       
+
     }
-
-   
-
-   
 }
+
+   
+
+   
+
 

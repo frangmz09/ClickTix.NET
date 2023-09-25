@@ -19,7 +19,7 @@ namespace ClickTix.Modelo
             MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
 
 
-            using (MySqlConnection mysqlConnection = c.ObtenerConexion()) {
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion()) {
                 mysqlConnection.Open();
                 string query = "SELECT * FROM asiento where asiento.id_funcion = @idfuncion;";
 
