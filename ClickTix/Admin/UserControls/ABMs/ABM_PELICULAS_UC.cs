@@ -50,13 +50,8 @@ namespace ClickTix.UserControls
                
                 FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC(id);
 
-               
-                if (this.ParentForm is Form principalForm)
-                {
-                    principalForm.Controls.Clear(); 
-                    principalForm.Controls.Add(formModificarPelicula);
-                    formModificarPelicula.Dock = DockStyle.Fill;
-                }
+                Index_Admin.addUserControl(formModificarPelicula);
+
             }
 
             else if (e.ColumnIndex == grid_peliculas.Columns["Borrar"].Index && e.RowIndex >= 0)

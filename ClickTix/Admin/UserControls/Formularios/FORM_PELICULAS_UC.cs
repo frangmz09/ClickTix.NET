@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
             c = new MyConexion("localhost", "clicktix", "root", "");
-
+            this.addpelicula_btn.Click += new System.EventHandler(this.Addpelicula_btn_Click);
 
         }
 
@@ -61,7 +62,7 @@ namespace ClickTix.UserControls
 
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
-
+            Trace.WriteLine("adddd");
             int id = GetMaxID() + 1;
 
             InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
@@ -70,7 +71,7 @@ namespace ClickTix.UserControls
 
         private void Addpelicula_btn_Click2(object sender, EventArgs e)
         {
-
+            Trace.WriteLine("editt");
             int idpelicula = idDelPanel;
             MessageBox.Show("id : " + idpelicula);
             ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
@@ -170,16 +171,13 @@ namespace ClickTix.UserControls
             try
             {
 
-                string consulta = "INSERT INTO peliculas (titulo, director, duracion, genero, clasificacion, imagen, fecha_estreno) " +
-                                  "VALUES (@titulo, @director, @duracion, @genero, @clasificacion, @imagen, @fechaEstreno)";
-                MyConexion.AbrirConexion();
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
 
-                    consulta = "UPDATE pelicula SET titulo = @titulo, director = @director, duracion = @duracion, descripcion = @descripcion, id_categoria = @categoria, id_clasificacion = @clasificacion, portada = @portada, fecha_estreno = @fechaEstreno WHERE id = @idParaActualizar";
+                string consulta = "UPDATE pelicula SET titulo = @titulo, director = @director, duracion = @duracion, descripcion = @descripcion, id_categoria = @categoria, id_clasificacion = @clasificacion, portada = @portada, fecha_estreno = @fechaEstreno WHERE id = @idParaActualizar";
 
                 MyConexion.AbrirConexion();
                 using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
                 {
+                    Trace.WriteLine(idParaActualizar);
                     cmd.Parameters.AddWithValue("@idParaActualizar", idParaActualizar);
                     cmd.Parameters.AddWithValue("@titulo", titulo);
                     cmd.Parameters.AddWithValue("@director", director);
