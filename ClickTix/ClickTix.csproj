@@ -145,6 +145,8 @@
     </Compile>
     <Compile Include="Modelo\Asiento.cs" />
     <Compile Include="Modelo\Asiento_Controller.cs" />
+    <Compile Include="Modelo\Funcion.cs" />
+    <Compile Include="Modelo\Funcion_Controller.cs" />
     <Compile Include="Modelo\Pelicula.cs" />
     <Compile Include="Admin\UserControls\ABMs\ABM_EMPLEADOS_UC.cs">
       <SubType>UserControl</SubType>

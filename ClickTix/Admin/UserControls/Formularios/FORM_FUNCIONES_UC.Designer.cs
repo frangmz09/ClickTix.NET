@@ -36,14 +36,14 @@
             this.label_turno = new System.Windows.Forms.Label();
             this.label_fecha = new System.Windows.Forms.Label();
             this.label_sala = new System.Windows.Forms.Label();
-            this.input_idioma = new System.Windows.Forms.ComboBox();
-            this.input_sala = new System.Windows.Forms.ComboBox();
-            this.input_dimension = new System.Windows.Forms.ComboBox();
-            this.input_turno = new System.Windows.Forms.ComboBox();
-            this.input_fecha = new System.Windows.Forms.DateTimePicker();
+            this.combobox_idioma = new System.Windows.Forms.ComboBox();
+            this.combobox_sala = new System.Windows.Forms.ComboBox();
+            this.combobox_dimension = new System.Windows.Forms.ComboBox();
+            this.combobox_turno = new System.Windows.Forms.ComboBox();
+            this.combobox_fecha = new System.Windows.Forms.DateTimePicker();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.input_sucursal = new System.Windows.Forms.ComboBox();
+            this.combobox_pelicula = new System.Windows.Forms.ComboBox();
+            this.combobox_sucursal = new System.Windows.Forms.ComboBox();
             this.label_sucursal = new System.Windows.Forms.Label();
             this.back_pelicula = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -68,6 +68,7 @@
             this.addfuncion_btn.TabIndex = 32;
             this.addfuncion_btn.Text = "Agregar";
             this.addfuncion_btn.UseVisualStyleBackColor = true;
+            this.addfuncion_btn.Click += new System.EventHandler(this.addfuncion_btn_Click);
             // 
             // label_pelicula
             // 
@@ -95,7 +96,7 @@
             // 
             this.label_dimension.AutoSize = true;
             this.label_dimension.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_dimension.Location = new System.Drawing.Point(377, 153);
+            this.label_dimension.Location = new System.Drawing.Point(384, 205);
             this.label_dimension.Name = "label_dimension";
             this.label_dimension.Size = new System.Drawing.Size(57, 14);
             this.label_dimension.TabIndex = 29;
@@ -106,7 +107,7 @@
             // 
             this.label_turno.AutoSize = true;
             this.label_turno.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_turno.Location = new System.Drawing.Point(386, 100);
+            this.label_turno.Location = new System.Drawing.Point(400, 100);
             this.label_turno.Name = "label_turno";
             this.label_turno.Size = new System.Drawing.Size(35, 14);
             this.label_turno.TabIndex = 28;
@@ -128,53 +129,54 @@
             // 
             this.label_sala.AutoSize = true;
             this.label_sala.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_sala.Location = new System.Drawing.Point(302, 153);
+            this.label_sala.Location = new System.Drawing.Point(400, 155);
             this.label_sala.Name = "label_sala";
             this.label_sala.Size = new System.Drawing.Size(28, 14);
             this.label_sala.TabIndex = 26;
             this.label_sala.Text = "Sala";
             this.label_sala.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // input_idioma
+            // combobox_idioma
             // 
-            this.input_idioma.FormattingEnabled = true;
-            this.input_idioma.Location = new System.Drawing.Point(272, 222);
-            this.input_idioma.Name = "input_idioma";
-            this.input_idioma.Size = new System.Drawing.Size(92, 21);
-            this.input_idioma.TabIndex = 25;
+            this.combobox_idioma.FormattingEnabled = true;
+            this.combobox_idioma.Location = new System.Drawing.Point(272, 222);
+            this.combobox_idioma.Name = "combobox_idioma";
+            this.combobox_idioma.Size = new System.Drawing.Size(92, 21);
+            this.combobox_idioma.TabIndex = 25;
             // 
-            // input_sala
+            // combobox_sala
             // 
-            this.input_sala.FormattingEnabled = true;
-            this.input_sala.Location = new System.Drawing.Point(272, 170);
-            this.input_sala.Name = "input_sala";
-            this.input_sala.Size = new System.Drawing.Size(92, 21);
-            this.input_sala.TabIndex = 24;
+            this.combobox_sala.Enabled = false;
+            this.combobox_sala.FormattingEnabled = true;
+            this.combobox_sala.Location = new System.Drawing.Point(377, 172);
+            this.combobox_sala.Name = "combobox_sala";
+            this.combobox_sala.Size = new System.Drawing.Size(71, 21);
+            this.combobox_sala.TabIndex = 24;
             // 
-            // input_dimension
+            // combobox_dimension
             // 
-            this.input_dimension.FormattingEnabled = true;
-            this.input_dimension.Location = new System.Drawing.Point(370, 170);
-            this.input_dimension.Name = "input_dimension";
-            this.input_dimension.Size = new System.Drawing.Size(71, 21);
-            this.input_dimension.TabIndex = 23;
+            this.combobox_dimension.FormattingEnabled = true;
+            this.combobox_dimension.Location = new System.Drawing.Point(377, 222);
+            this.combobox_dimension.Name = "combobox_dimension";
+            this.combobox_dimension.Size = new System.Drawing.Size(71, 21);
+            this.combobox_dimension.TabIndex = 23;
             // 
-            // input_turno
+            // combobox_turno
             // 
-            this.input_turno.FormattingEnabled = true;
-            this.input_turno.Location = new System.Drawing.Point(370, 116);
-            this.input_turno.Name = "input_turno";
-            this.input_turno.Size = new System.Drawing.Size(71, 21);
-            this.input_turno.TabIndex = 22;
+            this.combobox_turno.FormattingEnabled = true;
+            this.combobox_turno.Location = new System.Drawing.Point(377, 116);
+            this.combobox_turno.Name = "combobox_turno";
+            this.combobox_turno.Size = new System.Drawing.Size(71, 21);
+            this.combobox_turno.TabIndex = 22;
             // 
-            // input_fecha
+            // combobox_fecha
             // 
-            this.input_fecha.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.input_fecha.Location = new System.Drawing.Point(272, 116);
-            this.input_fecha.Name = "input_fecha";
-            this.input_fecha.Size = new System.Drawing.Size(92, 21);
-            this.input_fecha.TabIndex = 21;
+            this.combobox_fecha.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combobox_fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.combobox_fecha.Location = new System.Drawing.Point(272, 116);
+            this.combobox_fecha.Name = "combobox_fecha";
+            this.combobox_fecha.Size = new System.Drawing.Size(92, 21);
+            this.combobox_fecha.TabIndex = 21;
             // 
             // pictureBox1
             // 
@@ -184,27 +186,27 @@
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
             // 
-            // comboBox1
+            // combobox_pelicula
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(80, 74);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(152, 21);
-            this.comboBox1.TabIndex = 19;
+            this.combobox_pelicula.FormattingEnabled = true;
+            this.combobox_pelicula.Location = new System.Drawing.Point(80, 74);
+            this.combobox_pelicula.Name = "combobox_pelicula";
+            this.combobox_pelicula.Size = new System.Drawing.Size(152, 21);
+            this.combobox_pelicula.TabIndex = 19;
             // 
-            // input_sucursal
+            // combobox_sucursal
             // 
-            this.input_sucursal.FormattingEnabled = true;
-            this.input_sucursal.Location = new System.Drawing.Point(370, 222);
-            this.input_sucursal.Name = "input_sucursal";
-            this.input_sucursal.Size = new System.Drawing.Size(71, 21);
-            this.input_sucursal.TabIndex = 33;
+            this.combobox_sucursal.FormattingEnabled = true;
+            this.combobox_sucursal.Location = new System.Drawing.Point(272, 172);
+            this.combobox_sucursal.Name = "combobox_sucursal";
+            this.combobox_sucursal.Size = new System.Drawing.Size(92, 21);
+            this.combobox_sucursal.TabIndex = 33;
             // 
             // label_sucursal
             // 
             this.label_sucursal.AutoSize = true;
             this.label_sucursal.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_sucursal.Location = new System.Drawing.Point(377, 205);
+            this.label_sucursal.Location = new System.Drawing.Point(286, 155);
             this.label_sucursal.Name = "label_sucursal";
             this.label_sucursal.Size = new System.Drawing.Size(48, 14);
             this.label_sucursal.TabIndex = 34;
@@ -221,13 +223,13 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
-            // FORMFUNCIONES_UC
+            // FORM_FUNCIONES_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.label_sucursal);
-            this.Controls.Add(this.input_sucursal);
+            this.Controls.Add(this.combobox_sucursal);
             this.Controls.Add(this.addfuncion_btn);
             this.Controls.Add(this.label_pelicula);
             this.Controls.Add(this.label_idioma);
@@ -235,15 +237,15 @@
             this.Controls.Add(this.label_turno);
             this.Controls.Add(this.label_fecha);
             this.Controls.Add(this.label_sala);
-            this.Controls.Add(this.input_idioma);
-            this.Controls.Add(this.input_sala);
-            this.Controls.Add(this.input_dimension);
-            this.Controls.Add(this.input_turno);
-            this.Controls.Add(this.input_fecha);
+            this.Controls.Add(this.combobox_idioma);
+            this.Controls.Add(this.combobox_sala);
+            this.Controls.Add(this.combobox_dimension);
+            this.Controls.Add(this.combobox_turno);
+            this.Controls.Add(this.combobox_fecha);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.combobox_pelicula);
             this.Controls.Add(this.title);
-            this.Name = "FORMFUNCIONES_UC";
+            this.Name = "FORM_FUNCIONES_UC";
             this.Size = new System.Drawing.Size(560, 373);
             this.Load += new System.EventHandler(this.FUNCIONES_UC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -262,14 +264,14 @@
         private System.Windows.Forms.Label label_turno;
         private System.Windows.Forms.Label label_fecha;
         private System.Windows.Forms.Label label_sala;
-        private System.Windows.Forms.ComboBox input_idioma;
-        private System.Windows.Forms.ComboBox input_sala;
-        private System.Windows.Forms.ComboBox input_dimension;
-        private System.Windows.Forms.ComboBox input_turno;
-        private System.Windows.Forms.DateTimePicker input_fecha;
+        private System.Windows.Forms.ComboBox combobox_idioma;
+        private System.Windows.Forms.ComboBox combobox_sala;
+        private System.Windows.Forms.ComboBox combobox_dimension;
+        private System.Windows.Forms.ComboBox combobox_turno;
+        private System.Windows.Forms.DateTimePicker combobox_fecha;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox input_sucursal;
+        private System.Windows.Forms.ComboBox combobox_pelicula;
+        private System.Windows.Forms.ComboBox combobox_sucursal;
         private System.Windows.Forms.Label label_sucursal;
         private System.Windows.Forms.Button back_pelicula;
     }
