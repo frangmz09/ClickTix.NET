@@ -2,6 +2,8 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,7 +71,54 @@ namespace ClickTix.Modelo
             }
             return idReturn;
         }
+        public static int obtenerIdIdioma(ComboBox combobox_idioma) {
+            int idReturn = 0;
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                mysqlConnection.Open();
+                string query = "SELECT id FROM idioma where idioma=@idioma_seleccionado;";
 
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@idioma_seleccionado", combobox_idioma.SelectedItem.ToString());
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        idReturn = reader.GetInt32(0);
+                    }
+
+                    reader.Close();
+                }
+                mysqlConnection.Close();
+            }
+            return idReturn;        
+        }
+
+        public static int obtenerIdDimension(ComboBox combobox_dimension)
+        {
+            int idReturn = 0;
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                mysqlConnection.Open();
+                string query = "SELECT id FROM dimension where dimension=@dimension_seleccionada;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@dimension_seleccionada", combobox_dimension.SelectedItem.ToString());
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        idReturn = reader.GetInt32(0);
+                    }
+
+                    reader.Close();
+                }
+                mysqlConnection.Close();
+            }
+            return idReturn;
+        }
         public static int obtenerIdTurno(ComboBox combobox_turno)
         {
 
@@ -94,6 +143,37 @@ namespace ClickTix.Modelo
                 }
                 mysqlConnection.Close();
             }
+            return idReturn;
+        }
+        public static int obtenerIdSala(ComboBox combobox_sala, ComboBox combobox_sucursal) { 
+
+            int idReturn =0;
+
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                mysqlConnection.Open();
+                string query = "select nro_sala, sala.id from sucursal " +
+                    "inner join sala " +
+                    "on sucursal.id = sala.id_sucursal " +
+                    "where sucursal.nombre = @nombre_sucursal and sala.nro_sala=@sala_seleccionada;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@nombre_sucursal", combobox_sucursal.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("@sala_seleccionada", combobox_sala.SelectedItem);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        idReturn = reader.GetInt32(1);
+                    }
+
+                    reader.Close();
+                }
+                mysqlConnection.Close();
+            }
+
             return idReturn;
         }
 
@@ -214,35 +294,36 @@ namespace ClickTix.Modelo
         public static bool crearFuncion(Funcion funcion)
         {
 
-            try
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
             {
 
-                string consulta = "INSERT INTO funcion (id,fecha,id_dimension,id_sala,idioma_funcion,turno_id) " +
-                                  "VALUES (@id,@fecha,@id_dimension,@id_sala,@idioma_funcion,@turno_id)";
-                int id = GetMaxID();
-                MyConexion.AbrirConexion();
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@fecha", funcion.Fecha);
-                    cmd.Parameters.AddWithValue("@id_dimension", funcion.Id_Dimension);
-                    cmd.Parameters.AddWithValue("@id_sala", funcion.Id_Sala);
-                    cmd.Parameters.AddWithValue("@idioma_funcion", funcion.Id_Idioma);
-                    cmd.Parameters.AddWithValue("@turno_id", funcion.Id_Turno);
+
+                    string consulta = "INSERT INTO funcion (id,fecha,id_dimension,id_sala,id_pelicula,idioma_funcion,turno_id) " +
+                                  "VALUES (@id,@fecha,@id_dimension,@id_sala,@id_pelicula,@idioma_funcion,@turno_id)";
+                    int id = GetMaxIDFuncion()+1;
+                    using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@fecha", funcion.Fecha);
+                        cmd.Parameters.AddWithValue("@id_dimension", funcion.Id_Dimension);
+                        cmd.Parameters.AddWithValue("@id_sala", funcion.Id_Sala);
+                        cmd.Parameters.AddWithValue("@id_pelicula", funcion.Id_Pelicula);
+                        cmd.Parameters.AddWithValue("@idioma_funcion", funcion.Id_Idioma);
+                        cmd.Parameters.AddWithValue("@turno_id", funcion.Id_Turno);
 
 
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
+                        cmd.ExecuteNonQuery();
+                    }
+
+
+                
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al insertar el registro: " + ex.Message);
-                return false;
-            }
 
+
+            return true;
         }
-        private static int GetMaxID()
+        private static int GetMaxIDFuncion()
         {
             int maxID = -1;
 

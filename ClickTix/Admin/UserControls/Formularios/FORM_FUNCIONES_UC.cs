@@ -39,9 +39,9 @@ namespace ClickTix.UserControls
             combobox_fecha.ValueChanged += cambioFecha;
             combobox_turno.SelectedIndexChanged += cambioTurno;
             combobox_sucursal.SelectedIndexChanged += cambioSucursal;
-            //combobox_sala.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
-            //combobox_idioma.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
-            //combobox_dimension.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
+            combobox_sala.SelectedIndexChanged += cambioSala;
+            combobox_idioma.SelectedIndexChanged += cambioIdioma;
+            combobox_dimension.SelectedIndexChanged += cambioDimension;
 
 
         }
@@ -55,6 +55,8 @@ namespace ClickTix.UserControls
         private void cambioPelicula(object sender, EventArgs e)
         {
             funcionActual.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
+            Trace.WriteLine(funcionActual.Id_Pelicula);
+
         }
         private void cambioFecha(object sender, EventArgs e)
         {
@@ -64,17 +66,34 @@ namespace ClickTix.UserControls
         private void cambioSucursal(object sender, EventArgs e)
         {
             Funcion_Controller.llenarSalas(combobox_sucursal, combobox_sala);
+            funcionActual.Id_Sala = 0;
+            combobox_sala.SelectedItem = null;
+            combobox_sala.Text = "";
         }
         private void cambioTurno(object sender, EventArgs e)
         {
             funcionActual.Id_Turno = Funcion_Controller.obtenerIdTurno(combobox_turno);
         }
-
-
-
+        private void cambioSala(object sender, EventArgs e)
+        {
+            funcionActual.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala,combobox_sucursal);
+        }
+        private void cambioIdioma(object sender, EventArgs e)
+        {
+            funcionActual.Id_Idioma = Funcion_Controller.obtenerIdIdioma(combobox_idioma);
+        }
+        private void cambioDimension(object sender, EventArgs e)
+        {
+            funcionActual.Id_Dimension = Funcion_Controller.obtenerIdDimension(combobox_dimension);
+            Trace.WriteLine(funcionActual.Id_Dimension);
+        }
         private void addfuncion_btn_Click(object sender, EventArgs e)
         {
             Funcion_Controller.crearFuncion(funcionActual);
+            Asiento_Controller.crearDisponibilidad(funcionActual);
+
+
+
         }
     }
 }
