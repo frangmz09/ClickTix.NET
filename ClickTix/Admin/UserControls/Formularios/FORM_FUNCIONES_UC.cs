@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,17 +31,17 @@ namespace ClickTix.UserControls
             MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
 
             funcionActual = new Funcion();
-
+            funcionActual.Fecha = combobox_fecha.Value.Date;
             Funcion_Controller.llenarCamposAddFuncion(combobox_pelicula, combobox_turno, combobox_sucursal, combobox_dimension,combobox_idioma);
             
             
-            /*combobox_pelicula.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
-            combobox_fecha.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
-            combobox_turno.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
-            combobox_sucursal.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
-            combobox_sala.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
-            combobox_idioma.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
-            combobox_dimension.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;*/
+            combobox_pelicula.SelectedIndexChanged += cambioPelicula;
+            combobox_fecha.ValueChanged += cambioFecha;
+            combobox_turno.SelectedIndexChanged += cambioTurno;
+            combobox_sucursal.SelectedIndexChanged += cambioSucursal;
+            //combobox_sala.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
+            //combobox_idioma.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
+            //combobox_dimension.SelectedIndexChanged += ComboBoxSucursal_SelectedIndexChanged;
 
 
         }
@@ -51,12 +52,23 @@ namespace ClickTix.UserControls
             Index_Admin.addUserControl(abmfuncion);
         }
 
+        private void cambioPelicula(object sender, EventArgs e)
+        {
+            funcionActual.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
+        }
+        private void cambioFecha(object sender, EventArgs e)
+        {
+            funcionActual.Fecha = combobox_fecha.Value.Date;
 
-        private void ComboBoxSucursal_SelectedIndexChanged(object sender, EventArgs e)
+        }
+        private void cambioSucursal(object sender, EventArgs e)
         {
             Funcion_Controller.llenarSalas(combobox_sucursal, combobox_sala);
         }
-
+        private void cambioTurno(object sender, EventArgs e)
+        {
+            funcionActual.Id_Turno = Funcion_Controller.obtenerIdTurno(combobox_turno);
+        }
 
 
 

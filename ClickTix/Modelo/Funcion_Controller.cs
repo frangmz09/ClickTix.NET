@@ -44,6 +44,59 @@ namespace ClickTix.Modelo
             }
         }
 
+        public static int obtenerIdPelicula(ComboBox combobox_pelicula) {
+
+            int idReturn=0;
+
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                mysqlConnection.Open();
+                string query = "SELECT id FROM pelicula where titulo=@nombre_seleccionado;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@nombre_seleccionado",combobox_pelicula.SelectedItem.ToString());
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        idReturn = reader.GetInt32(0);
+                    }
+
+                    reader.Close();
+                }
+                mysqlConnection.Close();
+            }
+            return idReturn;
+        }
+
+        public static int obtenerIdTurno(ComboBox combobox_turno)
+        {
+
+            int idReturn = 0;
+
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                mysqlConnection.Open();
+                string query = "SELECT id FROM turno where hora=@fecha_seleccionada;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@fecha_seleccionada", combobox_turno.SelectedItem.ToString());
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        idReturn = reader.GetInt32(0);
+                    }
+
+                    reader.Close();
+                }
+                mysqlConnection.Close();
+            }
+            return idReturn;
+        }
+
         public static void llenarSalas(ComboBox combobox_sucursal, ComboBox combobox_sala)
         {
             combobox_sala.Items.Clear();
