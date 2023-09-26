@@ -39,19 +39,19 @@ namespace ClickTix
 
         private void addempleado_btn_Click(object sender, EventArgs e)
         {
-            int sucursal = 0;
 
             Usuario usuario = null;
 
-            if (input_sucursal.SelectedIndex ==0)
+            if (input_sucursal.SelectedIndex == 0)
             {
-                usuario = new Usuario(0, input_nombre.Text, input_apellido.Text, input_contraseña.Text, 0, input_usuario.Text, 0);
-                sucursal = 0;
-               
+                usuario = new Usuario(0, input_nombre.Text, input_apellido.Text, input_contraseña.Text, 0, input_usuario.Text, 1);
             }
-            
+            else {
+                usuario = new Usuario(0, input_nombre.Text, input_apellido.Text, input_contraseña.Text, 0, input_usuario.Text, input_sucursal.SelectedIndex);
+            }
 
-            
+
+
             if (Usuario_Controller.crearUsuario(usuario))
             {
                 this.Dialogresult = DialogResult.OK;
@@ -73,6 +73,11 @@ namespace ClickTix
         internal static DialogResult Showdialog()
         {
             throw new NotImplementedException();
+        }
+
+        private void FORM_EMPLEADOS_UC_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -186,6 +186,7 @@
             this.Controls.Add(this.input_nombre);
             this.Name = "FORM_EMPLEADOS_UC";
             this.Size = new System.Drawing.Size(560, 373);
+            this.Load += new System.EventHandler(this.FORM_EMPLEADOS_UC_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

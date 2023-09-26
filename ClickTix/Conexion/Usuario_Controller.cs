@@ -61,9 +61,11 @@ namespace ClickTix.Conexion
                 "@name, " +
                 "@lastname, " + 
                 "@pass, " +
-                "@username, " +
-                "@id_sucursal, " + 
-                "@is_admin)";    
+                "@id_sucursal, " +
+                "@username, " + 
+                "@is_admin)";
+
+            Trace.WriteLine(user.usuario);
 
             MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
             cmd.Parameters.AddWithValue("@id", obtenerMaxId() + 1);
