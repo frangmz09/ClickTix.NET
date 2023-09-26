@@ -1,12 +1,15 @@
 ﻿using ClickTix.Conexion;
 using ClickTix.Modelo;
 using ClickTix.UserControls;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,9 +20,23 @@ namespace ClickTix
     {
         internal static DialogResult showdialog;
         private Usuario usuario;
-
+        private int idDelPanel;
         public DialogResult Dialogresult { get; private set; }
 
+        public FORM_EMPLEADOS_UC(int id)
+        {
+            this.idDelPanel = id;
+            int empleadoId = id;
+            InitializeComponent();
+
+            input_sucursal.Items.Clear();
+
+            input_sucursal.Items.Add(0);
+            input_sucursal.Items.Add(1);
+            input_sucursal.Items.Add(2);
+            CargarDatosEmpleado(empleadoId);
+
+        }
         public FORM_EMPLEADOS_UC()
         {
             InitializeComponent();
@@ -68,7 +85,48 @@ namespace ClickTix
 
         }
 
-        
+        private void CargarDatosEmpleado(int empleadoId)
+        {
+            try
+            {
+
+                string consulta = "SELECT nombre, apellido, pass, id_sucursal, usuario,  FROM usuario_sistema WHERE id = @id";
+
+
+                MyConexion.AbrirConexion();
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                {
+                    cmd.Parameters.AddWithValue("@id", empleadoId);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+
+                       
+                    {
+                        if (reader.Read())
+                        {
+
+                           
+                            input_nombre.Text=reader["nombre"].ToString();
+                            input_apellido.Text=reader["apellido"].ToString();
+                            input_contraseña.Text = reader["pass"].ToString();
+                            input_usuario.Text = reader["usuario"].ToString();
+                            
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró al empleado con el ID proporcionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos del empleado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         internal static DialogResult Showdialog()
         {
