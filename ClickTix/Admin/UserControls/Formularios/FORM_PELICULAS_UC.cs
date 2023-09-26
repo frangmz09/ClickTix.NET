@@ -1,5 +1,4 @@
 ﻿using ClickTix.Conexion;
-using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -41,6 +40,7 @@ namespace ClickTix.UserControls
             InitializeComponent();
             addpelicula_btn.Click += new EventHandler(this.Addpelicula_btn_Click2);
             addpelicula_btn.Text = "modificar";
+            this.title.Text = "INGRESE DATOS PARA ACTUALIZAR UNA PELICULA";
 
 
             CargarDatosPelicula(peliculaID);
@@ -62,7 +62,7 @@ namespace ClickTix.UserControls
 
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
-            Trace.WriteLine("adddd");
+            
             int id = GetMaxID() + 1;
 
             InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
@@ -252,7 +252,7 @@ namespace ClickTix.UserControls
             }
         }
 
-
+        
     }
 }
 

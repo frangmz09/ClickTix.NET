@@ -42,10 +42,10 @@
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(157, 19);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(245, 24);
+            this.title.Size = new System.Drawing.Size(263, 25);
             this.title.TabIndex = 19;
             this.title.Text = "DIMENSIONES Y PRECIOS";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -73,25 +73,18 @@
             this.grid_dimension.Name = "grid_dimension";
             this.grid_dimension.Size = new System.Drawing.Size(524, 303);
             this.grid_dimension.TabIndex = 17;
+            this.grid_dimension.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_dimension_CellContentClick);
             // 
             // ID
             // 
-            this.ID.FillWeight = 195.2002F;
-            this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ID.Width = 30;
             // 
             // Nombre
             // 
-            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             // 
             // Precio
             // 
-            this.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             // 
             // Modificar

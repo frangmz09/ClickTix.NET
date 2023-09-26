@@ -70,6 +70,7 @@
             this.addpelicula_btn.TabIndex = 46;
             this.addpelicula_btn.Text = "Agregar";
             this.addpelicula_btn.UseVisualStyleBackColor = true;
+           
             // 
             // input_titulo
             // 

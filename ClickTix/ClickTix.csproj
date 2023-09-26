@@ -111,6 +111,7 @@
       <DependentUpon>FORM_PRECIODIMENSION_UC.cs</DependentUpon>
     </Compile>
     <Compile Include="Conexion\MyConexion.cs" />
+    <Compile Include="Conexion\PrecioDimension_Controller.cs" />
     <Compile Include="Conexion\Usuario_Controller.cs" />
     <Compile Include="Empleado\Index_User.cs">
       <SubType>Form</SubType>
@@ -187,6 +188,7 @@
     <Compile Include="Admin\Index_Admin.Designer.cs">
       <DependentUpon>Index_Admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\PrecioDimension.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,7 @@
-﻿using ClickTix.UserControls;
+﻿using ClickTix.Conexion;
+using ClickTix.Modelo;
+using ClickTix.UserControls;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,20 +16,103 @@ namespace ClickTix.Admin.UserControls.Formularios
 {
     public partial class FORM_PRECIODIMENSION_UC : UserControl
     {
+
+        private int idDelPanel;
         public FORM_PRECIODIMENSION_UC()
         {
             InitializeComponent();
+
+            this.adddimension_btn.Click += new System.EventHandler(this.addempleado_btn_Click);
         }
+
+        public FORM_PRECIODIMENSION_UC(int id)
+        {
+            this.adddimension_btn.Click += new System.EventHandler(this.addempleado_btn_Click2);
+            idDelPanel = id;
+            InitializeComponent();
+
+            MessageBox.Show("id : " + id);
+            CargarDatosPrecioDimension(id);
+            
+        }
+
+
+
 
         private void addempleado_btn_Click(object sender, EventArgs e)
         {
+            int maxId = PrecioDimension_Controller.ObtenerMaxIdDimension();
+
+            PrecioDimension pd = new PrecioDimension();
+
+            pd.id = maxId;
+            pd.precio = input_precio.Value;
+            pd.dimension = input_nombre.Text;
+
+            PrecioDimension_Controller.CrearDimension(pd);
 
         }
+
+        private void addempleado_btn_Click2(object sender, EventArgs e)
+        {
+            int maxId = PrecioDimension_Controller.ObtenerMaxIdDimension();
+
+            PrecioDimension pd = new PrecioDimension();
+
+            pd.id = maxId;
+            pd.precio = input_precio.Value;
+            pd.dimension = input_nombre.Text;
+
+            PrecioDimension_Controller.ActualizarDimension(pd);
+
+        }
+
+
+
 
         private void back_dimension_Click(object sender, EventArgs e)
         {
             ABM_EMPLEADOS_UC abmempleados = new ABM_EMPLEADOS_UC();
             Index_Admin.addUserControl(abmempleados);
         }
+
+
+
+
+
+        private void CargarDatosPrecioDimension(int dimensionID)
+        {
+            try
+            {
+                string consulta = "SELECT dimension, precio FROM dimension WHERE id = @id";
+
+                MyConexion.AbrirConexion();
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                {
+                    cmd.Parameters.AddWithValue("@id", dimensionID);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            
+                             input_nombre.Text= reader["dimension"].ToString();
+                             input_precio.Value = Convert.ToDecimal(reader["precio"]);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró la dimensión con el ID proporcionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos de la dimensión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        
     }
 }
