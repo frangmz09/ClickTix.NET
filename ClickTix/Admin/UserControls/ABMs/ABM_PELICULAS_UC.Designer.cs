@@ -41,10 +41,10 @@ namespace ClickTix.UserControls
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(219, 18);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(122, 25);
+            this.title.Size = new System.Drawing.Size(131, 25);
             this.title.TabIndex = 7;
             this.title.Text = "PELICULAS";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

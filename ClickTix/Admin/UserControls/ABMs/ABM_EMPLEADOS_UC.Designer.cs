@@ -31,11 +31,6 @@
             this.title = new System.Windows.Forms.Label();
             this.add_empleado = new System.Windows.Forms.Button();
             this.grid_empleados = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Permisos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_empleados)).BeginInit();
@@ -67,11 +62,6 @@
             // 
             this.grid_empleados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_empleados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.Nombre,
-            this.Apellido,
-            this.sucursal,
-            this.Permisos,
             this.Modificar,
             this.Borrar});
             this.grid_empleados.Location = new System.Drawing.Point(23, 52);
@@ -79,39 +69,6 @@
             this.grid_empleados.Size = new System.Drawing.Size(524, 303);
             this.grid_empleados.TabIndex = 5;
             this.grid_empleados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_empleados_CellContentClick);
-            // 
-            // ID
-            // 
-            this.ID.FillWeight = 195.2002F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ID.Width = 30;
-            // 
-            // Nombre
-            // 
-            this.Nombre.FillWeight = 82.47423F;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Apellido
-            // 
-            this.Apellido.FillWeight = 61.16275F;
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.Name = "Apellido";
-            // 
-            // sucursal
-            // 
-            this.sucursal.FillWeight = 61.16275F;
-            this.sucursal.HeaderText = "Sucursal";
-            this.sucursal.Name = "sucursal";
-            this.sucursal.Width = 90;
-            // 
-            // Permisos
-            // 
-            this.Permisos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Permisos.HeaderText = "Permisos";
-            this.Permisos.Name = "Permisos";
             // 
             // Modificar
             // 
@@ -127,15 +84,16 @@
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Borrar.Width = 50;
             // 
-            // ABMEMPLEADOS
+            // ABM_EMPLEADOS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.title);
             this.Controls.Add(this.add_empleado);
             this.Controls.Add(this.grid_empleados);
-            this.Name = "ABMEMPLEADOS";
+            this.Name = "ABM_EMPLEADOS_UC";
             this.Size = new System.Drawing.Size(570, 373);
+            this.Load += new System.EventHandler(this.ABM_EMPLEADOS_UC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_empleados)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -147,11 +105,6 @@
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Button add_empleado;
         private System.Windows.Forms.DataGridView grid_empleados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sucursal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Permisos;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
     }

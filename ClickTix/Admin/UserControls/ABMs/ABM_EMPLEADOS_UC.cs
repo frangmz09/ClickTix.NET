@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClickTix.Conexion;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,7 @@ namespace ClickTix.UserControls
         public ABM_EMPLEADOS_UC()
         {
             InitializeComponent();
+            ABM_EMPLEADOS_UC_Load(grid_empleados);
         }
 
         private void title_Click(object sender, EventArgs e)
@@ -30,6 +33,35 @@ namespace ClickTix.UserControls
         }
 
         private void grid_empleados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void ABM_EMPLEADOS_UC_Load(DataGridView tabla)
+        {
+            MyConexion.AbrirConexion();
+
+
+            string query = "SELECT  id, nombre, apellido, id_sucursal, is_admin FROM usuario_sistema";
+
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    DataTable dt = new DataTable();
+
+
+                    adapter.Fill(dt);
+
+
+                    tabla.DataSource = dt;
+                }
+            }
+        }
+
+        private void ABM_EMPLEADOS_UC_Load(object sender, EventArgs e)
         {
 
         }
