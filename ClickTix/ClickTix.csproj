@@ -125,6 +125,12 @@
     <Compile Include="Empleado\UserControls\BUTACAS_UC.Designer.cs">
       <DependentUpon>BUTACAS_UC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Empleado\UserControls\CARTELERA_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Empleado\UserControls\CARTELERA_UC.Designer.cs">
+      <DependentUpon>CARTELERA_UC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Empleado\UserControls\QR\LECTORQR_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -244,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\UserControls\BUTACAS_UC.resx">
       <DependentUpon>BUTACAS_UC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Empleado\UserControls\CARTELERA_UC.resx">
+      <DependentUpon>CARTELERA_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\UserControls\QR\LECTORQR_UC.resx">
       <DependentUpon>LECTORQR_UC.cs</DependentUpon>
