@@ -30,17 +30,20 @@
         {
             this.cartelera_grid = new System.Windows.Forms.DataGridView();
             this.cartelera = new System.Windows.Forms.Label();
-            this.seleccionar_pelicula = new System.Windows.Forms.Button();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.cartelera_grid)).BeginInit();
             this.SuspendLayout();
             // 
             // cartelera_grid
             // 
             this.cartelera_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.cartelera_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Seleccionar});
             this.cartelera_grid.Location = new System.Drawing.Point(34, 89);
             this.cartelera_grid.Name = "cartelera_grid";
-            this.cartelera_grid.Size = new System.Drawing.Size(692, 518);
+            this.cartelera_grid.Size = new System.Drawing.Size(687, 262);
             this.cartelera_grid.TabIndex = 0;
+            this.cartelera_grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartelera_grid_CellContentClick);
             // 
             // cartelera
             // 
@@ -53,25 +56,19 @@
             this.cartelera.Text = "CARTELERA";
             this.cartelera.Click += new System.EventHandler(this.label1_Click);
             // 
-            // seleccionar_pelicula
+            // Seleccionar
             // 
-            this.seleccionar_pelicula.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.seleccionar_pelicula.Location = new System.Drawing.Point(213, 628);
-            this.seleccionar_pelicula.Name = "seleccionar_pelicula";
-            this.seleccionar_pelicula.Size = new System.Drawing.Size(320, 44);
-            this.seleccionar_pelicula.TabIndex = 2;
-            this.seleccionar_pelicula.Text = "Seleccionar Pelicula";
-            this.seleccionar_pelicula.UseVisualStyleBackColor = true;
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
             // 
             // CARTELERA_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.seleccionar_pelicula);
             this.Controls.Add(this.cartelera);
             this.Controls.Add(this.cartelera_grid);
             this.Name = "CARTELERA_UC";
-            this.Size = new System.Drawing.Size(755, 696);
+            this.Size = new System.Drawing.Size(800, 451);
             ((System.ComponentModel.ISupportInitialize)(this.cartelera_grid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -82,6 +79,6 @@
 
         private System.Windows.Forms.DataGridView cartelera_grid;
         private System.Windows.Forms.Label cartelera;
-        private System.Windows.Forms.Button seleccionar_pelicula;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
     }
 }

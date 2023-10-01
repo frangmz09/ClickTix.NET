@@ -21,5 +21,10 @@ namespace ClickTix.Empleado.UserControls
         {
 
         }
+
+        private void cartelera_grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

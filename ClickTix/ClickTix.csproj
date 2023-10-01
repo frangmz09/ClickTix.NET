@@ -113,6 +113,12 @@
     <Compile Include="Conexion\MyConexion.cs" />
     <Compile Include="Conexion\PrecioDimension_Controller.cs" />
     <Compile Include="Conexion\Usuario_Controller.cs" />
+    <Compile Include="Empleado\ELEGIR_FUNCION_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Empleado\ELEGIR_FUNCION_UC.Designer.cs">
+      <DependentUpon>ELEGIR_FUNCION_UC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Empleado\Index_User.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\UserControls\Formularios\FORM_PRECIODIMENSION_UC.resx">
       <DependentUpon>FORM_PRECIODIMENSION_UC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Empleado\ELEGIR_FUNCION_UC.resx">
+      <DependentUpon>ELEGIR_FUNCION_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\Index_User.resx">
       <DependentUpon>Index_User.cs</DependentUpon>
