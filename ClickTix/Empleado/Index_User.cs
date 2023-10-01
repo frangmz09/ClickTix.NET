@@ -24,11 +24,12 @@ namespace ClickTix.Empleado
         private void Index_User_Load(object sender, EventArgs e)
         {
             c = new MyConexion("localhost", "clicktix", "root", "");
-            BUTACAS_UC butacas = new BUTACAS_UC();
-            Index_User.addUserControl(butacas);
+            // BUTACAS_UC butacas = new BUTACAS_UC();
+            MENU_UC menu = new MENU_UC();
+            Index_User.addUserControlUsuario(menu);
         }
 
-        public static void addUserControl(UserControl uc)
+        public static void addUserControlUsuario(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;
             panel2.Controls.Clear();
