@@ -1,6 +1,7 @@
 ﻿using ClickTix.Admin.UserControls.Formularios;
 using ClickTix.Conexion;
 using ClickTix.UserControls;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace ClickTix.Admin.UserControls.ABMs
         public ABM_PRECIODIMENSION_UC()
         {
             InitializeComponent();
+            PrecioDimension_Controller.Dimension_Load(grid_dimension);
         }
 
         private void add_dimension_Click(object sender, EventArgs e)
@@ -51,10 +53,16 @@ namespace ClickTix.Admin.UserControls.ABMs
                 {
                     PrecioDimension_Controller.EliminarRegistroDimension(id);
 
-                    PrecioDimension_Controller.Dimension_Load(grid_dimension);
-                    
+                    PrecioDimension_Controller.Dimension_Load(this.grid_dimension);
+
                 }
             }
         }
+
+
+
+
+
+
     }
 }

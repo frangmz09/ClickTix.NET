@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -51,8 +52,8 @@ namespace ClickTix.UserControls
             {
                 int id = Convert.ToInt32(grid_empleados.Rows[e.RowIndex].Cells["id"].Value);
 
-
-                FORM_EMPLEADOS_UC formempleados_uc = new FORM_EMPLEADOS_UC();
+                MessageBox.Show("id : " + id);
+                FORM_EMPLEADOS_UC formempleados_uc = new FORM_EMPLEADOS_UC(id);
 
                 Index_Admin.addUserControl(formempleados_uc);
 

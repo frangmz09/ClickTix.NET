@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -27,6 +28,8 @@ namespace ClickTix
         {
             this.idDelPanel = id;
             int empleadoId = id;
+
+
             InitializeComponent();
 
             input_sucursal.Items.Clear();
@@ -63,7 +66,8 @@ namespace ClickTix
             {
                 usuario = new Usuario(0, input_nombre.Text, input_apellido.Text, input_contraseña.Text, 0, input_usuario.Text, 1);
             }
-            else {
+            else
+            {
                 usuario = new Usuario(0, input_nombre.Text, input_apellido.Text, input_contraseña.Text, 0, input_usuario.Text, input_sucursal.SelectedIndex);
             }
 
@@ -90,7 +94,7 @@ namespace ClickTix
             try
             {
 
-                string consulta = "SELECT nombre, apellido, pass, id_sucursal, usuario,  FROM usuario_sistema WHERE id = @id";
+                string consulta = "SELECT nombre, apellido, pass, id_sucursal, usuario  FROM usuario_sistema WHERE id =" + empleadoId;
 
 
                 MyConexion.AbrirConexion();
@@ -101,17 +105,17 @@ namespace ClickTix
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
 
-                       
+
                     {
                         if (reader.Read())
                         {
 
-                           
-                            input_nombre.Text=reader["nombre"].ToString();
-                            input_apellido.Text=reader["apellido"].ToString();
+
+                            input_nombre.Text = reader["nombre"].ToString();
+                            input_apellido.Text = reader["apellido"].ToString();
                             input_contraseña.Text = reader["pass"].ToString();
                             input_usuario.Text = reader["usuario"].ToString();
-                            
+
 
                         }
                         else

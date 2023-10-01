@@ -145,6 +145,9 @@ namespace ClickTix.Conexion
             }
         }
 
-
+        internal static int GetMaxID()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

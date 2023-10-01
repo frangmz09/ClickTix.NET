@@ -1,4 +1,5 @@
-﻿using ClickTix.Conexion;
+﻿using ClickTix.Admin.UserControls.ABMs;
+using ClickTix.Conexion;
 using ClickTix.Modelo;
 using ClickTix.UserControls;
 using MySql.Data.MySqlClient;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,30 +24,31 @@ namespace ClickTix.Admin.UserControls.Formularios
         {
             InitializeComponent();
 
-            this.adddimension_btn.Click += new System.EventHandler(this.addempleado_btn_Click);
+            this.adddimension_btn.Click += new System.EventHandler(this.adddimension_btn_Click);
         }
 
         public FORM_PRECIODIMENSION_UC(int id)
         {
-            this.adddimension_btn.Click += new System.EventHandler(this.addempleado_btn_Click2);
+            this.adddimension_btn.Click += new System.EventHandler(this.adddimension_btn_Click2);
             idDelPanel = id;
             InitializeComponent();
 
             MessageBox.Show("id : " + id);
             CargarDatosPrecioDimension(id);
-            
+
+
         }
 
 
 
 
-        private void addempleado_btn_Click(object sender, EventArgs e)
+        private void adddimension_btn_Click(object sender, EventArgs e)
         {
-            int maxId = PrecioDimension_Controller.ObtenerMaxIdDimension();
+
 
             PrecioDimension pd = new PrecioDimension();
 
-            pd.id = maxId;
+            pd.id = 0;
             pd.precio = input_precio.Value;
             pd.dimension = input_nombre.Text;
 
@@ -53,9 +56,9 @@ namespace ClickTix.Admin.UserControls.Formularios
 
         }
 
-        private void addempleado_btn_Click2(object sender, EventArgs e)
+        private void adddimension_btn_Click2(object sender, EventArgs e)
         {
-            int maxId = PrecioDimension_Controller.ObtenerMaxIdDimension();
+            int maxId = PrecioDimension_Controller.GetMaxID() + 1;
 
             PrecioDimension pd = new PrecioDimension();
 
@@ -72,8 +75,8 @@ namespace ClickTix.Admin.UserControls.Formularios
 
         private void back_dimension_Click(object sender, EventArgs e)
         {
-            ABM_EMPLEADOS_UC abmempleados = new ABM_EMPLEADOS_UC();
-            Index_Admin.addUserControl(abmempleados);
+            ABM_PRECIODIMENSION_UC abmPrecioDimension = new ABM_PRECIODIMENSION_UC();
+            Index_Admin.addUserControl(abmPrecioDimension);
         }
 
 
@@ -96,9 +99,9 @@ namespace ClickTix.Admin.UserControls.Formularios
                     {
                         if (reader.Read())
                         {
-                            
-                             input_nombre.Text= reader["dimension"].ToString();
-                             input_precio.Value = Convert.ToDecimal(reader["precio"]);
+
+                            input_nombre.Text = reader["dimension"].ToString();
+                            input_precio.Value = Convert.ToDecimal(reader["precio"]);
                         }
                         else
                         {
@@ -113,6 +116,7 @@ namespace ClickTix.Admin.UserControls.Formularios
             }
         }
 
-        
+
     }
 }
+
