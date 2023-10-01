@@ -41,7 +41,7 @@
             this.Seleccionar});
             this.cartelera_grid.Location = new System.Drawing.Point(34, 89);
             this.cartelera_grid.Name = "cartelera_grid";
-            this.cartelera_grid.Size = new System.Drawing.Size(687, 262);
+            this.cartelera_grid.Size = new System.Drawing.Size(690, 265);
             this.cartelera_grid.TabIndex = 0;
             this.cartelera_grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartelera_grid_CellContentClick);
             // 

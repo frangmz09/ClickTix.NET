@@ -16,5 +16,15 @@ namespace ClickTix.Empleado
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cartelera_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
