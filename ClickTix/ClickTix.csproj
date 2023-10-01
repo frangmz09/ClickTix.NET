@@ -125,6 +125,12 @@
     <Compile Include="Conexion\MyConexion.cs" />
     <Compile Include="Conexion\PrecioDimension_Controller.cs" />
     <Compile Include="Conexion\Usuario_Controller.cs" />
+    <Compile Include="Empleado\ELEGIR_FUNCION_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Empleado\ELEGIR_FUNCION_UC.Designer.cs">
+      <DependentUpon>ELEGIR_FUNCION_UC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Empleado\Index_User.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,12 @@
     </Compile>
     <Compile Include="Empleado\UserControls\BUTACAS_UC.Designer.cs">
       <DependentUpon>BUTACAS_UC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\UserControls\CARTELERA_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Empleado\UserControls\CARTELERA_UC.Designer.cs">
+      <DependentUpon>CARTELERA_UC.cs</DependentUpon>
     </Compile>
     <Compile Include="Empleado\UserControls\QR\LECTORQR_UC.cs">
       <SubType>UserControl</SubType>
@@ -154,6 +166,12 @@
     </Compile>
     <Compile Include="Empleado\UserControls\QR\TIKCETQR_UC.Designer.cs">
       <DependentUpon>TIKCETQR_UC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado\UserControls\TICKET_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Empleado\UserControls\TICKET_UC.Designer.cs">
+      <DependentUpon>TICKET_UC.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Asiento.cs" />
     <Compile Include="Modelo\Asiento_Controller.cs" />
@@ -251,11 +269,17 @@
     <EmbeddedResource Include="Admin\UserControls\Formularios\FORM_PRECIODIMENSION_UC.resx">
       <DependentUpon>FORM_PRECIODIMENSION_UC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Empleado\ELEGIR_FUNCION_UC.resx">
+      <DependentUpon>ELEGIR_FUNCION_UC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Empleado\Index_User.resx">
       <DependentUpon>Index_User.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\UserControls\BUTACAS_UC.resx">
       <DependentUpon>BUTACAS_UC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Empleado\UserControls\CARTELERA_UC.resx">
+      <DependentUpon>CARTELERA_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\UserControls\QR\LECTORQR_UC.resx">
       <DependentUpon>LECTORQR_UC.cs</DependentUpon>
@@ -265,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\UserControls\QR\TIKCETQR_UC.resx">
       <DependentUpon>TIKCETQR_UC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Empleado\UserControls\TICKET_UC.resx">
+      <DependentUpon>TICKET_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

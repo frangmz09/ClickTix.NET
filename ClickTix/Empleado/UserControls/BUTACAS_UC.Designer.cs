@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.confirmar_asiento = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -39,10 +40,20 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
+            // confirmar_asiento
+            // 
+            this.confirmar_asiento.Location = new System.Drawing.Point(311, 392);
+            this.confirmar_asiento.Name = "confirmar_asiento";
+            this.confirmar_asiento.Size = new System.Drawing.Size(168, 36);
+            this.confirmar_asiento.TabIndex = 1;
+            this.confirmar_asiento.Text = "Confirmar Asientos";
+            this.confirmar_asiento.UseVisualStyleBackColor = true;
+            // 
             // BUTACAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.confirmar_asiento);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "BUTACAS_UC";
             this.Size = new System.Drawing.Size(800, 451);
@@ -54,5 +65,6 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button confirmar_asiento;
     }
 }
