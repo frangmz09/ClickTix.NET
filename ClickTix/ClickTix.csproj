@@ -110,8 +110,10 @@
     <Compile Include="Admin\UserControls\Formularios\FORM_PRECIODIMENSION_UC.Designer.cs">
       <DependentUpon>FORM_PRECIODIMENSION_UC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Empleado_Controller.cs" />
     <Compile Include="Conexion\MyConexion.cs" />
     <Compile Include="Conexion\PrecioDimension_Controller.cs" />
+    <Compile Include="Conexion\Sucursal_Controller.cs" />
     <Compile Include="Conexion\Usuario_Controller.cs" />
     <Compile Include="Empleado\Index_User.cs">
       <SubType>Form</SubType>
@@ -145,6 +147,7 @@
     </Compile>
     <Compile Include="Modelo\Asiento.cs" />
     <Compile Include="Modelo\Asiento_Controller.cs" />
+    <Compile Include="Modelo\Empleado.cs" />
     <Compile Include="Modelo\Funcion.cs" />
     <Compile Include="Modelo\Funcion_Controller.cs" />
     <Compile Include="Modelo\Pelicula.cs" />
@@ -191,6 +194,7 @@
       <DependentUpon>Index_Admin.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\PrecioDimension.cs" />
+    <Compile Include="Modelo\Sucursal.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -282,6 +286,7 @@
     <EmbeddedResource Include="Admin\UserControls\ABMs\ABM_PELICULAS_UC.resx">
       <DependentUpon>ABM_PELICULAS_UC.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Modelo\.editorconfig" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

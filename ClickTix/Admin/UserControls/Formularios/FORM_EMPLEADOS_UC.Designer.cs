@@ -145,7 +145,7 @@
             this.addempleado_btn.TabIndex = 70;
             this.addempleado_btn.Text = "Agregar";
             this.addempleado_btn.UseVisualStyleBackColor = true;
-            this.addempleado_btn.Click += new System.EventHandler(this.addempleado_btn_Click);
+            
             // 
             // input_sucursal
             // 

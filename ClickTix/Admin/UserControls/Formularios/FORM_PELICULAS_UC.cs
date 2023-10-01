@@ -23,7 +23,7 @@ namespace ClickTix.UserControls
         public FORM_PELICULAS_UC()
         {
             InitializeComponent();
-            c = new MyConexion("localhost", "clicktix", "root", "");
+            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
             this.addpelicula_btn.Click += new System.EventHandler(this.Addpelicula_btn_Click);
 
         }
@@ -36,7 +36,7 @@ namespace ClickTix.UserControls
             this.idDelPanel = id;
 
             int peliculaID = id;
-            c = new MyConexion("localhost", "clicktix", "root", "");
+            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
             InitializeComponent();
             addpelicula_btn.Click += new EventHandler(this.Addpelicula_btn_Click2);
             addpelicula_btn.Text = "modificar";

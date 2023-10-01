@@ -10,18 +10,21 @@ using System.Windows.Forms;
 
 namespace ClickTix.Conexion
 {
-    public class PrecioDimension_Controller
+     class Sucursal_Controller
     {
-        public static bool CrearDimension(PrecioDimension precioDimension)
+
+
+        public static bool CrearSucursal(Sucursal sucursal)
         {
-            string query = "INSERT INTO dimension (id, dimension, precio) " +
-                           "VALUES (@id, @dimension, @precio)";
+            string query = "INSERT INTO sucursal (id, nombre, cuit,direccion,numerosalas) " +
+                           "VALUES (@id, @nombre, @cuit,@direccion,@numerosalas)";
 
             MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
-            cmd.Parameters.AddWithValue("@id", ObtenerMaxIdDimension() + 1);
-            cmd.Parameters.AddWithValue("@dimension", precioDimension.dimension);
-            cmd.Parameters.AddWithValue("@precio", precioDimension.precio);
-
+            cmd.Parameters.AddWithValue("@id",ObtenerMaxIdSucursal()+1);
+            cmd.Parameters.AddWithValue("@nombre", sucursal.nombre);
+            cmd.Parameters.AddWithValue("@cuit", sucursal.cuit);
+            cmd.Parameters.AddWithValue("@direccion", sucursal.direccion);
+            cmd.Parameters.AddWithValue("@numerosalas", sucursal.numerosalas);
             try
             {
                 MyConexion.conexion.Open();
@@ -39,16 +42,20 @@ namespace ClickTix.Conexion
             }
         }
 
-        public static int ObtenerMaxIdDimension()
+        public static int ObtenerMaxIdSucursal()
         {
             int maxId = 0;
-            string query = "SELECT MAX(id) FROM dimension";
+            string query = "SELECT MAX(id) FROM sucursal";
 
             MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
 
             try
             {
-               
+                if (MyConexion.conexion.State != ConnectionState.Open)
+                {
+                    MyConexion.conexion.Open();
+                }
+
                 object result = cmd.ExecuteScalar();
 
                 if (result != null && result != DBNull.Value)
@@ -64,20 +71,26 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                MyConexion.conexion.Close();
+                if (MyConexion.conexion.State == ConnectionState.Open)
+                {
+                    MyConexion.conexion.Close();
+                }
             }
         }
 
-        public static bool ActualizarDimension(PrecioDimension precioDimension)
+        public static bool ActualizarSucursal(Sucursal sucursal)
         {
-            string query = "UPDATE dimension " +
-                           "SET dimension = @dimension, precio = @precio " +
+            string query = "UPDATE sucursal " +
+                           "SET nombre = @nombre, cuit = @cuit, direccion = @direccion, numerosalas = @numerosalas " +
                            "WHERE id = @id";
 
             MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
-            cmd.Parameters.AddWithValue("@dimension", precioDimension.dimension);
-            cmd.Parameters.AddWithValue("@precio", precioDimension.precio);
-            cmd.Parameters.AddWithValue("@id", precioDimension.id);
+
+            cmd.Parameters.AddWithValue("@id", sucursal.id);
+            cmd.Parameters.AddWithValue("@nombre", sucursal.nombre);
+            cmd.Parameters.AddWithValue("@cuit", sucursal.cuit);
+            cmd.Parameters.AddWithValue("@direccion", sucursal.direccion);
+            cmd.Parameters.AddWithValue("@numerosalas", sucursal.numerosalas);
 
             try
             {
@@ -89,7 +102,7 @@ namespace ClickTix.Conexion
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al actualizar la dimensión: " + ex.Message);
+                throw new Exception("Error al actualizar la sucursal: " + ex.Message);
             }
             finally
             {
@@ -97,40 +110,52 @@ namespace ClickTix.Conexion
             }
         }
 
-        public static void Dimension_Load(DataGridView tabla)
+        public static void Sucursal_Load(DataGridView tabla)
         {
-
-            MyConexion.AbrirConexion();
-
-
-            string query = "SELECT  id,dimension, precio FROM dimension";
-
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            try
             {
-                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                MyConexion.conexion.Open();
+
+
+                string query = "SELECT  id, nombre, cuit,direccion,numerosalas FROM sucursal";
+
+                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
                 {
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                    {
 
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                    DataTable dt = new DataTable();
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        DataTable dt = new DataTable();
 
 
-                    adapter.Fill(dt);
+                        adapter.Fill(dt);
 
 
-                    tabla.DataSource = dt;
+                        tabla.DataSource = dt;
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el registro: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               
+            }
+            finally
+            {
+                MyConexion.conexion.Close();
+            }
+            
         }
 
 
-        public static bool EliminarRegistroDimension(int id)
+        public static bool EliminarRegistroSucursal(int id)
         {
             try
             {
                 using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
                 {
                     mysqlConnection.Open();
-                    string query = "DELETE FROM dimension WHERE id = @id";
+                    string query = "DELETE FROM sucursal WHERE id = @id";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
@@ -160,6 +185,8 @@ namespace ClickTix.Conexion
                 MyConexion.conexion.Close();
             }
         }
+
+        
 
 
     }

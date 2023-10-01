@@ -29,12 +29,14 @@ namespace ClickTix.Admin.UserControls.Formularios
 
         public FORM_PRECIODIMENSION_UC(int id)
         {
+            InitializeComponent();
             this.adddimension_btn.Click += new System.EventHandler(this.adddimension_btn_Click2);
             idDelPanel = id;
-            InitializeComponent();
+            this.idDelPanel = id;
+            int dimensionlID = id;
 
             MessageBox.Show("id : " + id);
-            CargarDatosPrecioDimension(id);
+            CargarDatosPrecioDimension(dimensionlID);
 
 
         }
@@ -58,11 +60,11 @@ namespace ClickTix.Admin.UserControls.Formularios
 
         private void adddimension_btn_Click2(object sender, EventArgs e)
         {
-            int maxId = PrecioDimension_Controller.GetMaxID() + 1;
+            
 
             PrecioDimension pd = new PrecioDimension();
 
-            pd.id = maxId;
+            pd.id = this.idDelPanel;
             pd.precio = input_precio.Value;
             pd.dimension = input_nombre.Text;
 

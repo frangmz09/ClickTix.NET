@@ -45,10 +45,10 @@
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(71, 22);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(416, 24);
+            this.title.Size = new System.Drawing.Size(450, 25);
             this.title.TabIndex = 3;
             this.title.Text = "INGRESE DATOS PARA AGREGAR SUCURSAL";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -62,14 +62,15 @@
             this.addsucursal_btn.TabIndex = 33;
             this.addsucursal_btn.Text = "Agregar";
             this.addsucursal_btn.UseVisualStyleBackColor = true;
+            
             // 
             // label_titulo
             // 
             this.label_titulo.AutoSize = true;
-            this.label_titulo.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_titulo.Location = new System.Drawing.Point(140, 88);
             this.label_titulo.Name = "label_titulo";
-            this.label_titulo.Size = new System.Drawing.Size(44, 14);
+            this.label_titulo.Size = new System.Drawing.Size(52, 15);
             this.label_titulo.TabIndex = 58;
             this.label_titulo.Text = "Nombre";
             this.label_titulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,10 +85,10 @@
             // label_direccion
             // 
             this.label_direccion.AutoSize = true;
-            this.label_direccion.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_direccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_direccion.Location = new System.Drawing.Point(140, 132);
             this.label_direccion.Name = "label_direccion";
-            this.label_direccion.Size = new System.Drawing.Size(51, 14);
+            this.label_direccion.Size = new System.Drawing.Size(59, 15);
             this.label_direccion.TabIndex = 60;
             this.label_direccion.Text = "Direccion";
             this.label_direccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -102,10 +103,10 @@
             // label_cuit
             // 
             this.label_cuit.AutoSize = true;
-            this.label_cuit.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_cuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_cuit.Location = new System.Drawing.Point(140, 181);
             this.label_cuit.Name = "label_cuit";
-            this.label_cuit.Size = new System.Drawing.Size(27, 14);
+            this.label_cuit.Size = new System.Drawing.Size(28, 15);
             this.label_cuit.TabIndex = 62;
             this.label_cuit.Text = "Cuit";
             this.label_cuit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -120,10 +121,10 @@
             // label_salas
             // 
             this.label_salas.AutoSize = true;
-            this.label_salas.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_salas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_salas.Location = new System.Drawing.Point(205, 238);
             this.label_salas.Name = "label_salas";
-            this.label_salas.Size = new System.Drawing.Size(86, 14);
+            this.label_salas.Size = new System.Drawing.Size(101, 15);
             this.label_salas.TabIndex = 64;
             this.label_salas.Text = "Numero de salas";
             this.label_salas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -145,7 +146,7 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
-            // FORMSUCURSALES_UC
+            // FORM_SUCURSALES_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -160,7 +161,7 @@
             this.Controls.Add(this.input_nombre);
             this.Controls.Add(this.addsucursal_btn);
             this.Controls.Add(this.title);
-            this.Name = "FORMSUCURSALES_UC";
+            this.Name = "FORM_SUCURSALES_UC";
             this.Size = new System.Drawing.Size(560, 373);
             ((System.ComponentModel.ISupportInitialize)(this.input_salas)).EndInit();
             this.ResumeLayout(false);

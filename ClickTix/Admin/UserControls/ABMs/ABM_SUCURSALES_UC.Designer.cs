@@ -31,10 +31,6 @@
             this.title = new System.Windows.Forms.Label();
             this.add_sucursal = new System.Windows.Forms.Button();
             this.grid_sucursal = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sucursal)).BeginInit();
@@ -43,10 +39,10 @@
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(219, 18);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(135, 24);
+            this.title.Size = new System.Drawing.Size(148, 25);
             this.title.TabIndex = 16;
             this.title.Text = "SUCURSALES";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -65,46 +61,20 @@
             // 
             this.grid_sucursal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_sucursal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.Nombre,
-            this.Direccion,
-            this.Cuit,
             this.Modificar,
             this.Borrar});
             this.grid_sucursal.Location = new System.Drawing.Point(23, 52);
             this.grid_sucursal.Name = "grid_sucursal";
             this.grid_sucursal.Size = new System.Drawing.Size(524, 303);
             this.grid_sucursal.TabIndex = 14;
-            // 
-            // ID
-            // 
-            this.ID.FillWeight = 195.2002F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ID.Width = 30;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Direccion
-            // 
-            this.Direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Direccion.HeaderText = "Direccion";
-            this.Direccion.Name = "Direccion";
-            // 
-            // Cuit
-            // 
-            this.Cuit.HeaderText = "Cuit";
-            this.Cuit.Name = "Cuit";
-            this.Cuit.Width = 120;
+            this.grid_sucursal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_sucursal_CellContentClick);
             // 
             // Modificar
             // 
             this.Modificar.HeaderText = "Modificar";
             this.Modificar.Name = "Modificar";
+            this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Modificar.Width = 50;
             // 
             // Borrar

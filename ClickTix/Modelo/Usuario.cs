@@ -11,7 +11,7 @@ namespace ClickTix.Modelo
     {
         public int Id { get; set; }
         public string usuario { get; set; }
-        public string Contraseña { get; set; }
+        public string pass { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int Is_admin { get; set; }
@@ -21,7 +21,7 @@ namespace ClickTix.Modelo
         {
             Id = id;
             usuario = username;
-            Contraseña = pass;
+            this.pass = pass;
             Nombre = nombre;
             Apellido = apellido;
             Is_admin = is_admin;
@@ -35,7 +35,7 @@ namespace ClickTix.Modelo
         {
             Id = id;
             usuario = username;
-            Contraseña = pass;
+            this.pass = pass;
             Nombre = nombre;
             Apellido = apellido;
             Id_sucursal = id_sucursal;

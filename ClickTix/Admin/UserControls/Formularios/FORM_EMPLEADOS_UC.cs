@@ -38,17 +38,38 @@ namespace ClickTix
             input_sucursal.Items.Add(1);
             input_sucursal.Items.Add(2);
             CargarDatosEmpleado(empleadoId);
-
+            this.addempleado_btn.Click += new System.EventHandler(this.addempleado_btn_Click2);
         }
         public FORM_EMPLEADOS_UC()
         {
             InitializeComponent();
-
+            this.addempleado_btn.Click += new System.EventHandler(this.addempleado_btn_Click);
             input_sucursal.Items.Clear();
 
             input_sucursal.Items.Add(0);
             input_sucursal.Items.Add(1);
             input_sucursal.Items.Add(2);
+        }
+
+        private void addempleado_btn_Click2(object sender, EventArgs e)
+        {
+            Usuario u = new Usuario();
+
+            u.Id = this.idDelPanel;
+
+            u.Nombre = input_nombre.Text;
+            u.Apellido = input_apellido.Text;
+            u.usuario = input_usuario.Text;
+            u.pass = input_contraseña.Text;
+            u.Id_sucursal = input_sucursal.Text;
+
+
+
+
+           //Usuario_Controller.ActualizarUsuario(u);
+            
+
+
         }
 
         private void back_pelicula_Click(object sender, EventArgs e)
@@ -60,23 +81,7 @@ namespace ClickTix
         private void addempleado_btn_Click(object sender, EventArgs e)
         {
 
-            Usuario usuario = null;
-
-            if (input_sucursal.SelectedIndex == 0)
-            {
-                usuario = new Usuario(0, input_nombre.Text, input_apellido.Text, input_contraseña.Text, 0, input_usuario.Text, 1);
-            }
-            else
-            {
-                usuario = new Usuario(0, input_nombre.Text, input_apellido.Text, input_contraseña.Text, 0, input_usuario.Text, input_sucursal.SelectedIndex);
-            }
-
-
-
-            if (Usuario_Controller.crearUsuario(usuario))
-            {
-                this.Dialogresult = DialogResult.OK;
-            }
+           
         }
 
         private void input_nombre_TextChanged(object sender, EventArgs e)
