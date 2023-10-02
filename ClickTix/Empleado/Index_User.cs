@@ -38,5 +38,6 @@ namespace ClickTix.Empleado
             panel2.Controls.Add(uc);
             uc.BringToFront();
         }
+
     }
 }

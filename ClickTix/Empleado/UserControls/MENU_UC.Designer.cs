@@ -34,17 +34,18 @@
             // 
             // retirar
             // 
-            this.retirar.Font = new System.Drawing.Font("Roboto Bk", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.retirar.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.retirar.Location = new System.Drawing.Point(279, 228);
             this.retirar.Name = "retirar";
             this.retirar.Size = new System.Drawing.Size(242, 83);
             this.retirar.TabIndex = 7;
             this.retirar.Text = "RETIRAR";
             this.retirar.UseVisualStyleBackColor = true;
+            this.retirar.Click += new System.EventHandler(this.retirar_Click);
             // 
             // comprar
             // 
-            this.comprar.Font = new System.Drawing.Font("Roboto Bk", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comprar.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comprar.Location = new System.Drawing.Point(279, 139);
             this.comprar.Name = "comprar";
             this.comprar.Size = new System.Drawing.Size(242, 83);

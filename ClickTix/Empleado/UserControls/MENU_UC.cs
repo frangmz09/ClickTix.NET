@@ -19,6 +19,12 @@ namespace ClickTix.Empleado.UserControls
 
         private void comprar_Click(object sender, EventArgs e)
         {
+           CARTELERA_UC cARTELERA_UC = new CARTELERA_UC();  
+            Index_User.addUserControlUsuario(cARTELERA_UC);
+        }
+
+        private void retirar_Click(object sender, EventArgs e)
+        {
 
         }
     }
