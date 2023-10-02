@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.cartelera_grid = new System.Windows.Forms.DataGridView();
-            this.cartelera = new System.Windows.Forms.Label();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.cartelera = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cartelera_grid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,6 +45,11 @@
             this.cartelera_grid.TabIndex = 0;
             this.cartelera_grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartelera_grid_CellContentClick);
             // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
             // cartelera
             // 
             this.cartelera.AutoSize = true;
@@ -56,11 +61,6 @@
             this.cartelera.Text = "CARTELERA";
             this.cartelera.Click += new System.EventHandler(this.label1_Click);
             // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            // 
             // CARTELERA_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -69,6 +69,7 @@
             this.Controls.Add(this.cartelera_grid);
             this.Name = "CARTELERA_UC";
             this.Size = new System.Drawing.Size(800, 451);
+            this.Load += new System.EventHandler(this.CARTELERA_UC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cartelera_grid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

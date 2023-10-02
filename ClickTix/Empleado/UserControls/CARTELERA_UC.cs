@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace ClickTix.Empleado.UserControls
         public CARTELERA_UC()
         {
             InitializeComponent();
-            CARTELERA_UC_LOAD(cartelera_grid);
+            llenarDataGrid(cartelera_grid);
             c = new MyConexion("localhost", "clicktix", "root", "");
         }
 
@@ -41,7 +42,7 @@ namespace ClickTix.Empleado.UserControls
             }
             
         }
-        private void CARTELERA_UC_LOAD(DataGridView tabla)
+        private void llenarDataGrid(DataGridView tabla)
         {
             MyConexion.AbrirConexion();
 
@@ -52,9 +53,11 @@ namespace ClickTix.Empleado.UserControls
 
             using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
             {
+
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
                     command.Parameters.AddWithValue("@id_sucursal", Program.logeado.Id_sucursal);
+
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                     DataTable dt = new DataTable();
 
@@ -65,6 +68,11 @@ namespace ClickTix.Empleado.UserControls
                     tabla.DataSource = dt;
                 }
             }
+        }
+
+        private void CARTELERA_UC_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

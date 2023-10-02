@@ -39,7 +39,7 @@ namespace ClickTix.Conexion
                 {
                     Trace.WriteLine("Usr encontrado, nombre: " + reader.GetString(1));
                     usuario = new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),"", reader.GetString(5),
-                        reader.GetInt32(6));
+                        reader.GetInt32(6), reader.GetInt32(4));
 
                 }
                 reader.Close();

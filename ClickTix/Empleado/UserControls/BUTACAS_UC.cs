@@ -16,28 +16,36 @@ namespace ClickTix.Empleado.UserControls
 {
     public partial class BUTACAS_UC : UserControl
     {
-        public BUTACAS_UC()
+        public BUTACAS_UC(int id_funcion)
         {
             InitializeComponent();
+            llenarButacas(id_funcion);
         }
 
         private void BUTACAS_UC_Load(object sender, EventArgs e)
 
 
         {
+        }
+
+        private void llenarButacas(int id_funcion) {
+
+
             flowLayoutPanel1.Controls.Clear();
-            int numFilas=2;
-            int numColumnas=2;
+            int numFilas = 0;
+            int numColumnas = 0;
             MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
 
 
             using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
             {
                 mysqlConnection.Open();
-                string query = "select filas,columnas from sala s inner join funcion f on f.id_sala=s.id inner join asiento a on f.id = a.id_funcion where f.id = 1;";
+                string query = "select filas,columnas from sala s inner join funcion f on f.id_sala=s.id inner join asiento a on f.id = a.id_funcion where f.id = @id_funcion;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
+
+                    command.Parameters.AddWithValue("@id_funcion", id_funcion);
                     MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -64,7 +72,7 @@ namespace ClickTix.Empleado.UserControls
 
 
                         butaca.BackColor = Color.LightGray;
-                        butaca.Margin = new Padding(5); 
+                        butaca.Margin = new Padding(5);
 
                         if (asiento.Disponible == false)
                         {
@@ -78,8 +86,9 @@ namespace ClickTix.Empleado.UserControls
                     }
                 }
             }
-        }
 
+
+        }
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 

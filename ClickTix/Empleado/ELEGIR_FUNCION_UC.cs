@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Empleado.UserControls;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -24,19 +25,19 @@ namespace ClickTix.Empleado
         {
             InitializeComponent();
             MyConexion.AbrirConexion();
-            //CARTELERA_UC_LOAD(dataGridView1, titulo);
+            CARTELERA_UC_LOAD(dataGridView1, titulo);
 
 
             
         }
 
-        /*private void CARTELERA_UC_LOAD(DataGridView tabla, string titulo)
+        private void CARTELERA_UC_LOAD(DataGridView tabla, string titulo)
         {
             MyConexion.AbrirConexion();
 
 
 
-            string query = "select  sala.nro_sala , dimension.dimension, idioma.idioma, dimension.precio,funcion.fecha, turno.hora from funcion " +
+            string query = "select  funcion.id, sala.nro_sala , dimension.dimension, idioma.idioma, dimension.precio,funcion.fecha, turno.hora from funcion " +
                 "left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id " +
                 "left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id " +
                 "left join turno on funcion.turno_id = turno.id where pelicula.titulo = @titulo and sala.id_sucursal = @id_sucursal;";
@@ -57,7 +58,7 @@ namespace ClickTix.Empleado
                     tabla.DataSource = dt;
                 }
             }
-        }*/
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -69,6 +70,19 @@ namespace ClickTix.Empleado
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridView1.Columns["Seleccionar"].Index && e.RowIndex >= 0)
+            {
+                int id_funcion = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
+
+
+                BUTACAS_UC butacas = new BUTACAS_UC(id_funcion);
+                Index_User.addUserControlUsuario(butacas);
+
+            }
+        }
+
+        private void ELEGIR_FUNCION_UC_Load(object sender, EventArgs e)
         {
 
         }

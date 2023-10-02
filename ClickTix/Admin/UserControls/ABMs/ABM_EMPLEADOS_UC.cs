@@ -20,7 +20,7 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
             ABM_EMPLEADOS_UC_Load(grid_empleados);
-            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
+            c = new MyConexion("localhost", "clicktix", "root", "");
 
             ABM_EMPLEADOS_UC_Load(grid_empleados);
         }
@@ -29,7 +29,7 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
             ABM_EMPLEADOS_UC_Load(grid_empleados);
-            c = new MyConexion("localhost", "clicktix", "root", "tiago26");
+            c = new MyConexion("localhost", "clicktix", "root", "");
 
             ABM_EMPLEADOS_UC_Load(grid_empleados);
         }

@@ -31,7 +31,7 @@ namespace ClickTix.Modelo
 
         public Usuario() { }
 
-        public Usuario(int id, string nombre, string apellido, string pass,int id_sucursal, string username, int is_admin)
+        public Usuario(int id, string nombre, string apellido, string pass, string username, int is_admin, int id_sucursal)
         {
             Id = id;
             usuario = username;

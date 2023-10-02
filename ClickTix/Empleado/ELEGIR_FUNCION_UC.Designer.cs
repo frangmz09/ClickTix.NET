@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Fecha_hora = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Dimension = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Idioma = new System.Windows.Forms.DataGridViewButtonColumn();
             this.cartelera = new System.Windows.Forms.Label();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,30 +38,13 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Fecha_hora,
-            this.Dimension,
-            this.Idioma});
+            this.Seleccionar});
             this.dataGridView1.Location = new System.Drawing.Point(33, 85);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(690, 265);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Tag = "";
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Fecha_hora
-            // 
-            this.Fecha_hora.HeaderText = "Fecha y Hora";
-            this.Fecha_hora.Name = "Fecha_hora";
-            // 
-            // Dimension
-            // 
-            this.Dimension.HeaderText = "Dimension";
-            this.Dimension.Name = "Dimension";
-            // 
-            // Idioma
-            // 
-            this.Idioma.HeaderText = "Idioma";
-            this.Idioma.Name = "Idioma";
             // 
             // cartelera
             // 
@@ -76,6 +57,11 @@
             this.cartelera.Text = "Confirmar datos de la funcion";
             this.cartelera.Click += new System.EventHandler(this.cartelera_Click);
             // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
             // ELEGIR_FUNCION_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -84,6 +70,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "ELEGIR_FUNCION_UC";
             this.Size = new System.Drawing.Size(800, 451);
+            this.Load += new System.EventHandler(this.ELEGIR_FUNCION_UC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -94,8 +81,6 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label cartelera;
-        private System.Windows.Forms.DataGridViewButtonColumn Fecha_hora;
-        private System.Windows.Forms.DataGridViewButtonColumn Dimension;
-        private System.Windows.Forms.DataGridViewButtonColumn Idioma;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
     }
 }

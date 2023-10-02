@@ -68,17 +68,22 @@ namespace ClickTix.Empleado.UserControls
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (videoSourcePlayer1.GetCurrentVideoFrame() != null) 
+            if (videoSourcePlayer1.GetCurrentVideoFrame() != null)
             {
                 Bitmap img = new Bitmap(videoSourcePlayer1.GetCurrentVideoFrame());
                 String[] results = BarcodeReader.read(img, BarcodeReader.QRCODE);
                 img.Dispose();
-                if (results !=null && results.Count()>0)
+
+                if (results != null && results.Length > 0)
                 {
-                    textBox1.Text = results[0].ToString();
+                    string qrCodeValue = results[0].ToString();
+
+                    textBox1.Text = qrCodeValue;
                 }
             }
         }
+
+
 
         private void combobox_camara_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -27,7 +27,7 @@ namespace ClickTix
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            MyConexion c = new MyConexion("localhost", "clicktix", "root", "tiago26");
+            MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
             MyConexion.AbrirConexion();
             if (validateConnection())
             {
