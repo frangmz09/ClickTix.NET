@@ -41,6 +41,7 @@ namespace ClickTix.Conexion
 
         public static int ObtenerMaxIdDimension()
         {
+            MyConexion.AbrirConexion();
             int maxId = 0;
             string query = "SELECT MAX(id) FROM dimension";
 
@@ -70,6 +71,7 @@ namespace ClickTix.Conexion
 
         public static bool ActualizarDimension(PrecioDimension precioDimension)
         {
+            MyConexion.AbrirConexion();
             string query = "UPDATE dimension " +
                            "SET dimension = @dimension, precio = @precio " +
                            "WHERE id = @id";
@@ -125,6 +127,7 @@ namespace ClickTix.Conexion
 
         public static bool EliminarRegistroDimension(int id)
         {
+            
             try
             {
                 using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())

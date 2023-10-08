@@ -53,20 +53,21 @@ namespace ClickTix
 
         private void addempleado_btn_Click2(object sender, EventArgs e)
         {
-            Usuario u = new Usuario();
+            EmpleadoA em = new EmpleadoA();
+            
 
-            u.Id = this.idDelPanel;
+            em.Id = this.idDelPanel;
 
-            u.Nombre = input_nombre.Text;
-            u.Apellido = input_apellido.Text;
-            u.usuario = input_usuario.Text;
-            u.pass = input_contraseña.Text;
-            u.Id_sucursal = input_sucursal.Text;
-
-
+            em.Nombre = input_nombre.Text;
+            em.Apellido = input_apellido.Text;
+            em.Usuario = input_usuario.Text;
+            em.Pass = input_contraseña.Text;
+            em.Id_Sucursal = input_sucursal.Text;
 
 
-           //Usuario_Controller.ActualizarUsuario(u);
+
+            Empleado_Controller.ActualizarEmpleado(em);
+           
             
 
 
@@ -81,7 +82,20 @@ namespace ClickTix
         private void addempleado_btn_Click(object sender, EventArgs e)
         {
 
-           
+            EmpleadoA em = new EmpleadoA();
+
+            em.Id = 0;
+            em.Nombre = input_nombre.Text;
+            em.Apellido = input_apellido.Text;
+            em.Usuario = input_usuario.Text;
+            em.Pass = input_contraseña.Text;
+            em.Id_Sucursal = input_sucursal.Text;
+
+
+            Empleado_Controller.CrearEmpleado(em);
+            
+
+
         }
 
         private void input_nombre_TextChanged(object sender, EventArgs e)

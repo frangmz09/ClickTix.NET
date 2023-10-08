@@ -122,7 +122,7 @@
     <Compile Include="Admin\UserControls\Formularios\FORM_PRECIODIMENSION_UC.Designer.cs">
       <DependentUpon>FORM_PRECIODIMENSION_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Empleado_Controller.cs" />
+    <Compile Include="Conexion\DatabaseConnection.cs" />
     <Compile Include="Conexion\MyConexion.cs" />
     <Compile Include="Conexion\PrecioDimension_Controller.cs" />
     <Compile Include="Conexion\Sucursal_Controller.cs" />
@@ -175,7 +175,7 @@
     </Compile>
     <Compile Include="Modelo\Asiento.cs" />
     <Compile Include="Modelo\Asiento_Controller.cs" />
-    <Compile Include="Modelo\Empleado.cs" />
+    <Compile Include="Modelo\EmpleadoA.cs" />
     <Compile Include="Modelo\Empleado_Controller.cs" />
     <Compile Include="Modelo\Funcion.cs" />
     <Compile Include="Modelo\Funcion_Controller.cs" />
