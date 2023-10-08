@@ -31,24 +31,25 @@ namespace ClickTix
 
 
             InitializeComponent();
+            LlenarComboBoxSucursales();
+            //input_sucursal.Items.Clear();
 
-            input_sucursal.Items.Clear();
-
-            input_sucursal.Items.Add(0);
-            input_sucursal.Items.Add(1);
-            input_sucursal.Items.Add(2);
+            //input_sucursal.Items.Add(0);
+           // input_sucursal.Items.Add(1);
+            //input_sucursal.Items.Add(2);
             CargarDatosEmpleado(empleadoId);
             this.addempleado_btn.Click += new System.EventHandler(this.addempleado_btn_Click2);
         }
         public FORM_EMPLEADOS_UC()
         {
             InitializeComponent();
+            LlenarComboBoxSucursales();
             this.addempleado_btn.Click += new System.EventHandler(this.addempleado_btn_Click);
-            input_sucursal.Items.Clear();
+           // input_sucursal.Items.Clear();
 
-            input_sucursal.Items.Add(0);
-            input_sucursal.Items.Add(1);
-            input_sucursal.Items.Add(2);
+           // input_sucursal.Items.Add(0);
+            //input_sucursal.Items.Add(1);
+            //input_sucursal.Items.Add(2);
         }
 
         private void addempleado_btn_Click2(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace ClickTix
             em.Apellido = input_apellido.Text;
             em.Usuario = input_usuario.Text;
             em.Pass = input_contraseña.Text;
-            em.Id_Sucursal = input_sucursal.Text;
+            em.Id_Sucursal = int.Parse(input_sucursal.ValueMember);
 
 
 
@@ -81,7 +82,7 @@ namespace ClickTix
 
         private void addempleado_btn_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("value" + input_sucursal.ValueMember);
             EmpleadoA em = new EmpleadoA();
 
             em.Id = 0;
@@ -89,7 +90,7 @@ namespace ClickTix
             em.Apellido = input_apellido.Text;
             em.Usuario = input_usuario.Text;
             em.Pass = input_contraseña.Text;
-            em.Id_Sucursal = input_sucursal.Text;
+            em.Id_Sucursal = int.Parse(input_sucursal.ValueMember);
 
 
             Empleado_Controller.CrearEmpleado(em);
@@ -159,6 +160,40 @@ namespace ClickTix
         private void FORM_EMPLEADOS_UC_Load(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void LlenarComboBoxSucursales()
+        {
+            try
+            {
+                MyConexion.AbrirConexion();
+                string consultaSucursales = "SELECT id, nombre FROM sucursal"; 
+
+                using (MySqlCommand cmdSucursales = new MySqlCommand(consultaSucursales, MyConexion.ObtenerConexion()))
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(cmdSucursales.ExecuteReader());
+
+                    
+                    input_sucursal.DataSource = dt;
+
+                   
+                    input_sucursal.DisplayMember = "nombre";
+
+                   
+                    input_sucursal.ValueMember = "id";
+
+                    
+                    //input_sucursal.SelectedValue = idSucursalSeleccionada;
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al llenar el ComboBox de sucursales: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

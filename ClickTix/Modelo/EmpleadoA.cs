@@ -14,13 +14,13 @@ namespace ClickTix.Modelo
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Pass { get; set; }
-        public string Id_Sucursal { get; set; }
+        public int Id_Sucursal { get; set; }
 
         public string Usuario { get; set; }
 
         public EmpleadoA() { }
 
-        public EmpleadoA(int id, string nombre, string apellido, string pass, string id_Sucursal, string usuario)
+        public EmpleadoA(int id, string nombre, string apellido, string pass, int id_Sucursal, string usuario)
         {
             Id = id;
             Nombre = nombre;
@@ -29,6 +29,16 @@ namespace ClickTix.Modelo
             Id_Sucursal = id_Sucursal;
             Usuario = usuario;
         }
+
+
+
+
+
+
+
+
+
+
 
 
     }
