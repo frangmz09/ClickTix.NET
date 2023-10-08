@@ -84,7 +84,7 @@ namespace ClickTix.Empleado
 
         private void ELEGIR_FUNCION_UC_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

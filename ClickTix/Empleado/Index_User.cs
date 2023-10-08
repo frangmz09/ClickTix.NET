@@ -26,8 +26,8 @@ namespace ClickTix.Empleado
         {
             c = new MyConexion("localhost", "clicktix", "root", "");
             // BUTACAS_UC butacas = new BUTACAS_UC();
-            //MENU_UC menu = new MENU_UC();
-            LECTORQR_UC menu = new LECTORQR_UC();
+            MENU_UC menu = new MENU_UC();
+           // LECTORQR_UC menu = new LECTORQR_UC();
 
             Index_User.addUserControlUsuario(menu);
 

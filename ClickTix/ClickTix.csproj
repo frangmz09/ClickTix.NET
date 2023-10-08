@@ -151,9 +151,7 @@
     <Compile Include="Empleado\UserControls\CARTELERA_UC.Designer.cs">
       <DependentUpon>CARTELERA_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Empleado\UserControls\QR\LECTORQR_UC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Empleado\UserControls\QR\LECTORQR_UC.cs" />
     <Compile Include="Empleado\UserControls\QR\LECTORQR_UC.Designer.cs">
       <DependentUpon>LECTORQR_UC.cs</DependentUpon>
     </Compile>
@@ -178,6 +176,7 @@
     <Compile Include="Modelo\Asiento.cs" />
     <Compile Include="Modelo\Asiento_Controller.cs" />
     <Compile Include="Modelo\Empleado.cs" />
+    <Compile Include="Modelo\Empleado_Controller.cs" />
     <Compile Include="Modelo\Funcion.cs" />
     <Compile Include="Modelo\Funcion_Controller.cs" />
     <Compile Include="Modelo\Pelicula.cs" />
