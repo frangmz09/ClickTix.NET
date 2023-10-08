@@ -48,6 +48,7 @@
             this.confirmar_asiento.TabIndex = 1;
             this.confirmar_asiento.Text = "Confirmar Asientos";
             this.confirmar_asiento.UseVisualStyleBackColor = true;
+            this.confirmar_asiento.Click += new System.EventHandler(this.confirmar_asiento_Click);
             // 
             // BUTACAS_UC
             // 
