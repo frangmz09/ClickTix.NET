@@ -106,5 +106,12 @@ namespace ClickTix.Empleado.UserControls
                 clickedButton.BackColor = Color.LightGray; 
             }
         }
+
+        private void confirmar_asiento_Click(object sender, EventArgs e)
+        {
+            TICKET_UC tICKET_UC = new TICKET_UC();
+            Index_User.addUserControlUsuario(tICKET_UC);
+           
+        }
     }
 }
