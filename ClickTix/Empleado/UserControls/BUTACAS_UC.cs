@@ -16,8 +16,13 @@ namespace ClickTix.Empleado.UserControls
 {
     public partial class BUTACAS_UC : UserControl
     {
-        public BUTACAS_UC(int id_funcion)
+        private int idPelicula;
+        private int idFuncion;
+
+        public BUTACAS_UC(int id_funcion, int idPeli)
         {
+            this.idFuncion = id_funcion;
+            this.idPelicula = idPeli;
             InitializeComponent();
             llenarButacas(id_funcion);
         }
@@ -109,7 +114,7 @@ namespace ClickTix.Empleado.UserControls
 
         private void confirmar_asiento_Click(object sender, EventArgs e)
         {
-            TICKET_UC tICKET_UC = new TICKET_UC();
+            TICKET_UC tICKET_UC = new TICKET_UC(idFuncion,idPelicula,1);
             Index_User.addUserControlUsuario(tICKET_UC);
            
         }

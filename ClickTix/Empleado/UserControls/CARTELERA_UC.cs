@@ -17,6 +17,7 @@ namespace ClickTix.Empleado.UserControls
     public partial class CARTELERA_UC : UserControl
     {
         MyConexion c;
+        
         public CARTELERA_UC()
         {
             InitializeComponent();
@@ -34,9 +35,9 @@ namespace ClickTix.Empleado.UserControls
             if (e.ColumnIndex ==cartelera_grid.Columns["Seleccionar"].Index && e.RowIndex >= 0)
             {
                 string titulo = Convert.ToString(cartelera_grid.Rows[e.RowIndex].Cells["titulo"].Value);
+                int id = Convert.ToInt32(cartelera_grid.Rows[e.RowIndex].Cells["id"].Value);
 
-
-                ELEGIR_FUNCION_UC eLEGIR_FUNCION_UC = new ELEGIR_FUNCION_UC(titulo);
+                ELEGIR_FUNCION_UC eLEGIR_FUNCION_UC = new ELEGIR_FUNCION_UC(titulo,id);
                 Index_User.addUserControlUsuario(eLEGIR_FUNCION_UC);
 
             }
@@ -48,8 +49,7 @@ namespace ClickTix.Empleado.UserControls
 
            
 
-            string query = "SELECT titulo, director from funcion inner join sala on funcion.id = sala.id_sucursal " +
-                "inner join pelicula on funcion.id_pelicula = pelicula.id where sala.id_sucursal = @id_sucursal group by pelicula.titulo;";
+            string query = "SELECT id, titulo from pelicula";
 
             using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
             {

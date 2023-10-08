@@ -15,23 +15,25 @@ namespace ClickTix.Empleado
 {
     public partial class ELEGIR_FUNCION_UC : UserControl
     {
+        private int idPelicula;
         public ELEGIR_FUNCION_UC()
         {
             InitializeComponent();
         }
 
 
-        public ELEGIR_FUNCION_UC(string titulo)
+        public ELEGIR_FUNCION_UC(string titulo,int id)
         {
+            this.idPelicula = id;
             InitializeComponent();
             MyConexion.AbrirConexion();
-            CARTELERA_UC_LOAD(dataGridView1, titulo);
+            CARTELERA_UC_LOAD(dataGridView1, titulo, id);
 
 
             
         }
 
-        private void CARTELERA_UC_LOAD(DataGridView tabla, string titulo)
+        private void CARTELERA_UC_LOAD(DataGridView tabla, string titulo, int id)
         {
             MyConexion.AbrirConexion();
 
@@ -76,7 +78,7 @@ namespace ClickTix.Empleado
                 int id_funcion = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
 
 
-                BUTACAS_UC butacas = new BUTACAS_UC(id_funcion);
+                BUTACAS_UC butacas = new BUTACAS_UC(id_funcion, idPelicula);
                 Index_User.addUserControlUsuario(butacas);
 
             }
