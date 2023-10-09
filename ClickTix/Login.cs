@@ -40,6 +40,7 @@ namespace ClickTix
                 }*/
                 if (Program.logeado.Is_admin == 1)
                 {
+                    
                     Index_Admin index_Admin = new Index_Admin();
                     index_Admin.Show();
                 }

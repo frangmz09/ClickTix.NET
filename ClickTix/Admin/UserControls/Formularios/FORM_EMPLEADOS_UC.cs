@@ -32,11 +32,7 @@ namespace ClickTix
 
             InitializeComponent();
             LlenarComboBoxSucursales();
-            //input_sucursal.Items.Clear();
-
-            //input_sucursal.Items.Add(0);
-           // input_sucursal.Items.Add(1);
-            //input_sucursal.Items.Add(2);
+            
             CargarDatosEmpleado(empleadoId);
             this.addempleado_btn.Click += new System.EventHandler(this.addempleado_btn_Click2);
         }
@@ -45,29 +41,41 @@ namespace ClickTix
             InitializeComponent();
             LlenarComboBoxSucursales();
             this.addempleado_btn.Click += new System.EventHandler(this.addempleado_btn_Click);
-           // input_sucursal.Items.Clear();
-
-           // input_sucursal.Items.Add(0);
-            //input_sucursal.Items.Add(1);
-            //input_sucursal.Items.Add(2);
+           
         }
 
         private void addempleado_btn_Click2(object sender, EventArgs e)
         {
-            EmpleadoA em = new EmpleadoA();
-            
-
-            em.Id = this.idDelPanel;
-
-            em.Nombre = input_nombre.Text;
-            em.Apellido = input_apellido.Text;
-            em.Usuario = input_usuario.Text;
-            em.Pass = input_contraseña.Text;
-            em.Id_Sucursal = int.Parse(input_sucursal.ValueMember);
 
 
+            if (string.IsNullOrWhiteSpace(input_nombre.Text) || string.IsNullOrWhiteSpace(input_apellido.Text)
+               || string.IsNullOrWhiteSpace(input_usuario.Text) || string.IsNullOrWhiteSpace(input_contraseña.Text)
+               || string.IsNullOrWhiteSpace(input_sucursal.Text))
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
 
-            Empleado_Controller.ActualizarEmpleado(em);
+                EmpleadoA em = new EmpleadoA();
+
+
+                em.Id = this.idDelPanel;
+
+                em.Nombre = input_nombre.Text;
+                em.Apellido = input_apellido.Text;
+                em.Usuario = input_usuario.Text;
+                em.Pass = input_contraseña.Text;
+                em.Id_Sucursal = int.Parse(input_sucursal.ValueMember);
+
+
+
+                Empleado_Controller.ActualizarEmpleado(em);
+            }
+
+
+
+
            
             
 
@@ -82,18 +90,33 @@ namespace ClickTix
 
         private void addempleado_btn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("value" + input_sucursal.ValueMember);
-            EmpleadoA em = new EmpleadoA();
-
-            em.Id = 0;
-            em.Nombre = input_nombre.Text;
-            em.Apellido = input_apellido.Text;
-            em.Usuario = input_usuario.Text;
-            em.Pass = input_contraseña.Text;
-            em.Id_Sucursal = int.Parse(input_sucursal.ValueMember);
 
 
-            Empleado_Controller.CrearEmpleado(em);
+            if (string.IsNullOrWhiteSpace(input_nombre.Text) || string.IsNullOrWhiteSpace(input_apellido.Text ) 
+                || string.IsNullOrWhiteSpace(input_usuario.Text )|| string.IsNullOrWhiteSpace(input_contraseña.Text )
+                || string.IsNullOrWhiteSpace(input_sucursal.Text))
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
+                MessageBox.Show("value" + input_sucursal.ValueMember);
+                EmpleadoA em = new EmpleadoA();
+
+                em.Id = 0;
+                em.Nombre = input_nombre.Text;
+                em.Apellido = input_apellido.Text;
+                em.Usuario = input_usuario.Text;
+                em.Pass = input_contraseña.Text;
+                em.Id_Sucursal = int.Parse(input_sucursal.ValueMember);
+
+
+                Empleado_Controller.CrearEmpleado(em);
+            }
+
+
+
+            
             
 
 

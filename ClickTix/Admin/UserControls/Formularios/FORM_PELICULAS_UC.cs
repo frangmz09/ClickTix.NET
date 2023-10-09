@@ -63,19 +63,46 @@ namespace ClickTix.UserControls
 
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
-            
-            int id = GetMaxID() + 1;
 
-            InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
+            if (string.IsNullOrWhiteSpace(input_titulo.Text) || string.IsNullOrWhiteSpace(input_director.Text) 
+                || input_duracion.Value <=0 || string.IsNullOrWhiteSpace(input_descripcion.Text) 
+                || string.IsNullOrWhiteSpace(input_genero.Text) || string.IsNullOrWhiteSpace(input_clasificacion.Text)
+                || string.IsNullOrWhiteSpace(input_estreno.Text))
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
+                int id = GetMaxID() + 1;
+
+                InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
+            }
+
+
+            
 
         }
 
         private void Addpelicula_btn_Click2(object sender, EventArgs e)
         {
-            Trace.WriteLine("editt");
-            int idpelicula = idDelPanel;
-            MessageBox.Show("id : " + idpelicula);
-            ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
+
+
+
+            if (string.IsNullOrWhiteSpace(input_titulo.Text) || string.IsNullOrWhiteSpace(input_director.Text)
+                || input_duracion.Value <= 0 || string.IsNullOrWhiteSpace(input_descripcion.Text)
+                || string.IsNullOrWhiteSpace(input_genero.Text) || string.IsNullOrWhiteSpace(input_clasificacion.Text)
+                || string.IsNullOrWhiteSpace(input_estreno.Text))
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
+                int idpelicula = idDelPanel;
+                MessageBox.Show("id : " + idpelicula);
+                ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
+            }
+            
+            
 
         }
         private void input_genero_SelectedIndexChanged(object sender, EventArgs e)

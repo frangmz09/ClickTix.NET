@@ -67,15 +67,22 @@ namespace ClickTix.Admin.UserControls.Formularios
 
         private void adddimension_btn_Click2(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(input_nombre.Text) || input_precio.Value <= 0)
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
+                PrecioDimension pd = new PrecioDimension();
+
+                pd.id = this.idDelPanel;
+                pd.precio = input_precio.Value;
+                pd.dimension = input_nombre.Text;
+
+                PrecioDimension_Controller.ActualizarDimension(pd);
+            }
+
             
-
-            PrecioDimension pd = new PrecioDimension();
-
-            pd.id = this.idDelPanel;
-            pd.precio = input_precio.Value;
-            pd.dimension = input_nombre.Text;
-
-            PrecioDimension_Controller.ActualizarDimension(pd);
 
         }
 

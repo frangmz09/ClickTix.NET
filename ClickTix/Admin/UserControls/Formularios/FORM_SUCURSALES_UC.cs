@@ -65,32 +65,51 @@ namespace ClickTix.UserControls
 
         private void addsucursal_btn_Click(object sender, EventArgs e)
         {
-            Sucursal s = new Sucursal();
 
-            s.id = 0;
-            s.nombre = input_nombre.Text;
-            s.direccion = input_direccion.Text;
-            s.cuit = input_cuit.Text;
-            s.numerosalas = (int)input_salas.Value;
+             
+            if (string.IsNullOrWhiteSpace(input_nombre.Text) || string.IsNullOrWhiteSpace(input_direccion.Text) 
+                || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
+                Sucursal s = new Sucursal();
 
-            Sucursal_Controller.CrearSucursal(s);
+                s.id = 0;
+                s.nombre = input_nombre.Text;
+                s.direccion = input_direccion.Text;
+                s.cuit = input_cuit.Text;
+                s.numerosalas = (int)input_salas.Value;
+
+                Sucursal_Controller.CrearSucursal(s);
+            }
+            
         }
 
         private void addsucursal_btn_Click2(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(input_nombre.Text) || string.IsNullOrWhiteSpace(input_direccion.Text)
+                || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
+                Sucursal s = new Sucursal();
+                s.id = this.idDelPanel;
+                s.nombre = input_nombre.Text;
+                s.direccion = input_direccion.Text;
+                s.cuit = input_cuit.Text;
+                s.numerosalas = (int)input_salas.Value;
 
-           
-
-            Sucursal s = new Sucursal();
-            s.id = this.idDelPanel;
-            s.nombre = input_nombre.Text;
-            s.direccion = input_direccion.Text;
-            s.cuit = input_cuit.Text;
-            s.numerosalas = (int)input_salas.Value;
 
 
+                Sucursal_Controller.ActualizarSucursal(s);
+            }
 
-            Sucursal_Controller.ActualizarSucursal(s);
+
+         
         }
 
         private void CargarDatosSucursal(int sucursalID)
