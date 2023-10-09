@@ -19,6 +19,7 @@ namespace ClickTix.UserControls
 
         MyConexion c;
         private int idDelPanel;
+        Image ImagenCargada;
 
         public FORM_PELICULAS_UC()
         {
@@ -252,7 +253,27 @@ namespace ClickTix.UserControls
             }
         }
 
-        
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void addimage_btn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Seleccionar una imagen";
+            openFileDialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png\"";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ImagenCargada = Image.FromFile(openFileDialog.FileName);
+                pictureBox1.Image = ImagenCargada;
+            }
+        }
+
+        private void addpelicula_btn_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

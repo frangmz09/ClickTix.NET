@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -79,6 +80,9 @@ namespace ClickTix.Empleado
 
 
                 BUTACAS_UC butacas = new BUTACAS_UC(id_funcion, idPelicula);
+                Trace.WriteLine(idPelicula);
+                Trace.WriteLine(id_funcion);
+
                 Index_User.addUserControlUsuario(butacas);
 
             }

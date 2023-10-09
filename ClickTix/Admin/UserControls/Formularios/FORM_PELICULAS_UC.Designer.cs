@@ -47,6 +47,8 @@
             this.label_estreno = new System.Windows.Forms.Label();
             this.label_descripcion = new System.Windows.Forms.Label();
             this.back_pelicula = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.addimage_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.input_duracion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -70,7 +72,7 @@
             this.addpelicula_btn.TabIndex = 46;
             this.addpelicula_btn.Text = "Agregar";
             this.addpelicula_btn.UseVisualStyleBackColor = true;
-           
+            this.addpelicula_btn.Click += new System.EventHandler(this.addpelicula_btn_Click_1);
             // 
             // input_titulo
             // 
@@ -143,9 +145,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(54, 82);
+            this.pictureBox1.Location = new System.Drawing.Point(53, 80);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(152, 204);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 55;
             this.pictureBox1.TabStop = false;
             // 
@@ -236,10 +239,26 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // addimage_btn
+            // 
+            this.addimage_btn.Location = new System.Drawing.Point(77, 290);
+            this.addimage_btn.Name = "addimage_btn";
+            this.addimage_btn.Size = new System.Drawing.Size(111, 25);
+            this.addimage_btn.TabIndex = 64;
+            this.addimage_btn.Text = "Cargar imagen";
+            this.addimage_btn.UseVisualStyleBackColor = true;
+            this.addimage_btn.Click += new System.EventHandler(this.addimage_btn_Click);
+            // 
             // FORM_PELICULAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.addimage_btn);
             this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.label_descripcion);
             this.Controls.Add(this.label_estreno);
@@ -290,5 +309,7 @@
         private System.Windows.Forms.Label label_estreno;
         private System.Windows.Forms.Label label_descripcion;
         private System.Windows.Forms.Button back_pelicula;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button addimage_btn;
     }
 }

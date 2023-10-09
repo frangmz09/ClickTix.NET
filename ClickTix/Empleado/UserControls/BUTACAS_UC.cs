@@ -114,7 +114,7 @@ namespace ClickTix.Empleado.UserControls
 
         private void confirmar_asiento_Click(object sender, EventArgs e)
         {
-            TICKET_UC tICKET_UC = new TICKET_UC(idFuncion,idPelicula,1);
+            TICKET_UC tICKET_UC = new TICKET_UC(idPelicula,idFuncion,1);
             Index_User.addUserControlUsuario(tICKET_UC);
            
         }
