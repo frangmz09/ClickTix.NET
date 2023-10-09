@@ -64,7 +64,32 @@ namespace ClickTix.Empleado.UserControls
             return "";
         }
 
+        /*private string funcion_Load(int id)
+        {
+            try
+            {
+                MyConexion.AbrirConexion();
 
+                string query = "SELECT titulo FROM pelicula WHERE id = @id_pelicula;";
+
+                using (MySqlCommand command = new MySqlCommand(query, MyConexion.ObtenerConexion()))
+                {
+                    command.Parameters.AddWithValue("@id_pelicula", id);
+
+                    object result = command.ExecuteScalar();
+                    MessageBox.Show("valor :" + result);
+                    return "" + result;
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            return "";
+        }*/
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
