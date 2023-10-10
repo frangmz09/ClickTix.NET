@@ -42,6 +42,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.id_fecha = new System.Windows.Forms.Label();
+            this.id_hora = new System.Windows.Forms.Label();
+            this.id_precio = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -167,10 +170,44 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Precio:";
             // 
+            // id_fecha
+            // 
+            this.id_fecha.AutoSize = true;
+            this.id_fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.id_fecha.Location = new System.Drawing.Point(223, 140);
+            this.id_fecha.Name = "id_fecha";
+            this.id_fecha.Size = new System.Drawing.Size(70, 25);
+            this.id_fecha.TabIndex = 12;
+            this.id_fecha.Text = "label8";
+            // 
+            // id_hora
+            // 
+            this.id_hora.AutoSize = true;
+            this.id_hora.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.id_hora.Location = new System.Drawing.Point(223, 179);
+            this.id_hora.Name = "id_hora";
+            this.id_hora.Size = new System.Drawing.Size(70, 25);
+            this.id_hora.TabIndex = 13;
+            this.id_hora.Text = "label9";
+            // 
+            // id_precio
+            // 
+            this.id_precio.AutoSize = true;
+            this.id_precio.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.id_precio.Location = new System.Drawing.Point(231, 252);
+            this.id_precio.Name = "id_precio";
+            this.id_precio.Size = new System.Drawing.Size(79, 25);
+            this.id_precio.TabIndex = 14;
+            this.id_precio.Text = "Precio:";
+            this.id_precio.Click += new System.EventHandler(this.id_precio_Click);
+            // 
             // TICKET_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.id_precio);
+            this.Controls.Add(this.id_hora);
+            this.Controls.Add(this.id_fecha);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -204,5 +241,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label id_fecha;
+        private System.Windows.Forms.Label id_hora;
+        private System.Windows.Forms.Label id_precio;
     }
 }

@@ -24,7 +24,9 @@ namespace ClickTix.Empleado.UserControls
             id_pelicula.Text = pelicula_Load(idP);
             id_funcion.Text = idF.ToString();
             id_butaca.Text = idB.ToString();
-            
+           /* id_precio.Text = idPrecio.ToString();
+            id_fecha.Text = idFecha.ToString();
+            id_hora.Text = idHora.ToString();*/
             
         }
 
@@ -70,7 +72,7 @@ namespace ClickTix.Empleado.UserControls
             {
                 MyConexion.AbrirConexion();
 
-                string query = "SELECT titulo FROM pelicula WHERE id = @id_pelicula;";
+                string query = "SELECT fecha FROM funcion WHERE id = @id_pelicula;";
 
                 using (MySqlCommand command = new MySqlCommand(query, MyConexion.ObtenerConexion()))
                 {
@@ -103,6 +105,11 @@ namespace ClickTix.Empleado.UserControls
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void id_precio_Click(object sender, EventArgs e)
         {
 
         }
