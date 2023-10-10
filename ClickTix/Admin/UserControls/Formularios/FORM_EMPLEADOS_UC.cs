@@ -66,7 +66,9 @@ namespace ClickTix
                 em.Apellido = input_apellido.Text;
                 em.Usuario = input_usuario.Text;
                 em.Pass = input_contraseña.Text;
-                em.Id_Sucursal = int.Parse(input_sucursal.ValueMember);
+
+                int idSucursal = Empleado_Controller.ObtenerIdSucursal(input_nombre.Text);
+                em.Id_Sucursal = idSucursal;
 
 
 
@@ -108,7 +110,8 @@ namespace ClickTix
                 em.Apellido = input_apellido.Text;
                 em.Usuario = input_usuario.Text;
                 em.Pass = input_contraseña.Text;
-                em.Id_Sucursal = int.Parse(input_sucursal.ValueMember);
+                int idSucursal = Empleado_Controller.ObtenerIdSucursal(input_nombre.Text);
+                em.Id_Sucursal = idSucursal;
 
 
                 Empleado_Controller.CrearEmpleado(em);

@@ -24,7 +24,11 @@ namespace ClickTix.UserControls
         public FORM_PELICULAS_UC()
         {
             InitializeComponent();
+
             c = new MyConexion("localhost", "clicktix", "root", "");
+            LlenarComboBoxClasificacion();
+            LlenarComboBoxCategoria();
+
             this.addpelicula_btn.Click += new System.EventHandler(this.Addpelicula_btn_Click);
 
         }
@@ -39,6 +43,8 @@ namespace ClickTix.UserControls
             int peliculaID = id;
             c = new MyConexion("localhost", "clicktix", "root", "");
             InitializeComponent();
+            LlenarComboBoxClasificacion();
+            LlenarComboBoxCategoria();
             addpelicula_btn.Click += new EventHandler(this.Addpelicula_btn_Click2);
             addpelicula_btn.Text = "modificar";
             this.title.Text = "INGRESE DATOS PARA ACTUALIZAR UNA PELICULA";
@@ -64,8 +70,8 @@ namespace ClickTix.UserControls
         private void Addpelicula_btn_Click(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrWhiteSpace(input_titulo.Text) || string.IsNullOrWhiteSpace(input_director.Text) 
-                || input_duracion.Value <=0 || string.IsNullOrWhiteSpace(input_descripcion.Text) 
+            if (string.IsNullOrWhiteSpace(input_titulo.Text) || string.IsNullOrWhiteSpace(input_director.Text)
+                || input_duracion.Value <= 0 || string.IsNullOrWhiteSpace(input_descripcion.Text)
                 || string.IsNullOrWhiteSpace(input_genero.Text) || string.IsNullOrWhiteSpace(input_clasificacion.Text)
                 || string.IsNullOrWhiteSpace(input_estreno.Text))
             {
@@ -74,12 +80,13 @@ namespace ClickTix.UserControls
             else
             {
                 int id = GetMaxID() + 1;
-
-                InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
+                int idGenero = ObtenerIdGenero(input_genero.Text);
+                int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
+                InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, "imagen", input_estreno.Value);
             }
 
 
-            
+
 
         }
 
@@ -97,12 +104,14 @@ namespace ClickTix.UserControls
             }
             else
             {
+                int idGenero = ObtenerIdGenero(input_genero.Text);
+                int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
                 int idpelicula = idDelPanel;
                 MessageBox.Show("id : " + idpelicula);
-                ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, 1, 1, "imagen", input_estreno.Value);
+                ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, "imagen", input_estreno.Value);
             }
-            
-            
+
+
 
         }
         private void input_genero_SelectedIndexChanged(object sender, EventArgs e)
@@ -301,11 +310,188 @@ namespace ClickTix.UserControls
         {
 
         }
+
+
+
+        private void LlenarComboBoxClasificacion()
+        {
+            try
+            {
+                MyConexion.AbrirConexion();
+                string consultaSucursales = "SELECT id, clasificacion FROM clasificacion";
+
+                using (MySqlCommand cmdSucursales = new MySqlCommand(consultaSucursales, MyConexion.ObtenerConexion()))
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(cmdSucursales.ExecuteReader());
+
+
+                    input_clasificacion.DataSource = dt;
+
+
+                    input_clasificacion.DisplayMember = "clasificacion";
+
+
+                    //input_sucursal.ValueMember = "id";
+
+
+                    //input_sucursal.SelectedValue = idSucursalSeleccionada;
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al llenar el ComboBox de clasificacion de pelcula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+
+        private void LlenarComboBoxCategoria()
+        {
+            try
+            {
+                MyConexion.AbrirConexion();
+                string consultaSucursales = "SELECT id, nombre FROM categoria";
+
+                using (MySqlCommand cmdSucursales = new MySqlCommand(consultaSucursales, MyConexion.ObtenerConexion()))
+                {
+                    DataTable dt = new DataTable();
+                    dt.Load(cmdSucursales.ExecuteReader());
+
+
+                    input_genero.DataSource = dt;
+
+
+                    input_genero.DisplayMember = "nombre";
+
+
+                    //input_sucursal.ValueMember = "id";
+
+
+                    //input_sucursal.SelectedValue = idSucursalSeleccionada;
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al llenar el ComboBox de categoria de pelcula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+        public static int ObtenerIdGenero(string nombreCategoria)
+        {
+            int idCategoria = -1;
+
+            try
+            {
+                MyConexion.AbrirConexion();
+                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                {
+                    mysqlConnection.Open();
+                    string query = "SELECT id FROM categoria WHERE nombre = @nombre";
+
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                    {
+                        command.Parameters.AddWithValue("@nombre", nombreCategoria);
+                        object result = command.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            idCategoria = Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el ID de la categoria de pelicula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                MyConexion.conexion.Close();
+            }
+
+            return idCategoria;
+        }
+
+
+
+
+
+
+        public static int ObtenerIdClasificacion(string nombreClasificacion)
+        {
+            int idClasificacion = -1;
+
+            try
+            {
+                MyConexion.AbrirConexion();
+                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                {
+                    mysqlConnection.Open();
+                    string query = "SELECT id FROM clasificacion WHERE clasificacion = @clasificacion";
+
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                    {
+                        command.Parameters.AddWithValue("@clasificacion", nombreClasificacion);
+                        object result = command.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            idClasificacion = Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el ID de la calsificacion de pelicula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                MyConexion.conexion.Close();
+            }
+
+            return idClasificacion;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
 
-   
 
-   
+
+
 
 

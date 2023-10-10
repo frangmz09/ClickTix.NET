@@ -170,7 +170,40 @@ namespace ClickTix.Modelo
         }
 
 
+        public static int ObtenerIdSucursal(string nombreSucursal)
+        {
+            int idSucursal = -1; 
 
+            try
+            {
+                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                {
+                    mysqlConnection.Open();
+                    string query = "SELECT id FROM sucursal WHERE nombre = @nombre";
+
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                    {
+                        command.Parameters.AddWithValue("@nombre", nombreSucursal);
+                        object result = command.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            idSucursal = Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el ID de la sucursal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                MyConexion.conexion.Close();
+            }
+
+            return idSucursal;
+        }
 
 
 
