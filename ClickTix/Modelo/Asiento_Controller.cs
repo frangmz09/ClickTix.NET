@@ -63,16 +63,18 @@ namespace ClickTix.Modelo
         {
             int filas = 0;
             int columnas = 0;
+            MyConexion.conexion.Open();
+            Trace.WriteLine("Datos funcion");
+
+            Trace.WriteLine(funcion.Id_Sala);
+            Trace.WriteLine(funcion.Id);
             try
             {
                 using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
                 {
 
-                    string consulta = 
-                        "select filas,columnas from funcion " +
-                        "inner join sala " +
-                        "on funcion.id = sala.id_sucursal " +
-                        "where funcion.id = @id_funcion and sala.id = @id_sala;" ;
+                    string consulta =
+                        "select sala.filas, sala.columnas from funcion inner join sala on funcion.id_sala = sala.id;;";
 
                     using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
                     {
@@ -90,8 +92,10 @@ namespace ClickTix.Modelo
                         reader.Close();
                         mysqlConnection.Close();
                     }
+                    Trace.WriteLine("Filas :" + filas);
+                    Trace.WriteLine("Columnas :" + columnas);
 
-                   
+
 
                 }
             }

@@ -291,7 +291,7 @@ namespace ClickTix.Modelo
                 mysqlConnection.Close();
             }
         }
-        public static bool crearFuncion(Funcion funcion)
+        public static int crearFuncion(Funcion funcion)
         {
 
             using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
@@ -315,13 +315,13 @@ namespace ClickTix.Modelo
                         cmd.ExecuteNonQuery();
                     }
 
+                    return id;
 
-                
+
 
             }
 
 
-            return true;
         }
         private static int GetMaxIDFuncion()
         {

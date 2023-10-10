@@ -89,7 +89,7 @@ namespace ClickTix.UserControls
         }
         private void addfuncion_btn_Click(object sender, EventArgs e)
         {
-            Funcion_Controller.crearFuncion(funcionActual);
+            funcionActual.Id = Funcion_Controller.crearFuncion(funcionActual);
             Asiento_Controller.crearDisponibilidad(funcionActual);
 
 
