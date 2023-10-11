@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -33,8 +34,10 @@ namespace ClickTix.Empleado.UserControls
         {
         }
 
-        private void llenarButacas(int id_funcion) {
+        private void llenarButacas(int id_funcion)
+        {
 
+            Trace.WriteLine(id_funcion);
 
             flowLayoutPanel1.Controls.Clear();
             int numFilas = 0;
@@ -59,18 +62,21 @@ namespace ClickTix.Empleado.UserControls
                         numColumnas = reader.GetInt32(1);
                     }
 
+                    Trace.WriteLine(numFilas);
+                    Trace.WriteLine(numColumnas);
+
                     reader.Close();
                     mysqlConnection.Close();
 
                     List<Asiento> list = new List<Asiento>();
-                    list = Asiento_Controller.obtenerPorFuncion(1);
+                    list = Asiento_Controller.obtenerPorFuncion(id_funcion);
                     Image imagenButaca = Properties.Resources.butaca;
                     foreach (Asiento asiento in list)
                     {
 
                         Button butaca = new Button();
-                        butaca.Width = 50;
-                        butaca.Height = 50;
+                        butaca.Width = 25;
+                        butaca.Height = 25;
                         butaca.Name = $"btnButaca_{asiento.Fila} _ {asiento.Columna}";
                         butaca.BackgroundImage = imagenButaca;
                         butaca.BackgroundImageLayout = ImageLayout.Stretch;
@@ -91,12 +97,6 @@ namespace ClickTix.Empleado.UserControls
                     }
                 }
             }
-
-
-        }
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
         private void Butaca_Click(object sender, EventArgs e)
         {
