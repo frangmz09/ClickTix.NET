@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -350,5 +351,136 @@ namespace ClickTix.Modelo
 
             return maxID;
         }
+
+
+        public static void Funcion_Load(DataGridView tabla)
+        {
+            MyConexion.AbrirConexion();
+
+            string query = "SELECT id , fecha, id_dimension as dimension , id_pelicula as pelicula , id_sala as sala ,idioma_funcion as idioma" +
+                ", turno_id as turno FROM funcion";
+
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    DataTable dt = new DataTable();
+
+                    adapter.Fill(dt);
+
+                    tabla.DataSource = dt;
+                }
+            }
+        }
+
+        public static bool EliminarRegistroFuncion(int id)
+        {
+            try
+            {
+                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                {
+                    mysqlConnection.Open();
+
+                    
+                    string deleteAsientoQuery = "DELETE FROM asiento WHERE id_funcion = @id";
+                    using (MySqlCommand deleteAsientoCommand = new MySqlCommand(deleteAsientoQuery, mysqlConnection))
+                    {
+                        deleteAsientoCommand.Parameters.AddWithValue("@id", id);
+                        deleteAsientoCommand.ExecuteNonQuery();
+                    }
+
+                    
+                    string deleteFuncionQuery = "DELETE FROM funcion WHERE id = @id";
+                    using (MySqlCommand deleteFuncionCommand = new MySqlCommand(deleteFuncionQuery, mysqlConnection))
+                    {
+                        deleteFuncionCommand.Parameters.AddWithValue("@id", id);
+                        int rowsAffected = deleteFuncionCommand.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Registro eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró el registro a eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el registro: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            finally
+            {
+                MyConexion.conexion.Close();
+            }
+        }
+
+
+
+        public static bool ActualizarFuncion(Funcion funcion)
+        {
+            string query = "UPDATE funcion " +
+                           "SET id , fecha, id_dimension , id_pelicula  , id_sala  ,idioma_funcion, turno_id WHERE id = @id";
+
+            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+
+            cmd.Parameters.AddWithValue("@id",funcion.Id);
+            cmd.Parameters.AddWithValue("@fecha", funcion.Fecha);
+            cmd.Parameters.AddWithValue("@id_dimension", funcion.Id_Dimension);
+            cmd.Parameters.AddWithValue("@id_sala", funcion.Id_Sala);
+            cmd.Parameters.AddWithValue("@id_pelicula", funcion.Id_Pelicula);
+            cmd.Parameters.AddWithValue("@idioma_funcion", funcion.Id_Idioma);
+            cmd.Parameters.AddWithValue("@turno_id", funcion.Id_Turno);
+
+            try
+            {
+
+                int filasActualizadas = cmd.ExecuteNonQuery();
+
+
+                return filasActualizadas > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la sucursal: " + ex.Message);
+            }
+            finally
+            {
+                MyConexion.conexion.Close();
+            }
+        }
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

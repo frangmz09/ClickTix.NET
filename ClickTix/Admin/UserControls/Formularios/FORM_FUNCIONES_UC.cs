@@ -19,11 +19,68 @@ namespace ClickTix.UserControls
 
 
         Funcion funcionActual;
+        private int idDelPanel;
 
         public FORM_FUNCIONES_UC()
         {
             InitializeComponent();
+            this.addfuncion_btn.Click += new System.EventHandler(this.addfuncion_btn_Click);
         }
+
+        public FORM_FUNCIONES_UC(int id)
+        {
+            InitializeComponent();
+
+            this.addfuncion_btn.Text = "Modificar";
+
+            this.addfuncion_btn.Click += new System.EventHandler(this.addfuncion_btn_Click2);
+            this.idDelPanel = id;
+            int funcionId = id;
+            CargarDatosFuncion(funcionId);
+        }
+
+        private void addfuncion_btn_Click(object sender, EventArgs e)
+        {
+
+            funcionActual.Id = Funcion_Controller.crearFuncion(funcionActual);
+            Asiento_Controller.crearDisponibilidad(funcionActual);
+
+
+
+        }
+
+        private void addfuncion_btn_Click2(object sender, EventArgs e)
+        {
+
+            Funcion f = new Funcion();
+
+            f.Id = this.idDelPanel;
+
+
+            f.Fecha = combobox_fecha.Value;
+
+            f.Id_Dimension = Funcion_Controller.obtenerIdDimension(combobox_dimension);
+            
+            f.Id_Turno = Funcion_Controller.obtenerIdTurno(combobox_turno);
+            
+            f.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
+
+            f.Id_Idioma = Funcion_Controller.obtenerIdIdioma(combobox_pelicula);
+
+            f.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala,combobox_sucursal);
+
+            Funcion_Controller.ActualizarFuncion(f);
+
+
+            
+
+        }
+
+
+
+
+
+
 
         private void FUNCIONES_UC_Load(object sender, EventArgs e)
         {
@@ -32,9 +89,9 @@ namespace ClickTix.UserControls
 
             funcionActual = new Funcion();
             funcionActual.Fecha = combobox_fecha.Value.Date;
-            Funcion_Controller.llenarCamposAddFuncion(combobox_pelicula, combobox_turno, combobox_sucursal, combobox_dimension,combobox_idioma);
-            
-            
+            Funcion_Controller.llenarCamposAddFuncion(combobox_pelicula, combobox_turno, combobox_sucursal, combobox_dimension, combobox_idioma);
+
+
             combobox_pelicula.SelectedIndexChanged += cambioPelicula;
             combobox_fecha.ValueChanged += cambioFecha;
             combobox_turno.SelectedIndexChanged += cambioTurno;
@@ -76,7 +133,7 @@ namespace ClickTix.UserControls
         }
         private void cambioSala(object sender, EventArgs e)
         {
-            funcionActual.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala,combobox_sucursal);
+            funcionActual.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal);
         }
         private void cambioIdioma(object sender, EventArgs e)
         {
@@ -87,13 +144,90 @@ namespace ClickTix.UserControls
             funcionActual.Id_Dimension = Funcion_Controller.obtenerIdDimension(combobox_dimension);
             Trace.WriteLine(funcionActual.Id_Dimension);
         }
-        private void addfuncion_btn_Click(object sender, EventArgs e)
+
+
+
+        private void CargarDatosFuncion(int funcionID)
         {
-            funcionActual.Id = Funcion_Controller.crearFuncion(funcionActual);
-            Asiento_Controller.crearDisponibilidad(funcionActual);
+            try
+            {
+                string consulta = "SELECT f.fecha, " +
+                    "d.dimension, " +
+                    "s.nro_sala, " +
+                    "p.titulo, " +
+                    "i.idioma, " +
+                    "t.hora " +
+                    "FROM funcion f " +
+                    "INNER JOIN sala s ON s.id = f.id_sala " +
+                    "INNER JOIN pelicula p ON p.id = f.id_pelicula " +
+                    "INNER JOIN turno t ON t.id = f.turno_id " +
+                    "INNER JOIN dimension d ON d.id = f.id_dimension " +
+                    "INNER JOIN idioma i ON i.id = f.idioma_funcion " +
+                    "WHERE f.id = @id";
 
+                MyConexion.AbrirConexion();
 
+                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                {
+                    cmd.Parameters.AddWithValue("@id", funcionID);
 
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            combobox_fecha.Text = reader["fecha"].ToString();
+                            combobox_dimension.Text = reader["dimension"].ToString();
+                            combobox_pelicula.Text = reader["titulo"].ToString();
+                            combobox_idioma.Text = reader["idioma"].ToString();
+                            combobox_turno.Text = reader["hora"].ToString();
+                            combobox_sala.Text = reader["nro_sala"].ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró la función con el ID proporcionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los datos de la función: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -52,10 +52,10 @@
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(76, 22);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(400, 24);
+            this.title.Size = new System.Drawing.Size(431, 25);
             this.title.TabIndex = 1;
             this.title.Text = "INGRESE DATOS PARA AGREGAR FUNCION";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -73,10 +73,10 @@
             // label_pelicula
             // 
             this.label_pelicula.AutoSize = true;
-            this.label_pelicula.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_pelicula.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_pelicula.Location = new System.Drawing.Point(82, 57);
             this.label_pelicula.Name = "label_pelicula";
-            this.label_pelicula.Size = new System.Drawing.Size(45, 14);
+            this.label_pelicula.Size = new System.Drawing.Size(51, 15);
             this.label_pelicula.TabIndex = 31;
             this.label_pelicula.Text = "Pelicula";
             this.label_pelicula.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,10 +84,10 @@
             // label_idioma
             // 
             this.label_idioma.AutoSize = true;
-            this.label_idioma.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_idioma.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_idioma.Location = new System.Drawing.Point(296, 205);
             this.label_idioma.Name = "label_idioma";
-            this.label_idioma.Size = new System.Drawing.Size(40, 14);
+            this.label_idioma.Size = new System.Drawing.Size(45, 15);
             this.label_idioma.TabIndex = 30;
             this.label_idioma.Text = "Idioma";
             this.label_idioma.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -95,10 +95,10 @@
             // label_dimension
             // 
             this.label_dimension.AutoSize = true;
-            this.label_dimension.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_dimension.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_dimension.Location = new System.Drawing.Point(384, 205);
             this.label_dimension.Name = "label_dimension";
-            this.label_dimension.Size = new System.Drawing.Size(57, 14);
+            this.label_dimension.Size = new System.Drawing.Size(67, 15);
             this.label_dimension.TabIndex = 29;
             this.label_dimension.Text = "Dimension";
             this.label_dimension.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -106,10 +106,10 @@
             // label_turno
             // 
             this.label_turno.AutoSize = true;
-            this.label_turno.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_turno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_turno.Location = new System.Drawing.Point(400, 100);
             this.label_turno.Name = "label_turno";
-            this.label_turno.Size = new System.Drawing.Size(35, 14);
+            this.label_turno.Size = new System.Drawing.Size(39, 15);
             this.label_turno.TabIndex = 28;
             this.label_turno.Text = "Turno";
             this.label_turno.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -117,10 +117,10 @@
             // label_fecha
             // 
             this.label_fecha.AutoSize = true;
-            this.label_fecha.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_fecha.Location = new System.Drawing.Point(300, 100);
             this.label_fecha.Name = "label_fecha";
-            this.label_fecha.Size = new System.Drawing.Size(35, 14);
+            this.label_fecha.Size = new System.Drawing.Size(41, 15);
             this.label_fecha.TabIndex = 27;
             this.label_fecha.Text = "Fecha";
             this.label_fecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -128,10 +128,10 @@
             // label_sala
             // 
             this.label_sala.AutoSize = true;
-            this.label_sala.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_sala.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_sala.Location = new System.Drawing.Point(400, 155);
             this.label_sala.Name = "label_sala";
-            this.label_sala.Size = new System.Drawing.Size(28, 14);
+            this.label_sala.Size = new System.Drawing.Size(32, 15);
             this.label_sala.TabIndex = 26;
             this.label_sala.Text = "Sala";
             this.label_sala.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -171,11 +171,11 @@
             // 
             // combobox_fecha
             // 
-            this.combobox_fecha.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combobox_fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combobox_fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.combobox_fecha.Location = new System.Drawing.Point(272, 116);
             this.combobox_fecha.Name = "combobox_fecha";
-            this.combobox_fecha.Size = new System.Drawing.Size(92, 21);
+            this.combobox_fecha.Size = new System.Drawing.Size(92, 20);
             this.combobox_fecha.TabIndex = 21;
             // 
             // pictureBox1
@@ -205,10 +205,10 @@
             // label_sucursal
             // 
             this.label_sucursal.AutoSize = true;
-            this.label_sucursal.Font = new System.Drawing.Font("Roboto Cn", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_sucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_sucursal.Location = new System.Drawing.Point(286, 155);
             this.label_sucursal.Name = "label_sucursal";
-            this.label_sucursal.Size = new System.Drawing.Size(48, 14);
+            this.label_sucursal.Size = new System.Drawing.Size(55, 15);
             this.label_sucursal.TabIndex = 34;
             this.label_sucursal.Text = "Sucursal";
             this.label_sucursal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -221,7 +221,6 @@
             this.back_pelicula.TabIndex = 64;
             this.back_pelicula.Text = "<";
             this.back_pelicula.UseVisualStyleBackColor = true;
-            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
             // FORM_FUNCIONES_UC
             // 
