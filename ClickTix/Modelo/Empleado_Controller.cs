@@ -12,6 +12,61 @@ namespace ClickTix.Modelo
 {
     internal class Empleado_Controller
     {
+        public static string nombreSucursalEmpleado(int idEmpleado) {
+            string sucursalNombre="";
+
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                string query = "select sucursal.nombre from usuario_sistema inner join sucursal on usuario_sistema.id_sucursal = sucursal.id where usuario_sistema.id = @idEmpleado;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    mysqlConnection.Open();
+
+                    command.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        sucursalNombre = reader.GetString(0);
+                    }
+                    reader.Close();
+                    mysqlConnection.Close();
+                }
+
+
+            }
+            return sucursalNombre;
+        }
+
+
+        public static string cuitSucursalEmpleado(int idEmpleado)
+        {
+            string cuitSucursal = "";
+
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                string query = "select sucursal.cuit from usuario_sistema inner join sucursal on usuario_sistema.id_sucursal = sucursal.id where usuario_sistema.id = @idEmpleado;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    mysqlConnection.Open();
+
+                    command.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        cuitSucursal = reader.GetString(0);
+                    }
+                    reader.Close();
+                    mysqlConnection.Close();
+                }
+
+
+            }
+            return cuitSucursal;
+        }
         public static bool CrearEmpleado(EmpleadoA empleado)
         {
             string query = "INSERT INTO usuario_sistema (id,nombre, apellido, pass, id_sucursal, usuario) " +

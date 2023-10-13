@@ -13,6 +13,13 @@ using MySql.Data.MySqlClient;
 using ClickTix.Modelo;
 using ZXing;
 using System.Diagnostics;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using System.IO;
+using iTextSharp.tool.xml.html;
+
+
 
 namespace ClickTix.Empleado.UserControls
 {
@@ -51,11 +58,57 @@ namespace ClickTix.Empleado.UserControls
 
         }
 
-       
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-  
+            SaveFileDialog guardar = new SaveFileDialog();
+
+            guardar.FileName = DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf";
+
+            string html = Properties.Resources.ticket.ToString();
+
+            html = html.Replace("@nroSalaTicket", nrosala_ticket.Text);
+            html = html.Replace("@tituloTicket", nombre_pelicula_ticket.Text);
+            html = html.Replace("@fechaTicket", fecha_ticket.Text);
+            html = html.Replace("@horaTicket", hora_ticket.Text);
+            html = html.Replace("@filaTicket", fila_ticket.Text);
+            html = html.Replace("@columnaTicket", columna_ticket.Text);
+            html = html.Replace("@precioTicket", precio_ticket.Text);
+            html = html.Replace("@nombreSucursalTicket",Empleado_Controller.nombreSucursalEmpleado(Program.logeado.Id));
+            html = html.Replace("@cuitSucursalTicket", Empleado_Controller.cuitSucursalEmpleado(Program.logeado.Id));
+
+
+            if (guardar.ShowDialog() == DialogResult.OK)
+            {
+
+                using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
+                {
+                    Document pdfDoc = new Document(PageSize.POSTCARD, 25, 25, 25, 25);
+                    PdfWriter Writer = PdfWriter.GetInstance(pdfDoc, stream);
+
+                    pdfDoc.Open();
+                    pdfDoc.Add(new Phrase(""));
+
+                    iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(Properties.Resources.logo, System.Drawing.Imaging.ImageFormat.Png);
+                    
+                    img.Alignment = iTextSharp.text.Image.UNDERLYING;
+
+
+                    img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 60);
+
+
+                    pdfDoc.Add(img);
+
+
+                    using (StringReader sr = new StringReader(html))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(Writer, pdfDoc, sr);
+                    }
+                    pdfDoc.Close();
+                    stream.Close();
+                }
+            }
         }
 
         private void loadTicketStrings(int idFuncion)
@@ -80,8 +133,10 @@ namespace ClickTix.Empleado.UserControls
                         precio = reader.GetDouble(4);
                         idioma = reader.GetString(5);
 
-                    }                    
-                    
+                    }
+                    reader.Close();
+                    MyConexion.conexion.Close();
+
                 }
             }
             catch (Exception ex)
@@ -92,25 +147,6 @@ namespace ClickTix.Empleado.UserControls
         }
 
 
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
 
-
-        }
-
-        private void TICKET_UC_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void id_precio_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
