@@ -140,11 +140,10 @@
     <Compile Include="Admin\UserControls\Formularios\FORM_PRECIODIMENSION_UC.Designer.cs">
       <DependentUpon>FORM_PRECIODIMENSION_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\DatabaseConnection.cs" />
     <Compile Include="Conexion\MyConexion.cs" />
-    <Compile Include="Conexion\PrecioDimension_Controller.cs" />
-    <Compile Include="Conexion\Sucursal_Controller.cs" />
-    <Compile Include="Conexion\Usuario_Controller.cs" />
+    <Compile Include="Controller\PrecioDimension_Controller.cs" />
+    <Compile Include="Controller\Sucursal_Controller.cs" />
+    <Compile Include="Controller\Usuario_Controller.cs" />
     <Compile Include="Empleado\ELEGIR_FUNCION_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -194,11 +193,11 @@
       <DependentUpon>TICKET_UC.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Asiento.cs" />
-    <Compile Include="Modelo\Asiento_Controller.cs" />
+    <Compile Include="Controller\Asiento_Controller.cs" />
     <Compile Include="Modelo\EmpleadoA.cs" />
-    <Compile Include="Modelo\Empleado_Controller.cs" />
+    <Compile Include="Controller\Empleado_Controller.cs" />
     <Compile Include="Modelo\Funcion.cs" />
-    <Compile Include="Modelo\Funcion_Controller.cs" />
+    <Compile Include="Controller\Funcion_Controller.cs" />
     <Compile Include="Modelo\Pelicula.cs" />
     <Compile Include="Admin\UserControls\ABMs\ABM_EMPLEADOS_UC.cs">
       <SubType>UserControl</SubType>

@@ -28,8 +28,7 @@ namespace ClickTix.Conexion
                 {
                     conexion.Open();
 
-                    MessageBox.Show("Conexión abierta.");
-                    Console.WriteLine("Conexión abierta.");
+                   
                 }
             }
             catch (MySqlException ex)

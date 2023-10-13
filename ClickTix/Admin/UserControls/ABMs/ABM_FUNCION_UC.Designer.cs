@@ -31,12 +31,7 @@
             this.title = new System.Windows.Forms.Label();
             this.add_funcion = new System.Windows.Forms.Button();
             this.grid_funciones = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pelicula = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dimension = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sala = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Idioma = new System.Windows.Forms.DataGridViewTextBoxColumn();
+           
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_funciones)).BeginInit();
@@ -68,58 +63,18 @@
             // 
             this.grid_funciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_funciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.Pelicula,
-            this.Dimension,
-            this.Sala,
-            this.Sucursal,
-            this.Idioma,
+
             this.Modificar,
             this.Borrar});
             this.grid_funciones.Location = new System.Drawing.Point(23, 52);
             this.grid_funciones.Name = "grid_funciones";
             this.grid_funciones.Size = new System.Drawing.Size(524, 303);
             this.grid_funciones.TabIndex = 11;
-            this.grid_funciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_funciones_CellContentClick_1);
+            this.grid_funciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_funciones_CellContentClick);
             // 
             // ID
             // 
-            this.ID.FillWeight = 195.2002F;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ID.Width = 30;
-            // 
-            // Pelicula
-            // 
-            this.Pelicula.FillWeight = 82.47423F;
-            this.Pelicula.HeaderText = "Pelicula";
-            this.Pelicula.Name = "Pelicula";
-            // 
-            // Dimension
-            // 
-            this.Dimension.FillWeight = 61.16275F;
-            this.Dimension.HeaderText = "Dimension";
-            this.Dimension.Name = "Dimension";
-            this.Dimension.Width = 30;
-            // 
-            // Sala
-            // 
-            this.Sala.FillWeight = 61.16275F;
-            this.Sala.HeaderText = "Sala";
-            this.Sala.Name = "Sala";
-            this.Sala.Width = 30;
-            // 
-            // Sucursal
-            // 
-            this.Sucursal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Sucursal.HeaderText = "Sucursal";
-            this.Sucursal.Name = "Sucursal";
-            // 
-            // Idioma
-            // 
-            this.Idioma.HeaderText = "Idioma";
-            this.Idioma.Name = "Idioma";
+           
             // 
             // Modificar
             // 
@@ -144,7 +99,6 @@
             this.Controls.Add(this.grid_funciones);
             this.Name = "ABM_FUNCION_UC";
             this.Size = new System.Drawing.Size(570, 373);
-            this.Load += new System.EventHandler(this.ABM_FUNCION_UC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_funciones)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -156,12 +110,6 @@
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Button add_funcion;
         private System.Windows.Forms.DataGridView grid_funciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pelicula;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Dimension;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sala;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sucursal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Idioma;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
     }
