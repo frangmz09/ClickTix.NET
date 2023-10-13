@@ -36,23 +36,19 @@ namespace ClickTix.Empleado.UserControls
 
         private void llenarButacas(int id_funcion)
         {
-
             Trace.WriteLine(id_funcion);
-
             flowLayoutPanel1.Controls.Clear();
             int numFilas = 0;
             int numColumnas = 0;
             MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
 
-
             using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
             {
                 mysqlConnection.Open();
-                string query = "select filas,columnas from sala s inner join funcion f on f.id_sala=s.id inner join asiento a on f.id = a.id_funcion where f.id = @id_funcion;";
+                string query = "select filas, columnas from sala s inner join funcion f on f.id_sala = s.id inner join asiento a on f.id = a.id_funcion where f.id = @id_funcion;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-
                     command.Parameters.AddWithValue("@id_funcion", id_funcion);
                     MySqlDataReader reader = command.ExecuteReader();
 
@@ -71,16 +67,23 @@ namespace ClickTix.Empleado.UserControls
                     List<Asiento> list = new List<Asiento>();
                     list = Asiento_Controller.obtenerPorFuncion(id_funcion);
                     Image imagenButaca = Properties.Resources.butaca;
+
+                    int columnCount = 0;
+                    
+                    FlowLayoutPanel currentRowPanel = new FlowLayoutPanel();
+                    currentRowPanel.FlowDirection = FlowDirection.LeftToRight;
+                    currentRowPanel.Width = flowLayoutPanel1.Width;
+                    currentRowPanel.Height = 30;
+
+
                     foreach (Asiento asiento in list)
                     {
-
                         Button butaca = new Button();
                         butaca.Width = 25;
                         butaca.Height = 25;
                         butaca.Name = $"btnButaca_{asiento.Fila} _ {asiento.Columna}";
                         butaca.BackgroundImage = imagenButaca;
                         butaca.BackgroundImageLayout = ImageLayout.Stretch;
-
 
                         butaca.BackColor = Color.LightGray;
                         butaca.Margin = new Padding(5);
@@ -91,9 +94,26 @@ namespace ClickTix.Empleado.UserControls
                             butaca.Enabled = false;
                         }
                         butaca.Click += Butaca_Click;
+                        butaca.Anchor = AnchorStyles.None;
 
-                        flowLayoutPanel1.Controls.Add(butaca);
+                        currentRowPanel.Controls.Add(butaca);
+                        columnCount++;
 
+                        if (columnCount == numColumnas)
+                        {
+                            flowLayoutPanel1.Controls.Add(currentRowPanel);
+
+                            columnCount = 0;
+                            currentRowPanel = new FlowLayoutPanel();
+                            currentRowPanel.FlowDirection = FlowDirection.LeftToRight;
+                            currentRowPanel.Width = flowLayoutPanel1.Width;
+                            currentRowPanel.Height = 30;
+                        }
+                    }
+
+                    if (currentRowPanel.Controls.Count > 0)
+                    {
+                        flowLayoutPanel1.Controls.Add(currentRowPanel);
                     }
                 }
             }
