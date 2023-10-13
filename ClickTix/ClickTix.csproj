@@ -33,17 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AForge.Controls">
-      <HintPath>..\..\..\..\..\Desktop\LibreriasQR\AForge\Release\AForge.Controls.dll</HintPath>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
     </Reference>
-    <Reference Include="AForge.Video">
-      <HintPath>..\..\..\..\..\Desktop\LibreriasQR\AForge\Release\AForge.Video.dll</HintPath>
+    <Reference Include="AForge.Controls, Version=2.2.5.0, Culture=neutral, PublicKeyToken=a8ac264d1dc6b9d9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AForge.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="AForge.Video.DirectShow">
-      <HintPath>..\..\..\..\..\Desktop\LibreriasQR\AForge\Release\AForge.Video.DirectShow.dll</HintPath>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b" />
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
     </Reference>
-    <Reference Include="BarcodeLib.BarcodeReader">
-      <HintPath>..\..\..\..\..\Desktop\LibreriasQR\BarcodeLib_NETBarcodeReader_Trial\BarcodeLib.BarcodeReader.dll</HintPath>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
@@ -108,6 +110,12 @@
     <Reference Include="ZstdSharp, Version=0.7.1.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
       <HintPath>..\packages\ZstdSharp.Port.0.7.1\lib\net461\ZstdSharp.dll</HintPath>
     </Reference>
+    <Reference Include="zxing, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net47\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.9.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.9\lib\net47\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\UserControls\ABMs\ABM_PRECIODIMENSION_UC.cs">
@@ -151,7 +159,9 @@
     <Compile Include="Empleado\UserControls\CARTELERA_UC.Designer.cs">
       <DependentUpon>CARTELERA_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Empleado\UserControls\QR\LECTORQR_UC.cs" />
+    <Compile Include="Empleado\UserControls\QR\LECTORQR_UC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Empleado\UserControls\QR\LECTORQR_UC.Designer.cs">
       <DependentUpon>LECTORQR_UC.cs</DependentUpon>
     </Compile>
@@ -253,6 +263,7 @@
     </Compile>
     <EmbeddedResource Include="Admin\UserControls\ABMs\ABM_EMPLEADOS_UC.resx">
       <DependentUpon>ABM_EMPLEADOS_UC.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\UserControls\ABMs\ABM_FUNCION_UC.resx">
       <DependentUpon>ABM_FUNCION_UC.cs</DependentUpon>
@@ -295,12 +306,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\UserControls\TICKET_UC.resx">
       <DependentUpon>TICKET_UC.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\Index_Admin.resx">
       <DependentUpon>Index_Admin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

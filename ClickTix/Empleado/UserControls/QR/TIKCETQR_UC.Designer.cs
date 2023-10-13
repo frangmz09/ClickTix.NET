@@ -48,6 +48,7 @@
             this.Controls.Add(this.imprimir);
             this.Name = "TIKCETQR_UC";
             this.Size = new System.Drawing.Size(800, 451);
+            this.Load += new System.EventHandler(this.TIKCETQR_UC_Load);
             this.ResumeLayout(false);
 
         }

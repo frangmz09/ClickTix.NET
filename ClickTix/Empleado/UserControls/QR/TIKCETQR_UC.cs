@@ -16,5 +16,10 @@ namespace ClickTix.Empleado.UserControls
         {
             InitializeComponent();
         }
+
+        private void TIKCETQR_UC_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -25,7 +25,8 @@ namespace ClickTix.Empleado.UserControls
 
         private void retirar_Click(object sender, EventArgs e)
         {
-
+            LECTORQR_UC lector = new LECTORQR_UC();
+            Index_User.addUserControlUsuario(lector);
         }
     }
 }
