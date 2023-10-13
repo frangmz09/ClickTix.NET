@@ -10,6 +10,16 @@ using System.Windows.Forms;
 using System.Drawing.Printing;
 using ClickTix.Conexion;
 using MySql.Data.MySqlClient;
+using ClickTix.Modelo;
+using ZXing;
+using System.Diagnostics;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using System.IO;
+using iTextSharp.tool.xml.html;
+
+
 
 namespace ClickTix.Empleado.UserControls
 {
@@ -17,45 +27,116 @@ namespace ClickTix.Empleado.UserControls
     {
         MyConexion c;
 
-        public TICKET_UC(int idP, int idF, int idB)
+        int nroSala = 0;
+        string titulo = "";
+        DateTime fecha;
+        string hora = "";
+        string idioma = "";
+        double precio= 0;
+        int fila = 0;
+        int columna = 0;
+
+
+        public TICKET_UC(int idFuncion, int filaRecibida, int columnaRecibida)
         {
             c = new MyConexion("localhost", "clicktix", "root", "");
             InitializeComponent();
-            id_pelicula.Text = pelicula_Load(idP);
-            id_funcion.Text = idF.ToString();
-            id_butaca.Text = idB.ToString();
-           /* id_precio.Text = idPrecio.ToString();
-            id_fecha.Text = idFecha.ToString();
-            id_hora.Text = idHora.ToString();*/
-            
+            loadTicketStrings(idFuncion);
+            Trace.WriteLine(nroSala+ titulo+fecha+ hora+ idioma + precio);
+            fila = filaRecibida;
+            columna = columnaRecibida;
+
+            nombre_pelicula_ticket.Text = titulo;
+            nrosala_ticket.Text = nroSala.ToString();
+            fecha_ticket.Text = fecha.ToShortDateString();
+            hora_ticket.Text = hora;
+            fila_ticket.Text = fila.ToString();
+            columna_ticket.Text = columna.ToString();
+            idioma_ticket.Text = idioma;
+            precio_ticket.Text = precio.ToString();
+
+
         }
 
-       
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-            printPreviewDialog1 = new PrintPreviewDialog();
-            printPreviewDialog1.Document = printDocument1;
-            printPreviewDialog1.Show();
+            SaveFileDialog guardar = new SaveFileDialog();
+
+            guardar.FileName = DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf";
+
+            string html = Properties.Resources.ticket.ToString();
+
+            html = html.Replace("@nroSalaTicket", nrosala_ticket.Text);
+            html = html.Replace("@tituloTicket", nombre_pelicula_ticket.Text);
+            html = html.Replace("@fechaTicket", fecha_ticket.Text);
+            html = html.Replace("@horaTicket", hora_ticket.Text);
+            html = html.Replace("@filaTicket", fila_ticket.Text);
+            html = html.Replace("@columnaTicket", columna_ticket.Text);
+            html = html.Replace("@precioTicket", precio_ticket.Text);
+            html = html.Replace("@nombreSucursalTicket",Empleado_Controller.nombreSucursalEmpleado(Program.logeado.Id));
+            html = html.Replace("@cuitSucursalTicket", Empleado_Controller.cuitSucursalEmpleado(Program.logeado.Id));
+
+
+            if (guardar.ShowDialog() == DialogResult.OK)
+            {
+
+                using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
+                {
+                    Document pdfDoc = new Document(PageSize.POSTCARD, 25, 25, 25, 25);
+                    PdfWriter Writer = PdfWriter.GetInstance(pdfDoc, stream);
+
+                    pdfDoc.Open();
+                    pdfDoc.Add(new Phrase(""));
+
+                    iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(Properties.Resources.logo, System.Drawing.Imaging.ImageFormat.Png);
+                    
+                    img.Alignment = iTextSharp.text.Image.UNDERLYING;
+
+
+                    img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 60);
+
+
+                    pdfDoc.Add(img);
+
+
+                    using (StringReader sr = new StringReader(html))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(Writer, pdfDoc, sr);
+                    }
+                    pdfDoc.Close();
+                    stream.Close();
+                }
+            }
         }
 
-        private string pelicula_Load(int id)
+        private void loadTicketStrings(int idFuncion)
         {
             try
             {
                 MyConexion.AbrirConexion();
 
-                string query = "SELECT titulo FROM pelicula WHERE id = @id_pelicula;";
+                string query = "select s.nro_sala, p.titulo, fecha, t.hora, d.precio, i.idioma from funcion f inner join sala s on f.id_sala = s.id inner join dimension d  on f.id_dimension = d.id inner join pelicula p on f.id_pelicula = p.id inner join idioma i on f.idioma_funcion = i.id inner join turno t on f.turno_id = t.id where f.id=@id_funcion;;";
 
                 using (MySqlCommand command = new MySqlCommand(query, MyConexion.ObtenerConexion()))
                 {
-                    command.Parameters.AddWithValue("@id_pelicula", id);
-                   
-                    object result = command.ExecuteScalar();
-                    MessageBox.Show("valor :" + result);
-                    return "" + result;
-                    
-                    
+                    command.Parameters.AddWithValue("@id_funcion", idFuncion);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        nroSala = reader.GetInt32(0);
+                        titulo = reader.GetString(1);
+                        fecha = reader.GetDateTime(2);
+                        hora = reader.GetString(3);
+                        precio = reader.GetDouble(4);
+                        idioma = reader.GetString(5);
+
+                    }
+                    reader.Close();
+                    MyConexion.conexion.Close();
+
                 }
             }
             catch (Exception ex)
@@ -63,55 +144,9 @@ namespace ClickTix.Empleado.UserControls
                 MessageBox.Show("Error " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
             }
-            return "";
         }
 
-        /*private string funcion_Load(int id)
-        {
-            try
-            {
-                MyConexion.AbrirConexion();
-
-                string query = "SELECT fecha FROM funcion WHERE id = @id_pelicula;";
-
-                using (MySqlCommand command = new MySqlCommand(query, MyConexion.ObtenerConexion()))
-                {
-                    command.Parameters.AddWithValue("@id_pelicula", id);
-
-                    object result = command.ExecuteScalar();
-                    MessageBox.Show("valor :" + result);
-                    return "" + result;
 
 
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            return "";
-        }*/
-
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-
-
-        }
-
-        private void TICKET_UC_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void id_precio_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

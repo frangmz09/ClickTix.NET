@@ -1,11 +1,11 @@
 ﻿using ClickTix.Conexion;
 using ClickTix.Modelo;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -114,7 +114,7 @@ namespace ClickTix.Empleado.UserControls
 
         private void confirmar_asiento_Click(object sender, EventArgs e)
         {
-            TICKET_UC tICKET_UC = new TICKET_UC(idPelicula,idFuncion,1);
+            TICKET_UC tICKET_UC = new TICKET_UC(idFuncion,1,1);
             Index_User.addUserControlUsuario(tICKET_UC);
            
         }
