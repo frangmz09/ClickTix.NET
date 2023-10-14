@@ -68,7 +68,6 @@
             this.addfuncion_btn.TabIndex = 32;
             this.addfuncion_btn.Text = "Agregar";
             this.addfuncion_btn.UseVisualStyleBackColor = true;
-            this.addfuncion_btn.Click += new System.EventHandler(this.addfuncion_btn_Click);
             // 
             // label_pelicula
             // 

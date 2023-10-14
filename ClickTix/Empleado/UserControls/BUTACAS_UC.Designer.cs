@@ -36,12 +36,12 @@
             // 
             this.flowLayoutPanel1.Location = new System.Drawing.Point(77, 38);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(644, 338);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(796, 495);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // confirmar_asiento
             // 
-            this.confirmar_asiento.Location = new System.Drawing.Point(311, 392);
+            this.confirmar_asiento.Location = new System.Drawing.Point(335, 539);
             this.confirmar_asiento.Name = "confirmar_asiento";
             this.confirmar_asiento.Size = new System.Drawing.Size(168, 36);
             this.confirmar_asiento.TabIndex = 1;
@@ -56,7 +56,7 @@
             this.Controls.Add(this.confirmar_asiento);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "BUTACAS_UC";
-            this.Size = new System.Drawing.Size(800, 451);
+            this.Size = new System.Drawing.Size(920, 663);
             this.Load += new System.EventHandler(this.BUTACAS_UC_Load);
             this.ResumeLayout(false);
 
