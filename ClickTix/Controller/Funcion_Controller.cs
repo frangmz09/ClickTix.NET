@@ -299,6 +299,7 @@ namespace ClickTix.Modelo
             {
 
 
+
                     string consulta = "INSERT INTO funcion (id,fecha,id_dimension,id_sala,id_pelicula,idioma_funcion,turno_id) " +
                                   "VALUES (@id,@fecha,@id_dimension,@id_sala,@id_pelicula,@idioma_funcion,@turno_id)";
                     int id = GetMaxIDFuncion()+1;
@@ -424,19 +425,23 @@ namespace ClickTix.Modelo
 
 
         public static bool ActualizarFuncion(Funcion funcion)
+
+
         {
+
+            MyConexion.conexion.Open();
             string query = "UPDATE funcion " +
-                           "SET id , fecha, id_dimension , id_pelicula  , id_sala  ,idioma_funcion, turno_id WHERE id = @id";
+                           "SET fecha = @fecha,id_dimension = @id_dimension , id_pelicula=@id_pelicula  , id_sala=@id_sala  ,idioma_funcion = @idioma_funcion, turno_id =@turno_id WHERE id = @id";
 
             MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
 
-            cmd.Parameters.AddWithValue("@id",funcion.Id);
-            cmd.Parameters.AddWithValue("@fecha", funcion.Fecha);
-            cmd.Parameters.AddWithValue("@id_dimension", funcion.Id_Dimension);
-            cmd.Parameters.AddWithValue("@id_sala", funcion.Id_Sala);
-            cmd.Parameters.AddWithValue("@id_pelicula", funcion.Id_Pelicula);
-            cmd.Parameters.AddWithValue("@idioma_funcion", funcion.Id_Idioma);
-            cmd.Parameters.AddWithValue("@turno_id", funcion.Id_Turno);
+            cmd.Parameters.AddWithValue("@id",31);
+            cmd.Parameters.AddWithValue("@fecha", 1);
+            cmd.Parameters.AddWithValue("@id_dimension", 1);
+            cmd.Parameters.AddWithValue("@id_sala", 1);
+            cmd.Parameters.AddWithValue("@id_pelicula", 1);
+            cmd.Parameters.AddWithValue("@idioma_funcion", 1);
+            cmd.Parameters.AddWithValue("@turno_id", 1);
 
             try
             {

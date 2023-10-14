@@ -24,19 +24,19 @@ namespace ClickTix.UserControls
         public FORM_FUNCIONES_UC()
         {
             InitializeComponent();
-            this.addfuncion_btn.Click += new System.EventHandler(this.addfuncion_btn_Click);
+            addfuncion_btn.Click += addfuncion_btn_Click;
         }
 
         public FORM_FUNCIONES_UC(int id)
         {
             InitializeComponent();
-
-            this.addfuncion_btn.Text = "Modificar";
-
-            this.addfuncion_btn.Click += new System.EventHandler(this.addfuncion_btn_Click2);
             this.idDelPanel = id;
             int funcionId = id;
             CargarDatosFuncion(funcionId);
+
+
+            addfuncion_btn.Text = "Modificar";
+            addfuncion_btn.Click += addfuncion_btn_Click2;
         }
 
         private void addfuncion_btn_Click(object sender, EventArgs e)
@@ -57,18 +57,21 @@ namespace ClickTix.UserControls
             f.Id = this.idDelPanel;
 
 
-            f.Fecha = combobox_fecha.Value;
+            //f.Fecha = combobox_fecha.Value;
 
-            f.Id_Dimension = Funcion_Controller.obtenerIdDimension(combobox_dimension);
+            //f.Id_Dimension = Funcion_Controller.obtenerIdDimension(combobox_dimension);
             
-            f.Id_Turno = Funcion_Controller.obtenerIdTurno(combobox_turno);
+            //f.Id_Turno = Funcion_Controller.obtenerIdTurno(combobox_turno);
             
-            f.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
+            //f.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
 
-            f.Id_Idioma = Funcion_Controller.obtenerIdIdioma(combobox_pelicula);
+            //f.Id_Idioma = Funcion_Controller.obtenerIdIdioma(combobox_pelicula);
 
-            f.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala,combobox_sucursal);
+            //f.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala,combobox_sucursal);
 
+
+            Trace.WriteLine(f.Id_Dimension);
+            
             Funcion_Controller.ActualizarFuncion(f);
 
 
