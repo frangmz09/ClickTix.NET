@@ -1,6 +1,9 @@
-﻿namespace ClickTix.UserControls
+﻿using System;
+using System.Windows.Forms;
+
+namespace ClickTix.UserControls
 {
-    partial class ABM_SUCURSALES_UC
+    partial class ABM_SALAS_UC
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -29,12 +32,12 @@
         private void InitializeComponent()
         {
             this.title = new System.Windows.Forms.Label();
-            this.add_sucursal = new System.Windows.Forms.Button();
-            this.grid_sucursal = new System.Windows.Forms.DataGridView();
+            this.add_salas = new System.Windows.Forms.Button();
+            this.grid_salas = new System.Windows.Forms.DataGridView();
             this.Salas = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.grid_sucursal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_salas)).BeginInit();
             this.SuspendLayout();
             // 
             // title
@@ -45,31 +48,31 @@
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(148, 25);
             this.title.TabIndex = 16;
-            this.title.Text = "SUCURSALES";
+            this.title.Text = "SALAS";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // add_sucursal
+            // add_salas
             // 
-            this.add_sucursal.Location = new System.Drawing.Point(439, 18);
-            this.add_sucursal.Name = "add_sucursal";
-            this.add_sucursal.Size = new System.Drawing.Size(108, 25);
-            this.add_sucursal.TabIndex = 15;
-            this.add_sucursal.Text = "Agregar";
-            this.add_sucursal.UseVisualStyleBackColor = true;
-            this.add_sucursal.Click += new System.EventHandler(this.add_sucursal_Click);
+            this.add_salas.Location = new System.Drawing.Point(439, 18);
+            this.add_salas.Name = "add_salas";
+            this.add_salas.Size = new System.Drawing.Size(108, 25);
+            this.add_salas.TabIndex = 15;
+            this.add_salas.Text = "Agregar";
+            this.add_salas.UseVisualStyleBackColor = true;
+           
             // 
-            // grid_sucursal
+            // grid_salas
             // 
-            this.grid_sucursal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_sucursal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grid_salas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_salas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Modificar,
             this.Borrar,
             this.Salas});
-            this.grid_sucursal.Location = new System.Drawing.Point(23, 52);
-            this.grid_sucursal.Name = "grid_sucursal";
-            this.grid_sucursal.Size = new System.Drawing.Size(524, 303);
-            this.grid_sucursal.TabIndex = 14;
-            this.grid_sucursal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_sucursal_CellContentClick);
+            this.grid_salas.Location = new System.Drawing.Point(23, 52);
+            this.grid_salas.Name = "grid_salas";
+            this.grid_salas.Size = new System.Drawing.Size(524, 303);
+            this.grid_salas.TabIndex = 14;
+            this.grid_salas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_salas_CellContentClick);
             // 
             // Salas
             // 
@@ -95,26 +98,31 @@
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Borrar.Width = 50;
             // 
-            // ABM_SUCURSALES_UC
+            // ABM_SALAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.title);
-            this.Controls.Add(this.add_sucursal);
-            this.Controls.Add(this.grid_sucursal);
-            this.Name = "ABM_SUCURSALES_UC";
+            this.Controls.Add(this.add_salas);
+            this.Controls.Add(this.grid_salas);
+            this.Name = "ABM_SALAS_UC";
             this.Size = new System.Drawing.Size(570, 373);
-            ((System.ComponentModel.ISupportInitialize)(this.grid_sucursal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_salas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
+        private void grid_salas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private System.Windows.Forms.Label title;
-        private System.Windows.Forms.Button add_sucursal;
-        private System.Windows.Forms.DataGridView grid_sucursal;
+        private System.Windows.Forms.Button add_salas;
+        private System.Windows.Forms.DataGridView grid_salas;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;

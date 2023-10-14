@@ -57,6 +57,19 @@ namespace ClickTix.UserControls
 
                 }
             }
+            else if (e.ColumnIndex == grid_sucursal.Columns["Salas"].Index && e.RowIndex >= 0)
+            {
+                int id = Convert.ToInt32(grid_sucursal.Rows[e.RowIndex].Cells["id"].Value);
+
+
+                FORM_SUCURSALES_UC formModificarSucursal = new FORM_SUCURSALES_UC(id);
+
+                Index_Admin.addUserControl(formModificarSucursal);
+
+            }
+
+
+
         }
     }
 }

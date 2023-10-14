@@ -59,9 +59,9 @@
             // 
             // grid_dimension
             // 
+            this.grid_dimension.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.grid_dimension.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_dimension.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            
             this.Modificar,
             this.Borrar});
             this.grid_dimension.Location = new System.Drawing.Point(23, 52);
@@ -69,7 +69,17 @@
             this.grid_dimension.Size = new System.Drawing.Size(524, 303);
             this.grid_dimension.TabIndex = 17;
             this.grid_dimension.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_dimension_CellContentClick);
-          
+            // 
+            // Modificar
+            // 
+            this.Modificar.HeaderText = "Modificar";
+            this.Modificar.Name = "Modificar";
+            this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Modificar.Width = 50;
+            // 
+            // Borrar
+            // 
             this.Borrar.HeaderText = "Borrar";
             this.Borrar.Name = "Borrar";
             this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -88,23 +98,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.grid_dimension)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
-            // 
-            // Modificar
-            // 
-            this.Modificar.HeaderText = "Modificar";
-            this.Modificar.Name = "Modificar";
-            this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Modificar.Width = 50;
-            // 
-            // Borrar
-            // 
-            this.Borrar.HeaderText = "Borrar";
-            this.Borrar.Name = "Borrar";
-            this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Borrar.Width = 50;
 
         }
 
