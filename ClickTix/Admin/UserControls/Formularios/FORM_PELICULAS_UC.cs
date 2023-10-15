@@ -413,9 +413,11 @@ namespace ClickTix.UserControls
 
             try
             {
+                
                 MyConexion.AbrirConexion();
                 using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
                 {
+                    MyConexion.conexion.Close();
                     mysqlConnection.Open();
                     string query = "SELECT id FROM categoria WHERE nombre = @nombre";
 
