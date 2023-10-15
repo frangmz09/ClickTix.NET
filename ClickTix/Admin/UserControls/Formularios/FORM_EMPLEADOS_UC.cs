@@ -102,7 +102,7 @@ namespace ClickTix
             }
             else
             {
-                MessageBox.Show("value " + input_sucursal.ValueMember);
+                MessageBox.Show("value " + input_sucursal.Text);
                 EmpleadoA em = new EmpleadoA();
 
                 em.Id = 0;
@@ -110,9 +110,10 @@ namespace ClickTix
                 em.Apellido = input_apellido.Text;
                 em.Usuario = input_usuario.Text;
                 em.Pass = input_contraseña.Text;
-                int idSucursal = Empleado_Controller.ObtenerIdSucursal(input_nombre.Text);
+                int idSucursal = Empleado_Controller.ObtenerIdSucursal(input_sucursal.Text);
                 em.Id_Sucursal = idSucursal;
 
+                Trace.WriteLine(idSucursal);
 
                 Empleado_Controller.CrearEmpleado(em);
             }

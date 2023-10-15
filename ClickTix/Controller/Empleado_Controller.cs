@@ -21,7 +21,7 @@ namespace ClickTix.Modelo
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    mysqlConnection.Open();
+                    MyConexion.conexion.Open();
 
                     command.Parameters.AddWithValue("@idFuncion", idFuncion);
                     MySqlDataReader reader = command.ExecuteReader();
@@ -31,7 +31,7 @@ namespace ClickTix.Modelo
                         sucursalNombre = reader.GetString(0);
                     }
                     reader.Close();
-                    mysqlConnection.Close();
+                    MyConexion.conexion.Close();
                 }
 
 
@@ -50,7 +50,7 @@ namespace ClickTix.Modelo
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    mysqlConnection.Open();
+                    MyConexion.conexion.Open();
 
                     command.Parameters.AddWithValue("@idFuncion", idFuncion);
                     MySqlDataReader reader = command.ExecuteReader();
@@ -60,7 +60,7 @@ namespace ClickTix.Modelo
                         cuitSucursal = reader.GetString(0);
                     }
                     reader.Close();
-                    mysqlConnection.Close();
+                    MyConexion.conexion.Close();
                 }
 
 
@@ -129,7 +129,7 @@ namespace ClickTix.Modelo
 
         public static bool ActualizarEmpleado(EmpleadoA empleado)
         {
-            MyConexion.AbrirConexion();
+            MyConexion.conexion.Open();
             string query = "UPDATE usuario_sistema " +
                            "SET nombre = @nombre, apellido = @apellido, pass = @pass, id_sucursal = @id_sucursal, usuario = @usuario " +
                            "WHERE id = @id";
@@ -162,7 +162,7 @@ namespace ClickTix.Modelo
 
         public static void Empleado_Load(DataGridView tabla)
         {
-            MyConexion.AbrirConexion();
+            MyConexion.conexion.Open();
 
             string query = "SELECT id, nombre, apellido, pass, id_sucursal, usuario FROM usuario_sistema";
 
@@ -192,7 +192,7 @@ namespace ClickTix.Modelo
             {
                 using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
                 {
-                    mysqlConnection.Open();
+                    MyConexion.conexion.Open();
                     string query = "DELETE FROM usuario_sistema WHERE id = @id";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -227,24 +227,29 @@ namespace ClickTix.Modelo
 
         public static int ObtenerIdSucursal(string nombreSucursal)
         {
-            int idSucursal = -1; 
+            int idSucursal2 = -1; 
 
             try
             {
                 using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
                 {
-                    mysqlConnection.Open();
+                    MyConexion.conexion.Open();
                     string query = "SELECT id FROM sucursal WHERE nombre = @nombre";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
                         command.Parameters.AddWithValue("@nombre", nombreSucursal);
-                        object result = command.ExecuteScalar();
-
-                        if (result != null)
+                        MySqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
                         {
-                            idSucursal = Convert.ToInt32(result);
+
+                            idSucursal2 = reader.GetInt32(0);
+
+
                         }
+
+                        reader.Close();
+                        mysqlConnection.Close();
                     }
                 }
             }
@@ -257,7 +262,7 @@ namespace ClickTix.Modelo
                 MyConexion.conexion.Close();
             }
 
-            return idSucursal;
+            return idSucursal2;
         }
 
 
