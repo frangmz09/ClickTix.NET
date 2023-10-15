@@ -1,5 +1,6 @@
 ﻿using ClickTix.Admin.UserControls.Formularios;
 using ClickTix.Conexion;
+using ClickTix.Controller;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,19 +15,25 @@ namespace ClickTix.UserControls
 {
     public partial class ABM_SALAS_UC : UserControl
     {
-        public ABM_SALAS_UC()
+
+        private int idSucursalSeleccionada;
+        public ABM_SALAS_UC(int id)
         {
+
+            this.idSucursalSeleccionada = id;
             InitializeComponent();
-            Sucursal_Controller.Sucursal_Load(grid_salas);
+
+            Sala_Controller.Salas_Load(grid_salas,id);
+            //Sucursal_Controller.Sucursal_Load(grid_salas);
         }
 
-        private void add_sucursal_Click(object sender, EventArgs e)
+        private void add_salas_Click(object sender, EventArgs e)
         {
-            FORM_SALAS_UC formsucursales_uc = new FORM_SALAS_UC();
-            Index_Admin.addUserControl(formsucursales_uc);
+            FORM_SALAS_UC formsalas_uc = new FORM_SALAS_UC(this.idSucursalSeleccionada);
+            Index_Admin.addUserControl(formsalas_uc);
         }
 
-        private void grid_sucursal_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void grid_salas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == grid_salas.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
@@ -62,5 +69,14 @@ namespace ClickTix.UserControls
 
 
         }
+
+        private void back_button_Click_SalaToSucursales(object sender, EventArgs e)
+        {
+            ABM_SUCURSALES_UC sucursales_uc = new ABM_SUCURSALES_UC();
+            Index_Admin.addUserControl(sucursales_uc);
+
+        }
+
+       
     }
 }

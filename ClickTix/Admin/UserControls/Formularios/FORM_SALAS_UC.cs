@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Controller;
 using ClickTix.Modelo;
 using MySql.Data.MySqlClient;
 using System;
@@ -20,130 +21,84 @@ namespace ClickTix.UserControls
         public FORM_SALAS_UC()
         {
             InitializeComponent();
-            this.addsucursal_btn.Click += new System.EventHandler(this.addsucursal_btn_Click);
-            
+            this.addsala_btn.Click += new System.EventHandler(this.addsala_btn_Click);
+
         }
 
         public FORM_SALAS_UC(int id)
         {
-            InitializeComponent();
-            
-            this.addsucursal_btn.Click += new System.EventHandler(this.addsucursal_btn_Click2);
-            this.addsucursal_btn.Text = "Modificar";
             this.idDelPanel = id;
-            int sucursalID = id;
-
-            MessageBox.Show("id : " + id);
-
-            CargarDatosSucursal(sucursalID);
-           
-
-
+            InitializeComponent();
+            this.addsala_btn.Click += new System.EventHandler(this.addsala_btn_Click);
+            //CargarDatosSala(id);
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+
+
+
+
+        private void addsala_btn_Click(object sender, EventArgs e)
+        {
+            Sala s = new Sala();
+
+
+            MessageBox.Show("id: "+ idDelPanel);
+            s.Id_Sucursal = this.idDelPanel;
+            s.Filas = (int)input_filas.Value;
+            s.Columnas = (int)input_columnas.Value;
+            s.Capacidad = (int)input_columnas.Value * (int)input_filas.Value;
+            s.Nro_Sala = Sala_Controller.ObtenerMaxNroSala(idDelPanel) + 1;
+
+
+            Sala_Controller.CrearSala(s);
+        }
+
+        private void addsala_btn_Click2(object sender, EventArgs e)
         {
 
-        }
-
-        private void title_Click(object sender, EventArgs e)
-        {
 
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void back_pelicula_Click(object sender, EventArgs e)
-        {
-            ABM_SUCURSALES_UC sucursales_uc = new ABM_SUCURSALES_UC();
-            Index_Admin.addUserControl(sucursales_uc);
-        }
-
-        private void addsucursal_btn_Click(object sender, EventArgs e)
-        {
-
-             
-            if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text) 
-                || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
-            {
-                MessageBox.Show("Los campos deben estar llenos ");
-            }
-            else
-            {
-                Sucursal s = new Sucursal();
-
-                s.id = 0;
-                s.nombre = input_columnas.Text;
-                s.direccion = input_filas.Text;
-                s.cuit = input_cuit.Text;
-                s.numerosalas = (int)input_salas.Value;
-
-                Sucursal_Controller.CrearSucursal(s);
-            }
-            
-        }
-
-        private void addsucursal_btn_Click2(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text)
-                || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
-            {
-                MessageBox.Show("Los campos deben estar llenos ");
-            }
-            else
-            {
-                Sucursal s = new Sucursal();
-                s.id = this.idDelPanel;
-                s.nombre = input_columnas.Text;
-                s.direccion = input_filas.Text;
-                s.cuit = input_cuit.Text;
-                s.numerosalas = (int)input_salas.Value;
 
 
 
-                Sucursal_Controller.ActualizarSucursal(s);
-            }
 
-
-         
-        }
-
-        private void CargarDatosSucursal(int sucursalID)
+        private void CargarDatosSala(int salaID)
         {
             try
             {
-                string consulta = "SELECT id,nombre,direccion,cuit,numerosalas FROM sucursal WHERE id = @id";
+                string consulta = "SELECT id, filas, columna, capacidad, nro_sala FROM sala WHERE id = @id";
 
                 MyConexion.AbrirConexion();
 
                 using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
                 {
-                    cmd.Parameters.AddWithValue("@id", sucursalID);
+                    cmd.Parameters.AddWithValue("@id", salaID);
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-
-                            input_columnas.Text = reader["nombre"].ToString();
-                            input_filas.Text = reader["direccion"].ToString();
-                            //input_cuit.Text = reader["cuit"].ToString();
-                            input_salas.Value = Convert.ToDecimal(reader["numerosalas"]);
+                            input_filas.Text = reader["filas"].ToString();
+                            input_columnas.Text = reader["columna"].ToString();
+                            valorCapacidad.Text = reader["capacidad"].ToString();
+                            valorNroSala.Text = reader["nro_sala"].ToString();
                         }
                         else
                         {
-                            MessageBox.Show("No se encontró la dimensión con el ID proporcionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("No se encontró la sala con el ID proporcionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar los datos de la dimensión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al cargar los datos de la sala: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                //MyConexion.CerrarConexion();
             }
         }
 
@@ -153,6 +108,18 @@ namespace ClickTix.UserControls
         }
 
         private void label_titulo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void back_pelicula_Click_1(object sender, EventArgs e)
+        {
+            ABM_SALAS_UC sucursales_uc = new ABM_SALAS_UC(this.idDelPanel);
+            Index_Admin.addUserControl(sucursales_uc);
+
+        }
+
+        private void addsala_btn_Click_1(object sender, EventArgs e)
         {
 
         }

@@ -15,7 +15,7 @@ namespace ClickTix.Modelo
         public int Capacidad { get; set; }
         public int Nro_Sala { get; set; }
 
-        Sala() { }
+        public Sala() { }
         public Sala(int id, int id_Sucursal, int columnas, int filas, int capacidad, int nroSalas)
         {
             Id = id;

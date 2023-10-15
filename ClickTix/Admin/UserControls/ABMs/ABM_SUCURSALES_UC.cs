@@ -14,6 +14,8 @@ namespace ClickTix.UserControls
 {
     public partial class ABM_SUCURSALES_UC : UserControl
     {
+
+        
         public ABM_SUCURSALES_UC()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace ClickTix.UserControls
             {
                 int id = Convert.ToInt32(grid_sucursal.Rows[e.RowIndex].Cells["id"].Value);
 
-
+                
                 FORM_SUCURSALES_UC formModificarSucursal = new FORM_SUCURSALES_UC(id);
 
                 Index_Admin.addUserControl(formModificarSucursal);
@@ -61,10 +63,10 @@ namespace ClickTix.UserControls
             {
                 int id = Convert.ToInt32(grid_sucursal.Rows[e.RowIndex].Cells["id"].Value);
 
+               
+                ABM_SALAS_UC abmSalas = new ABM_SALAS_UC(id);
 
-                FORM_SUCURSALES_UC formModificarSucursal = new FORM_SUCURSALES_UC(id);
-
-                Index_Admin.addUserControl(formModificarSucursal);
+                Index_Admin.addUserControl(abmSalas);
 
             }
 

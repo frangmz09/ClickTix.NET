@@ -73,11 +73,11 @@
             // 
             // Salas
             // 
-            this.Modificar.HeaderText = "Salas";
-            this.Modificar.Name = "Salas";
-            this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Modificar.Width = 50;
+            this.Salas.HeaderText = "Salas";
+            this.Salas.Name = "Salas";
+            this.Salas.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Salas.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Salas.Width = 50;
             // 
             // Modificar
             // 
