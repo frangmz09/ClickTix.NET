@@ -62,9 +62,12 @@ namespace ClickTix.Empleado.UserControls
 
         private void LECTORQR_UC_Leave(object sender, EventArgs e)
         {
-            if (fuenteVideo.IsRunning)
+            if (fuenteVideo != null)
             {
-                fuenteVideo.Stop();
+                if (fuenteVideo.IsRunning)
+                {
+                    fuenteVideo.Stop();
+                }
             }
         }
 
@@ -83,9 +86,12 @@ namespace ClickTix.Empleado.UserControls
 
         private void LECTORQR_UC_ControlRemoved(object sender, ControlEventArgs e)
         {
-            if (fuenteVideo.IsRunning)
+            if (fuenteVideo != null)
             {
-                fuenteVideo.Stop();
+                if (fuenteVideo.IsRunning)
+                {
+                    fuenteVideo.Stop();
+                }
             }
         }
 

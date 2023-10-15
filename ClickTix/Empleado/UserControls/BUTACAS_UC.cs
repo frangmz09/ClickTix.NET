@@ -19,6 +19,9 @@ namespace ClickTix.Empleado.UserControls
     {
         private int idPelicula;
         private int idFuncion;
+        List<int> asientosSeleccionados = new List<int>();
+        int fila;
+        int columna;
 
         public BUTACAS_UC(int id_funcion, int idPeli)
         {
@@ -81,7 +84,7 @@ namespace ClickTix.Empleado.UserControls
                         Button butaca = new Button();
                         butaca.Width = 25;
                         butaca.Height = 25;
-                        butaca.Name = $"btnButaca_{asiento.Fila} _ {asiento.Columna}";
+                        butaca.Name = $"{asiento.Id}";
                         butaca.BackgroundImage = imagenButaca;
                         butaca.BackgroundImageLayout = ImageLayout.Stretch;
 
@@ -124,17 +127,32 @@ namespace ClickTix.Empleado.UserControls
 
             if (clickedButton.BackColor == Color.LightGray)
             {
-                clickedButton.BackColor = Color.Green; 
+                if (asientosSeleccionados.Count < 4)
+                {
+                    clickedButton.BackColor = Color.Green;
+
+                    asientosSeleccionados.Add(int.Parse(clickedButton.Name));
+                }
+
+
             }
             else
             {
-                clickedButton.BackColor = Color.LightGray; 
+                clickedButton.BackColor = Color.LightGray;
+
+                asientosSeleccionados.Remove(int.Parse(clickedButton.Name));
             }
         }
 
         private void confirmar_asiento_Click(object sender, EventArgs e)
         {
-            TICKET_UC tICKET_UC = new TICKET_UC(idFuncion,1,1);
+            foreach (int idAsiento in asientosSeleccionados)
+            {
+                Asiento_Controller.OcuparAsiento(idAsiento);
+                fila = Asiento_Controller.ObtenerFilaDelAsiento(idAsiento);
+                columna = Asiento_Controller.ObtenerColumnaDelAsiento(idAsiento);
+            }
+            TICKET_UC tICKET_UC = new TICKET_UC(idFuncion, fila, columna);
             Index_User.addUserControlUsuario(tICKET_UC);
            
         }

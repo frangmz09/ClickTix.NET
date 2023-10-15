@@ -102,7 +102,7 @@ namespace ClickTix
             }
             else
             {
-                MessageBox.Show("value" + input_sucursal.ValueMember);
+                MessageBox.Show("value " + input_sucursal.ValueMember);
                 EmpleadoA em = new EmpleadoA();
 
                 em.Id = 0;

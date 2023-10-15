@@ -198,12 +198,6 @@
     <Compile Include="Empleado\UserControls\MENU_UC.Designer.cs">
       <DependentUpon>MENU_UC.cs</DependentUpon>
     </Compile>
-    <Compile Include="Empleado\UserControls\QR\TIKCETQR_UC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Empleado\UserControls\QR\TIKCETQR_UC.Designer.cs">
-      <DependentUpon>TIKCETQR_UC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Empleado\UserControls\TICKET_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -334,9 +328,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\UserControls\MENU_UC.resx">
       <DependentUpon>MENU_UC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Empleado\UserControls\QR\TIKCETQR_UC.resx">
-      <DependentUpon>TIKCETQR_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\UserControls\TICKET_UC.resx">
       <DependentUpon>TICKET_UC.cs</DependentUpon>
