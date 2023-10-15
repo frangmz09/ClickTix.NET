@@ -104,13 +104,16 @@ namespace ClickTix
             {
                 MessageBox.Show("value " + input_sucursal.Text);
                 EmpleadoA em = new EmpleadoA();
-
+                int idSucursal = 0;
                 em.Id = 0;
                 em.Nombre = input_nombre.Text;
                 em.Apellido = input_apellido.Text;
                 em.Usuario = input_usuario.Text;
                 em.Pass = input_contraseña.Text;
-                int idSucursal = Empleado_Controller.ObtenerIdSucursal(input_sucursal.Text);
+
+                idSucursal = Empleado_Controller.ObtenerIdSucursal(input_sucursal.Text);
+
+
                 em.Id_Sucursal = idSucursal;
 
                 Trace.WriteLine(idSucursal);

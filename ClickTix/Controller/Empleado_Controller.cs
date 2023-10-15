@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -229,21 +230,26 @@ namespace ClickTix.Modelo
         {
             int idSucursal2 = -1; 
 
-            try
-            {
                 using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
                 {
+                    MyConexion.conexion.Close();
                     MyConexion.conexion.Open();
-                    string query = "SELECT id FROM sucursal WHERE nombre = @nombre";
+
+                    string query = "SELECT id FROM sucursal WHERE nombre = @nombreSucursal";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
-                        command.Parameters.AddWithValue("@nombre", nombreSucursal);
+                        Trace.WriteLine(nombreSucursal);
+                        command.Parameters.AddWithValue("@nombreSucursal", nombreSucursal);
+
                         MySqlDataReader reader = command.ExecuteReader();
+
                         while (reader.Read())
                         {
 
                             idSucursal2 = reader.GetInt32(0);
+
+                            Trace.WriteLine(reader.GetInt32(0));
 
 
                         }
@@ -252,15 +258,8 @@ namespace ClickTix.Modelo
                         mysqlConnection.Close();
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al obtener el ID de la sucursal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                MyConexion.conexion.Close();
-            }
+            
+
 
             return idSucursal2;
         }
