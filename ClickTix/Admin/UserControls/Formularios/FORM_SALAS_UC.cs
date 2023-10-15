@@ -67,8 +67,8 @@ namespace ClickTix.UserControls
         {
 
              
-            if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text) 
-                || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
+            if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text) )
+                // string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
             {
                 MessageBox.Show("Los campos deben estar llenos ");
             }
@@ -79,7 +79,7 @@ namespace ClickTix.UserControls
                 s.id = 0;
                 s.nombre = input_columnas.Text;
                 s.direccion = input_filas.Text;
-                s.cuit = input_cuit.Text;
+               //.cuit = input_cuit.Text;
                 s.numerosalas = (int)input_salas.Value;
 
                 Sucursal_Controller.CrearSucursal(s);
@@ -89,8 +89,8 @@ namespace ClickTix.UserControls
 
         private void addsucursal_btn_Click2(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text)
-                || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
+            if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text))
+               //| string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
             {
                 MessageBox.Show("Los campos deben estar llenos ");
             }
@@ -100,7 +100,7 @@ namespace ClickTix.UserControls
                 s.id = this.idDelPanel;
                 s.nombre = input_columnas.Text;
                 s.direccion = input_filas.Text;
-                s.cuit = input_cuit.Text;
+              //s.cuit = input_cuit.Text;
                 s.numerosalas = (int)input_salas.Value;
 
 
