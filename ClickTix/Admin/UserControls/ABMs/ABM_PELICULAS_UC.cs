@@ -93,6 +93,7 @@ namespace ClickTix.UserControls
                     tabla.DataSource = dt;
                 }
             }
+            MyConexion.conexion.Close();    
         }
 
 

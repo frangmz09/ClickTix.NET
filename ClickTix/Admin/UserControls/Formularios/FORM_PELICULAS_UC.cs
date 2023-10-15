@@ -152,14 +152,22 @@ namespace ClickTix.UserControls
                     cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
 
                     cmd.ExecuteNonQuery();
+                  
                     return true;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al insertar el registro: " + ex.Message);
+                
                 return false;
+
             }
+            finally
+            {
+                MyConexion.conexion.Close();
+            }
+
 
         }
 
@@ -226,7 +234,7 @@ namespace ClickTix.UserControls
                     cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
 
                     int filasActualizadas = cmd.ExecuteNonQuery();
-
+                    MyConexion.conexion.Close();
                     if (filasActualizadas > 0)
                     {
                         return true;
@@ -237,6 +245,7 @@ namespace ClickTix.UserControls
                         return false;
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -286,6 +295,10 @@ namespace ClickTix.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar los datos de la película: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                MyConexion.conexion.Close();
             }
         }
 
@@ -344,6 +357,10 @@ namespace ClickTix.UserControls
             {
                 MessageBox.Show("Error al llenar el ComboBox de clasificacion de pelcula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                MyConexion.conexion.Close();
+            }
         }
 
 
@@ -380,6 +397,10 @@ namespace ClickTix.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show("Error al llenar el ComboBox de categoria de pelcula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                MyConexion.conexion.Close();
             }
         }
 
@@ -433,7 +454,6 @@ namespace ClickTix.UserControls
 
             try
             {
-                MyConexion.AbrirConexion();
                 using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
                 {
                     mysqlConnection.Open();
@@ -453,11 +473,7 @@ namespace ClickTix.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener el ID de la calsificacion de pelicula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                MyConexion.conexion.Close();
+                MessageBox.Show("Error al obtener el ID de la clasificacion de pelicula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return idClasificacion;
