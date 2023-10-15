@@ -32,15 +32,21 @@ namespace ClickTix
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if (Usuario_Controller.autenticar(txt_user.Text, txt_pw.Text, true))
+            string usuario = txt_user.Text;
+            string contraseña = txt_pw.Text;
+
+           
+            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contraseña))
             {
-               /* if (MantenerSesion.Checked)
-                {
-                    Usuario_Controller.persistirUsuario(Program.logeado);
-                }*/
+                MessageBox.Show("Por favor, complete todos los campos.");
+                return; 
+            }
+
+            
+            if (Usuario_Controller.autenticar(usuario, contraseña, true))
+            {
                 if (Program.logeado.Is_admin == 1)
                 {
-                    
                     Index_Admin index_Admin = new Index_Admin();
                     index_Admin.Show();
                 }
@@ -49,21 +55,14 @@ namespace ClickTix
                     Index_User index_User = new Index_User();
                     index_User.Show();
                 }
-                this.Hide();
+
+                this.Hide(); 
             }
-
-
-            validarUsuario(txt_user.Text, txt_pw.Text);
-
-            // Index_User index = new Index_User();            
-
-
-           // Index_Admin index = new Index_Admin();
-           // index.Show();
-
-
-
-            this.Hide();    
+            else
+            {
+                
+                MessageBox.Show("Usuario y/o contraseña incorrectos. Por favor, inténtelo de nuevo.");
+            }
         }
 
         private void validarUsuario(string user, string pw)
