@@ -158,5 +158,11 @@ namespace ClickTix.Empleado.UserControls
             Index_User.addUserControlUsuario(tICKET_UC);
            
         }
+
+        private void back_pelicula_Click(object sender, EventArgs e)
+        {
+            ELEGIR_FUNCION_UC funcionElegir = new ELEGIR_FUNCION_UC();
+            Index_User.addUserControlUsuario(funcionElegir);
+        }
     }
 }

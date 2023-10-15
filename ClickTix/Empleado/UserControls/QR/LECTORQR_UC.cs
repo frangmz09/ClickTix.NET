@@ -139,5 +139,11 @@ namespace ClickTix.Empleado.UserControls
             TICKET_UC ticket = new TICKET_UC(idTicket);
             Index_User.addUserControlUsuario(ticket);
         }
+
+        private void back_pelicula_Click(object sender, EventArgs e)
+        {
+            MENU_UC menuUser = new MENU_UC();
+            Index_User.addUserControlUsuario(menuUser);
+        }
     }
 }

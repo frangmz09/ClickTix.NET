@@ -74,5 +74,11 @@ namespace ClickTix.Empleado.UserControls
         {
 
         }
+
+        private void back_pelicula_Click(object sender, EventArgs e)
+        {
+            MENU_UC menuUser = new MENU_UC();
+            Index_User.addUserControlUsuario(menuUser);
+        }
     }
 }

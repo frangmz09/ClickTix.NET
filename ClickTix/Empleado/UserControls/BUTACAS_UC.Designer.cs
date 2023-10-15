@@ -30,6 +30,7 @@
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.confirmar_asiento = new System.Windows.Forms.Button();
+            this.back_pelicula = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -49,10 +50,21 @@
             this.confirmar_asiento.UseVisualStyleBackColor = true;
             this.confirmar_asiento.Click += new System.EventHandler(this.confirmar_asiento_Click);
             // 
+            // back_pelicula
+            // 
+            this.back_pelicula.Location = new System.Drawing.Point(29, 20);
+            this.back_pelicula.Name = "back_pelicula";
+            this.back_pelicula.Size = new System.Drawing.Size(30, 30);
+            this.back_pelicula.TabIndex = 76;
+            this.back_pelicula.Text = "<";
+            this.back_pelicula.UseVisualStyleBackColor = true;
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
+            // 
             // BUTACAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.confirmar_asiento);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "BUTACAS_UC";
@@ -66,5 +78,6 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button confirmar_asiento;
+        private System.Windows.Forms.Button back_pelicula;
     }
 }

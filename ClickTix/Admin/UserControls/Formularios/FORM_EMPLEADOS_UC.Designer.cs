@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.back_pelicula = new System.Windows.Forms.Button();
             this.input_nombre = new System.Windows.Forms.TextBox();
             this.label_nombre = new System.Windows.Forms.Label();
             this.input_apellido = new System.Windows.Forms.TextBox();
@@ -41,17 +40,8 @@
             this.addempleado_btn = new System.Windows.Forms.Button();
             this.input_sucursal = new System.Windows.Forms.ComboBox();
             this.label_sucursal = new System.Windows.Forms.Label();
+            this.back_pelicula = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // back_pelicula
-            // 
-            this.back_pelicula.Location = new System.Drawing.Point(17, 16);
-            this.back_pelicula.Name = "back_pelicula";
-            this.back_pelicula.Size = new System.Drawing.Size(30, 30);
-            this.back_pelicula.TabIndex = 73;
-            this.back_pelicula.Text = "<";
-            this.back_pelicula.UseVisualStyleBackColor = true;
-            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
             // input_nombre
             // 
@@ -145,7 +135,6 @@
             this.addempleado_btn.TabIndex = 70;
             this.addempleado_btn.Text = "Agregar";
             this.addempleado_btn.UseVisualStyleBackColor = true;
-            
             // 
             // input_sucursal
             // 
@@ -166,6 +155,16 @@
             this.label_sucursal.TabIndex = 72;
             this.label_sucursal.Text = "Sucursal";
             this.label_sucursal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // back_pelicula
+            // 
+            this.back_pelicula.Location = new System.Drawing.Point(17, 16);
+            this.back_pelicula.Name = "back_pelicula";
+            this.back_pelicula.Size = new System.Drawing.Size(30, 30);
+            this.back_pelicula.TabIndex = 73;
+            this.back_pelicula.Text = "<";
+            this.back_pelicula.UseVisualStyleBackColor = true;
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
             // FORM_EMPLEADOS_UC
             // 
@@ -193,7 +192,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button back_pelicula;
         private System.Windows.Forms.TextBox input_nombre;
         private System.Windows.Forms.Label label_nombre;
         private System.Windows.Forms.TextBox input_apellido;
@@ -206,5 +204,6 @@
         private System.Windows.Forms.Button addempleado_btn;
         private System.Windows.Forms.ComboBox input_sucursal;
         private System.Windows.Forms.Label label_sucursal;
+        private System.Windows.Forms.Button back_pelicula;
     }
 }

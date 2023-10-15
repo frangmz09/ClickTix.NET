@@ -1,5 +1,6 @@
 ﻿using ClickTix.Conexion;
 using ClickTix.Empleado.UserControls;
+using ClickTix.UserControls;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -91,6 +92,12 @@ namespace ClickTix.Empleado
         private void ELEGIR_FUNCION_UC_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void back_pelicula_Click(object sender, EventArgs e)
+        {
+            CARTELERA_UC cartelera = new CARTELERA_UC();
+            Index_User.addUserControlUsuario(cartelera);
         }
     }
 }

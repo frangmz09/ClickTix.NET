@@ -31,6 +31,7 @@
             this.cartelera_grid = new System.Windows.Forms.DataGridView();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.cartelera = new System.Windows.Forms.Label();
+            this.back_pelicula = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cartelera_grid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,10 +62,21 @@
             this.cartelera.Text = "CARTELERA";
             this.cartelera.Click += new System.EventHandler(this.label1_Click);
             // 
+            // back_pelicula
+            // 
+            this.back_pelicula.Location = new System.Drawing.Point(34, 36);
+            this.back_pelicula.Name = "back_pelicula";
+            this.back_pelicula.Size = new System.Drawing.Size(30, 30);
+            this.back_pelicula.TabIndex = 75;
+            this.back_pelicula.Text = "<";
+            this.back_pelicula.UseVisualStyleBackColor = true;
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
+            // 
             // CARTELERA_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.cartelera);
             this.Controls.Add(this.cartelera_grid);
             this.Name = "CARTELERA_UC";
@@ -81,5 +93,6 @@
         private System.Windows.Forms.DataGridView cartelera_grid;
         private System.Windows.Forms.Label cartelera;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
+        private System.Windows.Forms.Button back_pelicula;
     }
 }

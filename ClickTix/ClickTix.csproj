@@ -162,10 +162,10 @@
     <Compile Include="Controller\Sucursal_Controller.cs" />
     <Compile Include="Controller\Ticket_Controller.cs" />
     <Compile Include="Controller\Usuario_Controller.cs" />
-    <Compile Include="Empleado\ELEGIR_FUNCION_UC.cs">
+    <Compile Include="Empleado\UserControls\ELEGIR_FUNCION_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Empleado\ELEGIR_FUNCION_UC.Designer.cs">
+    <Compile Include="Empleado\UserControls\ELEGIR_FUNCION_UC.Designer.cs">
       <DependentUpon>ELEGIR_FUNCION_UC.cs</DependentUpon>
     </Compile>
     <Compile Include="Empleado\Index_User.cs">
@@ -311,7 +311,7 @@
     <EmbeddedResource Include="Admin\UserControls\Formularios\FORM_SALAS_UC.resx">
       <DependentUpon>FORM_SALAS_UC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Empleado\ELEGIR_FUNCION_UC.resx">
+    <EmbeddedResource Include="Empleado\UserControls\ELEGIR_FUNCION_UC.resx">
       <DependentUpon>ELEGIR_FUNCION_UC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Empleado\Index_User.resx">
@@ -380,6 +380,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\img\icons\butaca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\img\peliculas\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

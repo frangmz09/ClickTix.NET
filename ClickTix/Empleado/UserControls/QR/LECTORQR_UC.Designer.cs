@@ -31,6 +31,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupbox1 = new System.Windows.Forms.GroupBox();
+            this.back_pelicula = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupbox1.SuspendLayout();
             this.SuspendLayout();
@@ -140,10 +141,21 @@
             this.groupbox1.TabStop = false;
             this.groupbox1.Text = "Alternativa";
             // 
+            // back_pelicula
+            // 
+            this.back_pelicula.Location = new System.Drawing.Point(51, 35);
+            this.back_pelicula.Name = "back_pelicula";
+            this.back_pelicula.Size = new System.Drawing.Size(30, 30);
+            this.back_pelicula.TabIndex = 77;
+            this.back_pelicula.Text = "<";
+            this.back_pelicula.UseVisualStyleBackColor = true;
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
+            // 
             // LECTORQR_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.groupbox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox1);
@@ -177,5 +189,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupbox1;
+        private System.Windows.Forms.Button back_pelicula;
     }
 }
