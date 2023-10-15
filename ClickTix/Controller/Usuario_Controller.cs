@@ -14,6 +14,7 @@ namespace ClickTix.Conexion
     {
         public static bool autenticar(string user, string pass, bool hasheado)
         {
+            MyConexion.AbrirConexion();
             Usuario usuario = null;
             string query = "select * from usuario_sistema where usuario = @user and pass = @pass";
 
