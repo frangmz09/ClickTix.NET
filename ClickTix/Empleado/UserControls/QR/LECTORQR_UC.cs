@@ -18,6 +18,8 @@ using AForge.Controls;
 using iTextSharp.text.xml;
 using System.Windows.Forms.VisualStyles;
 using System.Diagnostics;
+using ClickTix.Modelo;
+using MySqlX.XDevAPI.Common;
 
 namespace ClickTix.Empleado.UserControls
 {
@@ -92,7 +94,7 @@ namespace ClickTix.Empleado.UserControls
             if (pictureBox1.Image != null)
             {
                 BarcodeReader barcodeReader = new BarcodeReader();
-                Result result = barcodeReader.Decode((Bitmap)pictureBox1.Image);
+                ZXing.Result result = barcodeReader.Decode((Bitmap)pictureBox1.Image);
                 if (result != null)
                 {
                     timer1.Stop();
@@ -122,6 +124,14 @@ namespace ClickTix.Empleado.UserControls
                 }
             }
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int idTicket = int.Parse(textBox2.Text);
+            Trace.WriteLine("EL ID TICKET ES:" + idTicket);
+            TICKET_UC ticket = new TICKET_UC(idTicket);
+            Index_User.addUserControlUsuario(ticket);
         }
     }
 }
