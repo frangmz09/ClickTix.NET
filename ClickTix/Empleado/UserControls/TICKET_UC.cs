@@ -34,6 +34,7 @@ namespace ClickTix.Empleado.UserControls
         double precio= 0;
         int fila = 0;
         int columna = 0;
+        int idFuncionAux;
 
 
         public TICKET_UC(int idFuncion, int filaRecibida, int columnaRecibida)
@@ -41,6 +42,7 @@ namespace ClickTix.Empleado.UserControls
             c = new MyConexion("localhost", "clicktix", "root", "");
             InitializeComponent();
             loadTicketStrings(idFuncion);
+            idFuncionAux = idFuncion;
             Trace.WriteLine(nroSala+ titulo+fecha+ hora+ idioma + precio);
             fila = filaRecibida;
             columna = columnaRecibida;
@@ -64,7 +66,7 @@ namespace ClickTix.Empleado.UserControls
             ticket = Ticket_Controller.buscarTicketPorId(idTicket);
             Funcion funcionAuxiliar = Funcion_Controller.buscarFuncionPorId(ticket.id_funcion);
             loadTicketStrings(funcionAuxiliar.Id);
-
+            idFuncionAux = funcionAuxiliar.Id;
 
             nombre_pelicula_ticket.Text = titulo;
             nrosala_ticket.Text = nroSala.ToString();
@@ -95,8 +97,8 @@ namespace ClickTix.Empleado.UserControls
             html = html.Replace("@filaTicket", fila_ticket.Text);
             html = html.Replace("@columnaTicket", columna_ticket.Text);
             html = html.Replace("@precioTicket", precio_ticket.Text);
-            html = html.Replace("@nombreSucursalTicket",Empleado_Controller.nombreSucursalEmpleado(Program.logeado.Id));
-            html = html.Replace("@cuitSucursalTicket", Empleado_Controller.cuitSucursalEmpleado(Program.logeado.Id));
+            html = html.Replace("@nombreSucursalTicket",Empleado_Controller.nombreSucursalFuncion(idFuncionAux));
+            html = html.Replace("@cuitSucursalTicket", Empleado_Controller.cuitSucursalFuncion(idFuncionAux));
 
 
             if (guardar.ShowDialog() == DialogResult.OK)

@@ -12,18 +12,18 @@ namespace ClickTix.Modelo
 {
     internal class Empleado_Controller
     {
-        public static string nombreSucursalEmpleado(int idEmpleado) {
+        public static string nombreSucursalFuncion(int idFuncion) {
             string sucursalNombre="";
 
             using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
             {
-                string query = "select sucursal.nombre from usuario_sistema inner join sucursal on usuario_sistema.id_sucursal = sucursal.id where usuario_sistema.id = @idEmpleado;";
+                string query = "select sucursal.nombre from sala inner join sucursal on sucursal.id = sala.id_sucursal inner join funcion on funcion.id_sala = sala.id where funcion.id = @idFuncion;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
                     mysqlConnection.Open();
 
-                    command.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    command.Parameters.AddWithValue("@idFuncion", idFuncion);
                     MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -40,19 +40,19 @@ namespace ClickTix.Modelo
         }
 
 
-        public static string cuitSucursalEmpleado(int idEmpleado)
+        public static string cuitSucursalFuncion(int idFuncion)
         {
             string cuitSucursal = "";
 
             using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
             {
-                string query = "select sucursal.cuit from usuario_sistema inner join sucursal on usuario_sistema.id_sucursal = sucursal.id where usuario_sistema.id = @idEmpleado;";
+                string query = "select sucursal.cuit from sala inner join sucursal on sucursal.id = sala.id_sucursal inner join funcion on funcion.id_sala = sala.id where funcion.id = @idFuncion;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
                     mysqlConnection.Open();
 
-                    command.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    command.Parameters.AddWithValue("@idFuncion", idFuncion);
                     MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())

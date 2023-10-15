@@ -123,6 +123,65 @@ namespace ClickTix.Modelo
             return true;
 
         }
+        public static int ObtenerFilaDelAsiento(int idAsiento)
+        {
+            int fila;
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                MyConexion.conexion.Open();
+
+                string consulta = "SELECT fila FROM asiento WHERE id = @id";
+                using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
+                {
+                    cmd.Parameters.AddWithValue("@id", idAsiento);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+
+                              fila = reader.GetInt32(0);
+                            
+                        }
+                        else
+                        {
+                            fila = 0;
+                        }
+                        MyConexion.conexion.Close();
+
+                        return fila;
+                    }
+                }
+            }
+        }
+        public static int ObtenerColumnaDelAsiento(int idAsiento)
+        {
+            int columna;
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                MyConexion.conexion.Open();
+
+                string consulta = "SELECT columna FROM asiento WHERE id = @id";
+                using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
+                {
+                    cmd.Parameters.AddWithValue("@id", idAsiento);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            columna = reader.GetInt32(0);
+                        }
+                        else
+                        {
+                            columna = 0;
+                        }
+                    }
+                }
+                MyConexion.conexion.Close();
+            }
+            return columna;
+        }
         public static bool insertAsiento(Asiento asiento) {
 
        
@@ -148,6 +207,31 @@ namespace ClickTix.Modelo
 
         }
 
+        public static bool OcuparAsiento(int idAsiento)
+        {
+            MyConexion.conexion.Open();
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                string consulta = "UPDATE asiento SET disponible = 0 WHERE id = @id";
+                using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
+                {
+                    cmd.Parameters.AddWithValue("@id", idAsiento);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    MyConexion.conexion.Close();
+
+                    if (rowsAffected > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+        }
         private static int GetMaxIDAsiento()
         {
             int maxID = -1;

@@ -16,7 +16,7 @@ namespace ClickTix.Conexion
         public MyConexion(string servidor, string baseDeDatos, string usuario, string contraseña)
         {
             // Configura la cadena de conexión a MySQL
-            cadenaConexion = $"Server={servidor};Database={baseDeDatos};Uid={usuario};Pwd={contraseña};";
+            cadenaConexion = $"Server={servidor};Database={baseDeDatos};Uid={usuario};Pwd={contraseña}; convert zero datetime=True;";
             conexion = new MySqlConnection(cadenaConexion);
         }
 

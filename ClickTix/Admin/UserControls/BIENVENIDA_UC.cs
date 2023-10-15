@@ -19,7 +19,7 @@ namespace ClickTix
 
         private void BIENVENIDA_UC_Load(object sender, EventArgs e)
         {
-
+            title.Text = $"Bienvenido al sistema de ClicTix, {Program.logeado.Nombre}";
         }
     }
 }
