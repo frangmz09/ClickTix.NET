@@ -82,7 +82,7 @@ namespace ClickTix.Empleado.UserControls
             hora_ticket.Text = hora;
             fila_ticket.Text = ticket.fila.ToString() + "-" + ticket.columna.ToString();
             filas.Add(ticket.fila);
-            filas.Add(ticket.columna);
+            columnas.Add(ticket.columna);
             idioma_ticket.Text = idioma;
             precio_ticket.Text = precio.ToString();
         }
