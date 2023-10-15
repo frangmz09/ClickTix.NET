@@ -460,6 +460,41 @@ namespace ClickTix.Modelo
                 MyConexion.conexion.Close();
             }
         }
+        public static Funcion buscarFuncionPorId(int idFuncion) {
+
+            Funcion funcionAuxiliar = new Funcion();
+
+            MyConexion.AbrirConexion();
+
+            string query = "select * from funcion where id=@id";
+
+            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            {
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@id", idFuncion);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        funcionAuxiliar.Id = reader.GetInt32(0);
+                        funcionAuxiliar.Fecha = reader.GetDateTime(1);
+                        funcionAuxiliar.Id_Dimension = reader.GetInt32(2);
+                        funcionAuxiliar.Id_Pelicula = reader.GetInt32(3);
+                        funcionAuxiliar.Id_Sala = reader.GetInt32(4);
+                        funcionAuxiliar.Id_Idioma = reader.GetInt32(5);
+                        funcionAuxiliar.Id_Turno = reader.GetInt32(6);
+
+
+                    }
+
+                    reader.Close();
+
+                }
+            }
+            return funcionAuxiliar;
+        }
 
 
 

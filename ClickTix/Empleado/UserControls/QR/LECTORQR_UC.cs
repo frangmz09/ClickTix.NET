@@ -16,6 +16,8 @@ using System.Timers;
 using ZXing;
 using AForge.Controls;
 using iTextSharp.text.xml;
+using System.Windows.Forms.VisualStyles;
+using System.Diagnostics;
 
 namespace ClickTix.Empleado.UserControls
 {
@@ -95,14 +97,31 @@ namespace ClickTix.Empleado.UserControls
                 {
                     timer1.Stop();
                     textBox1.Text = result.ToString();
+                    int idTicket = int.Parse(textBox1.Text);
                     if (fuenteVideo.IsRunning)
                     {
                         fuenteVideo.Stop();
                     }
+                    Trace.WriteLine("EL ID TICKET ES:" + idTicket);
+                    TICKET_UC ticket = new TICKET_UC(idTicket);
+                    Index_User.addUserControlUsuario(ticket);
+
+                 
                 }
 
             }
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (fuenteVideo != null)
+            {
+                if (fuenteVideo.IsRunning)
+                {
+                    fuenteVideo.Stop();
+                }
+            }
+
+        }
     }
 }

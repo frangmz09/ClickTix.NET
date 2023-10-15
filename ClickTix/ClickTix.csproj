@@ -160,6 +160,7 @@
     <Compile Include="Controller\PrecioDimension_Controller.cs" />
     <Compile Include="Controller\Sala_Controller.cs" />
     <Compile Include="Controller\Sucursal_Controller.cs" />
+    <Compile Include="Controller\Ticket_Controller.cs" />
     <Compile Include="Controller\Usuario_Controller.cs" />
     <Compile Include="Empleado\ELEGIR_FUNCION_UC.cs">
       <SubType>UserControl</SubType>
@@ -261,6 +262,7 @@
     <Compile Include="Modelo\PrecioDimension.cs" />
     <Compile Include="Modelo\Sala.cs" />
     <Compile Include="Modelo\Sucursal.cs" />
+    <Compile Include="Modelo\Ticket.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
