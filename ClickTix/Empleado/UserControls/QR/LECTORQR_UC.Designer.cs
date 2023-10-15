@@ -18,35 +18,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label_qr = new System.Windows.Forms.Label();
-            this.combobox_camara = new System.Windows.Forms.ComboBox();
             this.title_qr = new System.Windows.Forms.Label();
-            this.iniciar_scaneo = new System.Windows.Forms.Button();
-            this.detener_scaneo = new System.Windows.Forms.Button();
             this.mysqlcommand1 = new MySql.Data.MySqlClient.MySqlCommand();
             this.label1 = new System.Windows.Forms.Label();
-            this.textbox1 = new System.Windows.Forms.TextBox();
-            this.videoSourcePlayer1 = new AForge.Controls.VideoSourcePlayer();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new AForge.Controls.PictureBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.groupbox1 = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupbox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label_qr
-            // 
-            this.label_qr.AutoSize = true;
-            this.label_qr.Location = new System.Drawing.Point(118, 141);
-            this.label_qr.Name = "label_qr";
-            this.label_qr.Size = new System.Drawing.Size(183, 13);
-            this.label_qr.TabIndex = 0;
-            this.label_qr.Text = "Seleccione la cámara para escanear:";
-            // 
-            // combobox_camara
-            // 
-            this.combobox_camara.FormattingEnabled = true;
-            this.combobox_camara.Location = new System.Drawing.Point(121, 157);
-            this.combobox_camara.Name = "combobox_camara";
-            this.combobox_camara.Size = new System.Drawing.Size(177, 21);
-            this.combobox_camara.TabIndex = 1;
-            this.combobox_camara.SelectedIndexChanged += new System.EventHandler(this.combobox_camara_SelectedIndexChanged);
             // 
             // title_qr
             // 
@@ -59,26 +46,6 @@
             this.title_qr.Text = "Escanear código QR";
             this.title_qr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // iniciar_scaneo
-            // 
-            this.iniciar_scaneo.Location = new System.Drawing.Point(121, 184);
-            this.iniciar_scaneo.Name = "iniciar_scaneo";
-            this.iniciar_scaneo.Size = new System.Drawing.Size(75, 23);
-            this.iniciar_scaneo.TabIndex = 68;
-            this.iniciar_scaneo.Text = "Iniciar";
-            this.iniciar_scaneo.UseVisualStyleBackColor = true;
-            this.iniciar_scaneo.Click += new System.EventHandler(this.iniciar_scaneo_Click);
-            // 
-            // detener_scaneo
-            // 
-            this.detener_scaneo.Location = new System.Drawing.Point(202, 184);
-            this.detener_scaneo.Name = "detener_scaneo";
-            this.detener_scaneo.Size = new System.Drawing.Size(75, 23);
-            this.detener_scaneo.TabIndex = 69;
-            this.detener_scaneo.Text = "Detener";
-            this.detener_scaneo.UseVisualStyleBackColor = true;
-            this.detener_scaneo.Click += new System.EventHandler(this.detener_scaneo_Click);
-            // 
             // mysqlcommand1
             // 
             this.mysqlcommand1.CacheAge = 0;
@@ -89,64 +56,126 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(118, 232);
+            this.label1.Location = new System.Drawing.Point(233, 102);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 71;
-            this.label1.Text = "Código escaneado";
+            this.label1.Size = new System.Drawing.Size(104, 13);
+            this.label1.TabIndex = 68;
+            this.label1.Text = "Seleccionar camara:";
             // 
-            // textbox1
+            // button1
             // 
-            this.textbox1.Location = new System.Drawing.Point(121, 248);
-            this.textbox1.Name = "textbox1";
-            this.textbox1.Size = new System.Drawing.Size(193, 20);
-            this.textbox1.TabIndex = 73;
+            this.button1.Location = new System.Drawing.Point(542, 145);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 69;
+            this.button1.Text = "Iniciar ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // videoSourcePlayer1
+            // comboBox1
             // 
-            this.videoSourcePlayer1.Location = new System.Drawing.Point(458, 125);
-            this.videoSourcePlayer1.Name = "videoSourcePlayer1";
-            this.videoSourcePlayer1.Size = new System.Drawing.Size(250, 228);
-            this.videoSourcePlayer1.TabIndex = 74;
-            this.videoSourcePlayer1.Text = "videoSourcePlayer1";
-            this.videoSourcePlayer1.VideoSource = null;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(343, 99);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(190, 21);
+            this.comboBox1.TabIndex = 70;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = null;
+            this.pictureBox1.Location = new System.Drawing.Point(68, 145);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(452, 280);
+            this.pictureBox1.TabIndex = 71;
+            this.pictureBox1.TabStop = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(542, 183);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(200, 20);
+            this.textBox1.TabIndex = 72;
+            this.textBox1.Visible = false;
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(31, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(181, 13);
+            this.label2.TabIndex = 73;
+            this.label2.Text = "Ingrese el codigo de manera manual:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(38, 57);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(163, 20);
+            this.textBox2.TabIndex = 74;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(79, 83);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 75;
+            this.button2.Text = "Iniciar ";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // groupbox1
+            // 
+            this.groupbox1.Controls.Add(this.button2);
+            this.groupbox1.Controls.Add(this.textBox2);
+            this.groupbox1.Controls.Add(this.label2);
+            this.groupbox1.Location = new System.Drawing.Point(528, 178);
+            this.groupbox1.Name = "groupbox1";
+            this.groupbox1.Size = new System.Drawing.Size(225, 116);
+            this.groupbox1.TabIndex = 76;
+            this.groupbox1.TabStop = false;
+            this.groupbox1.Text = "Alternativa";
             // 
             // LECTORQR_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.videoSourcePlayer1);
-            this.Controls.Add(this.textbox1);
+            this.Controls.Add(this.groupbox1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.detener_scaneo);
-            this.Controls.Add(this.iniciar_scaneo);
             this.Controls.Add(this.title_qr);
-            this.Controls.Add(this.combobox_camara);
-            this.Controls.Add(this.label_qr);
             this.Name = "LECTORQR_UC";
             this.Size = new System.Drawing.Size(800, 451);
             this.Load += new System.EventHandler(this.LECTORQR_UC_Load);
+            this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.LECTORQR_UC_ControlRemoved);
             this.Leave += new System.EventHandler(this.LECTORQR_UC_Leave);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupbox1.ResumeLayout(false);
+            this.groupbox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
         #endregion
-
-        private System.Windows.Forms.Label label_qr;
-        private System.Windows.Forms.ComboBox combobox_camara;
         private System.Windows.Forms.Label title_qr;
-        private System.Windows.Forms.Button iniciar_scaneo;
-        private System.Windows.Forms.Button detener_scaneo;
         private MySql.Data.MySqlClient.MySqlCommand mysqlcommand1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textbox1;
-        private AForge.Controls.VideoSourcePlayer videoSourcePlayer1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private AForge.Controls.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupbox1;
     }
 }

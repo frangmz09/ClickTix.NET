@@ -18,8 +18,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
 using System.IO;
 using iTextSharp.tool.xml.html;
-
-
+using ClickTix.Controller;
 
 namespace ClickTix.Empleado.UserControls
 {
@@ -52,6 +51,27 @@ namespace ClickTix.Empleado.UserControls
             hora_ticket.Text = hora;
             fila_ticket.Text = fila.ToString();
             columna_ticket.Text = columna.ToString();
+            idioma_ticket.Text = idioma;
+            precio_ticket.Text = precio.ToString();
+
+
+        }
+        public TICKET_UC(int idTicket)
+        {
+            c = new MyConexion("localhost", "clicktix", "root", "");
+            InitializeComponent();
+            Ticket ticket = new Ticket();
+            ticket = Ticket_Controller.buscarTicketPorId(idTicket);
+            Funcion funcionAuxiliar = Funcion_Controller.buscarFuncionPorId(ticket.id_funcion);
+            loadTicketStrings(funcionAuxiliar.Id);
+
+
+            nombre_pelicula_ticket.Text = titulo;
+            nrosala_ticket.Text = nroSala.ToString();
+            fecha_ticket.Text = fecha.ToShortDateString();
+            hora_ticket.Text = hora;
+            fila_ticket.Text = ticket.fila.ToString();
+            columna_ticket.Text = ticket.columna.ToString();
             idioma_ticket.Text = idioma;
             precio_ticket.Text = precio.ToString();
 
