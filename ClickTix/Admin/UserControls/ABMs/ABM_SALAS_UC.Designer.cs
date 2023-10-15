@@ -34,9 +34,9 @@ namespace ClickTix.UserControls
             this.title = new System.Windows.Forms.Label();
             this.add_salas = new System.Windows.Forms.Button();
             this.grid_salas = new System.Windows.Forms.DataGridView();
-            this.Salas = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid_salas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +46,7 @@ namespace ClickTix.UserControls
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(219, 18);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(148, 25);
+            this.title.Size = new System.Drawing.Size(79, 25);
             this.title.TabIndex = 16;
             this.title.Text = "SALAS";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -59,28 +59,19 @@ namespace ClickTix.UserControls
             this.add_salas.TabIndex = 15;
             this.add_salas.Text = "Agregar";
             this.add_salas.UseVisualStyleBackColor = true;
-           
+            this.add_salas.Click += new System.EventHandler(this.add_salas_Click);
             // 
             // grid_salas
             // 
             this.grid_salas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_salas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Modificar,
-            this.Borrar,
-            this.Salas});
+            this.Borrar});
             this.grid_salas.Location = new System.Drawing.Point(23, 52);
             this.grid_salas.Name = "grid_salas";
             this.grid_salas.Size = new System.Drawing.Size(524, 303);
             this.grid_salas.TabIndex = 14;
             this.grid_salas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_salas_CellContentClick);
-            // 
-            // Salas
-            // 
-            this.Modificar.HeaderText = "Salas";
-            this.Modificar.Name = "Salas";
-            this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Modificar.Width = 50;
             // 
             // Modificar
             // 
@@ -98,10 +89,21 @@ namespace ClickTix.UserControls
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Borrar.Width = 50;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(23, 18);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "<";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.back_button_Click_SalaToSucursales);
+            // 
             // ABM_SALAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.title);
             this.Controls.Add(this.add_salas);
             this.Controls.Add(this.grid_salas);
@@ -113,22 +115,15 @@ namespace ClickTix.UserControls
 
         }
 
-        private void grid_salas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         #endregion
 
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Button add_salas;
         private System.Windows.Forms.DataGridView grid_salas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cuit;
-        private System.Windows.Forms.DataGridViewButtonColumn Salas;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
+        private Button button1;
     }
 }

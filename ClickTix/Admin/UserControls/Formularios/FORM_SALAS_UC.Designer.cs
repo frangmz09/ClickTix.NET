@@ -29,17 +29,16 @@
         private void InitializeComponent()
         {
             this.title = new System.Windows.Forms.Label();
-            this.addsucursal_btn = new System.Windows.Forms.Button();
-            this.label_titulo = new System.Windows.Forms.Label();
-            this.label_direccion = new System.Windows.Forms.Label();
-            this.label_cuit = new System.Windows.Forms.Label();
-            this.label_salas = new System.Windows.Forms.Label();
-            this.input_salas = new System.Windows.Forms.NumericUpDown();
+            this.addsala_btn = new System.Windows.Forms.Button();
             this.back_pelicula = new System.Windows.Forms.Button();
             this.input_filas = new System.Windows.Forms.NumericUpDown();
             this.input_columnas = new System.Windows.Forms.NumericUpDown();
             this.valorCapacidad = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.input_salas)).BeginInit();
+            this.labelColumnas = new System.Windows.Forms.Label();
+            this.labelFilas = new System.Windows.Forms.Label();
+            this.labelCapacidad = new System.Windows.Forms.Label();
+            this.nroSalaLabel = new System.Windows.Forms.Label();
+            this.valorNroSala = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.input_filas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.input_columnas)).BeginInit();
             this.SuspendLayout();
@@ -54,79 +53,25 @@
             this.title.TabIndex = 3;
             this.title.Text = "INGRESE DATOS PARA AGREGAR SALAS";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.title.Click += new System.EventHandler(this.title_Click);
             // 
-            // addsucursal_btn
+            // addsala_btn
             // 
-            this.addsucursal_btn.Location = new System.Drawing.Point(222, 285);
-            this.addsucursal_btn.Name = "addsucursal_btn";
-            this.addsucursal_btn.Size = new System.Drawing.Size(111, 25);
-            this.addsucursal_btn.TabIndex = 33;
-            this.addsucursal_btn.Text = "Agregar";
-            this.addsucursal_btn.UseVisualStyleBackColor = true;
-            // 
-            // label_titulo
-            // 
-            this.label_titulo.AutoSize = true;
-            this.label_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_titulo.Location = new System.Drawing.Point(205, 89);
-            this.label_titulo.Name = "label_titulo";
-            this.label_titulo.Size = new System.Drawing.Size(63, 15);
-            this.label_titulo.TabIndex = 58;
-            this.label_titulo.Text = "Columnas";
-            this.label_titulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_titulo.Click += new System.EventHandler(this.label_titulo_Click);
-            // 
-            // label_direccion
-            // 
-            this.label_direccion.AutoSize = true;
-            this.label_direccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_direccion.Location = new System.Drawing.Point(205, 131);
-            this.label_direccion.Name = "label_direccion";
-            this.label_direccion.Size = new System.Drawing.Size(33, 15);
-            this.label_direccion.TabIndex = 60;
-            this.label_direccion.Text = "Filas";
-            this.label_direccion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_cuit
-            // 
-            this.label_cuit.AutoSize = true;
-            this.label_cuit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_cuit.Location = new System.Drawing.Point(205, 201);
-            this.label_cuit.Name = "label_cuit";
-            this.label_cuit.Size = new System.Drawing.Size(75, 15);
-            this.label_cuit.TabIndex = 62;
-            this.label_cuit.Text = "Capacidad : ";
-            this.label_cuit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label_cuit.Click += new System.EventHandler(this.label_cuit_Click);
-            // 
-            // label_salas
-            // 
-            this.label_salas.AutoSize = true;
-            this.label_salas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_salas.Location = new System.Drawing.Point(205, 227);
-            this.label_salas.Name = "label_salas";
-            this.label_salas.Size = new System.Drawing.Size(101, 15);
-            this.label_salas.TabIndex = 64;
-            this.label_salas.Text = "Numero de salas";
-            this.label_salas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // input_salas
-            // 
-            this.input_salas.Location = new System.Drawing.Point(312, 227);
-            this.input_salas.Name = "input_salas";
-            this.input_salas.Size = new System.Drawing.Size(45, 20);
-            this.input_salas.TabIndex = 65;
+            this.addsala_btn.Location = new System.Drawing.Point(222, 285);
+            this.addsala_btn.Name = "addsala_btn";
+            this.addsala_btn.Size = new System.Drawing.Size(111, 25);
+            this.addsala_btn.TabIndex = 33;
+            this.addsala_btn.Text = "Agregar";
+            this.addsala_btn.UseVisualStyleBackColor = true;
+            //this.addsala_btn.Click += new System.EventHandler(this.addsala_btn_Click);
             // 
             // back_pelicula
             // 
-            this.back_pelicula.Location = new System.Drawing.Point(17, 16);
+            this.back_pelicula.Location = new System.Drawing.Point(0, 0);
             this.back_pelicula.Name = "back_pelicula";
-            this.back_pelicula.Size = new System.Drawing.Size(30, 30);
-            this.back_pelicula.TabIndex = 66;
+            this.back_pelicula.Size = new System.Drawing.Size(75, 23);
+            this.back_pelicula.TabIndex = 70;
             this.back_pelicula.Text = "<";
-            this.back_pelicula.UseVisualStyleBackColor = true;
-            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click_1);
             // 
             // input_filas
             // 
@@ -148,29 +93,83 @@
             this.valorCapacidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.valorCapacidad.Location = new System.Drawing.Point(324, 201);
             this.valorCapacidad.Name = "valorCapacidad";
-            this.valorCapacidad.Size = new System.Drawing.Size(33, 15);
+            this.valorCapacidad.Size = new System.Drawing.Size(92, 15);
             this.valorCapacidad.TabIndex = 69;
-            this.valorCapacidad.Text = "valor";
+            this.valorCapacidad.Text = "valorCapacidad";
             this.valorCapacidad.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelColumnas
+            // 
+            this.labelColumnas.AutoSize = true;
+            this.labelColumnas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelColumnas.Location = new System.Drawing.Point(219, 94);
+            this.labelColumnas.Name = "labelColumnas";
+            this.labelColumnas.Size = new System.Drawing.Size(78, 15);
+            this.labelColumnas.TabIndex = 71;
+            this.labelColumnas.Text = "COLUMNAS:";
+            this.labelColumnas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelFilas
+            // 
+            this.labelFilas.AutoSize = true;
+            this.labelFilas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFilas.Location = new System.Drawing.Point(219, 136);
+            this.labelFilas.Name = "labelFilas";
+            this.labelFilas.Size = new System.Drawing.Size(42, 15);
+            this.labelFilas.TabIndex = 72;
+            this.labelFilas.Text = "FILAS:";
+            this.labelFilas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelCapacidad
+            // 
+            this.labelCapacidad.AutoSize = true;
+            this.labelCapacidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCapacidad.Location = new System.Drawing.Point(219, 201);
+            this.labelCapacidad.Name = "labelCapacidad";
+            this.labelCapacidad.Size = new System.Drawing.Size(76, 15);
+            this.labelCapacidad.TabIndex = 73;
+            this.labelCapacidad.Text = "CAPACIDAD:";
+            this.labelCapacidad.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nroSalaLabel
+            // 
+            this.nroSalaLabel.AutoSize = true;
+            this.nroSalaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nroSalaLabel.Location = new System.Drawing.Point(219, 229);
+            this.nroSalaLabel.Name = "nroSalaLabel";
+            this.nroSalaLabel.Size = new System.Drawing.Size(69, 15);
+            this.nroSalaLabel.TabIndex = 74;
+            this.nroSalaLabel.Text = "NRO SALA:";
+            this.nroSalaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // valorNroSala
+            // 
+            this.valorNroSala.AutoSize = true;
+            this.valorNroSala.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.valorNroSala.Location = new System.Drawing.Point(324, 229);
+            this.valorNroSala.Name = "valorNroSala";
+            this.valorNroSala.Size = new System.Drawing.Size(58, 15);
+            this.valorNroSala.TabIndex = 75;
+            this.valorNroSala.Text = "valorSala";
+            this.valorNroSala.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FORM_SALAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.valorNroSala);
+            this.Controls.Add(this.nroSalaLabel);
+            this.Controls.Add(this.labelCapacidad);
+            this.Controls.Add(this.labelFilas);
+            this.Controls.Add(this.labelColumnas);
             this.Controls.Add(this.valorCapacidad);
             this.Controls.Add(this.input_columnas);
             this.Controls.Add(this.input_filas);
             this.Controls.Add(this.back_pelicula);
-            this.Controls.Add(this.input_salas);
-            this.Controls.Add(this.label_salas);
-            this.Controls.Add(this.label_cuit);
-            this.Controls.Add(this.label_direccion);
-            this.Controls.Add(this.label_titulo);
-            this.Controls.Add(this.addsucursal_btn);
+            this.Controls.Add(this.addsala_btn);
             this.Controls.Add(this.title);
             this.Name = "FORM_SALAS_UC";
             this.Size = new System.Drawing.Size(560, 373);
-            ((System.ComponentModel.ISupportInitialize)(this.input_salas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.input_filas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.input_columnas)).EndInit();
             this.ResumeLayout(false);
@@ -181,15 +180,16 @@
         #endregion
 
         private System.Windows.Forms.Label title;
-        private System.Windows.Forms.Button addsucursal_btn;
-        private System.Windows.Forms.Label label_titulo;
-        private System.Windows.Forms.Label label_direccion;
-        private System.Windows.Forms.Label label_cuit;
-        private System.Windows.Forms.Label label_salas;
-        private System.Windows.Forms.NumericUpDown input_salas;
+        private System.Windows.Forms.Button addsala_btn;
+        
         private System.Windows.Forms.Button back_pelicula;
         private System.Windows.Forms.NumericUpDown input_filas;
         private System.Windows.Forms.NumericUpDown input_columnas;
         private System.Windows.Forms.Label valorCapacidad;
+        private System.Windows.Forms.Label labelColumnas;
+        private System.Windows.Forms.Label labelFilas;
+        private System.Windows.Forms.Label labelCapacidad;
+        private System.Windows.Forms.Label nroSalaLabel;
+        private System.Windows.Forms.Label valorNroSala;
     }
 }
