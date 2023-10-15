@@ -20,8 +20,9 @@ namespace ClickTix.Empleado.UserControls
         private int idPelicula;
         private int idFuncion;
         List<int> asientosSeleccionados = new List<int>();
-        int fila;
-        int columna;
+        List<int> filas = new List<int>();
+        List<int> columnas = new List<int>();
+
 
         public BUTACAS_UC(int id_funcion, int idPeli)
         {
@@ -149,10 +150,11 @@ namespace ClickTix.Empleado.UserControls
             foreach (int idAsiento in asientosSeleccionados)
             {
                 Asiento_Controller.OcuparAsiento(idAsiento);
-                fila = Asiento_Controller.ObtenerFilaDelAsiento(idAsiento);
-                columna = Asiento_Controller.ObtenerColumnaDelAsiento(idAsiento);
+                filas.Add(Asiento_Controller.ObtenerFilaDelAsiento(idAsiento));
+                columnas.Add(Asiento_Controller.ObtenerColumnaDelAsiento(idAsiento));
             }
-            TICKET_UC tICKET_UC = new TICKET_UC(idFuncion, fila, columna);
+
+            TICKET_UC tICKET_UC = new TICKET_UC(idFuncion, filas, columnas);
             Index_User.addUserControlUsuario(tICKET_UC);
            
         }

@@ -40,8 +40,6 @@
             this.fecha_ticket = new System.Windows.Forms.Label();
             this.hora_ticket = new System.Windows.Forms.Label();
             this.precio_ticket = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.columna_ticket = new System.Windows.Forms.Label();
             this.nrosala_ticket = new System.Windows.Forms.Label();
             this.idioma_ticket = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -71,7 +69,7 @@
             // 
             this.fila_ticket.AutoSize = true;
             this.fila_ticket.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fila_ticket.Location = new System.Drawing.Point(223, 214);
+            this.fila_ticket.Location = new System.Drawing.Point(331, 223);
             this.fila_ticket.Name = "fila_ticket";
             this.fila_ticket.Size = new System.Drawing.Size(70, 25);
             this.fila_ticket.TabIndex = 4;
@@ -81,11 +79,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(140, 214);
+            this.label1.Location = new System.Drawing.Point(142, 223);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 25);
+            this.label1.Size = new System.Drawing.Size(161, 25);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Fila:";
+            this.label1.Text = "Fila y Columna:";
             // 
             // label2
             // 
@@ -167,25 +165,6 @@
             this.precio_ticket.TabIndex = 14;
             this.precio_ticket.Text = "Precio:";
             // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(142, 252);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(109, 25);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Columna:";
-            // 
-            // columna_ticket
-            // 
-            this.columna_ticket.AutoSize = true;
-            this.columna_ticket.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.columna_ticket.Location = new System.Drawing.Point(257, 252);
-            this.columna_ticket.Name = "columna_ticket";
-            this.columna_ticket.Size = new System.Drawing.Size(70, 25);
-            this.columna_ticket.TabIndex = 15;
-            this.columna_ticket.Text = "label3";
-            // 
             // nrosala_ticket
             // 
             this.nrosala_ticket.AutoSize = true;
@@ -200,7 +179,7 @@
             // 
             this.idioma_ticket.AutoSize = true;
             this.idioma_ticket.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.idioma_ticket.Location = new System.Drawing.Point(439, 140);
+            this.idioma_ticket.Location = new System.Drawing.Point(223, 257);
             this.idioma_ticket.Name = "idioma_ticket";
             this.idioma_ticket.Size = new System.Drawing.Size(79, 25);
             this.idioma_ticket.TabIndex = 19;
@@ -210,7 +189,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(358, 140);
+            this.label9.Location = new System.Drawing.Point(142, 257);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(75, 25);
             this.label9.TabIndex = 18;
@@ -223,8 +202,6 @@
             this.Controls.Add(this.idioma_ticket);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.nrosala_ticket);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.columna_ticket);
             this.Controls.Add(this.precio_ticket);
             this.Controls.Add(this.hora_ticket);
             this.Controls.Add(this.fecha_ticket);
@@ -257,8 +234,6 @@
         private System.Windows.Forms.Label fecha_ticket;
         private System.Windows.Forms.Label hora_ticket;
         private System.Windows.Forms.Label precio_ticket;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label columna_ticket;
         private System.Windows.Forms.Label nrosala_ticket;
         private System.Windows.Forms.Label idioma_ticket;
         private System.Windows.Forms.Label label9;
