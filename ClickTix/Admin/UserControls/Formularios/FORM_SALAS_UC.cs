@@ -67,46 +67,46 @@ namespace ClickTix.UserControls
         {
 
              
-            //if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text) 
-            //    || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
-            //{
-            //    MessageBox.Show("Los campos deben estar llenos ");
-            //}
-            //else
-            //{
-            //    Sucursal s = new Sucursal();
+            if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text) )
+                // string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
+                Sucursal s = new Sucursal();
 
-            //    s.id = 0;
-            //    s.nombre = input_columnas.Text;
-            //    s.direccion = input_filas.Text;
-            //    s.cuit = input_cuit.Text;
-            //    s.numerosalas = (int)input_salas.Value;
+                s.id = 0;
+                s.nombre = input_columnas.Text;
+                s.direccion = input_filas.Text;
+               //.cuit = input_cuit.Text;
+                s.numerosalas = (int)input_salas.Value;
 
-            //    Sucursal_Controller.CrearSucursal(s);
-            //}
+                Sucursal_Controller.CrearSucursal(s);
+            }
             
         }
 
         private void addsucursal_btn_Click2(object sender, EventArgs e)
         {
-            //if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text)
-            //    || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
-            //{
-            //    MessageBox.Show("Los campos deben estar llenos ");
-            //}
-            //else
-            //{
-            //    Sucursal s = new Sucursal();
-            //    s.id = this.idDelPanel;
-            //    s.nombre = input_columnas.Text;
-            //    s.direccion = input_filas.Text;
-            //    s.cuit = input_cuit.Text;
-            //    s.numerosalas = (int)input_salas.Value;
+            if (string.IsNullOrWhiteSpace(input_columnas.Text) || string.IsNullOrWhiteSpace(input_filas.Text))
+               //| string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
+                Sucursal s = new Sucursal();
+                s.id = this.idDelPanel;
+                s.nombre = input_columnas.Text;
+                s.direccion = input_filas.Text;
+              //s.cuit = input_cuit.Text;
+                s.numerosalas = (int)input_salas.Value;
 
 
 
-            //    Sucursal_Controller.ActualizarSucursal(s);
-            //}
+                Sucursal_Controller.ActualizarSucursal(s);
+            }
 
 
          
