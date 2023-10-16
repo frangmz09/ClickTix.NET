@@ -27,7 +27,7 @@ namespace ClickTix.Modelo
 
         private static void llenarPeliculas(ComboBox combobox_pelicula)
         {
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "SELECT * FROM pelicula;";
@@ -51,7 +51,7 @@ namespace ClickTix.Modelo
 
             int idReturn=0;
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "SELECT id FROM pelicula where titulo=@nombre_seleccionado;";
@@ -74,7 +74,7 @@ namespace ClickTix.Modelo
         }
         public static int obtenerIdIdioma(ComboBox combobox_idioma) {
             int idReturn = 0;
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "SELECT id FROM idioma where idioma=@idioma_seleccionado;";
@@ -99,7 +99,7 @@ namespace ClickTix.Modelo
         public static int obtenerIdDimension(ComboBox combobox_dimension)
         {
             int idReturn = 0;
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "SELECT id FROM dimension where dimension=@dimension_seleccionada;";
@@ -125,7 +125,7 @@ namespace ClickTix.Modelo
 
             int idReturn = 0;
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "SELECT id FROM turno where hora=@fecha_seleccionada;";
@@ -150,7 +150,7 @@ namespace ClickTix.Modelo
 
             int idReturn =0;
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "select nro_sala, sala.id from sucursal " +
@@ -181,7 +181,7 @@ namespace ClickTix.Modelo
         public static void llenarSalas(ComboBox combobox_sucursal, ComboBox combobox_sala)
         {
             combobox_sala.Items.Clear();
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "select nro_sala from sucursal " +
@@ -208,7 +208,7 @@ namespace ClickTix.Modelo
         }
 
         private static void llenarTurnos(ComboBox combobox_turno) {
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "SELECT * FROM turno;";
@@ -230,7 +230,7 @@ namespace ClickTix.Modelo
 
         private static void llenarIdiomas(ComboBox combobox_idioma)
         {
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "SELECT * FROM idioma;";
@@ -251,7 +251,7 @@ namespace ClickTix.Modelo
         }
         private static void llenarDimensiones(ComboBox combobox_dimension)
         {
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "SELECT * FROM dimension;";
@@ -273,7 +273,7 @@ namespace ClickTix.Modelo
 
         private static void llenarSucursales(ComboBox combobox_sucursal)
         {
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "SELECT * FROM sucursal where id <> 0;";
@@ -295,12 +295,9 @@ namespace ClickTix.Modelo
         public static int crearFuncion(Funcion funcion)
         {
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-
-
-
-                    string consulta = "INSERT INTO funcion (id,fecha,id_dimension,id_sala,id_pelicula,idioma_funcion,turno_id) " +
+                string consulta = "INSERT INTO funcion (id,fecha,id_dimension,id_sala,id_pelicula,idioma_funcion,turno_id) " +
                                   "VALUES (@id,@fecha,@id_dimension,@id_sala,@id_pelicula,@idioma_funcion,@turno_id)";
                     int id = GetMaxIDFuncion()+1;
                     using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
@@ -313,11 +310,13 @@ namespace ClickTix.Modelo
                         cmd.Parameters.AddWithValue("@idioma_funcion", funcion.Id_Idioma);
                         cmd.Parameters.AddWithValue("@turno_id", funcion.Id_Turno);
 
+                    ManagerConnection.OpenConnection();
 
-                        cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     }
+                ManagerConnection.CloseConnection();
 
-                    return id;
+                return id;
 
 
 
@@ -331,11 +330,11 @@ namespace ClickTix.Modelo
 
             try
             {
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
 
                 string query = "SELECT MAX(id) FROM funcion";
 
-                MySqlCommand command = new MySqlCommand(query, MyConexion.ObtenerConexion());
+                MySqlCommand command = new MySqlCommand(query, ManagerConnection.getInstance());
                 object result = command.ExecuteScalar();
 
                 if (result != null && result != DBNull.Value)
@@ -348,6 +347,7 @@ namespace ClickTix.Modelo
 
                 Console.WriteLine("Error al obtener el ID máximo: " + ex.Message);
             }
+            ManagerConnection.CloseConnection();
 
 
             return maxID;
@@ -356,12 +356,12 @@ namespace ClickTix.Modelo
 
         public static void Funcion_Load(DataGridView tabla)
         {
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
 
             string query = "SELECT id , fecha, id_dimension as dimension , id_pelicula as pelicula , id_sala as sala ,idioma_funcion as idioma" +
                 ", turno_id as turno FROM funcion";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -373,13 +373,15 @@ namespace ClickTix.Modelo
                     tabla.DataSource = dt;
                 }
             }
+            ManagerConnection.CloseConnection();
+
         }
 
         public static bool EliminarRegistroFuncion(int id)
         {
             try
             {
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
                     mysqlConnection.Open();
 
@@ -418,7 +420,7 @@ namespace ClickTix.Modelo
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -429,11 +431,11 @@ namespace ClickTix.Modelo
 
         {
 
-            MyConexion.conexion.Open();
+            ManagerConnection.OpenConnection();
             string query = "UPDATE funcion " +
                            "SET fecha = @fecha,id_dimension = @id_dimension , id_pelicula=@id_pelicula  , id_sala=@id_sala  ,idioma_funcion = @idioma_funcion, turno_id =@turno_id WHERE id = @id";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance()); ;
 
             cmd.Parameters.AddWithValue("@id",31);
             cmd.Parameters.AddWithValue("@fecha", 1);
@@ -457,18 +459,18 @@ namespace ClickTix.Modelo
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
         public static Funcion buscarFuncionPorId(int idFuncion) {
 
             Funcion funcionAuxiliar = new Funcion();
 
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
 
             string query = "select * from funcion where id=@id";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -493,6 +495,8 @@ namespace ClickTix.Modelo
 
                 }
             }
+            ManagerConnection.CloseConnection();
+
             return funcionAuxiliar;
         }
 

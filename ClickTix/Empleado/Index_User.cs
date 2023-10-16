@@ -15,8 +15,6 @@ namespace ClickTix.Empleado
 {
     public partial class Index_User : Form
     {
-        MyConexion c;
-
         public Index_User()
         {
             InitializeComponent();
@@ -24,7 +22,6 @@ namespace ClickTix.Empleado
 
         private void Index_User_Load(object sender, EventArgs e)
         {
-            c = new MyConexion("localhost", "clicktix", "root", "");
             // BUTACAS_UC butacas = new BUTACAS_UC();
             MENU_UC menu = new MENU_UC();
            // LECTORQR_UC menu = new LECTORQR_UC();

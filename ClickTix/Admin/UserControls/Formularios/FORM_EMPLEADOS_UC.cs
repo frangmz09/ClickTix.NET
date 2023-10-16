@@ -147,9 +147,8 @@ namespace ClickTix
                 string consulta = "SELECT nombre, apellido, pass, id_sucursal, usuario  FROM usuario_sistema WHERE id =" + empleadoId;
 
 
-                MyConexion.AbrirConexion();
-
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                ManagerConnection.OpenConnection();
+                using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
                 {
                     cmd.Parameters.AddWithValue("@id", empleadoId);
 
@@ -180,6 +179,7 @@ namespace ClickTix
             {
                 MessageBox.Show("Error al cargar los datos del empleado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            ManagerConnection.CloseConnection();
         }
 
         internal static DialogResult Showdialog()
@@ -197,10 +197,10 @@ namespace ClickTix
         {
             try
             {
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
                 string consultaSucursales = "SELECT id, nombre FROM sucursal"; 
 
-                using (MySqlCommand cmdSucursales = new MySqlCommand(consultaSucursales, MyConexion.ObtenerConexion()))
+                using (MySqlCommand cmdSucursales = new MySqlCommand(consultaSucursales, ManagerConnection.getInstance()))
                 {
                     DataTable dt = new DataTable();
                     dt.Load(cmdSucursales.ExecuteReader());
@@ -224,6 +224,8 @@ namespace ClickTix
             {
                 MessageBox.Show("Error al llenar el ComboBox de sucursales: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            ManagerConnection.CloseConnection();
+
         }
     }
 }

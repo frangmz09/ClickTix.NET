@@ -16,11 +16,11 @@ namespace ClickTix.Controller
 
             Ticket ticketAuxiliar = new Ticket();
 
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
 
             string query = "select * from ticket where id=@id";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -45,6 +45,8 @@ namespace ClickTix.Controller
 
                 }
             }
+
+            ManagerConnection.CloseConnection();
             return ticketAuxiliar;
         }
     }

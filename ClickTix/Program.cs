@@ -26,14 +26,11 @@ namespace ClickTix
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
-            MyConexion.AbrirConexion();
+            ManagerConnection.getInstance();
             if (validateConnection())
             {
                 Trace.WriteLine("Conexion a la base de datos establecida con exito");
             }
-
             Application.Run(new Login());
         }
 
@@ -41,8 +38,8 @@ namespace ClickTix
         {
            try 
             {
-                MyConexion.conexion.Open();
-                MyConexion.conexion.Close();
+                ManagerConnection.OpenConnection();
+                ManagerConnection.CloseConnection();
                 return true;
             } 
             catch (Exception ex)

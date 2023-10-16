@@ -15,12 +15,9 @@ namespace ClickTix.UserControls
 {
     public partial class ABM_PELICULAS_UC : UserControl
     {
-        MyConexion c;
         public ABM_PELICULAS_UC()
         {
             InitializeComponent();
-            c = new MyConexion("localhost", "clicktix", "root", "");
-
             Pelicula_Load(grid_peliculas);
         }
 
@@ -73,12 +70,10 @@ namespace ClickTix.UserControls
         private void Pelicula_Load(DataGridView tabla)
         {
             
-            MyConexion.AbrirConexion();
-
-            
+            ManagerConnection.OpenConnection();
             string query = "SELECT  id,titulo, director FROM pelicula";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -93,7 +88,7 @@ namespace ClickTix.UserControls
                     tabla.DataSource = dt;
                 }
             }
-            MyConexion.conexion.Close();    
+            ManagerConnection.CloseConnection();
         }
 
 
@@ -101,7 +96,7 @@ namespace ClickTix.UserControls
         {
             try
             {
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
                     mysqlConnection.Open();
                     string query = "DELETE FROM pelicula WHERE id = @id";

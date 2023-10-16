@@ -17,7 +17,6 @@ namespace ClickTix.UserControls
     public partial class FORM_PELICULAS_UC : UserControl
     {
 
-        MyConexion c;
         private int idDelPanel;
         Image ImagenCargada;
 
@@ -25,7 +24,6 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
 
-            c = new MyConexion("localhost", "clicktix", "root", "");
             LlenarComboBoxClasificacion();
             LlenarComboBoxCategoria();
 
@@ -41,7 +39,6 @@ namespace ClickTix.UserControls
             this.idDelPanel = id;
 
             int peliculaID = id;
-            c = new MyConexion("localhost", "clicktix", "root", "");
             InitializeComponent();
             LlenarComboBoxClasificacion();
             LlenarComboBoxCategoria();
@@ -138,8 +135,8 @@ namespace ClickTix.UserControls
 
                 string consulta = "INSERT INTO pelicula (id,titulo, director, duracion,descripcion, id_categoria, id_clasificacion, portada, fecha_estreno) " +
                                   "VALUES (@id,@titulo, @director, @duracion,@descripcion ,@categoria, @clasificacion, @portada, @fechaEstreno)";
-                MyConexion.AbrirConexion();
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                ManagerConnection.OpenConnection();
+                using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@titulo", titulo);
@@ -165,7 +162,7 @@ namespace ClickTix.UserControls
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
 
 
@@ -189,11 +186,11 @@ namespace ClickTix.UserControls
 
             try
             {
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
 
                 string query = "SELECT MAX(id) FROM pelicula";
 
-                MySqlCommand command = new MySqlCommand(query, MyConexion.ObtenerConexion());
+                MySqlCommand command = new MySqlCommand(query, ManagerConnection.getInstance());
                 object result = command.ExecuteScalar();
 
                 if (result != null && result != DBNull.Value)
@@ -206,6 +203,7 @@ namespace ClickTix.UserControls
 
                 Console.WriteLine("Error al obtener el ID máximo: " + ex.Message);
             }
+            ManagerConnection.CloseConnection();
 
 
             return maxID;
@@ -219,8 +217,8 @@ namespace ClickTix.UserControls
 
                 string consulta = "UPDATE pelicula SET titulo = @titulo, director = @director, duracion = @duracion, descripcion = @descripcion, id_categoria = @categoria, id_clasificacion = @clasificacion, portada = @portada, fecha_estreno = @fechaEstreno WHERE id = @idParaActualizar";
 
-                MyConexion.AbrirConexion();
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                ManagerConnection.OpenConnection();
+                using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
                 {
                     Trace.WriteLine(idParaActualizar);
                     cmd.Parameters.AddWithValue("@idParaActualizar", idParaActualizar);
@@ -234,7 +232,7 @@ namespace ClickTix.UserControls
                     cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
 
                     int filasActualizadas = cmd.ExecuteNonQuery();
-                    MyConexion.conexion.Close();
+                    ManagerConnection.CloseConnection();
                     if (filasActualizadas > 0)
                     {
                         return true;
@@ -246,12 +244,14 @@ namespace ClickTix.UserControls
                     }
                 }
 
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al actualizar el registro: " + ex.Message);
                 return false;
             }
+
         }
 
 
@@ -263,9 +263,9 @@ namespace ClickTix.UserControls
                 string consulta = "SELECT titulo, director, duracion, descripcion, id_categoria, id_clasificacion, portada, fecha_estreno FROM pelicula WHERE id = @id";
 
 
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
 
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
                 {
                     cmd.Parameters.AddWithValue("@id", peliculaID);
 
@@ -298,7 +298,7 @@ namespace ClickTix.UserControls
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -330,10 +330,10 @@ namespace ClickTix.UserControls
         {
             try
             {
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
                 string consultaSucursales = "SELECT id, clasificacion FROM clasificacion";
 
-                using (MySqlCommand cmdSucursales = new MySqlCommand(consultaSucursales, MyConexion.ObtenerConexion()))
+                using (MySqlCommand cmdSucursales = new MySqlCommand(consultaSucursales, ManagerConnection.getInstance()))
                 {
                     DataTable dt = new DataTable();
                     dt.Load(cmdSucursales.ExecuteReader());
@@ -359,7 +359,7 @@ namespace ClickTix.UserControls
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -371,10 +371,10 @@ namespace ClickTix.UserControls
         {
             try
             {
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
                 string consultaSucursales = "SELECT id, nombre FROM categoria";
 
-                using (MySqlCommand cmdSucursales = new MySqlCommand(consultaSucursales, MyConexion.ObtenerConexion()))
+                using (MySqlCommand cmdSucursales = new MySqlCommand(consultaSucursales, ManagerConnection.getInstance()))
                 {
                     DataTable dt = new DataTable();
                     dt.Load(cmdSucursales.ExecuteReader());
@@ -400,7 +400,7 @@ namespace ClickTix.UserControls
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -413,10 +413,9 @@ namespace ClickTix.UserControls
 
             try
             {
-                MyConexion.AbrirConexion();
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                ManagerConnection.OpenConnection();
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
-                    mysqlConnection.Open();
                     string query = "SELECT id FROM categoria WHERE nombre = @nombre";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -437,7 +436,7 @@ namespace ClickTix.UserControls
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
 
             return idCategoria;
@@ -454,7 +453,7 @@ namespace ClickTix.UserControls
 
             try
             {
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
                     mysqlConnection.Open();
                     string query = "SELECT id FROM clasificacion WHERE clasificacion = @clasificacion";
@@ -475,6 +474,7 @@ namespace ClickTix.UserControls
             {
                 MessageBox.Show("Error al obtener el ID de la clasificacion de pelicula: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            ManagerConnection.CloseConnection();
 
             return idClasificacion;
         }

@@ -14,11 +14,11 @@ namespace ClickTix.Conexion
     {
         public static bool autenticar(string user, string pass, bool hasheado)
         {
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
             Usuario usuario = null;
             string query = "select * from usuario_sistema where usuario = @user and pass = @pass";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.ObtenerConexion());
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
             cmd.Parameters.AddWithValue("@user", user);
             cmd.Parameters.AddWithValue("@pass", pass);
 
@@ -37,7 +37,7 @@ namespace ClickTix.Conexion
                     }
                 }
 
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
 
                 if (usuario != null)
                 {
@@ -53,6 +53,8 @@ namespace ClickTix.Conexion
             {
                 throw new Exception("Error al ejecutar la consulta: " + ex.Message);
             }
+
+
         }
 
 

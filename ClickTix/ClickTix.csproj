@@ -155,6 +155,7 @@
     <Compile Include="Admin\UserControls\Formularios\FORM_SALAS_UC.Designer.cs">
       <DependentUpon>FORM_SALAS_UC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\ManagerConnection.cs" />
     <Compile Include="Conexion\MyConexion.cs" />
     <Compile Include="Controller\Pelicula_Controller.cs" />
     <Compile Include="Controller\PrecioDimension_Controller.cs" />

@@ -88,8 +88,6 @@ namespace ClickTix.UserControls
         private void FUNCIONES_UC_Load(object sender, EventArgs e)
         {
 
-            MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
-
             funcionActual = new Funcion();
             funcionActual.Fecha = combobox_fecha.Value.Date;
             Funcion_Controller.llenarCamposAddFuncion(combobox_pelicula, combobox_turno, combobox_sucursal, combobox_dimension, combobox_idioma);
@@ -168,9 +166,9 @@ namespace ClickTix.UserControls
                     "INNER JOIN idioma i ON i.id = f.idioma_funcion " +
                     "WHERE f.id = @id";
 
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
 
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
                 {
                     cmd.Parameters.AddWithValue("@id", funcionID);
 
@@ -196,6 +194,8 @@ namespace ClickTix.UserControls
             {
                 MessageBox.Show("Error al cargar los datos de la función: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            ManagerConnection.CloseConnection();
+
         }
 
 

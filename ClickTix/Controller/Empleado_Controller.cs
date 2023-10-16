@@ -16,13 +16,13 @@ namespace ClickTix.Modelo
         public static string nombreSucursalFuncion(int idFuncion) {
             string sucursalNombre="";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 string query = "select sucursal.nombre from sala inner join sucursal on sucursal.id = sala.id_sucursal inner join funcion on funcion.id_sala = sala.id where funcion.id = @idFuncion;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    MyConexion.conexion.Open();
+                    ManagerConnection.OpenConnection();
 
                     command.Parameters.AddWithValue("@idFuncion", idFuncion);
                     MySqlDataReader reader = command.ExecuteReader();
@@ -32,7 +32,7 @@ namespace ClickTix.Modelo
                         sucursalNombre = reader.GetString(0);
                     }
                     reader.Close();
-                    MyConexion.conexion.Close();
+                    ManagerConnection.CloseConnection();
                 }
 
 
@@ -45,13 +45,13 @@ namespace ClickTix.Modelo
         {
             string cuitSucursal = "";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 string query = "select sucursal.cuit from sala inner join sucursal on sucursal.id = sala.id_sucursal inner join funcion on funcion.id_sala = sala.id where funcion.id = @idFuncion;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    MyConexion.conexion.Open();
+                    ManagerConnection.OpenConnection();
 
                     command.Parameters.AddWithValue("@idFuncion", idFuncion);
                     MySqlDataReader reader = command.ExecuteReader();
@@ -61,7 +61,7 @@ namespace ClickTix.Modelo
                         cuitSucursal = reader.GetString(0);
                     }
                     reader.Close();
-                    MyConexion.conexion.Close();
+                    ManagerConnection.CloseConnection();
                 }
 
 
@@ -73,7 +73,7 @@ namespace ClickTix.Modelo
             string query = "INSERT INTO usuario_sistema (id,nombre, apellido, pass, id_sucursal, usuario) " +
                            "VALUES (@id,@nombre, @apellido, @pass, @id_sucursal, @usuario)";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance()) ;
             cmd.Parameters.AddWithValue("@id", ObtenerMaxIdEmpleado() + 1);
             cmd.Parameters.AddWithValue("@nombre", empleado.Nombre);
             cmd.Parameters.AddWithValue("@apellido", empleado.Apellido);
@@ -83,7 +83,7 @@ namespace ClickTix.Modelo
 
             try
             {
-                MyConexion.conexion.Open();
+                ManagerConnection.OpenConnection();
                 cmd.ExecuteNonQuery();
 
                 return true;
@@ -94,18 +94,18 @@ namespace ClickTix.Modelo
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
 
         public static int ObtenerMaxIdEmpleado()
         {
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
             int maxId = 0;
             string query = "SELECT MAX(id) FROM usuario_sistema";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
 
             try
             {
@@ -124,18 +124,18 @@ namespace ClickTix.Modelo
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
         public static bool ActualizarEmpleado(EmpleadoA empleado)
         {
-            MyConexion.conexion.Open();
+            ManagerConnection.OpenConnection();
             string query = "UPDATE usuario_sistema " +
                            "SET nombre = @nombre, apellido = @apellido, pass = @pass, id_sucursal = @id_sucursal, usuario = @usuario " +
                            "WHERE id = @id";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
             cmd.Parameters.AddWithValue("@nombre", empleado.Nombre);
             cmd.Parameters.AddWithValue("@apellido", empleado.Apellido);
             cmd.Parameters.AddWithValue("@pass", empleado.Pass);
@@ -155,7 +155,7 @@ namespace ClickTix.Modelo
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -163,11 +163,11 @@ namespace ClickTix.Modelo
 
         public static void Empleado_Load(DataGridView tabla)
         {
-            MyConexion.conexion.Open();
+            ManagerConnection.OpenConnection();
 
             string query = "SELECT id, nombre, apellido, pass, id_sucursal, usuario FROM usuario_sistema";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -191,9 +191,9 @@ namespace ClickTix.Modelo
         {
             try
             {
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
-                    MyConexion.conexion.Open();
+                    ManagerConnection.OpenConnection();
                     string query = "DELETE FROM usuario_sistema WHERE id = @id";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -221,7 +221,7 @@ namespace ClickTix.Modelo
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -230,12 +230,10 @@ namespace ClickTix.Modelo
         {
             int idSucursal2 = -1; 
 
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
-                    MyConexion.conexion.Close();
-                    MyConexion.conexion.Open();
-
-                    string query = "SELECT id FROM sucursal WHERE nombre = @nombreSucursal";
+                ManagerConnection.OpenConnection();
+                string query = "SELECT id FROM sucursal WHERE nombre = @nombreSucursal";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
@@ -255,8 +253,8 @@ namespace ClickTix.Modelo
                         }
 
                         reader.Close();
-                        mysqlConnection.Close();
-                    }
+                    ManagerConnection.CloseConnection();
+                }
                 }
             
 

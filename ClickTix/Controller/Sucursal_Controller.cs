@@ -19,7 +19,7 @@ namespace ClickTix.Conexion
             string query = "INSERT INTO sucursal (id, nombre, cuit,direccion,numerosalas) " +
                            "VALUES (@id, @nombre, @cuit,@direccion,@numerosalas)";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
             cmd.Parameters.AddWithValue("@id",ObtenerMaxIdSucursal()+1);
             cmd.Parameters.AddWithValue("@nombre", sucursal.nombre);
             cmd.Parameters.AddWithValue("@cuit", sucursal.cuit);
@@ -27,7 +27,7 @@ namespace ClickTix.Conexion
             cmd.Parameters.AddWithValue("@numerosalas", sucursal.numerosalas);
             try
             {
-                MyConexion.conexion.Open();
+                ManagerConnection.OpenConnection();
                 cmd.ExecuteNonQuery();
                 
                 return true;
@@ -38,7 +38,7 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -47,14 +47,13 @@ namespace ClickTix.Conexion
             int maxId = 0;
             string query = "SELECT MAX(id) FROM sucursal";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
 
             try
             {
-                if (MyConexion.conexion.State != ConnectionState.Open)
-                {
-                    MyConexion.conexion.Open();
-                }
+ 
+                    ManagerConnection.OpenConnection();
+                
 
                 object result = cmd.ExecuteScalar();
 
@@ -71,20 +70,19 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                if (MyConexion.conexion.State == ConnectionState.Open)
-                {
-                    MyConexion.conexion.Close();
-                }
+
+                    ManagerConnection.CloseConnection();
             }
         }
 
         public static bool ActualizarSucursal(Sucursal sucursal)
         {
+            ManagerConnection.OpenConnection();
             string query = "UPDATE sucursal " +
                            "SET nombre = @nombre, cuit = @cuit, direccion = @direccion, numerosalas = @numerosalas " +
                            "WHERE id = @id";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
 
             cmd.Parameters.AddWithValue("@id", sucursal.id);
             cmd.Parameters.AddWithValue("@nombre", sucursal.nombre);
@@ -106,7 +104,7 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -114,12 +112,12 @@ namespace ClickTix.Conexion
         {
             try
             {
-                MyConexion.conexion.Open();
+                ManagerConnection.OpenConnection();
 
 
                 string query = "SELECT  id, nombre, cuit,direccion,numerosalas FROM sucursal";
 
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
@@ -142,7 +140,7 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
             
         }
@@ -152,9 +150,9 @@ namespace ClickTix.Conexion
         {
             try
             {
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
-                    mysqlConnection.Open();
+                    ManagerConnection.OpenConnection();
                     string query = "DELETE FROM sucursal WHERE id = @id";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -182,7 +180,7 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 

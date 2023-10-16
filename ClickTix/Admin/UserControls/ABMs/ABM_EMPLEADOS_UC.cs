@@ -15,13 +15,10 @@ namespace ClickTix.UserControls
 {
     public partial class ABM_EMPLEADOS_UC : UserControl
     {
-        MyConexion c;
         public ABM_EMPLEADOS_UC()
         {
             InitializeComponent();
             ABM_EMPLEADOS_UC_Load(grid_empleados);
-            c = new MyConexion("localhost", "clicktix", "root", "");
-
             ABM_EMPLEADOS_UC_Load(grid_empleados);
         }
 
@@ -29,8 +26,6 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
             ABM_EMPLEADOS_UC_Load(grid_empleados);
-            c = new MyConexion("localhost", "clicktix", "root", "");
-
             ABM_EMPLEADOS_UC_Load(grid_empleados);
         }
 
@@ -77,12 +72,10 @@ namespace ClickTix.UserControls
 
         private void ABM_EMPLEADOS_UC_Load(DataGridView tabla)
         {
-            MyConexion.AbrirConexion();
-
-
+            ManagerConnection.OpenConnection();
             string query = "SELECT  id, nombre, apellido, id_sucursal, is_admin FROM usuario_sistema";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -97,13 +90,14 @@ namespace ClickTix.UserControls
                     tabla.DataSource = dt;
                 }
             }
+            ManagerConnection.CloseConnection();
         }
 
         public bool EliminarRegistro(int id)
         {
             try
             {
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
                     mysqlConnection.Open();
                     string query = "DELETE FROM usuario_sistema WHERE id = @id";

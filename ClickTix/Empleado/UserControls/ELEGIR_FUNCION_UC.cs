@@ -28,7 +28,6 @@ namespace ClickTix.Empleado
         {
             this.idPelicula = id;
             InitializeComponent();
-            MyConexion.AbrirConexion();
             CARTELERA_UC_LOAD(dataGridView1, titulo, id);
 
 
@@ -37,7 +36,7 @@ namespace ClickTix.Empleado
 
         private void CARTELERA_UC_LOAD(DataGridView tabla, string titulo, int id)
         {
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
 
 
 
@@ -46,7 +45,7 @@ namespace ClickTix.Empleado
                 "left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id " +
                 "left join turno on funcion.turno_id = turno.id where pelicula.titulo = @titulo and sala.id_sucursal = @id_sucursal;";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -62,6 +61,8 @@ namespace ClickTix.Empleado
                     tabla.DataSource = dt;
                 }
             }
+            ManagerConnection.CloseConnection();
+
         }
         private void label1_Click(object sender, EventArgs e)
         {

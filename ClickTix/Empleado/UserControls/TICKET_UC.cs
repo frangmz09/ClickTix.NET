@@ -24,8 +24,6 @@ namespace ClickTix.Empleado.UserControls
 {
     public partial class TICKET_UC : UserControl
     {
-        MyConexion c;
-
         int nroSala = 0;
         string titulo = "";
         DateTime fecha;
@@ -38,7 +36,6 @@ namespace ClickTix.Empleado.UserControls
 
         public TICKET_UC(int idFuncion, List<int> filasRecibidas, List<int> columnasRecibidas)
         {
-            c = new MyConexion("localhost", "clicktix", "root", "");
             InitializeComponent();
             loadTicketStrings(idFuncion);
             idFuncionAux = idFuncion;
@@ -69,7 +66,6 @@ namespace ClickTix.Empleado.UserControls
 
         public TICKET_UC(int idTicket)
         {
-            c = new MyConexion("localhost", "clicktix", "root", "");
             InitializeComponent();
             Ticket ticket = new Ticket();
             ticket = Ticket_Controller.buscarTicketPorId(idTicket);
@@ -139,9 +135,9 @@ namespace ClickTix.Empleado.UserControls
         {
             try
             {
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
                 string query = "select s.nro_sala, p.titulo, fecha, t.hora, d.precio, i.idioma from funcion f inner join sala s on f.id_sala = s.id inner join dimension d on f.id_dimension = d.id inner join pelicula p on f.id_pelicula = p.id inner join idioma i on f.idioma_funcion = i.id inner join turno t on f.turno_id = t.id where f.id=@id_funcion;";
-                using (MySqlCommand command = new MySqlCommand(query, MyConexion.ObtenerConexion()))
+                using (MySqlCommand command = new MySqlCommand(query, ManagerConnection.getInstance()))
                 {
                     command.Parameters.AddWithValue("@id_funcion", idFuncion);
                     MySqlDataReader reader = command.ExecuteReader();
@@ -155,7 +151,7 @@ namespace ClickTix.Empleado.UserControls
                         idioma = reader.GetString(5);
                     }
                     reader.Close();
-                    MyConexion.conexion.Close();
+                    ManagerConnection.CloseConnection();
                 }
             }
             catch (Exception ex)

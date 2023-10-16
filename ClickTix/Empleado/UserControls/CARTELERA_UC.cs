@@ -15,14 +15,11 @@ using System.Windows.Forms;
 namespace ClickTix.Empleado.UserControls
 {
     public partial class CARTELERA_UC : UserControl
-    {
-        MyConexion c;
-        
+    {        
         public CARTELERA_UC()
         {
             InitializeComponent();
             llenarDataGrid(cartelera_grid);
-            c = new MyConexion("localhost", "clicktix", "root", "");
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -45,13 +42,11 @@ namespace ClickTix.Empleado.UserControls
         }
         private void llenarDataGrid(DataGridView tabla)
         {
-            MyConexion.AbrirConexion();
-
-           
+            ManagerConnection.OpenConnection();
 
             string query = "SELECT id, titulo from pelicula";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -68,6 +63,8 @@ namespace ClickTix.Empleado.UserControls
                     tabla.DataSource = dt;
                 }
             }
+            ManagerConnection.CloseConnection();
+
         }
 
         private void CARTELERA_UC_Load(object sender, EventArgs e)

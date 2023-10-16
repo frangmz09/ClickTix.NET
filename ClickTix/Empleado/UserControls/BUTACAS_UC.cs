@@ -44,9 +44,8 @@ namespace ClickTix.Empleado.UserControls
             flowLayoutPanel1.Controls.Clear();
             int numFilas = 0;
             int numColumnas = 0;
-            MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 mysqlConnection.Open();
                 string query = "select filas, columnas from sala s inner join funcion f on f.id_sala = s.id inner join asiento a on f.id = a.id_funcion where f.id = @id_funcion;";

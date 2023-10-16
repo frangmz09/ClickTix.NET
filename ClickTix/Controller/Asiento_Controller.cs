@@ -17,10 +17,9 @@ namespace ClickTix.Modelo
 
             List<Asiento> list = new List<Asiento>();
 
-            MyConexion c = new MyConexion("localhost", "clicktix", "root", "");
 
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion()) {
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance()) {
                 mysqlConnection.Open();
                 string query = "SELECT * FROM asiento where asiento.id_funcion = @idfuncion;";
 
@@ -63,14 +62,14 @@ namespace ClickTix.Modelo
         {
             int filas = 0;
             int columnas = 0;
-            MyConexion.conexion.Open();
+            ManagerConnection.OpenConnection();
             Trace.WriteLine("Datos funcion");
 
             Trace.WriteLine(funcion.Id_Sala);
             Trace.WriteLine(funcion.Id);
             try
             {
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
 
                     string consulta =
@@ -119,16 +118,16 @@ namespace ClickTix.Modelo
                 }
             }
 
-
+            ManagerConnection.CloseConnection();
             return true;
 
         }
         public static int ObtenerFilaDelAsiento(int idAsiento)
         {
             int fila;
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                MyConexion.conexion.Open();
+                ManagerConnection.OpenConnection();
 
                 string consulta = "SELECT fila FROM asiento WHERE id = @id";
                 using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
@@ -147,8 +146,7 @@ namespace ClickTix.Modelo
                         {
                             fila = 0;
                         }
-                        MyConexion.conexion.Close();
-
+                        ManagerConnection.CloseConnection();
                         return fila;
                     }
                 }
@@ -157,9 +155,9 @@ namespace ClickTix.Modelo
         public static int ObtenerColumnaDelAsiento(int idAsiento)
         {
             int columna;
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                MyConexion.conexion.Open();
+                ManagerConnection.OpenConnection();
 
                 string consulta = "SELECT columna FROM asiento WHERE id = @id";
                 using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
@@ -178,29 +176,33 @@ namespace ClickTix.Modelo
                         }
                     }
                 }
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
             return columna;
         }
         public static bool insertAsiento(Asiento asiento) {
 
        
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
 
-                    string consulta = "INSERT INTO asiento (id,fila,disponible,columna,id_funcion) " +
+                string consulta = "INSERT INTO asiento (id,fila,disponible,columna,id_funcion) " +
                                       "VALUES (@id,@fila,@disponible,@columna,@id_funcion)";
                     int id = GetMaxIDAsiento() + 1;
                     using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
                     {
-                        cmd.Parameters.AddWithValue("@id", id);
+                    ManagerConnection.OpenConnection();
+
+                    cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@fila", asiento.Fila);
                         cmd.Parameters.AddWithValue("@columna", asiento.Columna);
                         cmd.Parameters.AddWithValue("@disponible", 1);
                         cmd.Parameters.AddWithValue("@id_funcion", asiento.Id_Funcion);
 
                         cmd.ExecuteNonQuery();
-                        return true;
+                    ManagerConnection.CloseConnection();
+
+                    return true;
                     }
                 }
             
@@ -209,8 +211,8 @@ namespace ClickTix.Modelo
 
         public static bool OcuparAsiento(int idAsiento)
         {
-            MyConexion.conexion.Open();
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            ManagerConnection.OpenConnection();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 string consulta = "UPDATE asiento SET disponible = 0 WHERE id = @id";
                 using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
@@ -218,8 +220,7 @@ namespace ClickTix.Modelo
                     cmd.Parameters.AddWithValue("@id", idAsiento);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
-                    MyConexion.conexion.Close();
-
+                    ManagerConnection.CloseConnection();
                     if (rowsAffected > 0)
                     {
                         return true;
@@ -238,11 +239,11 @@ namespace ClickTix.Modelo
 
             try
             {
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
 
                 string query = "SELECT MAX(id) FROM asiento";
 
-                MySqlCommand command = new MySqlCommand(query, MyConexion.ObtenerConexion());
+                MySqlCommand command = new MySqlCommand(query, ManagerConnection.getInstance());
                 object result = command.ExecuteScalar();
 
                 if (result != null && result != DBNull.Value)
@@ -255,7 +256,7 @@ namespace ClickTix.Modelo
 
                 Console.WriteLine("Error al obtener el ID máximo: " + ex.Message);
             }
-
+            ManagerConnection.CloseConnection();
 
             return maxID;
         }

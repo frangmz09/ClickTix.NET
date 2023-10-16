@@ -17,14 +17,14 @@ namespace ClickTix.Conexion
             string query = "INSERT INTO dimension (id, dimension, precio) " +
                            "VALUES (@id, @dimension, @precio)";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
             cmd.Parameters.AddWithValue("@id", ObtenerMaxIdDimension() + 1);
             cmd.Parameters.AddWithValue("@dimension", precioDimension.dimension);
             cmd.Parameters.AddWithValue("@precio", precioDimension.precio);
 
             try
             {
-                MyConexion.conexion.Open();
+                ManagerConnection.OpenConnection();
                 cmd.ExecuteNonQuery();
                 
                 return true;
@@ -35,17 +35,17 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
         public static int ObtenerMaxIdDimension()
         {
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
             int maxId = 0;
             string query = "SELECT MAX(id) FROM dimension";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
 
             try
             {
@@ -65,18 +65,18 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
         public static bool ActualizarDimension(PrecioDimension precioDimension)
         {
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
             string query = "UPDATE dimension " +
                            "SET dimension = @dimension, precio = @precio " +
                            "WHERE id = @id";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
             cmd.Parameters.AddWithValue("@dimension", precioDimension.dimension);
             cmd.Parameters.AddWithValue("@precio", precioDimension.precio);
             cmd.Parameters.AddWithValue("@id", precioDimension.id);
@@ -95,19 +95,19 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
         public static void Dimension_Load(DataGridView tabla)
         {
 
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
 
 
             string query = "SELECT  id,dimension, precio FROM dimension";
 
-            using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -130,9 +130,9 @@ namespace ClickTix.Conexion
             
             try
             {
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
-                    mysqlConnection.Open();
+                    ManagerConnection.OpenConnection();
                     string query = "DELETE FROM dimension WHERE id = @id";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -160,7 +160,7 @@ namespace ClickTix.Conexion
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 

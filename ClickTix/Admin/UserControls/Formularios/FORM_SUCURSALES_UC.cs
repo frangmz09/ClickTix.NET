@@ -118,9 +118,9 @@ namespace ClickTix.UserControls
             {
                 string consulta = "SELECT id,nombre,direccion,cuit,numerosalas FROM sucursal WHERE id = @id";
 
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
 
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
                 {
                     cmd.Parameters.AddWithValue("@id", sucursalID);
 
@@ -145,6 +145,8 @@ namespace ClickTix.UserControls
             {
                 MessageBox.Show("Error al cargar los datos de la dimensión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            ManagerConnection.CloseConnection();
+
         }
     }
 }

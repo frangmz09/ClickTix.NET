@@ -105,9 +105,9 @@ namespace ClickTix.Admin.UserControls.Formularios
             {
                 string consulta = "SELECT dimension, precio FROM dimension WHERE id = @id";
 
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
 
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
                 {
                     cmd.Parameters.AddWithValue("@id", dimensionID);
 
@@ -130,6 +130,8 @@ namespace ClickTix.Admin.UserControls.Formularios
             {
                 MessageBox.Show("Error al cargar los datos de la dimensión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            ManagerConnection.CloseConnection();
+
         }
 
 

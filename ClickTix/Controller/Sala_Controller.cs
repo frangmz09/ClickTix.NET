@@ -19,7 +19,7 @@ namespace ClickTix.Controller
             string query = "INSERT INTO sala (id,id_sucursal, filas, columnas, capacidad, nro_sala) " +
                            "VALUES (@id,@id_sucursal, @filas, @columnas, @capacidad, @nro_sala)";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
 
             cmd.Parameters.AddWithValue("@id", ObtenerMaxIdSala() + 1);
             cmd.Parameters.AddWithValue("@id_sucursal", sala.Id_Sucursal);
@@ -29,7 +29,7 @@ namespace ClickTix.Controller
             cmd.Parameters.AddWithValue("@nro_sala", sala.Nro_Sala);
             try
             {
-                MyConexion.conexion.Open();
+                ManagerConnection.OpenConnection();
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -39,7 +39,7 @@ namespace ClickTix.Controller
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -49,14 +49,14 @@ namespace ClickTix.Controller
                            "SET filas = @filas, columnas = @columnas, capacidad = @capacidad, nro_sala = @nro_sala " +
                            "WHERE id = @id";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
 
             cmd.Parameters.AddWithValue("@id", sala.Id);
             cmd.Parameters.AddWithValue("@filas", sala.Filas);
             cmd.Parameters.AddWithValue("@columna", sala.Columnas);
             cmd.Parameters.AddWithValue("@capacidad", sala.Capacidad);
             cmd.Parameters.AddWithValue("@nro_sala", sala.Nro_Sala);
-
+            ManagerConnection.OpenConnection();
             try
             {
                 int filasActualizadas = cmd.ExecuteNonQuery();
@@ -68,7 +68,7 @@ namespace ClickTix.Controller
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -76,9 +76,9 @@ namespace ClickTix.Controller
         {
             try
             {
-                MyConexion.conexion.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT id, filas, columnas, capacidad, nro_sala FROM sala WHERE id_sucursal = @id_sucursal";
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
@@ -96,7 +96,7 @@ namespace ClickTix.Controller
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -104,9 +104,9 @@ namespace ClickTix.Controller
         {
             try
             {
-                using (MySqlConnection mysqlConnection = MyConexion.ObtenerConexion())
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
-                    mysqlConnection.Open();
+                    ManagerConnection.OpenConnection();
                     string query = "DELETE FROM sala WHERE id = @id";
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
@@ -132,17 +132,17 @@ namespace ClickTix.Controller
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
         public static int ObtenerMaxIdSala()
         {
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
             int maxId = 0;
             string query = "SELECT MAX(id) FROM sala";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
 
             try
             {
@@ -161,17 +161,17 @@ namespace ClickTix.Controller
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
         public static int ObtenerMaxNroSala(int id_sucursal)
         {
-            MyConexion.AbrirConexion();
+            ManagerConnection.OpenConnection();
             int maxNroSala = 0;
             string query = "SELECT MAX(nro_sala) FROM sala WHERE id_sucursal = @id_sucursal";
 
-            MySqlCommand cmd = new MySqlCommand(query, MyConexion.conexion);
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
             cmd.Parameters.AddWithValue("@id_sucursal", id_sucursal);
 
             try
@@ -191,7 +191,7 @@ namespace ClickTix.Controller
             }
             finally
             {
-                MyConexion.conexion.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 

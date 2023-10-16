@@ -70,9 +70,9 @@ namespace ClickTix.UserControls
             {
                 string consulta = "SELECT id, filas, columna, capacidad, nro_sala FROM sala WHERE id = @id";
 
-                MyConexion.AbrirConexion();
+                ManagerConnection.OpenConnection();
 
-                using (MySqlCommand cmd = new MySqlCommand(consulta, MyConexion.ObtenerConexion()))
+                using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
                 {
                     cmd.Parameters.AddWithValue("@id", salaID);
 
@@ -91,6 +91,7 @@ namespace ClickTix.UserControls
                         }
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -98,7 +99,7 @@ namespace ClickTix.UserControls
             }
             finally
             {
-                //MyConexion.CerrarConexion();
+                ManagerConnection.CloseConnection();
             }
         }
 
