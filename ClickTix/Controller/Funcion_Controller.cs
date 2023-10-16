@@ -72,6 +72,9 @@ namespace ClickTix.Modelo
             }
             return idReturn;
         }
+
+
+
         public static int obtenerIdIdioma(ComboBox combobox_idioma) {
             int idReturn = 0;
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
@@ -101,7 +104,7 @@ namespace ClickTix.Modelo
             int idReturn = 0;
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT id FROM dimension where dimension=@dimension_seleccionada;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -116,10 +119,36 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
             return idReturn;
         }
+
+        public static double obtenerPrecioFuncion(int idFuncion)
+        {
+            double valorRetorno = 0;
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+                string query = "select dimension.precio from funcion inner join dimension on funcion.id_dimension = dimension.id where funcion.id = @id_funcion";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@id_funcion", idFuncion);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        valorRetorno = reader.GetDouble(0);
+                    }
+
+                    reader.Close();
+                }
+                ManagerConnection.CloseConnection();
+            }
+            return valorRetorno;
+        }
+
         public static int obtenerIdTurno(ComboBox combobox_turno)
         {
 

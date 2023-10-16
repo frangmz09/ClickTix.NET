@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Controller;
 using ClickTix.Modelo;
 using MySql.Data.MySqlClient;
 using System;
@@ -151,6 +152,7 @@ namespace ClickTix.Empleado.UserControls
                 Asiento_Controller.OcuparAsiento(idAsiento);
                 filas.Add(Asiento_Controller.ObtenerFilaDelAsiento(idAsiento));
                 columnas.Add(Asiento_Controller.ObtenerColumnaDelAsiento(idAsiento));
+                Ticket_Controller.crearTicket(idFuncion, Asiento_Controller.ObtenerFilaDelAsiento(idAsiento),Asiento_Controller.ObtenerColumnaDelAsiento(idAsiento));
             }
 
             TICKET_UC tICKET_UC = new TICKET_UC(idFuncion, filas, columnas);

@@ -49,5 +49,61 @@ namespace ClickTix.Controller
             ManagerConnection.CloseConnection();
             return ticketAuxiliar;
         }
+        public static bool crearTicket(int idFuncion, int filas, int columnas)
+        {
+            string query = "INSERT INTO ticket (id, id_funcion, fecha, fila, columna, precio_al_momento) " +
+                           "VALUES (@id,@id_funcion, @fecha ,@filas, @columnas, @precio_al_momento)";
+
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
+
+            cmd.Parameters.AddWithValue("@id", ObtenerMaxIdTicket() + 1);
+            cmd.Parameters.AddWithValue("@id_funcion", idFuncion);
+            cmd.Parameters.AddWithValue("@filas", filas);
+            cmd.Parameters.AddWithValue("@columnas", columnas);
+            cmd.Parameters.AddWithValue("@fecha", DateTime.Now);
+            cmd.Parameters.AddWithValue("@precio_al_momento", Funcion_Controller.obtenerPrecioFuncion(idFuncion));
+            try
+            {
+                ManagerConnection.OpenConnection();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al crear el ticket: " + ex.Message);
+            }
+            finally
+            {
+                ManagerConnection.CloseConnection();
+            }
+        }
+        public static int ObtenerMaxIdTicket()
+        {
+            ManagerConnection.OpenConnection();
+            int maxId = 0;
+            string query = "SELECT MAX(id) FROM ticket";
+
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
+
+            try
+            {
+                object result = cmd.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                {
+                    maxId = Convert.ToInt32(result);
+                }
+
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el máximo ID de sala: " + ex.Message);
+            }
+            finally
+            {
+                ManagerConnection.CloseConnection();
+            }
+        }
     }
 }
