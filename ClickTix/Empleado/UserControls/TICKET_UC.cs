@@ -116,10 +116,10 @@ namespace ClickTix.Empleado.UserControls
                     pdfDoc.Open();
                     pdfDoc.Add(new Phrase(""));
 
-                    iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(Properties.Resources.logo, System.Drawing.Imaging.ImageFormat.Png);
-                    img.Alignment = iTextSharp.text.Image.UNDERLYING;
-                    img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 60);
-                    pdfDoc.Add(img);
+                    //iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(Properties.Resources.logo, System.Drawing.Imaging.ImageFormat.Png);
+                    //img.Alignment = iTextSharp.text.Image.UNDERLYING;
+                    //img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 60);
+                    //pdfDoc.Add(img);
 
                     using (StringReader sr = new StringReader(html))
                     {
