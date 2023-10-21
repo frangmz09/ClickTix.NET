@@ -20,6 +20,7 @@ namespace ClickTix.Empleado.UserControls
     {
         private int idPelicula;
         private int idFuncion;
+        private string tituloPelicula;
         List<int> asientosSeleccionados = new List<int>();
         List<int> filas = new List<int>();
         List<int> columnas = new List<int>();
@@ -27,6 +28,8 @@ namespace ClickTix.Empleado.UserControls
 
         public BUTACAS_UC(int id_funcion, int idPeli)
         {
+            this.tituloPelicula = ObtenerTituloDePelicula(idPeli);
+            Trace.WriteLine("puto"+idPeli);
             this.idFuncion = id_funcion;
             this.idPelicula = idPeli;
             InitializeComponent();
@@ -159,11 +162,38 @@ namespace ClickTix.Empleado.UserControls
             Index_User.addUserControlUsuario(tICKET_UC);
            
         }
+        public static string ObtenerTituloDePelicula(int idPelicula)
+        {
+            string titulo = null;
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string consulta = "SELECT Titulo FROM pelicula WHERE Id = @id";
+                using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
+                {
+                    cmd.Parameters.AddWithValue("@id", idPelicula);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            titulo = reader["Titulo"].ToString();
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+            }
+            return titulo;
+        }
 
         private void back_pelicula_Click(object sender, EventArgs e)
         {
-            ELEGIR_FUNCION_UC funcionElegir = new ELEGIR_FUNCION_UC();
+            Trace.WriteLine(tituloPelicula+" "+ idFuncion);
+            ELEGIR_FUNCION_UC funcionElegir = new ELEGIR_FUNCION_UC(tituloPelicula,idPelicula);
             Index_User.addUserControlUsuario(funcionElegir);
         }
+
+
     }
 }

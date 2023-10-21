@@ -19,6 +19,7 @@ using iTextSharp.tool.xml;
 using System.IO;
 using iTextSharp.tool.xml.html;
 using ClickTix.Controller;
+using ClickTix.UserControls;
 
 namespace ClickTix.Empleado.UserControls
 {
@@ -158,6 +159,13 @@ namespace ClickTix.Empleado.UserControls
             {
                 MessageBox.Show("Error " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btn_MenuPrincipal_Click(object sender, EventArgs e)
+        {
+            MENU_UC mENU_UC = new MENU_UC();
+            Index_User.addUserControlUsuario(mENU_UC);  
+
         }
     }
 }
