@@ -385,5 +385,8 @@
   <ItemGroup>
     <Folder Include="Resources\img\peliculas\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket.html" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

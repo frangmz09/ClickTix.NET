@@ -81,7 +81,34 @@ namespace ClickTix.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a .
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Ticket&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        body {
+        ///            font-family: Arial, sans-serif;
+        ///            text-align: center;
+        ///        }
+        ///
+        ///        .ticket {
+        ///            width: 310px;
+        ///            background-color: #fff;
+        ///            border: 1px solid #ccc;
+        ///            margin: 50px auto;
+        ///            padding: 20px;
+        ///        }
+        ///
+        ///        h1 {
+        ///            color: #000000;
+        ///        }
+        ///
+        ///        img {
+        ///            max-width: 100%;
+        ///        }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;bod [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string ticket {
             get {
