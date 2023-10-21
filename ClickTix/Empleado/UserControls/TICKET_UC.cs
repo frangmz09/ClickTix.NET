@@ -95,7 +95,7 @@ namespace ClickTix.Empleado.UserControls
         {
             SaveFileDialog guardar = new SaveFileDialog();
             guardar.FileName = DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf";
-            string html = Properties.Resources.ticket.ToString();
+            string html = Properties.Resources.ticket;
             html = html.Replace("@nroSalaTicket", nrosala_ticket.Text);
             html = html.Replace("@tituloTicket", nombre_pelicula_ticket.Text);
             html = html.Replace("@fechaTicket", fecha_ticket.Text);
