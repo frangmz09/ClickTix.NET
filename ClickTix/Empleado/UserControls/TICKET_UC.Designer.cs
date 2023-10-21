@@ -43,11 +43,12 @@
             this.nrosala_ticket = new System.Windows.Forms.Label();
             this.idioma_ticket = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.btn_MenuPrincipal = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(206, 375);
+            this.button1.Location = new System.Drawing.Point(205, 340);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(389, 39);
             this.button1.TabIndex = 1;
@@ -195,10 +196,21 @@
             this.label9.TabIndex = 18;
             this.label9.Text = "Idioma";
             // 
+            // btn_MenuPrincipal
+            // 
+            this.btn_MenuPrincipal.Location = new System.Drawing.Point(336, 385);
+            this.btn_MenuPrincipal.Name = "btn_MenuPrincipal";
+            this.btn_MenuPrincipal.Size = new System.Drawing.Size(115, 42);
+            this.btn_MenuPrincipal.TabIndex = 20;
+            this.btn_MenuPrincipal.Text = "Volver al menu";
+            this.btn_MenuPrincipal.UseVisualStyleBackColor = true;
+            this.btn_MenuPrincipal.Click += new System.EventHandler(this.btn_MenuPrincipal_Click);
+            // 
             // TICKET_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_MenuPrincipal);
             this.Controls.Add(this.idioma_ticket);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.nrosala_ticket);
@@ -237,5 +249,6 @@
         private System.Windows.Forms.Label nrosala_ticket;
         private System.Windows.Forms.Label idioma_ticket;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btn_MenuPrincipal;
     }
 }

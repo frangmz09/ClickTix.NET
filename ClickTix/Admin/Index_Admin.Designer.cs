@@ -34,6 +34,7 @@
             this.btn_funciones = new System.Windows.Forms.Button();
             panel1 = new System.Windows.Forms.Panel();
             this.btn_dimensiones = new System.Windows.Forms.Button();
+            this.btn_logOut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_peliculas
@@ -93,11 +94,22 @@
             this.btn_dimensiones.UseVisualStyleBackColor = true;
             this.btn_dimensiones.Click += new System.EventHandler(this.btn_dimensiones_Click);
             // 
+            // btn_logOut
+            // 
+            this.btn_logOut.Location = new System.Drawing.Point(648, 8);
+            this.btn_logOut.Name = "btn_logOut";
+            this.btn_logOut.Size = new System.Drawing.Size(98, 23);
+            this.btn_logOut.TabIndex = 6;
+            this.btn_logOut.Text = "Cerrar Sesion";
+            this.btn_logOut.UseVisualStyleBackColor = true;
+            this.btn_logOut.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Index_Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_logOut);
             this.Controls.Add(this.btn_dimensiones);
             this.Controls.Add(panel1);
             this.Controls.Add(this.btn_funciones);
@@ -118,6 +130,7 @@
         private System.Windows.Forms.Button btn_empleado;
         private System.Windows.Forms.Button btn_funciones;
         private System.Windows.Forms.Button btn_dimensiones;
+        private System.Windows.Forms.Button btn_logOut;
         public static System.Windows.Forms.Panel panel1;
     }
 }

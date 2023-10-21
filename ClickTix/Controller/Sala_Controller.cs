@@ -53,7 +53,7 @@ namespace ClickTix.Controller
 
             cmd.Parameters.AddWithValue("@id", sala.Id);
             cmd.Parameters.AddWithValue("@filas", sala.Filas);
-            cmd.Parameters.AddWithValue("@columna", sala.Columnas);
+            cmd.Parameters.AddWithValue("@columnas", sala.Columnas);
             cmd.Parameters.AddWithValue("@capacidad", sala.Capacidad);
             cmd.Parameters.AddWithValue("@nro_sala", sala.Nro_Sala);
             ManagerConnection.OpenConnection();
@@ -194,6 +194,57 @@ namespace ClickTix.Controller
                 ManagerConnection.CloseConnection();
             }
         }
+
+
+
+        public static int ObtenerNroSala(int idSala)
+        {
+            ManagerConnection.OpenConnection();
+            int nroSala = 0;
+            string query = "SELECT nro_sala FROM sala WHERE id = @id";
+
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
+            cmd.Parameters.AddWithValue("@id", idSala);
+
+            try
+            {
+                object result = cmd.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                {
+                    nroSala = Convert.ToInt32(result);
+                }
+
+                return nroSala;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el máximo número de sala: " + ex.Message);
+            }
+            finally
+            {
+                ManagerConnection.CloseConnection();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -28,5 +28,13 @@ namespace ClickTix.Empleado.UserControls
             LECTORQR_UC lector = new LECTORQR_UC();
             Index_User.addUserControlUsuario(lector);
         }
+
+        private void LogOut_Click(object sender, EventArgs e)
+        {
+            
+            Login loginForm = new Login();
+            loginForm.Show();
+            Parent.Parent.Hide();
+        }
     }
 }
