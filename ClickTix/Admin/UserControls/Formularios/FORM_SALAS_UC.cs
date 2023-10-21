@@ -18,6 +18,7 @@ namespace ClickTix.UserControls
     {
 
         private int idDelPanel;
+        private int idDeSucursal;
         public FORM_SALAS_UC()
         {
             InitializeComponent();
@@ -30,7 +31,36 @@ namespace ClickTix.UserControls
             this.idDelPanel = id;
             InitializeComponent();
             this.addsala_btn.Click += new System.EventHandler(this.addsala_btn_Click);
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click_Crear);
+            int valor = Sala_Controller.ObtenerMaxNroSala(id)+1;
+            this.valorNroSala.Text = valor.ToString();
             //CargarDatosSala(id);
+            this.addsala_btn.Text = "agregar";
+                
+
+        }
+
+        public FORM_SALAS_UC(int idSalaAModificar ,int idSucursal )
+        {
+
+
+            //MessageBox.Show("id de sala  a modificar : " + idSalaAModificar);
+
+            //MessageBox.Show("id de sucursal: " + idSucursal);
+
+
+
+            this.idDeSucursal = idSucursal;
+            this.idDelPanel = idSalaAModificar;
+            InitializeComponent();
+            this.addsala_btn.Click += new System.EventHandler(this.addsala_btn_Click2);
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click_Actualizar);
+            int valor = Sala_Controller.ObtenerNroSala(idSalaAModificar);
+            this.valorNroSala.Text = valor.ToString();
+            
+            this.addsala_btn.Text = "modificar";
+
+            CargarDatosSala(idSalaAModificar);
 
         }
 
@@ -57,6 +87,23 @@ namespace ClickTix.UserControls
         private void addsala_btn_Click2(object sender, EventArgs e)
         {
 
+            Sala s = new Sala();
+
+            MessageBox.Show("id sucursal : " + this.idDelPanel);
+
+
+            s.Id = this.idDelPanel;
+            s.Filas = (int)input_filas.Value;
+            s.Columnas = (int)input_columnas.Value;
+            s.Capacidad = (int)input_columnas.Value * (int)input_filas.Value;
+
+            int valor = Sala_Controller.ObtenerNroSala(this.idDelPanel);
+            s.Nro_Sala = valor ;
+
+            //PrecioDimension_Controller.ActualizarDimension(s);
+
+            Sala_Controller.ActualizarSala(s);
+
 
         }
 
@@ -68,7 +115,7 @@ namespace ClickTix.UserControls
         {
             try
             {
-                string consulta = "SELECT id, filas, columna, capacidad, nro_sala FROM sala WHERE id = @id";
+                string consulta = "SELECT id, filas, columnas FROM sala WHERE id = @id";
 
                 ManagerConnection.OpenConnection();
 
@@ -81,9 +128,8 @@ namespace ClickTix.UserControls
                         if (reader.Read())
                         {
                             input_filas.Text = reader["filas"].ToString();
-                            input_columnas.Text = reader["columna"].ToString();
-                            valorCapacidad.Text = reader["capacidad"].ToString();
-                            valorNroSala.Text = reader["nro_sala"].ToString();
+                            input_columnas.Text = reader["columnas"].ToString();
+                            
                         }
                         else
                         {
@@ -113,10 +159,17 @@ namespace ClickTix.UserControls
 
         }
 
-        private void back_pelicula_Click_1(object sender, EventArgs e)
+        private void back_pelicula_Click_Crear(object sender, EventArgs e)
         {
-            ABM_SALAS_UC sucursales_uc = new ABM_SALAS_UC(this.idDelPanel);
-            Index_Admin.addUserControl(sucursales_uc);
+            ABM_SALAS_UC abm_salas_uc = new ABM_SALAS_UC(this.idDelPanel);
+            Index_Admin.addUserControl(abm_salas_uc);
+
+        }
+
+        private void back_pelicula_Click_Actualizar(object sender, EventArgs e)
+        {
+            ABM_SALAS_UC abm_salas_uc = new ABM_SALAS_UC(this.idDeSucursal);
+            Index_Admin.addUserControl(abm_salas_uc);
 
         }
 

@@ -40,7 +40,7 @@ namespace ClickTix.UserControls
                 int id = Convert.ToInt32(grid_salas.Rows[e.RowIndex].Cells["id"].Value);
 
 
-                FORM_SALAS_UC formModificarSucursal = new FORM_SALAS_UC(id);
+                FORM_SALAS_UC formModificarSucursal = new FORM_SALAS_UC(id,this.idSucursalSeleccionada);
 
                 Index_Admin.addUserControl(formModificarSucursal);
 
@@ -57,10 +57,13 @@ namespace ClickTix.UserControls
                 if (result == DialogResult.Yes)
                 {
 
-                    Sucursal_Controller.EliminarRegistroSucursal(id);
+                    Sala_Controller.EliminarRegistroSala(id);
+                    Sala_Controller.Salas_Load(this.grid_salas, idSucursalSeleccionada);
+
+                    //Sucursal_Controller.EliminarRegistroSucursal(id);
 
 
-                    Sucursal_Controller.Sucursal_Load(this.grid_salas);
+                    //Sucursal_Controller.Sucursal_Load(this.grid_salas);
 
                 }
             }
