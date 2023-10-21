@@ -40,11 +40,26 @@ namespace ClickTix.Empleado.UserControls
         private void LECTORQR_UC_Load(object sender, EventArgs e)
         {
             dispositivos = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            foreach (FilterInfo dispositivo in dispositivos)
+
+            if (dispositivos.Count>0)
             {
-                comboBox1.Items.Add(dispositivo.Name);
+                foreach (FilterInfo dispositivo in dispositivos)
+                {
+                    comboBox1.Items.Add(dispositivo.Name);
+                }
+                comboBox1.SelectedIndex = 0;
             }
-            comboBox1.SelectedIndex = 0;
+            else
+            {
+                comboBox1.Items.Clear();
+                comboBox1.Enabled = false;
+                pictureBox1.Enabled = false;
+                button1.Enabled = false;
+                error.Visible = true;
+
+            }
+
+
         }
 
 

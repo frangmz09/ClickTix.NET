@@ -32,6 +32,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.groupbox1 = new System.Windows.Forms.GroupBox();
             this.back_pelicula = new System.Windows.Forms.Button();
+            this.error = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupbox1.SuspendLayout();
             this.SuspendLayout();
@@ -151,10 +152,23 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
+            // error
+            // 
+            this.error.Font = new System.Drawing.Font("Roboto Cn", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.error.ForeColor = System.Drawing.Color.Red;
+            this.error.Location = new System.Drawing.Point(539, 320);
+            this.error.Name = "error";
+            this.error.Size = new System.Drawing.Size(224, 41);
+            this.error.TabIndex = 78;
+            this.error.Text = "No se detectaron dispositivos de grabacion, por favor ingrese el código de manera" +
+    " manual";
+            this.error.Visible = false;
+            // 
             // LECTORQR_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.error);
             this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.groupbox1);
             this.Controls.Add(this.textBox1);
@@ -190,5 +204,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupbox1;
         private System.Windows.Forms.Button back_pelicula;
+        private System.Windows.Forms.Label error;
     }
 }
