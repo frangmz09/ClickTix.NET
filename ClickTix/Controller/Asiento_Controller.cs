@@ -73,12 +73,11 @@ namespace ClickTix.Modelo
                 {
 
                     string consulta =
-                        "select sala.filas, sala.columnas from funcion inner join sala on funcion.id_sala = sala.id;;";
+                        "select sala.filas, sala.columnas from funcion inner join sala on funcion.id_sala = sala.id where funcion.id = @id_funcion;";
 
                     using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
                     {
                         cmd.Parameters.AddWithValue("@id_funcion", funcion.Id);
-                        cmd.Parameters.AddWithValue("@id_sala", funcion.Id_Sala);
                         MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
