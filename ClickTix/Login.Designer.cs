@@ -45,11 +45,12 @@
             // 
             // txt_pw
             // 
-            this.txt_pw.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.txt_pw.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.txt_pw.Location = new System.Drawing.Point(276, 217);
             this.txt_pw.Name = "txt_pw";
             this.txt_pw.Size = new System.Drawing.Size(174, 20);
             this.txt_pw.TabIndex = 1;
+            this.txt_pw.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -81,7 +82,7 @@
             this.btn_login.UseVisualStyleBackColor = false;
             this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
             // 
-            // Form1
+            // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -91,7 +92,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_pw);
             this.Controls.Add(this.txt_user);
-            this.Name = "Form1";
+            this.Name = "Login";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
