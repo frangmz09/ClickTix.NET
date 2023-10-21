@@ -68,5 +68,11 @@ namespace ClickTix
             uc.BringToFront();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Login loginForm = new Login();
+            loginForm.Show();
+            this.Hide();
+        }
     }
 }
