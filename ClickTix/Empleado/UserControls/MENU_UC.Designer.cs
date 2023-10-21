@@ -30,6 +30,7 @@
         {
             this.retirar = new System.Windows.Forms.Button();
             this.comprar = new System.Windows.Forms.Button();
+            this.LogOut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // retirar
@@ -54,10 +55,21 @@
             this.comprar.UseVisualStyleBackColor = true;
             this.comprar.Click += new System.EventHandler(this.comprar_Click);
             // 
+            // LogOut
+            // 
+            this.LogOut.Location = new System.Drawing.Point(664, 3);
+            this.LogOut.Name = "LogOut";
+            this.LogOut.Size = new System.Drawing.Size(133, 41);
+            this.LogOut.TabIndex = 8;
+            this.LogOut.Text = "Cerrar Sesion";
+            this.LogOut.UseVisualStyleBackColor = true;
+            this.LogOut.Click += new System.EventHandler(this.LogOut_Click);
+            // 
             // MENU_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.LogOut);
             this.Controls.Add(this.retirar);
             this.Controls.Add(this.comprar);
             this.Name = "MENU_UC";
@@ -70,5 +82,6 @@
 
         private System.Windows.Forms.Button retirar;
         private System.Windows.Forms.Button comprar;
+        private System.Windows.Forms.Button LogOut;
     }
 }
