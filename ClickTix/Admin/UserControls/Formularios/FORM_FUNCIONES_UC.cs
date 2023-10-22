@@ -21,15 +21,21 @@ namespace ClickTix.UserControls
     {
 
 
-        Funcion funcionActual;
+        Funcion funcionActual = new Funcion();
         private int idDelPanel;
         Image imagenCargada;
         public FORM_FUNCIONES_UC()
         {
+            funcionActual = null;
             InitializeComponent();
             addfuncion_btn.Click += addfuncion_btn_Click;
 
             this.combobox_turno.Enabled = false;
+            this.combobox_sucursal.Enabled = false;
+            this.combobox_sala.Enabled = false;
+            this.combobox_fecha.Enabled = false;
+            this.combobox_idioma.Enabled = false;
+            this.combobox_dimension.Enabled = false;
         }
 
         public FORM_FUNCIONES_UC(int id)
@@ -62,12 +68,25 @@ namespace ClickTix.UserControls
         private void addfuncion_btn_Click(object sender, EventArgs e)
         {
 
+            if (string.IsNullOrWhiteSpace(combobox_dimension.Text) || string.IsNullOrWhiteSpace(combobox_fecha.Text)
+                || string.IsNullOrWhiteSpace(combobox_idioma.Text)
+                || string.IsNullOrWhiteSpace(combobox_pelicula.Text) || string.IsNullOrWhiteSpace(combobox_sala.Text)
+                || string.IsNullOrWhiteSpace(combobox_sucursal.Text) || string.IsNullOrWhiteSpace(combobox_turno.Text))
+            {
+                MessageBox.Show("Por favor llene los campos antes de hacer el alta de funcion.");
+            }
+            else
+            {
+                
             funcionActual.Id = Funcion_Controller.crearFuncion(funcionActual);
-            Asiento_Controller.crearDisponibilidad(funcionActual);
+                Asiento_Controller.crearDisponibilidad(funcionActual);
 
 
-            ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
-            Index_Admin.addUserControl(abmfuncion);
+                ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
+                Index_Admin.addUserControl(abmfuncion);
+            }
+
+
 
         }
 
@@ -157,7 +176,10 @@ namespace ClickTix.UserControls
             {
 
             }
-
+            this.combobox_sucursal.Enabled = true;
+            this.combobox_fecha.Enabled = true;
+            this.combobox_idioma.Enabled = true;
+            this.combobox_dimension.Enabled = true;
         }
         private void cambioFecha(object sender, EventArgs e)
         {
@@ -170,8 +192,9 @@ namespace ClickTix.UserControls
             funcionActual.Id_Sala = 0;
             combobox_sala.SelectedItem = null;
             combobox_sala.Text = "";
-
+            this.combobox_sala.Enabled = true;
             funcionActual.Id_Turno = 0;
+            
             combobox_turno.Enabled = false;
             combobox_turno.SelectedItem = null;
             combobox_turno.Text = "";
@@ -249,7 +272,7 @@ namespace ClickTix.UserControls
 
         private void llenarTurnosDisponibles()
         {
-
+            combobox_turno.Items.Clear();
             this.combobox_turno.Enabled = true;
             int idSucursal = Funcion_Controller.ObtenerIdSucursalPorIdSala(Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal));
 
@@ -289,6 +312,10 @@ namespace ClickTix.UserControls
 
         }
 
-        
+        private void back_pelicula_Click_1(object sender, EventArgs e)
+        {
+            ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
+            Index_Admin.addUserControl(abmfuncion);
+        }
     }
 }

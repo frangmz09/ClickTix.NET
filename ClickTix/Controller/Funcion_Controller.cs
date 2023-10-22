@@ -163,7 +163,11 @@ namespace ClickTix.Modelo
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
-                        command.Parameters.AddWithValue("@fecha_seleccionada", combobox_turno.SelectedItem.ToString());
+                        if (combobox_turno != null && combobox_turno.Enabled == true)
+                        {
+                            command.Parameters.AddWithValue("@fecha_seleccionada", combobox_turno.SelectedItem.ToString());
+
+                        }
 
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {

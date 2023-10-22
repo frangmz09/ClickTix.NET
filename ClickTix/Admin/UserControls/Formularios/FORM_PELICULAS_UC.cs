@@ -397,11 +397,6 @@ namespace ClickTix.UserControls
 
 
 
-        private void addpelicula_btn_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
 
 
         private void LlenarComboBoxClasificacion()

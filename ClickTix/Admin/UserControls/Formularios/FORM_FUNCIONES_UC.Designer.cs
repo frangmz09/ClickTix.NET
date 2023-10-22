@@ -221,6 +221,7 @@
             this.back_pelicula.TabIndex = 64;
             this.back_pelicula.Text = "<";
             this.back_pelicula.UseVisualStyleBackColor = true;
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click_1);
             // 
             // FORM_FUNCIONES_UC
             // 
