@@ -1,5 +1,6 @@
 ﻿using ClickTix.Conexion;
 using ClickTix.Empleado;
+using ClickTix.Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -74,6 +75,11 @@ namespace ClickTix
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_pw_TextChanged(object sender, EventArgs e)
         {
 
         }

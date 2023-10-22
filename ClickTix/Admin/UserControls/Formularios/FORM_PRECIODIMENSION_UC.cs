@@ -60,6 +60,8 @@ namespace ClickTix.Admin.UserControls.Formularios
                 pd.dimension = input_nombre.Text;
 
                 PrecioDimension_Controller.CrearDimension(pd);
+                ABM_PRECIODIMENSION_UC abmPrecioDimension = new ABM_PRECIODIMENSION_UC();
+                Index_Admin.addUserControl(abmPrecioDimension);
             }
             
 
@@ -80,6 +82,8 @@ namespace ClickTix.Admin.UserControls.Formularios
                 pd.dimension = input_nombre.Text;
 
                 PrecioDimension_Controller.ActualizarDimension(pd);
+                ABM_PRECIODIMENSION_UC abmPrecioDimension = new ABM_PRECIODIMENSION_UC();
+                Index_Admin.addUserControl(abmPrecioDimension);
             }
 
             

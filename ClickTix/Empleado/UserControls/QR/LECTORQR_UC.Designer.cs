@@ -32,6 +32,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.groupbox1 = new System.Windows.Forms.GroupBox();
             this.back_pelicula = new System.Windows.Forms.Button();
+            this.error1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupbox1.SuspendLayout();
             this.SuspendLayout();
@@ -39,10 +40,10 @@
             // title_qr
             // 
             this.title_qr.AutoSize = true;
-            this.title_qr.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title_qr.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title_qr.Location = new System.Drawing.Point(302, 41);
             this.title_qr.Name = "title_qr";
-            this.title_qr.Size = new System.Drawing.Size(187, 24);
+            this.title_qr.Size = new System.Drawing.Size(192, 25);
             this.title_qr.TabIndex = 67;
             this.title_qr.Text = "Escanear código QR";
             this.title_qr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -151,10 +152,23 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
+            // error1
+            // 
+            this.error1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.error1.ForeColor = System.Drawing.Color.Red;
+            this.error1.Location = new System.Drawing.Point(539, 320);
+            this.error1.Name = "error1";
+            this.error1.Size = new System.Drawing.Size(224, 41);
+            this.error1.TabIndex = 78;
+            this.error1.Text = "No se detectaron dispositivos de grabacion, por favor ingrese el código de manera" +
+    " manual";
+            this.error1.Visible = false;
+            // 
             // LECTORQR_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.error1);
             this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.groupbox1);
             this.Controls.Add(this.textBox1);
@@ -190,5 +204,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupbox1;
         private System.Windows.Forms.Button back_pelicula;
+        private System.Windows.Forms.Label error1;
     }
 }

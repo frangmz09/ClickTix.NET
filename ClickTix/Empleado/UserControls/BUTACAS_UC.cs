@@ -197,5 +197,7 @@ namespace ClickTix.Empleado.UserControls
             ELEGIR_FUNCION_UC funcionElegir = new ELEGIR_FUNCION_UC(tituloPelicula, idFuncion);
             Index_User.addUserControlUsuario(funcionElegir);
         }
+
+
     }
 }

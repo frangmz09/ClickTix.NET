@@ -30,8 +30,14 @@ namespace ClickTix
             if (validateConnection())
             {
                 Trace.WriteLine("Conexion a la base de datos establecida con exito");
+                Funcion_Controller.validarAsientosaBorrar();
+                Application.Run(new Login());
+
             }
-            Application.Run(new Login());
+            else
+            {
+                MessageBox.Show("La conexion a la Base de Datos no se pudo establecer");
+            }
         }
 
         private static bool validateConnection()

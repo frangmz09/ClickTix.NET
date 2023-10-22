@@ -73,6 +73,8 @@ namespace ClickTix
 
 
                 Empleado_Controller.ActualizarEmpleado(em);
+                ABM_EMPLEADOS_UC abmempleados = new ABM_EMPLEADOS_UC();
+                Index_Admin.addUserControl(abmempleados);
             }
 
 
@@ -119,6 +121,9 @@ namespace ClickTix
                 Trace.WriteLine(idSucursal);
 
                 Empleado_Controller.CrearEmpleado(em);
+                ABM_EMPLEADOS_UC abmempleados = new ABM_EMPLEADOS_UC();
+                Index_Admin.addUserControl(abmempleados);
+
             }
 
 

@@ -115,7 +115,7 @@ namespace ClickTix.Conexion
                 ManagerConnection.OpenConnection();
 
 
-                string query = "SELECT  id, nombre, cuit,direccion,numerosalas FROM sucursal";
+                string query = "SELECT  id, nombre, cuit,direccion FROM sucursal";
 
                 using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {

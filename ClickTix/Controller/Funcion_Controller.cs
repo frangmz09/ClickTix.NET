@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZXing;
 
 namespace ClickTix.Modelo
 {
@@ -649,6 +650,50 @@ namespace ClickTix.Modelo
                 ManagerConnection.CloseConnection();
             }
         }
+
+
+
+        public static void validarAsientosaBorrar()
+        {
+            List<int> idsABorrar = new List<int>();
+            ManagerConnection.OpenConnection();
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                string query = "select id, fecha from funcion";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        int funcionId = reader.GetInt32(0);
+                        DateTime fechaFuncion = reader.GetDateTime(1);
+                        DateTime fechaActual = DateTime.Now;
+
+                        if (fechaFuncion < fechaActual)
+                        {
+                            idsABorrar.Add(funcionId);
+                        }
+                    }
+                }
+            }
+
+
+            foreach (int id in idsABorrar)
+            {
+                Asiento_Controller.borrarAsientosDeFuncion(id);
+
+            }
+
+            ManagerConnection.CloseConnection();
+
+        }
+
+
+
+
         public static Funcion buscarFuncionPorId(int idFuncion) {
 
             Funcion funcionAuxiliar = new Funcion();
@@ -686,14 +731,6 @@ namespace ClickTix.Modelo
 
             return funcionAuxiliar;
         }
-
-
-
-
-        
-
-
-
 
 
 

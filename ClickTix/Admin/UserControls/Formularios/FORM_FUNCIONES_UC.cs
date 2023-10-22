@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Controller;
 using ClickTix.Modelo;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Crypto;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +23,7 @@ namespace ClickTix.UserControls
 
         Funcion funcionActual;
         private int idDelPanel;
-
+        Image imagenCargada;
         public FORM_FUNCIONES_UC()
         {
             InitializeComponent();
@@ -36,8 +38,23 @@ namespace ClickTix.UserControls
             this.idDelPanel = id;
             int funcionId = id;
             CargarDatosFuncion(funcionId);
+            string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + Pelicula_Controller.obtenerFileName(Pelicula_Controller.obtenerIdPorNombre(combobox_pelicula.Text)));
 
+            try
+            {
 
+                if (File.Exists(rutaImagen))
+                {
+
+                    imagenCargada = Image.FromFile(rutaImagen);
+                    pictureBox1.Image = imagenCargada;
+
+                }
+            }
+            catch
+            {
+
+            }
             addfuncion_btn.Text = "Modificar";
             addfuncion_btn.Click += addfuncion_btn_Click2;
         }
@@ -49,6 +66,8 @@ namespace ClickTix.UserControls
             Asiento_Controller.crearDisponibilidad(funcionActual);
 
 
+            ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
+            Index_Admin.addUserControl(abmfuncion);
 
         }
 
@@ -78,7 +97,8 @@ namespace ClickTix.UserControls
             Funcion_Controller.ActualizarFuncion(f);
 
 
-            
+            ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
+            Index_Admin.addUserControl(abmfuncion);
 
         }
 
@@ -119,6 +139,24 @@ namespace ClickTix.UserControls
         {
             funcionActual.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
             Trace.WriteLine(funcionActual.Id_Pelicula);
+
+            string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + Pelicula_Controller.obtenerFileName(Pelicula_Controller.obtenerIdPorNombre(combobox_pelicula.Text)));
+
+            try
+            {
+
+                if (File.Exists(rutaImagen))
+                {
+
+                    imagenCargada = Image.FromFile(rutaImagen);
+                    pictureBox1.Image = imagenCargada;
+
+                }
+            }
+            catch
+            {
+
+            }
 
         }
         private void cambioFecha(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
 using System;
@@ -34,9 +35,9 @@ namespace ClickTix.Modelo
                         auxiliar.Id = reader.GetInt32(0);
                         auxiliar.Fila = reader.GetInt32(1);
                         auxiliar.Columna = reader.GetInt32(3);
-                        if (reader.GetInt32(2)== 1)
+                        if (reader.GetInt32(2) == 1)
                         {
-                            auxiliar.Disponible = true;                           
+                            auxiliar.Disponible = true;
                         }
                         else
                         {
@@ -81,7 +82,7 @@ namespace ClickTix.Modelo
                         MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                        
+
                             filas = reader.GetInt32(0);
                             columnas = reader.GetInt32(1);
 
@@ -138,8 +139,8 @@ namespace ClickTix.Modelo
                         if (reader.Read())
                         {
 
-                              fila = reader.GetInt32(0);
-                            
+                            fila = reader.GetInt32(0);
+
                         }
                         else
                         {
@@ -181,30 +182,30 @@ namespace ClickTix.Modelo
         }
         public static bool insertAsiento(Asiento asiento) {
 
-       
-                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
-                {
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
 
                 string consulta = "INSERT INTO asiento (id,fila,disponible,columna,id_funcion) " +
                                       "VALUES (@id,@fila,@disponible,@columna,@id_funcion)";
-                    int id = GetMaxIDAsiento() + 1;
-                    using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
-                    {
+                int id = GetMaxIDAsiento() + 1;
+                using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
+                {
                     ManagerConnection.OpenConnection();
 
                     cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@fila", asiento.Fila);
-                        cmd.Parameters.AddWithValue("@columna", asiento.Columna);
-                        cmd.Parameters.AddWithValue("@disponible", 1);
-                        cmd.Parameters.AddWithValue("@id_funcion", asiento.Id_Funcion);
+                    cmd.Parameters.AddWithValue("@fila", asiento.Fila);
+                    cmd.Parameters.AddWithValue("@columna", asiento.Columna);
+                    cmd.Parameters.AddWithValue("@disponible", 1);
+                    cmd.Parameters.AddWithValue("@id_funcion", asiento.Id_Funcion);
 
-                        cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     ManagerConnection.CloseConnection();
 
                     return true;
-                    }
                 }
-            
+            }
+
 
         }
 
@@ -259,5 +260,32 @@ namespace ClickTix.Modelo
 
             return maxID;
         }
+
+        public static void borrarAsientosDeFuncion(int idFuncion) {
+
+            try
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "DELETE FROM asiento WHERE id_funcion = @IdFuncion";
+
+                MySqlCommand command = new MySqlCommand(query, ManagerConnection.getInstance());
+                command.Parameters.AddWithValue("@IdFuncion", idFuncion);
+
+                int rowsAffected = command.ExecuteNonQuery();
+                Trace.WriteLine($"Se eliminaron {rowsAffected} asientos vinculados a la función con ID {idFuncion}.");
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine( ex.Message);
+            }
+
+            ManagerConnection.CloseConnection();
+
+
+        }
+
     }
 }

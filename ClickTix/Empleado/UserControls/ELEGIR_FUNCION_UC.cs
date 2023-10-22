@@ -43,7 +43,7 @@ namespace ClickTix.Empleado
             string query = "select  funcion.id, sala.nro_sala , dimension.dimension, idioma.idioma, dimension.precio,funcion.fecha, turno.hora from funcion " +
                 "left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id " +
                 "left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id " +
-                "left join turno on funcion.turno_id = turno.id where pelicula.titulo = @titulo and sala.id_sucursal = @id_sucursal;";
+                "left join turno on funcion.turno_id = turno.id where pelicula.titulo = @titulo and sala.id_sucursal = @id_sucursal and funcion.fecha > NOW();";
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {

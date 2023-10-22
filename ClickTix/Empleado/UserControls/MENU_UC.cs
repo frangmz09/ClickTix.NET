@@ -31,10 +31,17 @@ namespace ClickTix.Empleado.UserControls
 
         private void LogOut_Click(object sender, EventArgs e)
         {
-            
-            Login loginForm = new Login();
-            loginForm.Show();
-            Parent.Parent.Hide();
+            DialogResult result = MessageBox.Show("¿Estás seguro que deseas cerrar sesión?", "Confirmar Cierre de Sesión",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Login loginForm = new Login();
+                loginForm.Show();
+                Parent.Parent.Hide();
+            }
+            else if (result == DialogResult.No)
+            {
+            }
         }
     }
 }

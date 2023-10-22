@@ -1,4 +1,8 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Controller;
+using ClickTix.Modelo;
+using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -19,6 +23,8 @@ namespace ClickTix.UserControls
 
         private int idDelPanel;
         Image ImagenCargada;
+        private string extensionAntigua = "";
+        private string rutaAntigua = "";
 
         public FORM_PELICULAS_UC()
         {
@@ -46,13 +52,29 @@ namespace ClickTix.UserControls
             addpelicula_btn.Text = "modificar";
             this.title.Text = "INGRESE DATOS PARA ACTUALIZAR UNA PELICULA";
 
+            string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + Pelicula_Controller.obtenerFileName(peliculaID));
 
+            try {
+
+                if (File.Exists(rutaImagen))
+                {
+                    extensionAntigua = Path.GetExtension(rutaImagen);
+                    rutaAntigua = rutaImagen;
+                    ImagenCargada = Image.FromFile(rutaImagen);
+                    pictureBox1.Image = ImagenCargada;
+                    pictureBox1.Tag = Path.GetExtension(rutaImagen);
+
+                }
+            }
+            catch {
+                
+            }
             CargarDatosPelicula(peliculaID);
 
 
         }
 
-
+        
 
         private void FORM_PELICULAS_UC_Load(object sender, EventArgs e)
         {
@@ -79,13 +101,18 @@ namespace ClickTix.UserControls
                 int id = GetMaxID() + 1;
                 int idGenero = ObtenerIdGenero(input_genero.Text);
                 int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
-                InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, "imagen", input_estreno.Value);
+                string fileName = guardarImagen(id);
+                InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, fileName, input_estreno.Value);
+                ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
+                Index_Admin.addUserControl(abmpeliculas);
+
             }
 
 
 
 
         }
+
 
         private void Addpelicula_btn_Click2(object sender, EventArgs e)
         {
@@ -104,10 +131,18 @@ namespace ClickTix.UserControls
                 int idGenero = ObtenerIdGenero(input_genero.Text);
                 int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
                 int idpelicula = idDelPanel;
-                MessageBox.Show("id : " + idpelicula);
-                ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, "imagen", input_estreno.Value);
-            }
+                Trace.WriteLine(extensionAntigua);
+                string fileName = guardarImagen(idpelicula);
 
+
+
+                MessageBox.Show("id : " + idpelicula);
+                ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, fileName, input_estreno.Value);
+                Trace.WriteLine("la ruta es:" + rutaAntigua);
+
+                ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
+                Index_Admin.addUserControl(abmpeliculas);
+            }
 
 
         }
@@ -130,11 +165,13 @@ namespace ClickTix.UserControls
         private bool InsertarPelicula(int id, string titulo, string director, decimal duracion, string descripcion, int categoria, int clasificacion, string portada, DateTime fechaEstreno)
         {
 
+
+
             try
             {
 
-                string consulta = "INSERT INTO pelicula (id,titulo, director, duracion,descripcion, id_categoria, id_clasificacion, portada, fecha_estreno) " +
-                                  "VALUES (@id,@titulo, @director, @duracion,@descripcion ,@categoria, @clasificacion, @portada, @fechaEstreno)";
+                string consulta = "INSERT INTO pelicula (id,titulo, director, duracion,descripcion, id_categoria, id_clasificacion, portada, fecha_estreno, esta_activa) " +
+                                  "VALUES (@id,@titulo, @director, @duracion,@descripcion ,@categoria, @clasificacion, @portada, @fechaEstreno, 1)";
                 ManagerConnection.OpenConnection();
                 using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
                 {
@@ -149,22 +186,21 @@ namespace ClickTix.UserControls
                     cmd.Parameters.AddWithValue("@fechaEstreno", fechaEstreno);
 
                     cmd.ExecuteNonQuery();
-                  
+
                     return true;
                 }
+
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al insertar el registro: " + ex.Message);
-                
+                MessageBox.Show("Error al cargar los datos de la película: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
-
             }
             finally
             {
                 ManagerConnection.CloseConnection();
             }
-
 
         }
 
@@ -314,10 +350,52 @@ namespace ClickTix.UserControls
             openFileDialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png\"";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+
                 ImagenCargada = Image.FromFile(openFileDialog.FileName);
                 pictureBox1.Image = ImagenCargada;
+                pictureBox1.Tag = Path.GetExtension(openFileDialog.FileName);
             }
+
+
         }
+
+  
+        private string guardarImagen(int idPelicula)
+        {
+
+            try
+            {
+
+
+                long timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+                string rutaDeGuardado = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + timestamp);
+
+                string extension = pictureBox1.Tag.ToString();
+
+                string fileName = timestamp + extension;
+
+                string rutaCompleta = rutaDeGuardado + extension;
+
+                Trace.WriteLine(rutaCompleta);
+
+
+                ImagenCargada.Save(rutaCompleta);
+
+
+                return fileName;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al guardar la imagen: " + ex.Message);
+
+                return "";
+            }
+
+        }
+
+
 
         private void addpelicula_btn_Click_1(object sender, EventArgs e)
         {
