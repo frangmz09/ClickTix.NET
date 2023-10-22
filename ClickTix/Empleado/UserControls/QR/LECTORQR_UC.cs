@@ -57,7 +57,7 @@ namespace ClickTix.Empleado.UserControls
                 comboBox1.Enabled = false;
                 pictureBox1.Enabled = false;
                 button1.Enabled = false;
-                error.Visible = true;
+                error1.Visible = true;
 
             }
 

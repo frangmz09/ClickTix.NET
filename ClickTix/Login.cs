@@ -78,5 +78,10 @@ namespace ClickTix
         {
 
         }
+
+        private void txt_pw_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
