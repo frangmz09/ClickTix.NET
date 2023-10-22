@@ -73,17 +73,27 @@ namespace ClickTix.UserControls
             Sala s = new Sala();
 
 
-            MessageBox.Show("id: "+ idDelPanel);
-            s.Id_Sucursal = this.idDelPanel;
-            s.Filas = (int)input_filas.Value;
-            s.Columnas = (int)input_columnas.Value;
-            s.Capacidad = (int)input_columnas.Value * (int)input_filas.Value;
-            s.Nro_Sala = Sala_Controller.ObtenerMaxNroSala(idDelPanel) + 1;
+
+            if ((input_columnas.Value <= 0 || input_filas.Value <=0))
+            {
+                MessageBox.Show("Los campos no pueden ser 0 ");
+            }
+            else
+            {
+                MessageBox.Show("id: " + idDelPanel);
+                s.Id_Sucursal = this.idDelPanel;
+                s.Filas = (int)input_filas.Value;
+                s.Columnas = (int)input_columnas.Value;
+                s.Capacidad = (int)input_columnas.Value * (int)input_filas.Value;
+                s.Nro_Sala = Sala_Controller.ObtenerMaxNroSala(idDelPanel) + 1;
 
 
-            Sala_Controller.CrearSala(s);
-            ABM_SALAS_UC abm_salas_uc = new ABM_SALAS_UC(this.idDelPanel);
-            Index_Admin.addUserControl(abm_salas_uc);
+                Sala_Controller.CrearSala(s);
+                ABM_SALAS_UC abm_salas_uc = new ABM_SALAS_UC(this.idDelPanel);
+                Index_Admin.addUserControl(abm_salas_uc);
+            }
+
+
         }
 
         private void addsala_btn_Click2(object sender, EventArgs e)
