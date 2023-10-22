@@ -98,21 +98,29 @@ namespace ClickTix.UserControls
             f.Id = this.idDelPanel;
 
 
-            //f.Fecha = combobox_fecha.Value;
+            f.Fecha = combobox_fecha.Value;
 
-            //f.Id_Dimension = Funcion_Controller.obtenerIdDimension(combobox_dimension);
+            f.Id_Dimension = Funcion_Controller.obtenerIdDimension(combobox_dimension);
             
-            //f.Id_Turno = Funcion_Controller.obtenerIdTurno(combobox_turno);
+            f.Id_Turno = Funcion_Controller.ObtenerIdTurno(combobox_turno);
             
-            //f.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
+            f.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
+            if (combobox_sala.Enabled == true)
+            {
+                f.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal);
 
-            //f.Id_Idioma = Funcion_Controller.obtenerIdIdioma(combobox_pelicula);
+            }
+            else
+            {
+                f.Id_Sala = Funcion_Controller.obtenerIdSalaporFuncion(f.Id);
+            }
 
-            //f.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala,combobox_sucursal);
+            f.Id_Idioma = Funcion_Controller.obtenerIdIdioma(combobox_idioma);
+
+
 
 
             Trace.WriteLine(f.Id_Dimension);
-            
             Funcion_Controller.ActualizarFuncion(f);
 
 
@@ -224,19 +232,7 @@ namespace ClickTix.UserControls
         {
             try
             {
-                string consulta = "SELECT f.fecha, " +
-                    "d.dimension, " +
-                    "s.nro_sala, " +
-                    "p.titulo, " +
-                    "i.idioma, " +
-                    "t.hora " +
-                    "FROM funcion f " +
-                    "INNER JOIN sala s ON s.id = f.id_sala " +
-                    "INNER JOIN pelicula p ON p.id = f.id_pelicula " +
-                    "INNER JOIN turno t ON t.id = f.turno_id " +
-                    "INNER JOIN dimension d ON d.id = f.id_dimension " +
-                    "INNER JOIN idioma i ON i.id = f.idioma_funcion " +
-                    "WHERE f.id = @id";
+                string consulta = "SELECT f.fecha, d.dimension, s.nro_sala, p.titulo, i.idioma, t.hora,su.nombre FROM funcion f INNER JOIN sala s ON s.id = f.id_sala  INNER JOIN pelicula p ON p.id = f.id_pelicula  INNER JOIN turno t ON t.id = f.turno_id  INNER JOIN dimension d ON d.id = f.id_dimension INNER JOIN idioma i ON i.id = f.idioma_funcion INNER JOIN sucursal su ON s.id_sucursal = su.id WHERE f.id = @id;";
 
                 ManagerConnection.OpenConnection();
 
@@ -254,6 +250,8 @@ namespace ClickTix.UserControls
                             combobox_idioma.Text = reader["idioma"].ToString();
                             combobox_turno.Text = reader["hora"].ToString();
                             combobox_sala.Text = reader["nro_sala"].ToString();
+                            combobox_sucursal.Text = reader["nombre"].ToString();
+
                         }
                         else
                         {

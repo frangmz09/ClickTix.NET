@@ -59,7 +59,7 @@ namespace ClickTix.Modelo
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    command.Parameters.AddWithValue("@nombre_seleccionado",combobox_pelicula.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("@nombre_seleccionado",combobox_pelicula.Text.ToString());
                     MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -85,7 +85,7 @@ namespace ClickTix.Modelo
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    command.Parameters.AddWithValue("@idioma_seleccionado", combobox_idioma.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("@idioma_seleccionado", combobox_idioma.Text.ToString());
                     MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -110,7 +110,7 @@ namespace ClickTix.Modelo
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    command.Parameters.AddWithValue("@dimension_seleccionada", combobox_dimension.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("@dimension_seleccionada", combobox_dimension.Text.ToString());
                     MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
@@ -165,7 +165,7 @@ namespace ClickTix.Modelo
                     {
                         if (combobox_turno != null && combobox_turno.Enabled == true)
                         {
-                            command.Parameters.AddWithValue("@fecha_seleccionada", combobox_turno.SelectedItem.ToString());
+                            command.Parameters.AddWithValue("@fecha_seleccionada", combobox_turno.Text.ToString());
 
                         }
 
@@ -201,7 +201,7 @@ namespace ClickTix.Modelo
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    command.Parameters.AddWithValue("@nombre_sucursal", combobox_sucursal.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("@nombre_sucursal", combobox_sucursal.Text.ToString());
                     command.Parameters.AddWithValue("@sala_seleccionada", combobox_sala.SelectedItem);
 
                     MySqlDataReader reader = command.ExecuteReader();
@@ -219,6 +219,35 @@ namespace ClickTix.Modelo
             return idReturn;
         }
 
+
+        public static int obtenerIdSalaporFuncion(int idFuncion)
+        {
+
+            int idReturn = 0;
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                mysqlConnection.Open();
+                string query = "select id_sala from funcion where id = @idFuncion";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@idFuncion", idFuncion);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        idReturn = reader.GetInt32(0);
+                    }
+
+                    reader.Close();
+                }
+                mysqlConnection.Close();
+            }
+
+            return idReturn;
+        }
         public static void llenarSalas(ComboBox combobox_sucursal, ComboBox combobox_sala)
         {
             combobox_sala.Items.Clear();
@@ -232,7 +261,7 @@ namespace ClickTix.Modelo
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    command.Parameters.AddWithValue("@nombre_sucursal", combobox_sucursal.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("@nombre_sucursal", combobox_sucursal.Text.ToString());
 
                     MySqlDataReader reader = command.ExecuteReader();
 
@@ -301,6 +330,9 @@ namespace ClickTix.Modelo
                 mysqlConnection.Close();
             }
         }
+
+
+
 
 
 
@@ -629,13 +661,13 @@ namespace ClickTix.Modelo
 
             MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance()); ;
 
-            cmd.Parameters.AddWithValue("@id",31);
-            cmd.Parameters.AddWithValue("@fecha", 1);
-            cmd.Parameters.AddWithValue("@id_dimension", 1);
-            cmd.Parameters.AddWithValue("@id_sala", 1);
-            cmd.Parameters.AddWithValue("@id_pelicula", 1);
-            cmd.Parameters.AddWithValue("@idioma_funcion", 1);
-            cmd.Parameters.AddWithValue("@turno_id", 1);
+            cmd.Parameters.AddWithValue("@id", funcion.Id);
+            cmd.Parameters.AddWithValue("@fecha", funcion.Fecha);
+            cmd.Parameters.AddWithValue("@id_dimension", funcion.Id_Dimension);
+            cmd.Parameters.AddWithValue("@id_sala", funcion.Id_Sala);
+            cmd.Parameters.AddWithValue("@id_pelicula", funcion.Id_Pelicula);
+            cmd.Parameters.AddWithValue("@idioma_funcion", funcion.Id_Idioma);
+            cmd.Parameters.AddWithValue("@turno_id", funcion.Id_Turno);
 
             try
             {
