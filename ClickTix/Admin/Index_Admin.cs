@@ -70,9 +70,17 @@ namespace ClickTix
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Login loginForm = new Login();
-            loginForm.Show();
-            this.Hide();
+            DialogResult result = MessageBox.Show("¿Estás seguro que deseas cerrar sesión?", "Confirmar Cierre de Sesión",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Login loginForm = new Login();
+                loginForm.Show();
+                this.Hide();
+            }
+            else if (result == DialogResult.No)
+            {
+            }
         }
     }
 }
