@@ -18,7 +18,7 @@ namespace ClickTix.Modelo
 
         public static void llenarCamposAddFuncion(ComboBox peliculas, ComboBox turnos, ComboBox sucursal, ComboBox dimension,ComboBox idioma) {
             llenarPeliculas(peliculas);
-            llenarTurnos(turnos);
+            //llenarTurnos(turnos);
             llenarSucursales(sucursal);
             llenarDimensiones(dimension);
             llenarIdiomas(idioma);
@@ -149,30 +149,37 @@ namespace ClickTix.Modelo
             return valorRetorno;
         }
 
-        public static int obtenerIdTurno(ComboBox combobox_turno)
+        public static int ObtenerIdTurno(ComboBox combobox_turno)
         {
-
             int idReturn = 0;
 
-            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            try
             {
-                mysqlConnection.Open();
-                string query = "SELECT id FROM turno where hora=@fecha_seleccionada;";
-
-                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
-                    command.Parameters.AddWithValue("@fecha_seleccionada", combobox_turno.SelectedItem.ToString());
-                    MySqlDataReader reader = command.ExecuteReader();
+                    mysqlConnection.Open();
+                    string query = "SELECT id FROM turno WHERE hora = @fecha_seleccionada;";
 
-                    while (reader.Read())
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
-                        idReturn = reader.GetInt32(0);
-                    }
+                        command.Parameters.AddWithValue("@fecha_seleccionada", combobox_turno.SelectedItem.ToString());
 
-                    reader.Close();
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                idReturn = reader.GetInt32(0);
+                            }
+                        }
+                    }
                 }
-                mysqlConnection.Close();
             }
+            catch (MySqlException ex)
+            {
+                
+                Console.WriteLine("Error de base de datos: " + ex.Message);
+            }
+
             return idReturn;
         }
         public static int obtenerIdSala(ComboBox combobox_sala, ComboBox combobox_sucursal) { 
@@ -256,6 +263,157 @@ namespace ClickTix.Modelo
                 mysqlConnection.Close();
             }
         }
+
+
+
+        public static void LlenarTurnos(ComboBox combobox_turno, List<int> turnos)
+        {
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                mysqlConnection.Open();
+
+                
+                if (turnos.Count > 0)
+                {
+                   
+                    string parameters = string.Join(",", turnos);
+
+                    string query = "SELECT hora FROM turno WHERE id IN (" + parameters + ");";
+
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                    {
+                        MySqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            combobox_turno.Items.Add(reader.GetTimeSpan(0));
+                        }
+
+                        reader.Close();
+                    }
+                }
+
+                mysqlConnection.Close();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static List<int> ObtenerTodosLosIdsDeTurno()
+        {
+            List<int> idsDeTurno = new List<int>();
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                mysqlConnection.Open();
+                string query = "SELECT id FROM turno;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (!reader.IsDBNull(0)) // Verifica si el campo no es nulo
+                            {
+                                int idTurno = reader.GetInt32(0);
+                                idsDeTurno.Add(idTurno);
+                            }
+                        }
+                    }
+                }
+                mysqlConnection.Close();
+            }
+
+            return idsDeTurno;
+        }
+
+
+        public static List<int> ObtenerTurnosPorPeliculaYSala(int idPelicula, int idSala)
+        {
+            List<int> turnos = new List<int>();
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                mysqlConnection.Open();
+
+                string query = "SELECT turno_id " +
+                               "FROM funcion " +
+                               "WHERE id_pelicula = @IdPelicula AND id_sala = @IdSala";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@IdPelicula", idPelicula);
+                    command.Parameters.AddWithValue("@IdSala", idSala);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (!reader.IsDBNull(0))
+                            {
+                                int turno = reader.GetInt32(0);
+                                turnos.Add(turno);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return turnos;
+        }
+
+
+        public static int ObtenerIdSucursalPorIdSala(int idSala)
+        {
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                mysqlConnection.Open();
+                string query = "SELECT s.id_sucursal FROM funcion f " +
+                               "INNER JOIN sala s ON f.id_sala = s.id " +
+                               "WHERE f.id_sala = @IdSala;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@IdSala", idSala);
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        // Manejo de error o valor predeterminado si no se encuentra el registro.
+                        return -1; // Por ejemplo, -1 podría indicar que no se encontró la sala.
+                    }
+                }
+                mysqlConnection.Close();
+            }
+        }
+
+
+
+
 
         private static void llenarIdiomas(ComboBox combobox_idioma)
         {

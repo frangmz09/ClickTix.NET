@@ -1,6 +1,7 @@
 ﻿using ClickTix.Conexion;
 using ClickTix.Modelo;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Crypto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,8 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
             addfuncion_btn.Click += addfuncion_btn_Click;
+
+            this.combobox_turno.Enabled = false;
         }
 
         public FORM_FUNCIONES_UC(int id)
@@ -97,7 +100,9 @@ namespace ClickTix.UserControls
             combobox_fecha.ValueChanged += cambioFecha;
             combobox_turno.SelectedIndexChanged += cambioTurno;
             combobox_sucursal.SelectedIndexChanged += cambioSucursal;
+
             combobox_sala.SelectedIndexChanged += cambioSala;
+
             combobox_idioma.SelectedIndexChanged += cambioIdioma;
             combobox_dimension.SelectedIndexChanged += cambioDimension;
 
@@ -127,14 +132,20 @@ namespace ClickTix.UserControls
             funcionActual.Id_Sala = 0;
             combobox_sala.SelectedItem = null;
             combobox_sala.Text = "";
+
+            funcionActual.Id_Turno = 0;
+            combobox_turno.Enabled = false;
+            combobox_turno.SelectedItem = null;
+            combobox_turno.Text = "";
         }
         private void cambioTurno(object sender, EventArgs e)
         {
-            funcionActual.Id_Turno = Funcion_Controller.obtenerIdTurno(combobox_turno);
+            funcionActual.Id_Turno = Funcion_Controller.ObtenerIdTurno(combobox_turno);
         }
         private void cambioSala(object sender, EventArgs e)
         {
             funcionActual.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal);
+            llenarTurnosDisponibles();
         }
         private void cambioIdioma(object sender, EventArgs e)
         {
@@ -198,39 +209,48 @@ namespace ClickTix.UserControls
 
         }
 
+        private void llenarTurnosDisponibles()
+        {
+
+            this.combobox_turno.Enabled = true;
+            int idSucursal = Funcion_Controller.ObtenerIdSucursalPorIdSala(Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal));
+
+            MessageBox.Show("id sucursal = " + idSucursal);
+
+
+            List<int> listaTurnosCompleta= Funcion_Controller.ObtenerTodosLosIdsDeTurno();
+
+            List<int> listaTurnosUsados = Funcion_Controller.ObtenerTurnosPorPeliculaYSala(Funcion_Controller.obtenerIdPelicula( combobox_pelicula), Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal));
+
+
+            //List<int> listaConcatenada = listaTurnosCompleta.Concat(listaTurnosUsados).ToList();
+
+            //List<int> listaSinDuplicados = listaConcatenada.Distinct().ToList();
+
+
+            //List<int> lista1 = new List<int> { 1, 2, 3, 4, 5, 6 };
+            //List<int> lista2 = new List<int> { 4, 5, 6, 7, 8, 9 };
+
+            List<int> listaSinRepetidos = listaTurnosCompleta
+                .Union(listaTurnosUsados)
+                .Except(listaTurnosCompleta.Intersect(listaTurnosUsados))
+                .ToList();
+
+
+            List<int> listaTurnosDisponibles = listaSinRepetidos;
+
+            foreach (int valor in listaTurnosDisponibles)
+            {
+                Console.WriteLine(valor);
+            }
+
+
+            Funcion_Controller.LlenarTurnos(combobox_turno, listaTurnosDisponibles);
 
 
 
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     }
 }

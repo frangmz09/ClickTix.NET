@@ -84,7 +84,7 @@
             // 
             this.label_idioma.AutoSize = true;
             this.label_idioma.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_idioma.Location = new System.Drawing.Point(296, 205);
+            this.label_idioma.Location = new System.Drawing.Point(296, 201);
             this.label_idioma.Name = "label_idioma";
             this.label_idioma.Size = new System.Drawing.Size(45, 15);
             this.label_idioma.TabIndex = 30;
@@ -95,7 +95,7 @@
             // 
             this.label_dimension.AutoSize = true;
             this.label_dimension.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_dimension.Location = new System.Drawing.Point(384, 205);
+            this.label_dimension.Location = new System.Drawing.Point(384, 201);
             this.label_dimension.Name = "label_dimension";
             this.label_dimension.Size = new System.Drawing.Size(67, 15);
             this.label_dimension.TabIndex = 29;
@@ -106,7 +106,7 @@
             // 
             this.label_turno.AutoSize = true;
             this.label_turno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_turno.Location = new System.Drawing.Point(400, 100);
+            this.label_turno.Location = new System.Drawing.Point(400, 145);
             this.label_turno.Name = "label_turno";
             this.label_turno.Size = new System.Drawing.Size(39, 15);
             this.label_turno.TabIndex = 28;
@@ -117,7 +117,7 @@
             // 
             this.label_fecha.AutoSize = true;
             this.label_fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_fecha.Location = new System.Drawing.Point(300, 100);
+            this.label_fecha.Location = new System.Drawing.Point(300, 145);
             this.label_fecha.Name = "label_fecha";
             this.label_fecha.Size = new System.Drawing.Size(41, 15);
             this.label_fecha.TabIndex = 27;
@@ -128,7 +128,7 @@
             // 
             this.label_sala.AutoSize = true;
             this.label_sala.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_sala.Location = new System.Drawing.Point(400, 155);
+            this.label_sala.Location = new System.Drawing.Point(400, 98);
             this.label_sala.Name = "label_sala";
             this.label_sala.Size = new System.Drawing.Size(32, 15);
             this.label_sala.TabIndex = 26;
@@ -138,7 +138,7 @@
             // combobox_idioma
             // 
             this.combobox_idioma.FormattingEnabled = true;
-            this.combobox_idioma.Location = new System.Drawing.Point(272, 222);
+            this.combobox_idioma.Location = new System.Drawing.Point(272, 218);
             this.combobox_idioma.Name = "combobox_idioma";
             this.combobox_idioma.Size = new System.Drawing.Size(92, 21);
             this.combobox_idioma.TabIndex = 25;
@@ -147,7 +147,7 @@
             // 
             this.combobox_sala.Enabled = false;
             this.combobox_sala.FormattingEnabled = true;
-            this.combobox_sala.Location = new System.Drawing.Point(377, 172);
+            this.combobox_sala.Location = new System.Drawing.Point(377, 115);
             this.combobox_sala.Name = "combobox_sala";
             this.combobox_sala.Size = new System.Drawing.Size(71, 21);
             this.combobox_sala.TabIndex = 24;
@@ -155,7 +155,7 @@
             // combobox_dimension
             // 
             this.combobox_dimension.FormattingEnabled = true;
-            this.combobox_dimension.Location = new System.Drawing.Point(377, 222);
+            this.combobox_dimension.Location = new System.Drawing.Point(377, 218);
             this.combobox_dimension.Name = "combobox_dimension";
             this.combobox_dimension.Size = new System.Drawing.Size(71, 21);
             this.combobox_dimension.TabIndex = 23;
@@ -163,7 +163,7 @@
             // combobox_turno
             // 
             this.combobox_turno.FormattingEnabled = true;
-            this.combobox_turno.Location = new System.Drawing.Point(377, 116);
+            this.combobox_turno.Location = new System.Drawing.Point(377, 161);
             this.combobox_turno.Name = "combobox_turno";
             this.combobox_turno.Size = new System.Drawing.Size(71, 21);
             this.combobox_turno.TabIndex = 22;
@@ -172,7 +172,7 @@
             // 
             this.combobox_fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combobox_fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.combobox_fecha.Location = new System.Drawing.Point(272, 116);
+            this.combobox_fecha.Location = new System.Drawing.Point(272, 161);
             this.combobox_fecha.Name = "combobox_fecha";
             this.combobox_fecha.Size = new System.Drawing.Size(92, 20);
             this.combobox_fecha.TabIndex = 21;
@@ -196,7 +196,7 @@
             // combobox_sucursal
             // 
             this.combobox_sucursal.FormattingEnabled = true;
-            this.combobox_sucursal.Location = new System.Drawing.Point(272, 172);
+            this.combobox_sucursal.Location = new System.Drawing.Point(272, 115);
             this.combobox_sucursal.Name = "combobox_sucursal";
             this.combobox_sucursal.Size = new System.Drawing.Size(92, 21);
             this.combobox_sucursal.TabIndex = 33;
@@ -205,7 +205,7 @@
             // 
             this.label_sucursal.AutoSize = true;
             this.label_sucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_sucursal.Location = new System.Drawing.Point(286, 155);
+            this.label_sucursal.Location = new System.Drawing.Point(286, 98);
             this.label_sucursal.Name = "label_sucursal";
             this.label_sucursal.Size = new System.Drawing.Size(55, 15);
             this.label_sucursal.TabIndex = 34;
