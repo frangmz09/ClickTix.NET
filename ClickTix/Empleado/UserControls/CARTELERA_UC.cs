@@ -15,18 +15,26 @@ using System.Windows.Forms;
 namespace ClickTix.Empleado.UserControls
 {
     public partial class CARTELERA_UC : UserControl
-    {        
+    {
+
+        private int back = 0;
+
         public CARTELERA_UC()
         {
             InitializeComponent();
             llenarDataGrid(cartelera_grid);
+            Trace.WriteLine(back);
+
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
-
+        private void volverAlMenu() {
+            MENU_UC menuUser = new MENU_UC();
+            Index_User.addUserControlUsuario(menuUser);
+        }
         private void cartelera_grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex ==cartelera_grid.Columns["Seleccionar"].Index && e.RowIndex >= 0)
@@ -42,13 +50,13 @@ namespace ClickTix.Empleado.UserControls
         }
         private void llenarDataGrid(DataGridView tabla)
         {
+            back = 0;
             ManagerConnection.OpenConnection();
 
-            string query = "SELECT id, titulo from pelicula";
+            string query = "select p.titulo, p.director from pelicula p inner join funcion f on f.id_pelicula = p.id inner join sala s on f.id_sala = s.id where s.id_sucursal = @id_sucursal and  f.fecha > NOW();";
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
                     command.Parameters.AddWithValue("@id_sucursal", Program.logeado.Id_sucursal);
@@ -56,20 +64,32 @@ namespace ClickTix.Empleado.UserControls
                     MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                     DataTable dt = new DataTable();
 
-
                     adapter.Fill(dt);
 
-
-                    tabla.DataSource = dt;
+                    if (dt.Rows.Count > 0)
+                    {
+                        tabla.DataSource = dt;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay películas disponibles en cartelera.");
+                        back = 1;
+                    }
                 }
             }
             ManagerConnection.CloseConnection();
-
+            if (back == 1)
+            {
+                volverAlMenu();
+            }
         }
 
         private void CARTELERA_UC_Load(object sender, EventArgs e)
         {
-
+            if (back == 1)
+            {
+                volverAlMenu();
+            }
         }
 
         private void back_pelicula_Click(object sender, EventArgs e)
