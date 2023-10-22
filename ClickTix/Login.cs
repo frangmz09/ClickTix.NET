@@ -1,5 +1,6 @@
 ﻿using ClickTix.Conexion;
 using ClickTix.Empleado;
+using ClickTix.Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
