@@ -36,10 +36,7 @@
             this.input_direccion = new System.Windows.Forms.TextBox();
             this.label_cuit = new System.Windows.Forms.Label();
             this.input_cuit = new System.Windows.Forms.TextBox();
-            this.label_salas = new System.Windows.Forms.Label();
-            this.input_salas = new System.Windows.Forms.NumericUpDown();
             this.back_pelicula = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.input_salas)).BeginInit();
             this.SuspendLayout();
             // 
             // title
@@ -62,7 +59,6 @@
             this.addsucursal_btn.TabIndex = 33;
             this.addsucursal_btn.Text = "Agregar";
             this.addsucursal_btn.UseVisualStyleBackColor = true;
-            
             // 
             // label_titulo
             // 
@@ -118,24 +114,6 @@
             this.input_cuit.Size = new System.Drawing.Size(268, 20);
             this.input_cuit.TabIndex = 61;
             // 
-            // label_salas
-            // 
-            this.label_salas.AutoSize = true;
-            this.label_salas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_salas.Location = new System.Drawing.Point(205, 238);
-            this.label_salas.Name = "label_salas";
-            this.label_salas.Size = new System.Drawing.Size(101, 15);
-            this.label_salas.TabIndex = 64;
-            this.label_salas.Text = "Numero de salas";
-            this.label_salas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // input_salas
-            // 
-            this.input_salas.Location = new System.Drawing.Point(297, 236);
-            this.input_salas.Name = "input_salas";
-            this.input_salas.Size = new System.Drawing.Size(45, 20);
-            this.input_salas.TabIndex = 65;
-            // 
             // back_pelicula
             // 
             this.back_pelicula.Location = new System.Drawing.Point(17, 16);
@@ -151,8 +129,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.back_pelicula);
-            this.Controls.Add(this.input_salas);
-            this.Controls.Add(this.label_salas);
             this.Controls.Add(this.label_cuit);
             this.Controls.Add(this.input_cuit);
             this.Controls.Add(this.label_direccion);
@@ -163,7 +139,6 @@
             this.Controls.Add(this.title);
             this.Name = "FORM_SUCURSALES_UC";
             this.Size = new System.Drawing.Size(560, 373);
-            ((System.ComponentModel.ISupportInitialize)(this.input_salas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,8 +154,6 @@
         private System.Windows.Forms.TextBox input_direccion;
         private System.Windows.Forms.Label label_cuit;
         private System.Windows.Forms.TextBox input_cuit;
-        private System.Windows.Forms.Label label_salas;
-        private System.Windows.Forms.NumericUpDown input_salas;
         private System.Windows.Forms.Button back_pelicula;
     }
 }

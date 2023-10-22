@@ -82,6 +82,8 @@ namespace ClickTix.UserControls
 
 
             Sala_Controller.CrearSala(s);
+            ABM_SALAS_UC abm_salas_uc = new ABM_SALAS_UC(this.idDelPanel);
+            Index_Admin.addUserControl(abm_salas_uc);
         }
 
         private void addsala_btn_Click2(object sender, EventArgs e)
@@ -103,6 +105,8 @@ namespace ClickTix.UserControls
             //PrecioDimension_Controller.ActualizarDimension(s);
 
             Sala_Controller.ActualizarSala(s);
+            ABM_SALAS_UC abm_salas_uc = new ABM_SALAS_UC(this.idDelPanel);
+            Index_Admin.addUserControl(abm_salas_uc);
 
 
         }

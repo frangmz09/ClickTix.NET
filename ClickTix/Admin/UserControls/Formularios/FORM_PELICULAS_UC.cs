@@ -103,8 +103,9 @@ namespace ClickTix.UserControls
                 int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
                 string fileName = guardarImagen(id);
                 InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, fileName, input_estreno.Value);
-  
-                
+                ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
+                Index_Admin.addUserControl(abmpeliculas);
+
             }
 
 
@@ -137,12 +138,12 @@ namespace ClickTix.UserControls
 
                 MessageBox.Show("id : " + idpelicula);
                 ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, fileName, input_estreno.Value);
-            
-                
+                Trace.WriteLine("la ruta es:" + rutaAntigua);
+
+                ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
+                Index_Admin.addUserControl(abmpeliculas);
             }
 
-            borrarImagenLocal();
-            Trace.WriteLine("la ruta es:" + rutaAntigua);
 
         }
         private void input_genero_SelectedIndexChanged(object sender, EventArgs e)
@@ -358,25 +359,7 @@ namespace ClickTix.UserControls
 
         }
 
-        private void borrarImagenLocal() {
-
-
-            try
-            {
-                if (File.Exists(rutaAntigua))
-                {
-                    File.Delete(rutaAntigua);
-                    Console.WriteLine("Imagen borrada con éxito.");
-                }
-        
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al borrar la imagen: " + ex.Message);
-
-            }
-
-        }
+  
         private string guardarImagen(int idPelicula)
         {
 

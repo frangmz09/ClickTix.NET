@@ -63,6 +63,8 @@ namespace ClickTix.UserControls
             Asiento_Controller.crearDisponibilidad(funcionActual);
 
 
+            ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
+            Index_Admin.addUserControl(abmfuncion);
 
         }
 
@@ -92,7 +94,8 @@ namespace ClickTix.UserControls
             Funcion_Controller.ActualizarFuncion(f);
 
 
-            
+            ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
+            Index_Admin.addUserControl(abmfuncion);
 
         }
 

@@ -68,7 +68,7 @@ namespace ClickTix.UserControls
 
              
             if (string.IsNullOrWhiteSpace(input_nombre.Text) || string.IsNullOrWhiteSpace(input_direccion.Text) 
-                || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
+                || string.IsNullOrWhiteSpace(input_cuit.Text))
             {
                 MessageBox.Show("Los campos deben estar llenos ");
             }
@@ -80,9 +80,10 @@ namespace ClickTix.UserControls
                 s.nombre = input_nombre.Text;
                 s.direccion = input_direccion.Text;
                 s.cuit = input_cuit.Text;
-                s.numerosalas = (int)input_salas.Value;
 
                 Sucursal_Controller.CrearSucursal(s);
+                ABM_SUCURSALES_UC sucursales_uc = new ABM_SUCURSALES_UC();
+                Index_Admin.addUserControl(sucursales_uc);
             }
             
         }
@@ -90,7 +91,7 @@ namespace ClickTix.UserControls
         private void addsucursal_btn_Click2(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(input_nombre.Text) || string.IsNullOrWhiteSpace(input_direccion.Text)
-                || string.IsNullOrWhiteSpace(input_cuit.Text) || input_salas.Value <= 0)
+                || string.IsNullOrWhiteSpace(input_cuit.Text))
             {
                 MessageBox.Show("Los campos deben estar llenos ");
             }
@@ -101,11 +102,13 @@ namespace ClickTix.UserControls
                 s.nombre = input_nombre.Text;
                 s.direccion = input_direccion.Text;
                 s.cuit = input_cuit.Text;
-                s.numerosalas = (int)input_salas.Value;
+
 
 
 
                 Sucursal_Controller.ActualizarSucursal(s);
+                ABM_SUCURSALES_UC sucursales_uc = new ABM_SUCURSALES_UC();
+                Index_Admin.addUserControl(sucursales_uc);
             }
 
 
@@ -116,7 +119,7 @@ namespace ClickTix.UserControls
         {
             try
             {
-                string consulta = "SELECT id,nombre,direccion,cuit,numerosalas FROM sucursal WHERE id = @id";
+                string consulta = "SELECT id,nombre,direccion,cuit FROM sucursal WHERE id = @id";
 
                 ManagerConnection.OpenConnection();
 
@@ -132,7 +135,6 @@ namespace ClickTix.UserControls
                             input_nombre.Text = reader["nombre"].ToString();
                             input_direccion.Text = reader["direccion"].ToString();
                             input_cuit.Text = reader["cuit"].ToString();
-                            input_salas.Value = Convert.ToDecimal(reader["numerosalas"]);
                         }
                         else
                         {
