@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Controller;
 using ClickTix.Modelo;
 using Google.Protobuf;
 using Google.Protobuf.WellKnownTypes;
@@ -51,7 +52,7 @@ namespace ClickTix.UserControls
             addpelicula_btn.Text = "modificar";
             this.title.Text = "INGRESE DATOS PARA ACTUALIZAR UNA PELICULA";
 
-            string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + obtenerFileName(peliculaID));
+            string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + Pelicula_Controller.obtenerFileName(peliculaID));
 
             try {
 
@@ -73,48 +74,7 @@ namespace ClickTix.UserControls
 
         }
 
-        private string obtenerFileName(int idPelicula) {
-
-            string fileName = "";
-            try
-            {
-
-                string consulta = "SELECT portada FROM pelicula WHERE id = @id";
-
-
-                ManagerConnection.OpenConnection();
-
-                using (MySqlCommand cmd = new MySqlCommand(consulta, ManagerConnection.getInstance()))
-                {
-                    cmd.Parameters.AddWithValue("@id", idPelicula);
-
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-
-                            fileName = reader.GetString(0);
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se encontró la película con el ID proporcionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar los datos de la película: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                ManagerConnection.CloseConnection();
-            }
-
-            return fileName;
-        }
+        
 
         private void FORM_PELICULAS_UC_Load(object sender, EventArgs e)
         {
