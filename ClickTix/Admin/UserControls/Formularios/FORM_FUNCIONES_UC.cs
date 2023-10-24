@@ -274,7 +274,6 @@ namespace ClickTix.UserControls
             this.combobox_turno.Enabled = true;
             int idSucursal = Funcion_Controller.ObtenerIdSucursalPorIdSala(Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal));
 
-            MessageBox.Show("id sucursal = " + idSucursal);
 
 
             List<int> listaTurnosCompleta= Funcion_Controller.ObtenerTodosLosIdsDeTurno();

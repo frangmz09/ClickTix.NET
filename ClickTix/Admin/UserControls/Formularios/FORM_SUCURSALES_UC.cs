@@ -33,7 +33,6 @@ namespace ClickTix.UserControls
             this.idDelPanel = id;
             int sucursalID = id;
 
-            MessageBox.Show("id : " + id);
 
             CargarDatosSucursal(sucursalID);
            

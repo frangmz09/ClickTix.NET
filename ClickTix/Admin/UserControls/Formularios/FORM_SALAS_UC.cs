@@ -80,7 +80,6 @@ namespace ClickTix.UserControls
             }
             else
             {
-                MessageBox.Show("id: " + idDelPanel);
                 s.Id_Sucursal = this.idDelPanel;
                 s.Filas = (int)input_filas.Value;
                 s.Columnas = (int)input_columnas.Value;
@@ -101,7 +100,6 @@ namespace ClickTix.UserControls
 
             Sala s = new Sala();
 
-            MessageBox.Show("id sucursal : " + this.idDelPanel);
 
 
             s.Id = this.idDelPanel;

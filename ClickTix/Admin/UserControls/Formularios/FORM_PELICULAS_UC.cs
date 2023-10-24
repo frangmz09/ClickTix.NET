@@ -136,7 +136,6 @@ namespace ClickTix.UserControls
 
 
 
-                MessageBox.Show("id : " + idpelicula);
                 ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, fileName, input_estreno.Value);
                 Trace.WriteLine("la ruta es:" + rutaAntigua);
 

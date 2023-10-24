@@ -35,7 +35,6 @@ namespace ClickTix.Admin.UserControls.Formularios
             this.idDelPanel = id;
             int dimensionlID = id;
 
-            MessageBox.Show("id : " + id);
             CargarDatosPrecioDimension(dimensionlID);
 
 

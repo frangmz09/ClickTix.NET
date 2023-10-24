@@ -49,7 +49,6 @@ namespace ClickTix.UserControls
 
                 int id = Convert.ToInt32(grid_empleados.Rows[e.RowIndex].Cells["id"].Value);
 
-                MessageBox.Show("id : " + id);
                 FORM_EMPLEADOS_UC formempleados_uc = new FORM_EMPLEADOS_UC(id);
 
                 Index_Admin.addUserControl(formempleados_uc);

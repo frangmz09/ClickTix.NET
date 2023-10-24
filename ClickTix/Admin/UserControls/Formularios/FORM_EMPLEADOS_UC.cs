@@ -104,7 +104,6 @@ namespace ClickTix
             }
             else
             {
-                MessageBox.Show("value " + input_sucursal.Text);
                 EmpleadoA em = new EmpleadoA();
                 int idSucursal = 0;
                 em.Id = 0;
