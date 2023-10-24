@@ -29,27 +29,33 @@
         private void InitializeComponent()
         {
             this.cartelera_grid = new System.Windows.Forms.DataGridView();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.cartelera = new System.Windows.Forms.Label();
             this.back_pelicula = new System.Windows.Forms.Button();
+            this.idPel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Portada = new System.Windows.Forms.DataGridViewImageColumn();
+            this.tituloo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Director = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.cartelera_grid)).BeginInit();
             this.SuspendLayout();
             // 
             // cartelera_grid
             // 
+            this.cartelera_grid.AllowUserToAddRows = false;
+            this.cartelera_grid.AllowUserToDeleteRows = false;
             this.cartelera_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cartelera_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idPel,
+            this.Portada,
+            this.tituloo,
+            this.Director,
             this.Seleccionar});
             this.cartelera_grid.Location = new System.Drawing.Point(34, 89);
             this.cartelera_grid.Name = "cartelera_grid";
+            this.cartelera_grid.ReadOnly = true;
             this.cartelera_grid.Size = new System.Drawing.Size(690, 265);
             this.cartelera_grid.TabIndex = 0;
             this.cartelera_grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.cartelera_grid_CellContentClick);
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
             // 
             // cartelera
             // 
@@ -72,6 +78,38 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
+            // idPel
+            // 
+            this.idPel.HeaderText = "ID";
+            this.idPel.Name = "idPel";
+            this.idPel.ReadOnly = true;
+            // 
+            // Portada
+            // 
+            this.Portada.HeaderText = "Portada";
+            this.Portada.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.Portada.Name = "Portada";
+            this.Portada.ReadOnly = true;
+            // 
+            // tituloo
+            // 
+            this.tituloo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.tituloo.HeaderText = "Titulo";
+            this.tituloo.Name = "tituloo";
+            this.tituloo.ReadOnly = true;
+            // 
+            // Director
+            // 
+            this.Director.HeaderText = "Director";
+            this.Director.Name = "Director";
+            this.Director.ReadOnly = true;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.ReadOnly = true;
+            // 
             // CARTELERA_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -92,7 +130,11 @@
 
         private System.Windows.Forms.DataGridView cartelera_grid;
         private System.Windows.Forms.Label cartelera;
-        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
         private System.Windows.Forms.Button back_pelicula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idPel;
+        private System.Windows.Forms.DataGridViewImageColumn Portada;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tituloo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Director;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
     }
 }

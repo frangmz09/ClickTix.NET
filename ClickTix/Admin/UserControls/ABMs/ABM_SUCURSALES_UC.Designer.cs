@@ -31,9 +31,13 @@
             this.title = new System.Windows.Forms.Label();
             this.add_sucursal = new System.Windows.Forms.Button();
             this.grid_sucursal = new System.Windows.Forms.DataGridView();
+            this.Idd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cuitt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Direccionn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Salas = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sucursal)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,40 +64,73 @@
             // 
             // grid_sucursal
             // 
+            this.grid_sucursal.AllowUserToAddRows = false;
+            this.grid_sucursal.AllowUserToDeleteRows = false;
             this.grid_sucursal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_sucursal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Modificar,
+            this.Idd,
+            this.Nombrev,
+            this.Cuitt,
+            this.Direccionn,
+            this.Salas,
             this.Borrar,
-            this.Salas});
+            this.Modificar});
             this.grid_sucursal.Location = new System.Drawing.Point(23, 52);
             this.grid_sucursal.Name = "grid_sucursal";
+            this.grid_sucursal.ReadOnly = true;
             this.grid_sucursal.Size = new System.Drawing.Size(524, 303);
             this.grid_sucursal.TabIndex = 14;
             this.grid_sucursal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_sucursal_CellContentClick);
+            // 
+            // Idd
+            // 
+            this.Idd.HeaderText = "ID";
+            this.Idd.Name = "Idd";
+            this.Idd.ReadOnly = true;
+            // 
+            // Nombrev
+            // 
+            this.Nombrev.HeaderText = "Nombre";
+            this.Nombrev.Name = "Nombrev";
+            this.Nombrev.ReadOnly = true;
+            // 
+            // Cuitt
+            // 
+            this.Cuitt.HeaderText = "CUIT";
+            this.Cuitt.Name = "Cuitt";
+            this.Cuitt.ReadOnly = true;
+            // 
+            // Direccionn
+            // 
+            this.Direccionn.HeaderText = "Direccion";
+            this.Direccionn.Name = "Direccionn";
+            this.Direccionn.ReadOnly = true;
             // 
             // Salas
             // 
             this.Salas.HeaderText = "Salas";
             this.Salas.Name = "Salas";
+            this.Salas.ReadOnly = true;
             this.Salas.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Salas.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Salas.Width = 50;
-            // 
-            // Modificar
-            // 
-            this.Modificar.HeaderText = "Modificar";
-            this.Modificar.Name = "Modificar";
-            this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Modificar.Width = 50;
             // 
             // Borrar
             // 
             this.Borrar.HeaderText = "Borrar";
             this.Borrar.Name = "Borrar";
+            this.Borrar.ReadOnly = true;
             this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Borrar.Width = 50;
+            // 
+            // Modificar
+            // 
+            this.Modificar.HeaderText = "Modificar";
+            this.Modificar.Name = "Modificar";
+            this.Modificar.ReadOnly = true;
+            this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Modificar.Width = 50;
             // 
             // ABM_SUCURSALES_UC
             // 
@@ -119,8 +156,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Idd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombrev;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cuitt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direccionn;
         private System.Windows.Forms.DataGridViewButtonColumn Salas;
-        private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
+        private System.Windows.Forms.DataGridViewButtonColumn Modificar;
     }
 }

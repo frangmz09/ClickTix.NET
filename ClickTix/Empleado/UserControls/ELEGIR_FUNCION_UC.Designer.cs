@@ -28,29 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.grid_funcionesc = new System.Windows.Forms.DataGridView();
             this.cartelera = new System.Windows.Forms.Label();
             this.back_pelicula = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.idFunSel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NROsala = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dimm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Idiomma = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_funcionesc)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // grid_funcionesc
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grid_funcionesc.AllowUserToAddRows = false;
+            this.grid_funcionesc.AllowUserToDeleteRows = false;
+            this.grid_funcionesc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_funcionesc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idFunSel,
+            this.NROsala,
+            this.Dimm,
+            this.Idiomma,
+            this.Precio,
+            this.Fecha,
+            this.Hora,
             this.Seleccionar});
-            this.dataGridView1.Location = new System.Drawing.Point(33, 85);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(690, 265);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.Tag = "";
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
+            this.grid_funcionesc.Location = new System.Drawing.Point(33, 85);
+            this.grid_funcionesc.Name = "grid_funcionesc";
+            this.grid_funcionesc.ReadOnly = true;
+            this.grid_funcionesc.Size = new System.Drawing.Size(690, 265);
+            this.grid_funcionesc.TabIndex = 0;
+            this.grid_funcionesc.Tag = "";
+            this.grid_funcionesc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // cartelera
             // 
@@ -73,17 +85,57 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
+            // idFunSel
+            // 
+            this.idFunSel.HeaderText = "ID";
+            this.idFunSel.Name = "idFunSel";
+            // 
+            // NROsala
+            // 
+            this.NROsala.HeaderText = "Numero de Sala";
+            this.NROsala.Name = "NROsala";
+            // 
+            // Dimm
+            // 
+            this.Dimm.HeaderText = "Dimension";
+            this.Dimm.Name = "Dimm";
+            // 
+            // Idiomma
+            // 
+            this.Idiomma.HeaderText = "Idioma";
+            this.Idiomma.Name = "Idiomma";
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            // 
+            // Hora
+            // 
+            this.Hora.HeaderText = "Hora";
+            this.Hora.Name = "Hora";
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
             // ELEGIR_FUNCION_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.cartelera);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.grid_funcionesc);
             this.Name = "ELEGIR_FUNCION_UC";
             this.Size = new System.Drawing.Size(800, 451);
             this.Load += new System.EventHandler(this.ELEGIR_FUNCION_UC_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_funcionesc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,9 +143,16 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView grid_funcionesc;
         private System.Windows.Forms.Label cartelera;
-        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
         private System.Windows.Forms.Button back_pelicula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idFunSel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NROsala;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dimm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Idiomma;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
     }
 }

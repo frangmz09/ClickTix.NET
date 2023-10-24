@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Modelo;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -18,15 +19,15 @@ namespace ClickTix.UserControls
         public ABM_EMPLEADOS_UC()
         {
             InitializeComponent();
-            ABM_EMPLEADOS_UC_Load(grid_empleados);
-            ABM_EMPLEADOS_UC_Load(grid_empleados);
+            cargarEmpleados();
+
         }
 
         public ABM_EMPLEADOS_UC(int id)
         {
             InitializeComponent();
-            ABM_EMPLEADOS_UC_Load(grid_empleados);
-            ABM_EMPLEADOS_UC_Load(grid_empleados);
+            cargarEmpleados();
+
         }
 
         private void title_Click(object sender, EventArgs e)
@@ -45,6 +46,7 @@ namespace ClickTix.UserControls
         {
             if (e.ColumnIndex == grid_empleados.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
+
                 int id = Convert.ToInt32(grid_empleados.Rows[e.RowIndex].Cells["id"].Value);
 
                 MessageBox.Show("id : " + id);
@@ -53,44 +55,52 @@ namespace ClickTix.UserControls
                 Index_Admin.addUserControl(formempleados_uc);
 
             }
-
             else if (e.ColumnIndex == grid_empleados.Columns["Borrar"].Index && e.RowIndex >= 0)
             {
 
-                int id = Convert.ToInt32(grid_empleados.Rows[e.RowIndex].Cells["id"].Value);
+
+                int id2 = Convert.ToInt32(grid_empleados.Rows[e.RowIndex].Cells["id"].Value);
 
 
                 DialogResult result = MessageBox.Show("¿Estás seguro de eliminar este registro?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    EliminarRegistro(id);
-                    ABM_EMPLEADOS_UC_Load(grid_empleados);
+                    EliminarRegistro(id2);
+                    cargarEmpleados();
                 }
             }
         }
 
-        private void ABM_EMPLEADOS_UC_Load(DataGridView tabla)
-        {
-            ManagerConnection.OpenConnection();
-            string query = "SELECT  id, nombre, apellido, id_sucursal, is_admin FROM usuario_sistema";
 
-            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+        private void cargarEmpleados()
+        {
+            grid_empleados.Rows.Clear();
+
+            List<EmpleadoA> empleados = Empleado_Controller.obtenerTodos();
+            foreach (EmpleadoA empleado in empleados)
             {
-                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                int rowIndex = grid_empleados.Rows.Add();
+
+                grid_empleados.Rows[rowIndex].Cells[0].Value = empleado.Id.ToString();
+                grid_empleados.Rows[rowIndex].Cells[1].Value = empleado.Nombre.ToString();
+                grid_empleados.Rows[rowIndex].Cells[2].Value = empleado.Apellido.ToString();
+                grid_empleados.Rows[rowIndex].Cells[3].Value = Sucursal_Controller.ObtenerNombreSucursalPorID(empleado.Id_Sucursal);
+                grid_empleados.Rows[rowIndex].Cells[4].Value = empleado.Usuario.ToString();
+                if (empleado.is_admin.ToString() == "1")
+                {
+                    grid_empleados.Rows[rowIndex].Cells[5].Value = "Administrador";
+
+                }
+                else
                 {
 
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                    DataTable dt = new DataTable();
+                    grid_empleados.Rows[rowIndex].Cells[5].Value = "Empleado";
+                }   
+                grid_empleados.Rows[rowIndex].Cells[6].Value = "Modificar";
+                grid_empleados.Rows[rowIndex].Cells[7].Value = "Eliminar";
 
-
-                    adapter.Fill(dt);
-
-
-                    tabla.DataSource = dt;
-                }
             }
-            ManagerConnection.CloseConnection();
         }
 
         public bool EliminarRegistro(int id)

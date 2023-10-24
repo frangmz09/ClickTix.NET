@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using iTextSharp.tool.xml.html.head;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,14 +17,113 @@ namespace ClickTix.Modelo
 {
     public class Funcion_Controller
     {
+        public static List<Funcion> obtenerTodos()
+        {
+            List<Funcion> funciones = new List<Funcion>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
 
+                string query = "SELECT id, fecha, id_dimension, id_pelicula, id_sala, idioma_funcion, turno_id FROM funcion";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Funcion funcion = new Funcion();
+
+                            funcion.Id = reader.GetInt32("id");
+                            funcion.Id_Dimension = reader.GetInt32("id_dimension");
+                            funcion.Id_Sala = reader.GetInt32("id_sala");
+                            funcion.Id_Pelicula= reader.GetInt32("id_pelicula");
+                            funcion.Id_Idioma = reader.GetInt32("idioma_funcion");
+                            funcion.Fecha = reader.GetDateTime("fecha");
+                            funcion.Id_Turno = reader.GetInt32("turno_id");
+
+                            funciones.Add(funcion);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return funciones;
+        }
+
+        public static List<Funcion> obtenerTodosCartelera(string titulo)
+        {
+            List<Funcion> funciones = new List<Funcion>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "select  funcion.id, sala.nro_sala , dimension.dimension, idioma.idioma, dimension.precio, funcion.fecha, turno.hora from funcion left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id left join turno on funcion.turno_id = turno.id where pelicula.titulo = @tituloP and sala.id_sucursal = @id_sucursal and funcion.fecha > NOW();";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@tituloP", titulo);
+                    command.Parameters.AddWithValue("@id_sucursal", Program.logeado.Id_sucursal);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+                            Funcion funcion = new Funcion();
+
+                            funcion.Id = reader.GetInt32("id");
+                            funcion.nroSala = reader.GetInt32("nro_sala");
+                            funcion.dimension = reader.GetString("dimension");
+                            funcion.idioma = reader.GetString("idioma");
+                            funcion.precio = reader.GetDecimal("precio");
+                            funcion.Fecha = reader.GetDateTime("fecha");
+                            funcion.hora = reader.GetTimeSpan("hora");
+
+                            funciones.Add(funcion);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return funciones;
+        }
 
         public static void llenarCamposAddFuncion(ComboBox peliculas, ComboBox turnos, ComboBox sucursal, ComboBox dimension,ComboBox idioma) {
             llenarPeliculas(peliculas);
-            //llenarTurnos(turnos);
+            llenarTurnos(turnos);
             llenarSucursales(sucursal);
             llenarDimensiones(dimension);
             llenarIdiomas(idioma);
+        }
+
+        public static string ObtenerHorarioPorID(int idTurno)
+        {
+            string horario = "";
+            ManagerConnection.OpenConnection();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                string query = "SELECT hora FROM turno WHERE id = @idTurno";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@idTurno", idTurno);
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        horario = result.ToString();
+                    }
+                }
+            }
+            ManagerConnection.CloseConnection();
+
+            return horario;
+
         }
 
 
@@ -187,6 +288,35 @@ namespace ClickTix.Modelo
 
             return idReturn;
         }
+        public static string ObtenerIdiomaFuncion(int idFuncion)
+        {
+            ManagerConnection.OpenConnection();
+            string idioma = "";
+            string query = "SELECT idioma FROM idioma WHERE id = @idFuncion";
+
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
+            cmd.Parameters.AddWithValue("@idFuncion", idFuncion);
+
+            try
+            {
+                object result = cmd.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                {
+                    idioma = Convert.ToString(result);
+                }
+
+                return idioma;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el idioma: " + ex.Message);
+            }
+            finally
+            {
+                ManagerConnection.CloseConnection();
+            }
+        }
         public static int obtenerIdSala(ComboBox combobox_sala, ComboBox combobox_sucursal) { 
 
             int idReturn =0;
@@ -344,9 +474,65 @@ namespace ClickTix.Modelo
 
 
 
+        public static string obtenerDimensionDesdeId(int idDimension)
+        {
+            ManagerConnection.OpenConnection();
+            string dimension = "";
+            string query = "SELECT dimension FROM dimension WHERE id = @idDimension";
 
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
+            cmd.Parameters.AddWithValue("@idDimension", idDimension);
 
+            try
+            {
+                object result = cmd.ExecuteScalar();
 
+                if (result != null && result != DBNull.Value)
+                {
+                    dimension = Convert.ToString(result);
+                }
+
+                return dimension;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el idioma: " + ex.Message);
+            }
+            finally
+            {
+                ManagerConnection.CloseConnection();
+            }
+        }
+
+        public static string obtenerSucursalDesdeIdSala(int idSala)
+        {
+            ManagerConnection.OpenConnection();
+            string dimension = "";
+            string query = "select nombre from sala inner join sucursal on sala.id_sucursal = sucursal.id where sala.id = @idSala";
+
+            MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
+            cmd.Parameters.AddWithValue("@idSala", idSala);
+
+            try
+            {
+                object result = cmd.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                {
+                    dimension = Convert.ToString(result);
+                }
+
+                return dimension;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el idioma: " + ex.Message);
+            }
+            finally
+            {
+                ManagerConnection.CloseConnection();
+            }
+        }
 
 
 

@@ -1,4 +1,7 @@
-﻿using ClickTix.Conexion;
+﻿using AForge.Controls;
+using ClickTix.Conexion;
+using ClickTix.Controller;
+using ClickTix.Modelo;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -6,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +22,45 @@ namespace ClickTix.UserControls
         public ABM_PELICULAS_UC()
         {
             InitializeComponent();
-            Pelicula_Load(grid_peliculas);
+            cargarPeliculas();
         }
+        private void cargarPeliculas()
+        {
+            grid_peliculas.Rows.Clear();
 
+            List<Pelicula> peliculas = Pelicula_Controller.obtenerTodos();
+            foreach (Pelicula pelicula in peliculas)
+            {
+                int rowIndex = grid_peliculas.Rows.Add();
+
+                grid_peliculas.Rows[rowIndex].Cells[0].Value = pelicula.id.ToString();
+
+                string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + pelicula.imagen.ToString());
+                Image ImagenCargada;
+                try
+                {
+
+                    if (File.Exists(rutaImagen))
+                    {
+
+                       ImagenCargada = Image.FromFile(rutaImagen);
+
+                        grid_peliculas.Rows[rowIndex].Cells[1].Value = ImagenCargada;
+
+                    }
+                   
+                }
+                catch
+                {
+
+                }
+                grid_peliculas.Rows[rowIndex].Cells[2].Value = pelicula.titulo.ToString();
+                grid_peliculas.Rows[rowIndex].Cells[3].Value = pelicula.director.ToString();
+                grid_peliculas.Rows[rowIndex].Cells[4].Value = "Modificar";
+                grid_peliculas.Rows[rowIndex].Cells[5].Value = "Eliminar";
+
+            }
+        }
         private void title_Click(object sender, EventArgs e)
         {
 
@@ -42,7 +82,7 @@ namespace ClickTix.UserControls
 
             if (e.ColumnIndex == grid_peliculas.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
-                int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["id"].Value);
+                int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["IdD"].Value);
 
                
                 FORM_PELICULAS_UC formModificarPelicula = new FORM_PELICULAS_UC(id);
@@ -54,7 +94,7 @@ namespace ClickTix.UserControls
             else if (e.ColumnIndex == grid_peliculas.Columns["Borrar"].Index && e.RowIndex >= 0)
             {
                 
-                int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["id"].Value);
+                int id = Convert.ToInt32(grid_peliculas.Rows[e.RowIndex].Cells["IdD"].Value);
 
                 
                 DialogResult result = MessageBox.Show("¿Estás seguro de eliminar este registro?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -62,7 +102,7 @@ namespace ClickTix.UserControls
                 if (result == DialogResult.Yes)
                 {
                     EliminarRegistro(id);
-                    Pelicula_Load(grid_peliculas);
+                    cargarPeliculas();
                 }
             }
         }

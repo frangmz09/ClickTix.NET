@@ -31,6 +31,9 @@
             this.title = new System.Windows.Forms.Label();
             this.add_dimension = new System.Windows.Forms.Button();
             this.grid_dimension = new System.Windows.Forms.DataGridView();
+            this.idDimension = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dimension = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_dimension)).BeginInit();
@@ -59,29 +62,56 @@
             // 
             // grid_dimension
             // 
+            this.grid_dimension.AllowUserToAddRows = false;
+            this.grid_dimension.AllowUserToDeleteRows = false;
             this.grid_dimension.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.grid_dimension.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_dimension.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDimension,
+            this.Dimension,
+            this.PrecioD,
             this.Modificar,
             this.Borrar});
             this.grid_dimension.Location = new System.Drawing.Point(23, 52);
             this.grid_dimension.Name = "grid_dimension";
+            this.grid_dimension.ReadOnly = true;
             this.grid_dimension.Size = new System.Drawing.Size(524, 303);
             this.grid_dimension.TabIndex = 17;
             this.grid_dimension.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_dimension_CellContentClick);
             // 
+            // idDimension
+            // 
+            this.idDimension.HeaderText = "ID";
+            this.idDimension.Name = "idDimension";
+            this.idDimension.ReadOnly = true;
+            // 
+            // Dimension
+            // 
+            this.Dimension.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Dimension.HeaderText = "Dimension";
+            this.Dimension.Name = "Dimension";
+            this.Dimension.ReadOnly = true;
+            // 
+            // PrecioD
+            // 
+            this.PrecioD.HeaderText = "Precio";
+            this.PrecioD.Name = "PrecioD";
+            this.PrecioD.ReadOnly = true;
+            // 
             // Modificar
             // 
+            this.Modificar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Modificar.HeaderText = "Modificar";
             this.Modificar.Name = "Modificar";
+            this.Modificar.ReadOnly = true;
             this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Modificar.Width = 50;
             // 
             // Borrar
             // 
             this.Borrar.HeaderText = "Borrar";
             this.Borrar.Name = "Borrar";
+            this.Borrar.ReadOnly = true;
             this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Borrar.Width = 50;
@@ -109,6 +139,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDimension;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dimension;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioD;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
     }

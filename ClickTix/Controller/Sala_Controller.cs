@@ -195,7 +195,41 @@ namespace ClickTix.Controller
             }
         }
 
+        public static List<Sala> obtenerTodos(int idSucursal)
+        {
+            List<Sala> salas = new List<Sala>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
 
+                string query = "SELECT id,filas,columnas,capacidad, nro_sala FROM sala where id_sucursal = @idSucursal";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@idSucursal", idSucursal);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Sala sala = new Sala();
+
+                            sala.Id = reader.GetInt32("id");
+                            sala.Filas= reader.GetInt32("filas");
+                            sala.Columnas = reader.GetInt32("columnas");
+                            sala.Capacidad = reader.GetInt32("capacidad");
+                            sala.Nro_Sala = reader.GetInt32("nro_sala");
+
+                            salas.Add(sala);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return salas;
+        }
 
         public static int ObtenerNroSala(int idSala)
         {

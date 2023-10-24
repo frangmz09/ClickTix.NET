@@ -15,7 +15,7 @@ namespace ClickTix.Modelo
         public string Apellido { get; set; }
         public string Pass { get; set; }
         public int Id_Sucursal { get; set; }
-
+        public int is_admin { get; set; }
         public string Usuario { get; set; }
 
         public EmpleadoA() { }

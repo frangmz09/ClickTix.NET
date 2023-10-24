@@ -12,7 +12,62 @@ namespace ClickTix.Conexion
 {
      class Sucursal_Controller
     {
+        public static List<Sucursal> obtenerTodos()
+        {
+            List<Sucursal> sucursales = new List<Sucursal>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
 
+                string query = "SELECT id,nombre,cuit, direccion FROM sucursal";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Sucursal sucursal = new Sucursal();
+
+                            sucursal.id = reader.GetInt32("id");
+                            sucursal.nombre = reader.GetString("nombre");
+                            sucursal.cuit= reader.GetString("cuit");
+                            sucursal.direccion = reader.GetString("direccion");
+                            sucursales.Add(sucursal);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return sucursales;
+        }
+
+        public static string ObtenerNombreSucursalPorID(int idSucursal)
+        {
+            string nombreSucursal = "";
+            ManagerConnection.OpenConnection();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                string query = "SELECT nombre FROM sucursal WHERE id = @idSucursal";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@idSucursal", idSucursal);
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        nombreSucursal = result.ToString();
+                    }
+                }
+            }
+            ManagerConnection.CloseConnection();
+
+            return nombreSucursal;
+
+        }
 
         public static bool CrearSucursal(Sucursal sucursal)
         {

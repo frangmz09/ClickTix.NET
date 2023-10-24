@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Controller;
 using ClickTix.Modelo;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace ClickTix.UserControls
         public ABM_FUNCION_UC()
         {
             InitializeComponent();
-            Funcion_Controller.Funcion_Load(this.grid_funciones);
+            cargarFunciones();
         }
 
        
@@ -50,7 +51,7 @@ namespace ClickTix.UserControls
                     Funcion_Controller.EliminarRegistroFuncion(id);
 
 
-                    Funcion_Controller.Funcion_Load(this.grid_funciones);
+                    cargarFunciones();
 
                 }
             }
@@ -60,7 +61,28 @@ namespace ClickTix.UserControls
 
 
 
-     
+        private void cargarFunciones()
+        {
+            grid_funciones.Rows.Clear();
+
+            List<Funcion> funciones = Funcion_Controller.obtenerTodos();
+            foreach (Funcion funcion in funciones)
+            {
+                int rowIndex = grid_funciones.Rows.Add();
+
+                grid_funciones.Rows[rowIndex].Cells[0].Value = funcion.Id.ToString();
+                grid_funciones.Rows[rowIndex].Cells[1].Value = Pelicula_Controller.ObtenerNombrePeliculaPorID(funcion.Id_Pelicula);
+                grid_funciones.Rows[rowIndex].Cells[2].Value = funcion.Fecha.ToShortDateString();
+                grid_funciones.Rows[rowIndex].Cells[3].Value = Funcion_Controller.ObtenerHorarioPorID(funcion.Id_Turno);
+                grid_funciones.Rows[rowIndex].Cells[4].Value = Sala_Controller.ObtenerNroSala(funcion.Id_Turno);
+                grid_funciones.Rows[rowIndex].Cells[5].Value = Funcion_Controller.ObtenerIdiomaFuncion(funcion.Id_Idioma);
+                grid_funciones.Rows[rowIndex].Cells[6].Value = Funcion_Controller.obtenerDimensionDesdeId(funcion.Id_Dimension);
+                grid_funciones.Rows[rowIndex].Cells[7].Value = Funcion_Controller.obtenerSucursalDesdeIdSala(funcion.Id_Sala);
+                grid_funciones.Rows[rowIndex].Cells[8].Value = "Modificar";
+                grid_funciones.Rows[rowIndex].Cells[9].Value = "Eliminar";
+
+            }
+        }
         private void add_funcion_Click(object sender, EventArgs e)
         {
             FORM_FUNCIONES_UC formfunciones_uc = new FORM_FUNCIONES_UC();

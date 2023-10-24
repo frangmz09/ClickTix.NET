@@ -99,6 +99,37 @@ namespace ClickTix.Conexion
             }
         }
 
+
+        public static List<PrecioDimension> obtenerTodos()
+        {
+            List<PrecioDimension> dimenisones = new List<PrecioDimension>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "SELECT id,dimension,precio FROM dimension";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PrecioDimension dimension = new PrecioDimension();
+
+                            dimension.id = reader.GetInt32("id");
+                            dimension.dimension = reader.GetString("dimension");
+                            dimension.precio = reader.GetDecimal("precio");
+                            dimenisones.Add(dimension);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return dimenisones;
+        }
         public static void Dimension_Load(DataGridView tabla)
         {
 

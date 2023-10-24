@@ -16,6 +16,13 @@ namespace ClickTix.Modelo
         public int Id_Idioma { get; set; }
         public int Id_Turno { get; set; }
 
+        public int nroSala { get; set; }
+        public string dimension { get; set; }
+        public string idioma { get; set; }
+        public TimeSpan hora{ get; set; }
+        public decimal precio { get; set; }
+
+
         public Funcion(int id, DateTime fecha, int id_Dimension, int id_Pelicula, int id_Sala, int id_Idioma, int id_Turno)
         {
             Id = id;

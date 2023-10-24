@@ -1,6 +1,7 @@
 ﻿using ClickTix.Admin.UserControls.Formularios;
 using ClickTix.Conexion;
 using ClickTix.Controller;
+using ClickTix.Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,10 +24,29 @@ namespace ClickTix.UserControls
             this.idSucursalSeleccionada = id;
             InitializeComponent();
 
-            Sala_Controller.Salas_Load(grid_salas,id);
+            cargarSalas();
             //Sucursal_Controller.Sucursal_Load(grid_salas);
         }
+        private void cargarSalas()
+        {
 
+            grid_salas.Rows.Clear();
+
+            List<Sala> dimensiones = Sala_Controller.obtenerTodos(idSucursalSeleccionada);
+
+            foreach (Sala sala in dimensiones)
+            {
+                int rowIndex = grid_salas.Rows.Add();
+                grid_salas.Rows[rowIndex].Cells[0].Value = sala.Id.ToString();
+                grid_salas.Rows[rowIndex].Cells[1].Value = sala.Nro_Sala.ToString();
+                grid_salas.Rows[rowIndex].Cells[2].Value = sala.Filas.ToString();
+                grid_salas.Rows[rowIndex].Cells[3].Value = sala.Columnas.ToString();
+                grid_salas.Rows[rowIndex].Cells[4].Value = sala.Capacidad.ToString();
+                grid_salas.Rows[rowIndex].Cells[5].Value = "Modificar";
+                grid_salas.Rows[rowIndex].Cells[6].Value = "Eliminar";
+
+            }
+        }
         private void add_salas_Click(object sender, EventArgs e)
         {
             FORM_SALAS_UC formsalas_uc = new FORM_SALAS_UC(this.idSucursalSeleccionada);
@@ -37,7 +57,7 @@ namespace ClickTix.UserControls
         {
             if (e.ColumnIndex == grid_salas.Columns["Modificar"].Index && e.RowIndex >= 0)
             {
-                int id = Convert.ToInt32(grid_salas.Rows[e.RowIndex].Cells["id"].Value);
+                int id = Convert.ToInt32(grid_salas.Rows[e.RowIndex].Cells["IdSala"].Value);
 
 
                 FORM_SALAS_UC formModificarSucursal = new FORM_SALAS_UC(id,this.idSucursalSeleccionada);
@@ -49,7 +69,7 @@ namespace ClickTix.UserControls
             else if (e.ColumnIndex == grid_salas.Columns["Borrar"].Index && e.RowIndex >= 0)
             {
 
-                int id = Convert.ToInt32(grid_salas.Rows[e.RowIndex].Cells["id"].Value);
+                int id = Convert.ToInt32(grid_salas.Rows[e.RowIndex].Cells["IdSala"].Value);
 
 
                 DialogResult result = MessageBox.Show("¿Estás seguro de eliminar este registro?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

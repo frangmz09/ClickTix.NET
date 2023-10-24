@@ -1,5 +1,7 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Controller;
 using ClickTix.Empleado.UserControls;
+using ClickTix.Modelo;
 using ClickTix.UserControls;
 using MySql.Data.MySqlClient;
 using System;
@@ -18,6 +20,7 @@ namespace ClickTix.Empleado
     public partial class ELEGIR_FUNCION_UC : UserControl
     {
         private int idPelicula;
+        private string tituloP;
         public ELEGIR_FUNCION_UC()
         {
             InitializeComponent();
@@ -28,42 +31,35 @@ namespace ClickTix.Empleado
         {
             this.idPelicula = id;
             InitializeComponent();
-            CARTELERA_UC_LOAD(dataGridView1, titulo, id);
+            this.tituloP = titulo;
+            cargarFunciones();
 
 
-            
+
+
         }
-
-        private void CARTELERA_UC_LOAD(DataGridView tabla, string titulo, int id)
+        private void cargarFunciones()
         {
-            ManagerConnection.OpenConnection();
 
+            grid_funcionesc.Rows.Clear();
+            Trace.WriteLine("TITULO" + this.tituloP);
+            List<Funcion> funciones = Funcion_Controller.obtenerTodosCartelera(tituloP);
 
-
-            string query = "select  funcion.id, sala.nro_sala , dimension.dimension, idioma.idioma, dimension.precio,funcion.fecha, turno.hora from funcion " +
-                "left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id " +
-                "left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id " +
-                "left join turno on funcion.turno_id = turno.id where pelicula.titulo = @titulo and sala.id_sucursal = @id_sucursal and funcion.fecha > NOW();";
-
-            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            foreach (Funcion funcion in funciones)
             {
-                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
-                {
-                    command.Parameters.AddWithValue("@titulo", titulo);
-                    command.Parameters.AddWithValue("@id_sucursal", Program.logeado.Id_sucursal);
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                    DataTable dt = new DataTable();
+                int rowIndex = grid_funcionesc.Rows.Add();
+                grid_funcionesc.Rows[rowIndex].Cells[0].Value = funcion.Id.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[1].Value = funcion.nroSala.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[2].Value = funcion.dimension.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[3].Value = funcion.idioma.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[4].Value = funcion.precio.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.Fecha.ToShortDateString();
+                grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.hora.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[7].Value = "Seleccionar";
 
-
-                    adapter.Fill(dt);
-
-
-                    tabla.DataSource = dt;
-                }
             }
-            ManagerConnection.CloseConnection();
-
         }
+      
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -76,9 +72,9 @@ namespace ClickTix.Empleado
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridView1.Columns["Seleccionar"].Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == grid_funcionesc.Columns["Seleccionar"].Index && e.RowIndex >= 0)
             {
-                int id_funcion = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id"].Value);
+                int id_funcion = Convert.ToInt32(grid_funcionesc.Rows[e.RowIndex].Cells["idFunSel"].Value);
 
 
                 BUTACAS_UC butacas = new BUTACAS_UC(id_funcion, idPelicula);

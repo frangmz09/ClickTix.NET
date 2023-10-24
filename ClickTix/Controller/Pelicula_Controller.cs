@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Modelo;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,99 @@ namespace ClickTix.Controller
 {
     internal class Pelicula_Controller
     {
+        public static List<Pelicula> obtenerTodos()
+        {
+            List<Pelicula> peliculas = new List<Pelicula>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
 
+                string query = "SELECT id,portada,titulo, director FROM pelicula";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Pelicula pelicula = new Pelicula();
+
+                            pelicula.id = reader.GetInt32("id");
+                            pelicula.imagen = reader.GetString("portada");
+                            pelicula.titulo = reader.GetString("titulo");
+                            pelicula.imagen = reader.GetString("portada");
+                            pelicula.director = reader.GetString("director");
+
+                            peliculas.Add(pelicula);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return peliculas;
+        }
+
+
+        public static List<Pelicula> obtenerTodosCartelera()
+        {
+            List<Pelicula> peliculas = new List<Pelicula>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "select p.id, p.titulo,p.portada, p.director from pelicula p inner join funcion f on f.id_pelicula = p.id inner join sala s on f.id_sala = s.id where s.id_sucursal = @id_sucursal and  f.fecha > NOW();";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@id_sucursal", Program.logeado.Id_sucursal);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Pelicula pelicula = new Pelicula();
+
+                            pelicula.id = reader.GetInt32("id");
+                            pelicula.imagen = reader.GetString("portada");
+                            pelicula.titulo = reader.GetString("titulo");
+                            pelicula.director = reader.GetString("director");
+
+                            peliculas.Add(pelicula);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return peliculas;
+        }
+        public static string ObtenerNombrePeliculaPorID(int idPelicula)
+        {
+            string nombrePelicula = "";
+            ManagerConnection.OpenConnection();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                string query = "SELECT titulo FROM pelicula WHERE id = @idPelicula";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@idPelicula", idPelicula);
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        nombrePelicula = result.ToString();
+                    }
+                }
+            }
+            ManagerConnection.CloseConnection();
+
+            return nombrePelicula;
+
+        }
 
         public static string obtenerFileName(int idPelicula)
         {

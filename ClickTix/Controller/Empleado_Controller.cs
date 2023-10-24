@@ -13,6 +13,41 @@ namespace ClickTix.Modelo
 {
     internal class Empleado_Controller
     {
+
+        public static List<EmpleadoA> obtenerTodos()
+        {
+            List<EmpleadoA> empleados = new List<EmpleadoA>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "SELECT id, nombre, apellido, usuario, is_admin, id_sucursal FROM usuario_sistema"; 
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            EmpleadoA empleado = new EmpleadoA();
+
+                            empleado.Id = reader.GetInt32("id");
+                            empleado.Nombre = reader.GetString("nombre");
+                            empleado.Apellido = reader.GetString("apellido");
+                            empleado.Usuario = reader.GetString("usuario");
+                            empleado.is_admin = reader.GetInt32("is_admin");
+                            empleado.Id_Sucursal = reader.GetInt32("id_sucursal");
+                            
+                            empleados.Add(empleado);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return empleados;
+        }
         public static string nombreSucursalFuncion(int idFuncion) {
             string sucursalNombre="";
 

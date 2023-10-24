@@ -56,7 +56,6 @@
             this.adddimension_btn.TabIndex = 83;
             this.adddimension_btn.Text = "Agregar";
             this.adddimension_btn.UseVisualStyleBackColor = true;
-           
             // 
             // title
             // 
@@ -101,6 +100,11 @@
             // input_precio
             // 
             this.input_precio.Location = new System.Drawing.Point(142, 188);
+            this.input_precio.Maximum = new decimal(new int[] {
+            -305594368,
+            20954757,
+            0,
+            0});
             this.input_precio.Name = "input_precio";
             this.input_precio.Size = new System.Drawing.Size(268, 20);
             this.input_precio.TabIndex = 87;
