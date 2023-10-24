@@ -115,6 +115,11 @@
             // input_duracion
             // 
             this.input_duracion.Location = new System.Drawing.Point(221, 161);
+            this.input_duracion.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.input_duracion.Name = "input_duracion";
             this.input_duracion.Size = new System.Drawing.Size(45, 20);
             this.input_duracion.TabIndex = 52;
