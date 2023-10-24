@@ -882,7 +882,7 @@ namespace ClickTix.Modelo
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                string query = "select id, fecha from funcion";
+                string query = "SELECT id FROM funcion WHERE fecha < NOW()";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -891,26 +891,17 @@ namespace ClickTix.Modelo
                     while (reader.Read())
                     {
                         int funcionId = reader.GetInt32(0);
-                        DateTime fechaFuncion = reader.GetDateTime(1);
-                        DateTime fechaActual = DateTime.Now;
-
-                        if (fechaFuncion < fechaActual)
-                        {
-                            idsABorrar.Add(funcionId);
-                        }
+                        idsABorrar.Add(funcionId);
                     }
                 }
             }
 
-
             foreach (int id in idsABorrar)
             {
                 Asiento_Controller.borrarAsientosDeFuncion(id);
-
             }
 
             ManagerConnection.CloseConnection();
-
         }
 
 

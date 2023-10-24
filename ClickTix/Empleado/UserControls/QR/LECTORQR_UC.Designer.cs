@@ -26,7 +26,7 @@
             this.pictureBox1 = new AForge.Controls.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            timer1 = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -89,6 +89,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(68, 145);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(452, 280);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 71;
             this.pictureBox1.TabStop = false;
             // 
@@ -102,7 +103,6 @@
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label2
             // 
@@ -180,7 +180,6 @@
             this.Name = "LECTORQR_UC";
             this.Size = new System.Drawing.Size(800, 451);
             this.Load += new System.EventHandler(this.LECTORQR_UC_Load);
-            this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.LECTORQR_UC_ControlRemoved);
             this.Leave += new System.EventHandler(this.LECTORQR_UC_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupbox1.ResumeLayout(false);
@@ -198,7 +197,7 @@
         private AForge.Controls.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Timer timer1;
+        public System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button2;

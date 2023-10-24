@@ -48,17 +48,13 @@ namespace ClickTix.Conexion
         }
         public static void OpenConnection()
         {
-            try
-            {
+         
                 if (connection != null && connection.State == ConnectionState.Closed)
                 {
                     connection.Open();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al abrir la conexión a la base de datos: " + ex.Message);
-            }
+            
+
         }
         public static void CloseConnection()
         {

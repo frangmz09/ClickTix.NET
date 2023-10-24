@@ -388,5 +388,8 @@
   <ItemGroup>
     <None Include="Resources\ticket.html" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\img\icons\none.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

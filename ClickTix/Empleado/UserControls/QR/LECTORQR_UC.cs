@@ -22,6 +22,7 @@ using ClickTix.Modelo;
 using MySqlX.XDevAPI.Common;
 using MySql.Data.MySqlClient;
 using ClickTix.Conexion;
+using System.IO;
 
 namespace ClickTix.Empleado.UserControls
 {
@@ -29,21 +30,33 @@ namespace ClickTix.Empleado.UserControls
     {
 
         FilterInfoCollection dispositivos;
-        VideoCaptureDevice fuenteVideo;
-
-
-
+        public static VideoCaptureDevice fuenteVideo;
+        Image imagenNone;
 
         public LECTORQR_UC()
         {
             InitializeComponent();
+            button1.Enabled = false;
+            string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\icons\\none.png");
+            try
+            {
+                if (File.Exists(rutaImagen))
+                {
+                    imagenNone = Image.FromFile(rutaImagen);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la imagen: " + ex.Message);
+            }
+            pictureBox1.Image = imagenNone;
         }
 
         private void LECTORQR_UC_Load(object sender, EventArgs e)
         {
             dispositivos = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
-            if (dispositivos.Count>0)
+            if (dispositivos.Count > 0)
             {
                 foreach (FilterInfo dispositivo in dispositivos)
                 {
@@ -58,96 +71,69 @@ namespace ClickTix.Empleado.UserControls
                 pictureBox1.Enabled = false;
                 button1.Enabled = false;
                 error1.Visible = true;
-
             }
-
-
         }
-
-
-        private void title_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
- 
 
         private void LECTORQR_UC_Leave(object sender, EventArgs e)
         {
-            if (fuenteVideo != null)
+            DetenerCamara();
+        }
+
+        public static void DetenerCamara()
+        {
+            if (fuenteVideo != null && fuenteVideo.IsRunning)
             {
-                if (fuenteVideo.IsRunning)
-                {
-                    fuenteVideo.Stop();
-                }
+                fuenteVideo.SignalToStop();
+                fuenteVideo.WaitForStop();
+                fuenteVideo = null;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            fuenteVideo = new VideoCaptureDevice(dispositivos[comboBox1.SelectedIndex].MonikerString);
+            CambiarCamara(comboBox1.SelectedIndex);
+        }
+
+        private void CambiarCamara(int nuevaCamaraIndex)
+        {
+            DetenerCamara();
+
+            fuenteVideo = new VideoCaptureDevice(dispositivos[nuevaCamaraIndex].MonikerString);
             fuenteVideo.NewFrame += CaptureDevice_NewFrame;
-            fuenteVideo.Start(); 
+            fuenteVideo.Start();
             timer1.Start();
+            button1.Enabled = false;
         }
 
         private void CaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-        }
-
-        private void LECTORQR_UC_ControlRemoved(object sender, ControlEventArgs e)
-        {
-            if (fuenteVideo != null)
+            try
             {
-                if (fuenteVideo.IsRunning)
+                if (pictureBox1.InvokeRequired)
                 {
-                    fuenteVideo.Stop();
+                    pictureBox1.Invoke(new MethodInvoker(() =>
+                    {
+                        pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                    }));
+                }
+                else
+                {
+                    pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
                 }
             }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (pictureBox1.Image != null)
+            catch (Exception ex)
             {
-                BarcodeReader barcodeReader = new BarcodeReader();
-                ZXing.Result result = barcodeReader.Decode((Bitmap)pictureBox1.Image);
-                if (result != null)
-                {
-                    timer1.Stop();
-                    textBox1.Text = result.ToString();
-                    int idTicket = int.Parse(textBox1.Text);
-                    if (fuenteVideo.IsRunning)
-                    {
-                        fuenteVideo.Stop();
-                    }
-                    Trace.WriteLine("EL ID TICKET ES:" + idTicket);
-                    TICKET_UC ticket = new TICKET_UC(idTicket);
-                    Index_User.addUserControlUsuario(ticket);
-
-                 
-                }
-
+                MessageBox.Show("Error al actualizar la imagen: " + ex.Message);
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (fuenteVideo != null)
-            {
-                if (fuenteVideo.IsRunning)
-                {
-                    fuenteVideo.Stop();
-                }
-            }
-
+            DetenerCamara();
+            pictureBox1.Image = imagenNone;
+            button1.Enabled = true;
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {

@@ -51,6 +51,7 @@
             this.Name = "Index_User";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ClickTix: Ventas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Index_User_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Index_User_FormClosed);
             this.Load += new System.EventHandler(this.Index_User_Load);
             this.ResumeLayout(false);

@@ -27,7 +27,7 @@ namespace ClickTix
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ManagerConnection.getInstance();
-            if (validateConnection())
+            if (validateConnection()== true)
             {
                 Trace.WriteLine("Conexion a la base de datos establecida con exito");
                 Funcion_Controller.validarAsientosaBorrar();
@@ -36,7 +36,7 @@ namespace ClickTix
             }
             else
             {
-                MessageBox.Show("La conexion a la Base de Datos no se pudo establecer");
+                MessageBox.Show("La conexion a la Base de Datos no se pudo establecer, no podrá utilizar ClickTix ");
             }
         }
 

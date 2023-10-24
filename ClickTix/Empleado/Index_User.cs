@@ -44,5 +44,18 @@ namespace ClickTix.Empleado
             Program.login.Show();
 
         }
+
+        private void Index_User_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                LECTORQR_UC.DetenerCamara();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al detener la cámara: " + ex.Message);
+            }
+
+        }
     }
 }

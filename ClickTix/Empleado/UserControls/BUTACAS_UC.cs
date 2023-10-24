@@ -32,6 +32,12 @@ namespace ClickTix.Empleado.UserControls
             this.tituloPelicula = ObtenerTituloDePelicula(idPeli);
             this.idFuncion = id_funcion;
             this.idPelicula = idPeli;
+
+            Trace.WriteLine("DATOS PARA RECIBIR:" +
+                "\n TITULO: " + this.tituloPelicula +
+                "\n ID FUNCION: " + this.idFuncion +
+                "\n ID PELICULA: " + this.idPelicula);
+
             InitializeComponent();
             llenarButacas(id_funcion);
         }
@@ -65,8 +71,8 @@ namespace ClickTix.Empleado.UserControls
                         numColumnas = reader.GetInt32(1);
                     }
 
-                    Trace.WriteLine(numFilas);
-                    Trace.WriteLine(numColumnas);
+                    Trace.WriteLine("FILAS "  + numFilas);
+                    Trace.WriteLine("COLUMNAS " + numColumnas);
 
                     reader.Close();
                     mysqlConnection.Close();
