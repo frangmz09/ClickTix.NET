@@ -825,7 +825,7 @@ namespace ClickTix.Modelo
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar el registro: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se puede borrar esta funcion, ya hay cliente que reservaron asientos para la misma: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             finally

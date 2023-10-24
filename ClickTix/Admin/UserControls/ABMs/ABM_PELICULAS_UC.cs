@@ -161,7 +161,7 @@ namespace ClickTix.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar el registro: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se puede borrar esta pelicula, ya que ya tiene funciones asociadas a la misma", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
