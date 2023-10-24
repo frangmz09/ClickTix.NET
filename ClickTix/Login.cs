@@ -46,6 +46,8 @@ namespace ClickTix
             
             if (Usuario_Controller.autenticar(usuario, contraseña, true))
             {
+                txt_pw.Text = "";
+                txt_user.Text = "";
                 if (Program.logeado.Is_admin == 1)
                 {
                     Index_Admin index_Admin = new Index_Admin();

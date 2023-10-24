@@ -13,7 +13,7 @@ namespace ClickTix
     {
 
         public static Usuario logeado;
-
+        public static Login login ;
 
 
 
@@ -31,7 +31,7 @@ namespace ClickTix
             {
                 Trace.WriteLine("Conexion a la base de datos establecida con exito");
                 Funcion_Controller.validarAsientosaBorrar();
-                Application.Run(new Login());
+                Application.Run(login = new Login());
 
             }
             else

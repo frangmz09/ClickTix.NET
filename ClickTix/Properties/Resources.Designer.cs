@@ -102,13 +102,13 @@ namespace ClickTix.Properties {
         ///        h1 {
         ///            color: #000000;
         ///        }
-        ///
-        ///        img {
-        ///            max-width: 100%;
-        ///        }
         ///    &lt;/style&gt;
         ///&lt;/head&gt;
-        ///&lt;bod [resto de la cadena truncado]&quot;;.
+        ///&lt;body&gt;
+        ///    &lt;div class=&quot;ticket&quot;&gt;
+        ///
+        ///        
+        ///        &lt;img src [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string ticket {
             get {

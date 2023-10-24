@@ -74,13 +74,17 @@ namespace ClickTix
             MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                Login loginForm = new Login();
-                loginForm.Show();
-                this.Hide();
+               
+                this.Close();
             }
             else if (result == DialogResult.No)
             {
             }
+        }
+
+        private void Index_Admin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.login.Show();
         }
     }
 }

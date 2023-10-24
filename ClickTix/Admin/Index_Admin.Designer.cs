@@ -33,7 +33,7 @@
             this.btn_sucur = new System.Windows.Forms.Button();
             this.btn_empleado = new System.Windows.Forms.Button();
             this.btn_funciones = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            panel1 = new System.Windows.Forms.Panel();
             this.btn_dimensiones = new System.Windows.Forms.Button();
             this.btn_logOut = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -84,11 +84,11 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panel1.Location = new System.Drawing.Point(186, 37);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(560, 373);
-            this.panel1.TabIndex = 4;
+            panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            panel1.Location = new System.Drawing.Point(186, 37);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(560, 373);
+            panel1.TabIndex = 4;
             // 
             // btn_dimensiones
             // 
@@ -119,7 +119,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_logOut);
             this.Controls.Add(this.btn_dimensiones);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(panel1);
             this.Controls.Add(this.btn_funciones);
             this.Controls.Add(this.btn_empleado);
             this.Controls.Add(this.btn_sucur);
@@ -127,7 +127,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Index_Admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Index";
+            this.Text = "ClickTix: Administrador";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Index_Admin_FormClosed);
             this.Load += new System.EventHandler(this.Index_Load);
             this.ResumeLayout(false);
 
@@ -141,6 +142,6 @@
         private System.Windows.Forms.Button btn_funciones;
         private System.Windows.Forms.Button btn_dimensiones;
         private System.Windows.Forms.Button btn_logOut;
-        public System.Windows.Forms.Panel panel1;
+        public static System.Windows.Forms.Panel panel1;
     }
 }

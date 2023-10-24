@@ -39,5 +39,10 @@ namespace ClickTix.Empleado
             uc.BringToFront();
         }
 
+        private void Index_User_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.login.Show();
+
+        }
     }
 }

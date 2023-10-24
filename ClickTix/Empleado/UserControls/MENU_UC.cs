@@ -35,9 +35,12 @@ namespace ClickTix.Empleado.UserControls
             MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                Login loginForm = new Login();
-                loginForm.Show();
-                Parent.Parent.Hide();
+                Form formularioPadre = this.FindForm();
+                if (formularioPadre != null)
+                {
+                    formularioPadre.Close();
+                }
+                Program.login.Show();
             }
             else if (result == DialogResult.No)
             {
