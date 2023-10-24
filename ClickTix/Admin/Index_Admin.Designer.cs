@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Index_Admin));
             this.btn_peliculas = new System.Windows.Forms.Button();
             this.btn_sucur = new System.Windows.Forms.Button();
             this.btn_empleado = new System.Windows.Forms.Button();
             this.btn_funciones = new System.Windows.Forms.Button();
-            panel1 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.btn_dimensiones = new System.Windows.Forms.Button();
             this.btn_logOut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_peliculas
             // 
+            this.btn_peliculas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_peliculas.Location = new System.Drawing.Point(12, 37);
             this.btn_peliculas.Name = "btn_peliculas";
             this.btn_peliculas.Size = new System.Drawing.Size(125, 51);
@@ -49,6 +51,7 @@
             // 
             // btn_sucur
             // 
+            this.btn_sucur.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_sucur.Location = new System.Drawing.Point(12, 110);
             this.btn_sucur.Name = "btn_sucur";
             this.btn_sucur.Size = new System.Drawing.Size(125, 51);
@@ -59,6 +62,7 @@
             // 
             // btn_empleado
             // 
+            this.btn_empleado.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_empleado.Location = new System.Drawing.Point(12, 252);
             this.btn_empleado.Name = "btn_empleado";
             this.btn_empleado.Size = new System.Drawing.Size(125, 51);
@@ -69,6 +73,7 @@
             // 
             // btn_funciones
             // 
+            this.btn_funciones.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_funciones.Location = new System.Drawing.Point(12, 181);
             this.btn_funciones.Name = "btn_funciones";
             this.btn_funciones.Size = new System.Drawing.Size(125, 51);
@@ -79,13 +84,15 @@
             // 
             // panel1
             // 
-            panel1.Location = new System.Drawing.Point(186, 37);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(560, 373);
-            panel1.TabIndex = 4;
+            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel1.Location = new System.Drawing.Point(186, 37);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(560, 373);
+            this.panel1.TabIndex = 4;
             // 
             // btn_dimensiones
             // 
+            this.btn_dimensiones.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_dimensiones.Location = new System.Drawing.Point(12, 323);
             this.btn_dimensiones.Name = "btn_dimensiones";
             this.btn_dimensiones.Size = new System.Drawing.Size(125, 51);
@@ -96,6 +103,7 @@
             // 
             // btn_logOut
             // 
+            this.btn_logOut.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_logOut.Location = new System.Drawing.Point(648, 8);
             this.btn_logOut.Name = "btn_logOut";
             this.btn_logOut.Size = new System.Drawing.Size(98, 23);
@@ -111,12 +119,14 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_logOut);
             this.Controls.Add(this.btn_dimensiones);
-            this.Controls.Add(panel1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_funciones);
             this.Controls.Add(this.btn_empleado);
             this.Controls.Add(this.btn_sucur);
             this.Controls.Add(this.btn_peliculas);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Index_Admin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Index";
             this.Load += new System.EventHandler(this.Index_Load);
             this.ResumeLayout(false);
@@ -131,6 +141,6 @@
         private System.Windows.Forms.Button btn_funciones;
         private System.Windows.Forms.Button btn_dimensiones;
         private System.Windows.Forms.Button btn_logOut;
-        public static System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Panel panel1;
     }
 }
