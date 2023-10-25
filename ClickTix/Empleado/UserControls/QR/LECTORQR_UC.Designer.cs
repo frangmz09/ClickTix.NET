@@ -26,7 +26,7 @@
             this.pictureBox1 = new AForge.Controls.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -103,6 +103,7 @@
             // 
             // timer1
             // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label2
             // 

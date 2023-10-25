@@ -42,7 +42,7 @@
             // 
             // confirmar_asiento
             // 
-            this.confirmar_asiento.Location = new System.Drawing.Point(335, 539);
+            this.confirmar_asiento.Location = new System.Drawing.Point(394, 3);
             this.confirmar_asiento.Name = "confirmar_asiento";
             this.confirmar_asiento.Size = new System.Drawing.Size(168, 36);
             this.confirmar_asiento.TabIndex = 1;

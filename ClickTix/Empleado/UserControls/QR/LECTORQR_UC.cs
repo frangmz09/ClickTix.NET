@@ -7,30 +7,22 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-
 using AForge.Video.DirectShow;
 using AForge.Video;
-
 using System.Windows.Forms;
-using System.Timers;
 using ZXing;
-using AForge.Controls;
-using iTextSharp.text.xml;
-using System.Windows.Forms.VisualStyles;
-using System.Diagnostics;
-using ClickTix.Modelo;
-using MySqlX.XDevAPI.Common;
-using MySql.Data.MySqlClient;
-using ClickTix.Conexion;
 using System.IO;
+using ClickTix.Conexion;
+using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace ClickTix.Empleado.UserControls
 {
     public partial class LECTORQR_UC : UserControl
     {
-
         FilterInfoCollection dispositivos;
-        public static VideoCaptureDevice fuenteVideo;
+        private VideoCaptureDevice fuenteVideo;
+        private BarcodeReader barcodeReader;
         Image imagenNone;
 
         public LECTORQR_UC()
@@ -50,8 +42,13 @@ namespace ClickTix.Empleado.UserControls
                 MessageBox.Show("Error al cargar la imagen: " + ex.Message);
             }
             pictureBox1.Image = imagenNone;
-        }
 
+            barcodeReader = new BarcodeReader();
+            barcodeReader.Options = new ZXing.Common.DecodingOptions
+            {
+                TryHarder = true
+            };
+        }
         private void LECTORQR_UC_Load(object sender, EventArgs e)
         {
             dispositivos = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -74,12 +71,28 @@ namespace ClickTix.Empleado.UserControls
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            fuenteVideo = new VideoCaptureDevice(dispositivos[comboBox1.SelectedIndex].MonikerString);
+            fuenteVideo.NewFrame += CaptureDevice_NewFrame;
+            fuenteVideo.Start();
+            timer1.Start();
+        }
+
+
+        private void CaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+     
+                pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            
+
+        }
         private void LECTORQR_UC_Leave(object sender, EventArgs e)
         {
             DetenerCamara();
         }
 
-        public static void DetenerCamara()
+         private void DetenerCamara()
         {
             if (fuenteVideo != null && fuenteVideo.IsRunning)
             {
@@ -89,51 +102,12 @@ namespace ClickTix.Empleado.UserControls
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            CambiarCamara(comboBox1.SelectedIndex);
-        }
-
-        private void CambiarCamara(int nuevaCamaraIndex)
-        {
-            DetenerCamara();
-
-            fuenteVideo = new VideoCaptureDevice(dispositivos[nuevaCamaraIndex].MonikerString);
-            fuenteVideo.NewFrame += CaptureDevice_NewFrame;
-            fuenteVideo.Start();
-            timer1.Start();
-            button1.Enabled = false;
-        }
-
-        private void CaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
-        {
-            try
-            {
-                if (pictureBox1.InvokeRequired)
-                {
-                    pictureBox1.Invoke(new MethodInvoker(() =>
-                    {
-                        pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-                    }));
-                }
-                else
-                {
-                    pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al actualizar la imagen: " + ex.Message);
-            }
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             DetenerCamara();
             pictureBox1.Image = imagenNone;
             button1.Enabled = true;
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -145,7 +119,6 @@ namespace ClickTix.Empleado.UserControls
             {
                 MessageBox.Show("El valor ingresado no es un número, por favor ingrese un valor del tipo numerico.");
             }
-
             else
             {
                 int idTicketInput = int.Parse(textBox2.Text);
@@ -159,45 +132,73 @@ namespace ClickTix.Empleado.UserControls
                 {
                     MessageBox.Show("No se encontró un ticket con ese Nro de Ticket.");
                 }
-
             }
         }
 
-        private bool validarExistenciaTicket(int id) {
+        private bool validarExistenciaTicket(int id)
+        {
+            try
+            {
+                ManagerConnection.OpenConnection();
 
-                try
+                string query = "SELECT id FROM ticket where id=@id";
+
+                MySqlCommand command = new MySqlCommand(query, ManagerConnection.getInstance());
+
+                command.Parameters.AddWithValue("@id", id);
+
+                object resultado = command.ExecuteScalar();
+
+                if (resultado == null || resultado == DBNull.Value)
                 {
-                    ManagerConnection.OpenConnection();
-
-                    string query = "SELECT id FROM ticket where id=@id";
-
-                    MySqlCommand command = new MySqlCommand(query, ManagerConnection.getInstance());
-
-                    command.Parameters.AddWithValue("@id", id);
-
-                    object resultado = command.ExecuteScalar();
-
-                    if (resultado == null || resultado == DBNull.Value)
-                    {
                     ManagerConnection.CloseConnection();
                     return false;
-                    }
+                }
                 ManagerConnection.CloseConnection();
                 return true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
                 ManagerConnection.CloseConnection();
                 return false;
-                }
-            
+            }
         }
 
         private void back_pelicula_Click(object sender, EventArgs e)
         {
             MENU_UC menuUser = new MENU_UC();
             Index_User.addUserControlUsuario(menuUser);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image!= null || pictureBox1.Image!= imagenNone)
+            {
+                BarcodeReader barcodeReader = new BarcodeReader();
+                Result result = barcodeReader.Decode((Bitmap)pictureBox1.Image);
+                if (result!= null)
+                {
+                    textBox1.Text = "";
+                    textBox1.Text = result.ToString();
+
+
+                    int idTicketInput = int.Parse(textBox1.Text);
+                    if (validarExistenciaTicket(idTicketInput))
+                    {
+                        DetenerCamara();
+                        timer1.Stop();
+                        Trace.WriteLine("EL ID TICKET ES: " + idTicketInput);
+                        TICKET_UC ticket = new TICKET_UC(idTicketInput);
+                        Index_User.addUserControlUsuario(ticket);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró un ticket con ese Nro de Ticket.");
+                    }
+
+                }
+            }
         }
     }
 }
