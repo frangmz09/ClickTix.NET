@@ -1,8 +1,10 @@
 ﻿using ClickTix.Conexion;
 using ClickTix.Modelo;
+using Firebase.Storage;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,7 +16,7 @@ namespace ClickTix
 
         public static Usuario logeado;
         public static Login login ;
-
+        public static FirebaseStorage storage;
 
 
 
@@ -27,6 +29,17 @@ namespace ClickTix
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ManagerConnection.getInstance();
+            string rutaCredenciales = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "FirebaseCredentials\\clicktixmobile-firebase-adminsdk-vl0f0-d2cf63174e.json");
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", rutaCredenciales);
+
+            var options = new FirebaseStorageOptions
+            {
+                AuthTokenAsyncFactory = () => Task.FromResult(File.ReadAllText(rutaCredenciales))
+            };
+
+            Program.storage = new FirebaseStorage("clicktixmobile.appspot.com", options);
+
+
             if (validateConnection()== true)
             {
                 Trace.WriteLine("Conexion a la base de datos establecida con exito");

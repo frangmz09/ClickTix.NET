@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Firebase.Storage;
 
 namespace ClickTix.UserControls
 {
@@ -86,7 +87,7 @@ namespace ClickTix.UserControls
 
         }
 
-        private void Addpelicula_btn_Click(object sender, EventArgs e)
+        private async void Addpelicula_btn_Click(object sender, EventArgs e)
         {
 
             if (string.IsNullOrWhiteSpace(input_titulo.Text) || string.IsNullOrWhiteSpace(input_director.Text)
@@ -101,8 +102,11 @@ namespace ClickTix.UserControls
                 int id = GetMaxID() + 1;
                 int idGenero = ObtenerIdGenero(input_genero.Text);
                 int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
-                string fileName = guardarImagen(id);
-                InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, fileName, input_estreno.Value);
+
+
+                string rutaDeGuardadoFirebase = await guardarImagen(id);
+
+                InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, rutaDeGuardadoFirebase, input_estreno.Value);
                 ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
                 Index_Admin.addUserControl(abmpeliculas);
 
@@ -114,7 +118,7 @@ namespace ClickTix.UserControls
         }
 
 
-        private void Addpelicula_btn_Click2(object sender, EventArgs e)
+        private async void Addpelicula_btn_Click2(object sender, EventArgs e)
         {
 
 
@@ -132,11 +136,9 @@ namespace ClickTix.UserControls
                 int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
                 int idpelicula = idDelPanel;
                 Trace.WriteLine(extensionAntigua);
-                string fileName = guardarImagen(idpelicula);
+                string rutaDeGuardadoFirebase = await guardarImagen(idpelicula);
 
-
-
-                ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, fileName, input_estreno.Value);
+                ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, rutaDeGuardadoFirebase, input_estreno.Value);
                 Trace.WriteLine("la ruta es:" + rutaAntigua);
 
                 ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
@@ -359,40 +361,45 @@ namespace ClickTix.UserControls
         }
 
   
-        private string guardarImagen(int idPelicula)
+        private async Task<string> guardarImagen(int idPelicula)
+{
+    try
+    {
+        long timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+        string rutaDeGuardado = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + timestamp);
+
+        string extension = pictureBox1.Tag.ToString();
+
+        if (string.IsNullOrEmpty(extension) || !extension.StartsWith("."))
         {
-
-            try
-            {
-
-
-                long timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-
-                string rutaDeGuardado = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + timestamp);
-
-                string extension = pictureBox1.Tag.ToString();
-
-                string fileName = timestamp + extension;
-
-                string rutaCompleta = rutaDeGuardado + extension;
-
-                Trace.WriteLine(rutaCompleta);
-
-
-                ImagenCargada.Save(rutaCompleta);
-
-
-                return fileName;
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al guardar la imagen: " + ex.Message);
-
-                return "";
-            }
-
+            Console.WriteLine("Extensión de archivo no válida.");
+            return "";
         }
+
+        string fileName = timestamp + extension;
+
+        string rutaCompleta = rutaDeGuardado + extension;
+
+        Trace.WriteLine(rutaCompleta);
+
+        ImagenCargada.Save(rutaCompleta);
+
+        FirebaseStorageManager uploader = new FirebaseStorageManager();
+
+
+        string urlImagen =      await uploader.SubirImagenAsync(rutaCompleta, fileName);
+                Trace.WriteLine(urlImagen);
+
+                return urlImagen;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error al subir la imagen a Firebase Storage: {ex.Message}");
+        return "";
+    }
+}
+
 
 
 
