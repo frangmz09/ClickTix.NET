@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Firebase.Storage;
+using System.Net;
 
 namespace ClickTix.UserControls
 {
@@ -53,19 +54,32 @@ namespace ClickTix.UserControls
             addpelicula_btn.Text = "modificar";
             this.title.Text = "INGRESE DATOS PARA ACTUALIZAR UNA PELICULA";
 
-            string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + Pelicula_Controller.obtenerFileName(peliculaID));
+          
 
-            try {
+            try
+            {
 
-                if (File.Exists(rutaImagen))
+                string rutaImagen = Pelicula_Controller.obtenerFileName(peliculaID);
+
+                using (WebClient webClient = new WebClient())
                 {
-                    extensionAntigua = Path.GetExtension(rutaImagen);
-                    rutaAntigua = rutaImagen;
-                    ImagenCargada = Image.FromFile(rutaImagen);
-                    pictureBox1.Image = ImagenCargada;
-                    pictureBox1.Tag = Path.GetExtension(rutaImagen);
-
+                    byte[] data = webClient.DownloadData(rutaImagen);
+                    using (MemoryStream mem = new MemoryStream(data))
+                    {
+                        Image imagen = Image.FromStream(mem);
+                        pictureBox1.Image = imagen;
+                    }
                 }
+
+                //if (File.Exists(rutaImagen))
+                //{
+                //    extensionAntigua = Path.GetExtension(rutaImagen);
+                //    rutaAntigua = rutaImagen;
+                //    ImagenCargada = Image.FromFile(rutaImagen);
+                //    pictureBox1.Image = ImagenCargada;
+                //    pictureBox1.Tag = Path.GetExtension(rutaImagen);
+
+                //}
             }
             catch {
                 

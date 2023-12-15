@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,29 +36,31 @@ namespace ClickTix.UserControls
 
                 grid_peliculas.Rows[rowIndex].Cells[0].Value = pelicula.id.ToString();
 
-                string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + pelicula.imagen.ToString());
-                Image ImagenCargada;
                 try
                 {
 
-                    if (File.Exists(rutaImagen))
-                    {
+                    //string urlImagen = pelicula.imagen.ToString();
 
-                       ImagenCargada = Image.FromFile(rutaImagen);
+                    //using (WebClient webClient = new WebClient())
+                    //{
+                    //    byte[] data = webClient.DownloadData(urlImagen);
+                    //    using (MemoryStream mem = new MemoryStream(data))
+                    //    {
+                    //        Image imagen = Image.FromStream(mem);
 
-                        grid_peliculas.Rows[rowIndex].Cells[1].Value = ImagenCargada;
+                    //        grid_peliculas.Rows[rowIndex].Cells[1].Value = imagen;
+                    //    }
+                    //}
 
-                    }
-                   
                 }
                 catch
                 {
 
                 }
-                grid_peliculas.Rows[rowIndex].Cells[2].Value = pelicula.titulo.ToString();
-                grid_peliculas.Rows[rowIndex].Cells[3].Value = pelicula.director.ToString();
-                grid_peliculas.Rows[rowIndex].Cells[4].Value = "Modificar";
-                grid_peliculas.Rows[rowIndex].Cells[5].Value = "Eliminar";
+                grid_peliculas.Rows[rowIndex].Cells[1].Value = pelicula.titulo.ToString();
+                grid_peliculas.Rows[rowIndex].Cells[2].Value = pelicula.director.ToString();
+                grid_peliculas.Rows[rowIndex].Cells[3].Value = "Modificar";
+                grid_peliculas.Rows[rowIndex].Cells[4].Value = "Eliminar";
 
             }
         }

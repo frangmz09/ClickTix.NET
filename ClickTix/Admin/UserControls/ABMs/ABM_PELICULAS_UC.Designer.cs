@@ -34,7 +34,6 @@ namespace ClickTix.UserControls
             this.add_pelicula = new System.Windows.Forms.Button();
             this.grid_peliculas = new System.Windows.Forms.DataGridView();
             this.IdD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Portada = new System.Windows.Forms.DataGridViewImageColumn();
             this.Titulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Directores = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -70,7 +69,6 @@ namespace ClickTix.UserControls
             this.grid_peliculas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_peliculas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdD,
-            this.Portada,
             this.Titulo,
             this.Directores,
             this.Modificar,
@@ -88,18 +86,9 @@ namespace ClickTix.UserControls
             this.IdD.Name = "IdD";
             this.IdD.ReadOnly = true;
             // 
-            // Portada
-            // 
-            this.Portada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Portada.HeaderText = "Portada";
-            this.Portada.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.Portada.Name = "Portada";
-            this.Portada.ReadOnly = true;
-            this.Portada.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Portada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // Titulo
             // 
+            this.Titulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Titulo.HeaderText = "Titulo";
             this.Titulo.Name = "Titulo";
             this.Titulo.ReadOnly = true;
@@ -154,7 +143,6 @@ namespace ClickTix.UserControls
         private System.Windows.Forms.DataGridViewTextBoxColumn Director;
         private System.Windows.Forms.DataGridViewTextBoxColumn emision;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdD;
-        private System.Windows.Forms.DataGridViewImageColumn Portada;
         private System.Windows.Forms.DataGridViewTextBoxColumn Titulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Directores;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;

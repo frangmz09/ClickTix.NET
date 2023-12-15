@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,17 +45,19 @@ namespace ClickTix.UserControls
             this.idDelPanel = id;
             int funcionId = id;
             CargarDatosFuncion(funcionId);
-            string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + Pelicula_Controller.obtenerFileName(Pelicula_Controller.obtenerIdPorNombre(combobox_pelicula.Text)));
+            string rutaImagen = Pelicula_Controller.obtenerFileName(Pelicula_Controller.obtenerIdPorNombre(combobox_pelicula.Text));
+
 
             try
             {
-
-                if (File.Exists(rutaImagen))
+                using (WebClient webClient = new WebClient())
                 {
-
-                    imagenCargada = Image.FromFile(rutaImagen);
-                    pictureBox1.Image = imagenCargada;
-
+                    byte[] data = webClient.DownloadData(rutaImagen);
+                    using (MemoryStream mem = new MemoryStream(data))
+                    {
+                        Image imagen = Image.FromStream(mem);
+                        pictureBox1.Image = imagen;
+                    }
                 }
             }
             catch
@@ -167,17 +170,18 @@ namespace ClickTix.UserControls
             funcionActual.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
             Trace.WriteLine(funcionActual.Id_Pelicula);
 
-            string rutaImagen = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + Pelicula_Controller.obtenerFileName(Pelicula_Controller.obtenerIdPorNombre(combobox_pelicula.Text)));
-
+            
             try
             {
-
-                if (File.Exists(rutaImagen))
+                string rutaImagen = Pelicula_Controller.obtenerFileName(Pelicula_Controller.obtenerIdPorNombre(combobox_pelicula.Text));
+                using (WebClient webClient = new WebClient())
                 {
-
-                    imagenCargada = Image.FromFile(rutaImagen);
-                    pictureBox1.Image = imagenCargada;
-
+                    byte[] data = webClient.DownloadData(rutaImagen);
+                    using (MemoryStream mem = new MemoryStream(data))
+                    {
+                        Image imagen = Image.FromStream(mem);
+                        pictureBox1.Image = imagen;
+                    }
                 }
             }
             catch
