@@ -14,7 +14,6 @@ namespace ClickTix.Controller
 
         public FirebaseStorageManager()
         {
-            // Reemplaza "tu-proyecto" con tu ID de proyecto de Firebase
             _storageClient = StorageClient.Create();
         }
 

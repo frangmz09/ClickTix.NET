@@ -167,7 +167,7 @@ namespace ClickTix.Modelo
         {
             ManagerConnection.OpenConnection();
             string query = "UPDATE usuario_sistema " +
-                           "SET nombre = @nombre, apellido = @apellido, pass = @pass, id_sucursal = @id_sucursal, usuario = @usuario " +
+                           "SET nombre = @nombre, apellido = @apellido, pass = @pass, id_sucursal = @id_sucursal, usuario = @usuario, is_admin = @is_admin " +
                            "WHERE id = @id";
 
             MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
@@ -176,6 +176,7 @@ namespace ClickTix.Modelo
             cmd.Parameters.AddWithValue("@pass", empleado.Pass);
             cmd.Parameters.AddWithValue("@id_sucursal", empleado.Id_Sucursal);
             cmd.Parameters.AddWithValue("@usuario", empleado.Usuario);
+            cmd.Parameters.AddWithValue("@is_admin", empleado.is_admin);  // Asegúrate de que el objeto EmpleadoA tenga la propiedad Is_Admin
             cmd.Parameters.AddWithValue("@id", empleado.Id);
 
             try

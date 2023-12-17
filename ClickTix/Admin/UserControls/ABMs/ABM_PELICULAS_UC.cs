@@ -23,7 +23,44 @@ namespace ClickTix.UserControls
         public ABM_PELICULAS_UC()
         {
             InitializeComponent();
+            search_films.TextChanged += TxtSearch_TextChanged;
             cargarPeliculas();
+        }
+        private void CargarPeliculasEnGrid(List<Pelicula> peliculas)
+        {
+            grid_peliculas.Rows.Clear();
+
+            foreach (Pelicula pelicula in peliculas)
+            {
+                int rowIndex = grid_peliculas.Rows.Add();
+
+                grid_peliculas.Rows[rowIndex].Cells[0].Value = pelicula.id.ToString();
+
+                try
+                {
+                    // Aquí puedes agregar la lógica para cargar la imagen si es necesario
+                    //string urlImagen = pelicula.imagen.ToString();
+
+                    //using (WebClient webClient = new WebClient())
+                    //{
+                    //    byte[] data = webClient.DownloadData(urlImagen);
+                    //    using (MemoryStream mem = new MemoryStream(data))
+                    //    {
+                    //        Image imagen = Image.FromStream(mem);
+                    //        grid_peliculas.Rows[rowIndex].Cells[1].Value = imagen;
+                    //    }
+                    //}
+                }
+                catch
+                {
+                    // Manejar la excepción de carga de imagen si es necesario
+                }
+
+                grid_peliculas.Rows[rowIndex].Cells[1].Value = pelicula.titulo.ToString();
+                grid_peliculas.Rows[rowIndex].Cells[2].Value = pelicula.director.ToString();
+                grid_peliculas.Rows[rowIndex].Cells[3].Value = "Modificar";
+                grid_peliculas.Rows[rowIndex].Cells[4].Value = "Eliminar";
+            }
         }
         private void cargarPeliculas()
         {
@@ -64,6 +101,14 @@ namespace ClickTix.UserControls
 
             }
         }
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = search_films.Text.Trim().ToLower();
+            List<Pelicula> peliculasFiltradas = Pelicula_Controller.BuscarPeliculas(searchTerm);
+            CargarPeliculasEnGrid(peliculasFiltradas);
+        }
+
+
         private void title_Click(object sender, EventArgs e)
         {
 

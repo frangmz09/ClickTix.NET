@@ -63,6 +63,12 @@ namespace ClickTix.Empleado.UserControls
             fila_ticket.Text = stringFyC;
             idioma_ticket.Text = idioma;
             precio_ticket.Text = precio.ToString();
+
+            DateTime fechaHoraFuncion = new DateTime(fecha.Year, fecha.Month, fecha.Day, int.Parse(hora.Split(':')[0]), int.Parse(hora.Split(':')[1]), 0);
+            if (DateTime.Now > fechaHoraFuncion)
+            {
+                text_error.Text = "La función de la cual se retiró la entrada ya caducó";
+            }
         }
 
         public TICKET_UC(int idTicket)
@@ -82,6 +88,11 @@ namespace ClickTix.Empleado.UserControls
             columnas.Add(ticket.columna);
             idioma_ticket.Text = idioma;
             precio_ticket.Text = precio.ToString();
+            DateTime fechaHoraFuncion = new DateTime(fecha.Year, fecha.Month, fecha.Day, int.Parse(hora.Split(':')[0]), int.Parse(hora.Split(':')[1]), 0);
+            if (DateTime.Now > fechaHoraFuncion)
+            {
+                text_error.Text = "La función de la cual se retiró la entrada ya caducó";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

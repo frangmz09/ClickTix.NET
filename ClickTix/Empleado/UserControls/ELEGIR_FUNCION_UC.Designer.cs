@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.grid_funcionesc = new System.Windows.Forms.DataGridView();
+            this.cartelera = new System.Windows.Forms.Label();
+            this.back_pelicula = new System.Windows.Forms.Button();
+            this.comboBoxPeliculas = new System.Windows.Forms.ComboBox();
+            this.comboBoxFechas = new System.Windows.Forms.ComboBox();
+            this.comboBoxDimension = new System.Windows.Forms.ComboBox();
             this.idFunSel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pelicula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NROsala = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,12 +42,8 @@
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Disponibilidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.cartelera = new System.Windows.Forms.Label();
-            this.back_pelicula = new System.Windows.Forms.Button();
-            this.comboBoxPeliculas = new System.Windows.Forms.ComboBox();
-            this.comboBoxFechas = new System.Windows.Forms.ComboBox();
-            this.comboBoxDimension = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.grid_funcionesc)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,6 +61,7 @@
             this.Precio,
             this.Fecha,
             this.Hora,
+            this.Disponibilidad,
             this.Seleccionar});
             this.grid_funcionesc.Location = new System.Drawing.Point(47, 105);
             this.grid_funcionesc.Name = "grid_funcionesc";
@@ -68,6 +70,51 @@
             this.grid_funcionesc.TabIndex = 0;
             this.grid_funcionesc.Tag = "";
             this.grid_funcionesc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // cartelera
+            // 
+            this.cartelera.AutoSize = true;
+            this.cartelera.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cartelera.Location = new System.Drawing.Point(146, 13);
+            this.cartelera.Name = "cartelera";
+            this.cartelera.Size = new System.Drawing.Size(498, 39);
+            this.cartelera.TabIndex = 2;
+            this.cartelera.Text = "Confirmar datos de la funcion";
+            this.cartelera.Click += new System.EventHandler(this.cartelera_Click);
+            // 
+            // back_pelicula
+            // 
+            this.back_pelicula.Location = new System.Drawing.Point(33, 25);
+            this.back_pelicula.Name = "back_pelicula";
+            this.back_pelicula.Size = new System.Drawing.Size(30, 30);
+            this.back_pelicula.TabIndex = 74;
+            this.back_pelicula.Text = "<";
+            this.back_pelicula.UseVisualStyleBackColor = true;
+            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
+            // 
+            // comboBoxPeliculas
+            // 
+            this.comboBoxPeliculas.FormattingEnabled = true;
+            this.comboBoxPeliculas.Location = new System.Drawing.Point(47, 78);
+            this.comboBoxPeliculas.Name = "comboBoxPeliculas";
+            this.comboBoxPeliculas.Size = new System.Drawing.Size(136, 21);
+            this.comboBoxPeliculas.TabIndex = 75;
+            // 
+            // comboBoxFechas
+            // 
+            this.comboBoxFechas.FormattingEnabled = true;
+            this.comboBoxFechas.Location = new System.Drawing.Point(189, 78);
+            this.comboBoxFechas.Name = "comboBoxFechas";
+            this.comboBoxFechas.Size = new System.Drawing.Size(136, 21);
+            this.comboBoxFechas.TabIndex = 76;
+            // 
+            // comboBoxDimension
+            // 
+            this.comboBoxDimension.FormattingEnabled = true;
+            this.comboBoxDimension.Location = new System.Drawing.Point(331, 78);
+            this.comboBoxDimension.Name = "comboBoxDimension";
+            this.comboBoxDimension.Size = new System.Drawing.Size(136, 21);
+            this.comboBoxDimension.TabIndex = 77;
             // 
             // idFunSel
             // 
@@ -117,56 +164,17 @@
             this.Hora.Name = "Hora";
             this.Hora.ReadOnly = true;
             // 
+            // Disponibilidad
+            // 
+            this.Disponibilidad.HeaderText = "Disponibilidad";
+            this.Disponibilidad.Name = "Disponibilidad";
+            this.Disponibilidad.ReadOnly = true;
+            // 
             // Seleccionar
             // 
             this.Seleccionar.HeaderText = "Seleccionar";
             this.Seleccionar.Name = "Seleccionar";
             this.Seleccionar.ReadOnly = true;
-            // 
-            // cartelera
-            // 
-            this.cartelera.AutoSize = true;
-            this.cartelera.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cartelera.Location = new System.Drawing.Point(146, 13);
-            this.cartelera.Name = "cartelera";
-            this.cartelera.Size = new System.Drawing.Size(498, 39);
-            this.cartelera.TabIndex = 2;
-            this.cartelera.Text = "Confirmar datos de la funcion";
-            this.cartelera.Click += new System.EventHandler(this.cartelera_Click);
-            // 
-            // back_pelicula
-            // 
-            this.back_pelicula.Location = new System.Drawing.Point(33, 25);
-            this.back_pelicula.Name = "back_pelicula";
-            this.back_pelicula.Size = new System.Drawing.Size(30, 30);
-            this.back_pelicula.TabIndex = 74;
-            this.back_pelicula.Text = "<";
-            this.back_pelicula.UseVisualStyleBackColor = true;
-            this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
-            // 
-            // comboBoxPeliculas
-            // 
-            this.comboBoxPeliculas.FormattingEnabled = true;
-            this.comboBoxPeliculas.Location = new System.Drawing.Point(47, 78);
-            this.comboBoxPeliculas.Name = "comboBoxPeliculas";
-            this.comboBoxPeliculas.Size = new System.Drawing.Size(136, 21);
-            this.comboBoxPeliculas.TabIndex = 75;
-            // 
-            // comboBoxFechas
-            // 
-            this.comboBoxFechas.FormattingEnabled = true;
-            this.comboBoxFechas.Location = new System.Drawing.Point(189, 78);
-            this.comboBoxFechas.Name = "comboBoxFechas";
-            this.comboBoxFechas.Size = new System.Drawing.Size(136, 21);
-            this.comboBoxFechas.TabIndex = 76;
-            // 
-            // comboBoxDimension
-            // 
-            this.comboBoxDimension.FormattingEnabled = true;
-            this.comboBoxDimension.Location = new System.Drawing.Point(331, 78);
-            this.comboBoxDimension.Name = "comboBoxDimension";
-            this.comboBoxDimension.Size = new System.Drawing.Size(136, 21);
-            this.comboBoxDimension.TabIndex = 77;
             // 
             // ELEGIR_FUNCION_UC
             // 
@@ -192,6 +200,9 @@
         private System.Windows.Forms.DataGridView grid_funcionesc;
         private System.Windows.Forms.Label cartelera;
         private System.Windows.Forms.Button back_pelicula;
+        private System.Windows.Forms.ComboBox comboBoxPeliculas;
+        private System.Windows.Forms.ComboBox comboBoxFechas;
+        private System.Windows.Forms.ComboBox comboBoxDimension;
         private System.Windows.Forms.DataGridViewTextBoxColumn idFunSel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pelicula;
         private System.Windows.Forms.DataGridViewTextBoxColumn NROsala;
@@ -200,9 +211,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Disponibilidad;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
-        private System.Windows.Forms.ComboBox comboBoxPeliculas;
-        private System.Windows.Forms.ComboBox comboBoxFechas;
-        private System.Windows.Forms.ComboBox comboBoxDimension;
     }
 }

@@ -48,6 +48,7 @@ namespace ClickTix.Empleado
         }
         private void cargarFunciones()
         {
+            grid_funcionesc.RowPrePaint -= grid_funcionesc_RowPrePaint;
 
             grid_funcionesc.Rows.Clear();
             List<Funcion> funciones = Funcion_Controller.obtenerTodosPorSucursal();
@@ -63,9 +64,22 @@ namespace ClickTix.Empleado
                 grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.precio.ToString();
                 grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.Fecha.ToShortDateString();
                 grid_funcionesc.Rows[rowIndex].Cells[7].Value = funcion.hora.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[8].Value = "Seleccionar";
+                grid_funcionesc.Rows[rowIndex].Cells[8].Value = Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id);
+                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
 
+                double porcentajeDisponibilidad = 0;
+
+                if (Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id) > 0)
+                {
+                    porcentajeDisponibilidad = ((double)Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id) / Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id)) * 100;
+                }
+
+
+                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
+
+                grid_funcionesc.Rows[rowIndex].Tag = porcentajeDisponibilidad;
             }
+
             List<string> peliculas = Funcion_Controller.obtenerTodosTitulosPorSucursal();
             peliculas.Insert(0, "Todas las películas");
             comboBoxPeliculas.DataSource = peliculas;
@@ -77,8 +91,10 @@ namespace ClickTix.Empleado
             List<string> dimensiones = Funcion_Controller.obtenerTodasDimensionesPorSucursal();
             dimensiones.Insert(0, "Todas las dimensiones");
             comboBoxDimension.DataSource = dimensiones;
-            
+
+            grid_funcionesc.RowPrePaint += grid_funcionesc_RowPrePaint;
         }
+
 
         private void aplicarFiltros(object sender, EventArgs e)
         {
@@ -105,6 +121,8 @@ namespace ClickTix.Empleado
         {
             grid_funcionesc.Rows.Clear();
 
+            grid_funcionesc.RowPrePaint += grid_funcionesc_RowPrePaint;
+
             foreach (Funcion funcion in funciones)
             {
                 int rowIndex = grid_funcionesc.Rows.Add();
@@ -116,9 +134,72 @@ namespace ClickTix.Empleado
                 grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.precio.ToString();
                 grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.Fecha.ToShortDateString();
                 grid_funcionesc.Rows[rowIndex].Cells[7].Value = funcion.hora.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[8].Value = "Seleccionar";
+                grid_funcionesc.Rows[rowIndex].Cells[8].Value = Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id);
+                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
+
+                double porcentajeDisponibilidad = 0;
+
+                if (Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id) > 0)
+                {
+                    porcentajeDisponibilidad = ((double)Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id) / Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id)) * 100;
+                }
+
+
+                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
+
+                grid_funcionesc.Rows[rowIndex].Tag = porcentajeDisponibilidad;
+                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
+
+                if (Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id) == 0)
+                {
+                    grid_funcionesc.Rows[rowIndex].Cells[9].Value = "No Disponible";
+                    grid_funcionesc.Rows[rowIndex].Cells[9].ReadOnly = true;
+                }
+
             }
         }
+
+        private void grid_funcionesc_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            DataGridViewRow row = grid_funcionesc.Rows[e.RowIndex];
+
+            int columnIndex = 8;
+
+            if (row.Cells[columnIndex].Value != null)
+            {
+                int porcentajeDisponibilidad = Convert.ToInt32(row.Cells[columnIndex].Value);
+
+                Color color = ObtenerColorPorcentaje(porcentajeDisponibilidad);
+
+                row.DefaultCellStyle.BackColor = color;
+            }
+        }
+
+        private Color ObtenerColorPorcentaje(int porcentaje)
+        {
+            if (porcentaje >= 75)
+            {
+                Color color = ColorTranslator.FromHtml("#9ccc65");
+                return color; 
+            }
+            else if (porcentaje >= 50)
+            {
+                Color color = ColorTranslator.FromHtml("#ffee58");
+                return color;
+            }
+            else if (porcentaje >= 25)
+            {
+                Color color = ColorTranslator.FromHtml("#ffb74d");
+                return color;
+            }
+            else
+            {
+                Color color = ColorTranslator.FromHtml("#f44336");
+                return color;
+            }
+        }
+
+       
         private void label1_Click(object sender, EventArgs e)
         {
 

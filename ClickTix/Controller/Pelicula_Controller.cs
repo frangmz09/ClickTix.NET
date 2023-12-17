@@ -12,6 +12,48 @@ namespace ClickTix.Controller
 {
     internal class Pelicula_Controller
     {
+        public static List<Pelicula> BuscarPeliculas(string searchTerm)
+        {
+            List<Pelicula> peliculasEncontradas = new List<Pelicula>();
+
+            try
+            {
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+                {
+                    ManagerConnection.OpenConnection();
+
+                    string query = "SELECT id, titulo, director FROM pelicula " +
+                                   "WHERE LOWER(titulo) LIKE @searchTerm OR LOWER(director) LIKE @searchTerm";
+
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                    {
+                        command.Parameters.AddWithValue("@searchTerm", "%" + searchTerm.ToLower() + "%");
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Pelicula pelicula = new Pelicula
+                                {
+                                    id = reader.GetInt32("id"),
+                                    titulo = reader.GetString("titulo"),
+                                    director = reader.GetString("director")
+                                };
+
+                                peliculasEncontradas.Add(pelicula);
+                            }
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return peliculasEncontradas;
+        }
         public static List<Pelicula> obtenerTodos()
         {
             List<Pelicula> peliculas = new List<Pelicula>();

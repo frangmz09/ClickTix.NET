@@ -14,6 +14,29 @@ namespace ClickTix.Modelo
 {
     public class Asiento_Controller
     {
+        public static int ObtenerTotalAsientosPorFuncion(int idFuncion)
+        {
+            int totalAsientos = 0;
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string countQuery = "SELECT COUNT(*) FROM asiento WHERE asiento.id_funcion = @idfuncion;";
+
+                using (MySqlCommand countCommand = new MySqlCommand(countQuery, mysqlConnection))
+                {
+                    countCommand.Parameters.AddWithValue("@idfuncion", idFuncion);
+                    totalAsientos = Convert.ToInt32(countCommand.ExecuteScalar());
+                }
+
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return totalAsientos;
+        }
+
         public static List<Asiento> obtenerPorFuncion(int id_funcion) {
 
             List<Asiento> list = new List<Asiento>();
@@ -21,7 +44,7 @@ namespace ClickTix.Modelo
 
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance()) {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT * FROM asiento where asiento.id_funcion = @idfuncion;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection)) {
@@ -48,7 +71,7 @@ namespace ClickTix.Modelo
                     }
 
                     reader.Close();
-                    mysqlConnection.Close();
+                    ManagerConnection.CloseConnection();
 
 
 
@@ -285,6 +308,33 @@ namespace ClickTix.Modelo
             ManagerConnection.CloseConnection();
 
 
+        }
+        public static int ObtenerAsientosDisponibles(int idFuncion)
+        {
+            int asientosDisponibles = 0;
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string consulta = "SELECT COUNT(*) FROM asiento WHERE id_funcion = @idFuncion AND disponible = 1";
+
+                using (MySqlCommand cmd = new MySqlCommand(consulta, mysqlConnection))
+                {
+                    cmd.Parameters.AddWithValue("@idFuncion", idFuncion);
+
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        asientosDisponibles = Convert.ToInt32(result);
+                    }
+                }
+
+                ManagerConnection.CloseConnection();
+            }
+
+            return asientosDisponibles;
         }
 
     }

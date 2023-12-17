@@ -38,6 +38,8 @@ namespace ClickTix.UserControls
             this.Directores = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.search_films = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_peliculas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,10 +119,30 @@ namespace ClickTix.UserControls
             this.Borrar.Text = "BORRAR";
             this.Borrar.Width = 75;
             // 
+            // search_films
+            // 
+            this.search_films.Location = new System.Drawing.Point(23, 21);
+            this.search_films.Name = "search_films";
+            this.search_films.Size = new System.Drawing.Size(157, 20);
+            this.search_films.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(20, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Buscar peliculas:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ABM_PELICULAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.search_films);
             this.Controls.Add(this.title);
             this.Controls.Add(this.add_pelicula);
             this.Controls.Add(this.grid_peliculas);
@@ -147,5 +169,7 @@ namespace ClickTix.UserControls
         private System.Windows.Forms.DataGridViewTextBoxColumn Directores;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
+        private System.Windows.Forms.TextBox search_films;
+        private System.Windows.Forms.Label label1;
     }
 }

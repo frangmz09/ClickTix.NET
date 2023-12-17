@@ -188,7 +188,7 @@ namespace ClickTix.Modelo
                             DateTime fecha = reader.GetDateTime("fecha");
 
 
-                            fechas.Add(fecha.ToString());
+                            fechas.Add(fecha.ToShortDateString());
                         }
                     }
                 }
@@ -202,7 +202,6 @@ namespace ClickTix.Modelo
         {
             List<Funcion> funciones = obtenerTodosPorSucursal();
 
-            // Filtrar la lista según los parámetros proporcionados en el diccionario
             foreach (var filtro in filtros)
             {
                 switch (filtro.Key)

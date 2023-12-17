@@ -44,6 +44,7 @@
             this.idioma_ticket = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btn_MenuPrincipal = new System.Windows.Forms.Button();
+            this.text_error = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -206,10 +207,21 @@
             this.btn_MenuPrincipal.UseVisualStyleBackColor = true;
             this.btn_MenuPrincipal.Click += new System.EventHandler(this.btn_MenuPrincipal_Click);
             // 
+            // text_error
+            // 
+            this.text_error.AutoSize = true;
+            this.text_error.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.text_error.ForeColor = System.Drawing.Color.Red;
+            this.text_error.Location = new System.Drawing.Point(243, 318);
+            this.text_error.Name = "text_error";
+            this.text_error.Size = new System.Drawing.Size(0, 19);
+            this.text_error.TabIndex = 21;
+            // 
             // TICKET_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.text_error);
             this.Controls.Add(this.btn_MenuPrincipal);
             this.Controls.Add(this.idioma_ticket);
             this.Controls.Add(this.label9);
@@ -250,5 +262,6 @@
         private System.Windows.Forms.Label idioma_ticket;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_MenuPrincipal;
+        private System.Windows.Forms.Label text_error;
     }
 }

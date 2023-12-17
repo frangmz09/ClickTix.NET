@@ -35,6 +35,7 @@ namespace ClickTix
             
             CargarDatosEmpleado(empleadoId);
             this.addempleado_btn.Click += new System.EventHandler(this.addempleado_btn_Click2);
+            addempleado_btn.Text = "Aceptar";
         }
         public FORM_EMPLEADOS_UC()
         {
@@ -67,9 +68,17 @@ namespace ClickTix
                 em.Usuario = input_usuario.Text;
                 em.Pass = input_contraseña.Text;
 
-                int idSucursal = Empleado_Controller.ObtenerIdSucursal(input_nombre.Text);
+                int idSucursal = Empleado_Controller.ObtenerIdSucursal(input_sucursal.Text);
                 em.Id_Sucursal = idSucursal;
 
+                if (idSucursal== 0)
+                {
+                    em.is_admin = 1;
+                }
+                else
+                {
+                    em.is_admin = 0;
+                }
 
 
                 Empleado_Controller.ActualizarEmpleado(em);
@@ -168,7 +177,7 @@ namespace ClickTix
                             input_apellido.Text = reader["apellido"].ToString();
                             input_contraseña.Text = reader["pass"].ToString();
                             input_usuario.Text = reader["usuario"].ToString();
-
+                            input_sucursal.SelectedIndex = Convert.ToInt32(reader["id_sucursal"]);
 
                         }
                         else
