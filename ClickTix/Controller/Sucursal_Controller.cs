@@ -71,15 +71,14 @@ namespace ClickTix.Conexion
 
         public static bool CrearSucursal(Sucursal sucursal)
         {
-            string query = "INSERT INTO sucursal (id, nombre, cuit,direccion,numerosalas) " +
-                           "VALUES (@id, @nombre, @cuit,@direccion,@numerosalas)";
+            string query = "INSERT INTO sucursal (id, nombre, cuit,direccion) " +
+                           "VALUES (@id, @nombre, @cuit,@direccion)";
 
             MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
             cmd.Parameters.AddWithValue("@id",ObtenerMaxIdSucursal()+1);
             cmd.Parameters.AddWithValue("@nombre", sucursal.nombre);
             cmd.Parameters.AddWithValue("@cuit", sucursal.cuit);
             cmd.Parameters.AddWithValue("@direccion", sucursal.direccion);
-            cmd.Parameters.AddWithValue("@numerosalas", sucursal.numerosalas);
             try
             {
                 ManagerConnection.OpenConnection();

@@ -126,6 +126,17 @@ namespace ClickTix
 
                 em.Id_Sucursal = idSucursal;
 
+
+                if (idSucursal == 0)
+                {
+                    em.is_admin = 1;
+                }
+                else
+                {
+                    em.is_admin = 0;
+                }
+
+
                 Trace.WriteLine(idSucursal);
 
                 Empleado_Controller.CrearEmpleado(em);

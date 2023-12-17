@@ -35,17 +35,17 @@
             // panel2
             // 
             panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            panel2.Location = new System.Drawing.Point(41, 46);
+            panel2.Location = new System.Drawing.Point(9, 9);
             panel2.Margin = new System.Windows.Forms.Padding(0);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(816, 489);
+            panel2.Size = new System.Drawing.Size(1122, 533);
             panel2.TabIndex = 0;
             // 
             // Index_User
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 542);
+            this.ClientSize = new System.Drawing.Size(1140, 551);
             this.Controls.Add(panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Index_User";
