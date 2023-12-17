@@ -24,6 +24,9 @@ namespace ClickTix.Empleado
         public ELEGIR_FUNCION_UC()
         {
             InitializeComponent();
+
+            cargarFunciones();
+
         }
 
 
@@ -42,20 +45,20 @@ namespace ClickTix.Empleado
         {
 
             grid_funcionesc.Rows.Clear();
-            Trace.WriteLine("TITULO" + this.tituloP);
-            List<Funcion> funciones = Funcion_Controller.obtenerTodosCartelera(tituloP);
+            List<Funcion> funciones = Funcion_Controller.obtenerTodosPorSucursal();
 
             foreach (Funcion funcion in funciones)
             {
                 int rowIndex = grid_funcionesc.Rows.Add();
                 grid_funcionesc.Rows[rowIndex].Cells[0].Value = funcion.Id.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[1].Value = funcion.nroSala.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[2].Value = funcion.dimension.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[3].Value = funcion.idioma.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[4].Value = funcion.precio.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.Fecha.ToShortDateString();
-                grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.hora.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[7].Value = "Seleccionar";
+                grid_funcionesc.Rows[rowIndex].Cells[1].Value = funcion.peliculaNombre.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[2].Value = funcion.nroSala.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[3].Value = funcion.dimension.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[4].Value = funcion.idioma.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.precio.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.Fecha.ToShortDateString();
+                grid_funcionesc.Rows[rowIndex].Cells[7].Value = funcion.hora.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[8].Value = "Seleccionar";
 
             }
         }

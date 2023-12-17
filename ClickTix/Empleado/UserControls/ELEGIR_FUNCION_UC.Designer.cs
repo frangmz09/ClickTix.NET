@@ -32,6 +32,7 @@
             this.cartelera = new System.Windows.Forms.Label();
             this.back_pelicula = new System.Windows.Forms.Button();
             this.idFunSel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pelicula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NROsala = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dimm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Idiomma = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +50,7 @@
             this.grid_funcionesc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_funcionesc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idFunSel,
+            this.Pelicula,
             this.NROsala,
             this.Dimm,
             this.Idiomma,
@@ -89,41 +91,55 @@
             // 
             this.idFunSel.HeaderText = "ID";
             this.idFunSel.Name = "idFunSel";
+            this.idFunSel.ReadOnly = true;
+            // 
+            // Pelicula
+            // 
+            this.Pelicula.HeaderText = "Pelicula";
+            this.Pelicula.Name = "Pelicula";
+            this.Pelicula.ReadOnly = true;
             // 
             // NROsala
             // 
             this.NROsala.HeaderText = "Numero de Sala";
             this.NROsala.Name = "NROsala";
+            this.NROsala.ReadOnly = true;
             // 
             // Dimm
             // 
             this.Dimm.HeaderText = "Dimension";
             this.Dimm.Name = "Dimm";
+            this.Dimm.ReadOnly = true;
             // 
             // Idiomma
             // 
             this.Idiomma.HeaderText = "Idioma";
             this.Idiomma.Name = "Idiomma";
+            this.Idiomma.ReadOnly = true;
             // 
             // Precio
             // 
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
             // 
             // Fecha
             // 
             this.Fecha.HeaderText = "Fecha";
             this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
             // 
             // Hora
             // 
             this.Hora.HeaderText = "Hora";
             this.Hora.Name = "Hora";
+            this.Hora.ReadOnly = true;
             // 
             // Seleccionar
             // 
             this.Seleccionar.HeaderText = "Seleccionar";
             this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.ReadOnly = true;
             // 
             // ELEGIR_FUNCION_UC
             // 
@@ -147,6 +163,7 @@
         private System.Windows.Forms.Label cartelera;
         private System.Windows.Forms.Button back_pelicula;
         private System.Windows.Forms.DataGridViewTextBoxColumn idFunSel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pelicula;
         private System.Windows.Forms.DataGridViewTextBoxColumn NROsala;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dimm;
         private System.Windows.Forms.DataGridViewTextBoxColumn Idiomma;

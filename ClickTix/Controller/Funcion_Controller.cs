@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZXing;
+using ZXing.PDF417.Internal;
 
 namespace ClickTix.Modelo
 {
@@ -23,7 +24,6 @@ namespace ClickTix.Modelo
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
                 ManagerConnection.OpenConnection();
-
                 string query = "SELECT id, fecha, id_dimension, id_pelicula, id_sala, idioma_funcion, turno_id FROM funcion";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -53,6 +53,7 @@ namespace ClickTix.Modelo
             return funciones;
         }
 
+
         public static List<Funcion> obtenerTodosCartelera(string titulo)
         {
             List<Funcion> funciones = new List<Funcion>();
@@ -75,6 +76,46 @@ namespace ClickTix.Modelo
                             Funcion funcion = new Funcion();
 
                             funcion.Id = reader.GetInt32("id");
+                            funcion.nroSala = reader.GetInt32("nro_sala");
+                            funcion.dimension = reader.GetString("dimension");
+                            funcion.idioma = reader.GetString("idioma");
+                            funcion.precio = reader.GetDecimal("precio");
+                            funcion.Fecha = reader.GetDateTime("fecha");
+                            funcion.hora = reader.GetTimeSpan("hora");
+
+                            funciones.Add(funcion);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return funciones;
+        }
+
+        public static List<Funcion> obtenerTodosPorSucursal()
+        {
+            List<Funcion> funciones = new List<Funcion>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "select  funcion.id, pelicula.titulo, sala.nro_sala , dimension.dimension, idioma.idioma, dimension.precio, funcion.fecha, turno.hora from funcion left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id left join turno on funcion.turno_id = turno.id where sala.id_sucursal = @id_sucursal and funcion.fecha > NOW();";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@id_sucursal", Program.logeado.Id_sucursal);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+                            Funcion funcion = new Funcion();
+
+                            funcion.Id = reader.GetInt32("id");
+                            funcion.peliculaNombre = reader.GetString("titulo");
                             funcion.nroSala = reader.GetInt32("nro_sala");
                             funcion.dimension = reader.GetString("dimension");
                             funcion.idioma = reader.GetString("idioma");

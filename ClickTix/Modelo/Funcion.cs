@@ -22,6 +22,7 @@ namespace ClickTix.Modelo
         public TimeSpan hora{ get; set; }
         public decimal precio { get; set; }
 
+        public string peliculaNombre { get; set; }
 
         public Funcion(int id, DateTime fecha, int id_Dimension, int id_Pelicula, int id_Sala, int id_Idioma, int id_Turno)
         {
