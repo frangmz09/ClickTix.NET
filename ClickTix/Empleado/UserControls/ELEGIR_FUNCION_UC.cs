@@ -27,6 +27,11 @@ namespace ClickTix.Empleado
 
             cargarFunciones();
 
+            comboBoxDimension.SelectedIndexChanged += aplicarFiltros;
+            comboBoxFechas.SelectedIndexChanged += aplicarFiltros;
+            comboBoxPeliculas.SelectedIndexChanged += aplicarFiltros;
+
+
         }
 
 
@@ -61,8 +66,59 @@ namespace ClickTix.Empleado
                 grid_funcionesc.Rows[rowIndex].Cells[8].Value = "Seleccionar";
 
             }
+            List<string> peliculas = Funcion_Controller.obtenerTodosTitulosPorSucursal();
+            peliculas.Insert(0, "Todas las películas");
+            comboBoxPeliculas.DataSource = peliculas;
+
+            List<string> fechas = Funcion_Controller.obtenerTodasFechasPorSucursal();
+            fechas.Insert(0, "Todas los dias");
+            comboBoxFechas.DataSource = fechas;
+
+            List<string> dimensiones = Funcion_Controller.obtenerTodasDimensionesPorSucursal();
+            dimensiones.Insert(0, "Todas las dimensiones");
+            comboBoxDimension.DataSource = dimensiones;
+            
         }
-      
+
+        private void aplicarFiltros(object sender, EventArgs e)
+        {
+            Dictionary<string, object> filtros = new Dictionary<string, object>();
+
+            string tituloSeleccionado = comboBoxPeliculas.SelectedItem.ToString();
+            string fechaSeleccionada = comboBoxFechas.SelectedItem.ToString();
+            string dimensionSeleccionada = comboBoxDimension.SelectedItem.ToString();
+
+            if (tituloSeleccionado != "Todas las películas")
+                filtros.Add("Titulo", tituloSeleccionado);
+
+            if (fechaSeleccionada != "Todas los dias")
+                filtros.Add("Fecha", DateTime.Parse(fechaSeleccionada));
+
+            if (dimensionSeleccionada != "Todas las dimensiones")
+                filtros.Add("Dimension", dimensionSeleccionada);
+
+            List<Funcion> funcionesFiltradas = Funcion_Controller.obtenerPorFiltros(filtros);
+
+            cargarFuncionesEnGrid(funcionesFiltradas);
+        }
+        private void cargarFuncionesEnGrid(List<Funcion> funciones)
+        {
+            grid_funcionesc.Rows.Clear();
+
+            foreach (Funcion funcion in funciones)
+            {
+                int rowIndex = grid_funcionesc.Rows.Add();
+                grid_funcionesc.Rows[rowIndex].Cells[0].Value = funcion.Id.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[1].Value = funcion.peliculaNombre.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[2].Value = funcion.nroSala.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[3].Value = funcion.dimension.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[4].Value = funcion.idioma.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.precio.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.Fecha.ToShortDateString();
+                grid_funcionesc.Rows[rowIndex].Cells[7].Value = funcion.hora.ToString();
+                grid_funcionesc.Rows[rowIndex].Cells[8].Value = "Seleccionar";
+            }
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -96,8 +152,8 @@ namespace ClickTix.Empleado
 
         private void back_pelicula_Click(object sender, EventArgs e)
         {
-            CARTELERA_UC cartelera = new CARTELERA_UC();
-            Index_User.addUserControlUsuario(cartelera);
+            MENU_UC menu = new MENU_UC();
+            Index_User.addUserControlUsuario(menu);
         }
     }
 }

@@ -133,7 +133,127 @@ namespace ClickTix.Modelo
 
             return funciones;
         }
+        public static List<string> obtenerTodosTitulosPorSucursal()
+        {
+            List<string> peliculas = new List<string>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
 
+                string query = "select pelicula.titulo from funcion left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id left join turno on funcion.turno_id = turno.id where sala.id_sucursal = @id_sucursal and funcion.fecha > NOW() group by pelicula.titulo;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@id_sucursal", Program.logeado.Id_sucursal);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+
+                            string nombre = reader.GetString("titulo");
+
+
+                            peliculas.Add(nombre);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return peliculas;
+        }
+        
+        public static List<string> obtenerTodasFechasPorSucursal()
+        {
+            List<string> fechas = new List<string>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "select funcion.fecha from funcion left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id left join turno on funcion.turno_id = turno.id where sala.id_sucursal = @id_sucursal and funcion.fecha > NOW() group by funcion.fecha;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@id_sucursal", Program.logeado.Id_sucursal);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+
+                            DateTime fecha = reader.GetDateTime("fecha");
+
+
+                            fechas.Add(fecha.ToString());
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return fechas;
+        }
+        public static List<Funcion> obtenerPorFiltros(Dictionary<string, object> filtros)
+        {
+            List<Funcion> funciones = obtenerTodosPorSucursal();
+
+            // Filtrar la lista según los parámetros proporcionados en el diccionario
+            foreach (var filtro in filtros)
+            {
+                switch (filtro.Key)
+                {
+                    case "Titulo":
+                        funciones = funciones.Where(funcion => funcion.peliculaNombre == (string)filtro.Value).ToList();
+                        break;
+                    case "Fecha":
+                        funciones = funciones.Where(funcion => funcion.Fecha == (DateTime)filtro.Value).ToList();
+                        break;
+                    case "Dimension":
+                        funciones = funciones.Where(funcion => funcion.dimension == (string)filtro.Value).ToList();
+                        break;
+                }
+            }
+
+            return funciones;
+        }
+
+        public static List<string> obtenerTodasDimensionesPorSucursal()
+        {
+            List<string> dimensiones = new List<string>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "select dimension.dimension from funcion left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id left join turno on funcion.turno_id = turno.id where sala.id_sucursal = @id_sucursal and funcion.fecha > NOW() group by dimension.dimension;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@id_sucursal", Program.logeado.Id_sucursal);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+
+                            string dimension = reader.GetString("dimension");
+
+
+                            dimensiones.Add(dimension);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+
+            }
+
+            return dimensiones;
+        }
         public static void llenarCamposAddFuncion(ComboBox peliculas, ComboBox turnos, ComboBox sucursal, ComboBox dimension,ComboBox idioma) {
             llenarPeliculas(peliculas);
             llenarTurnos(turnos);
