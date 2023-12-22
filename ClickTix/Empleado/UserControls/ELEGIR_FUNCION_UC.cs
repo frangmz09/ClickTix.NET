@@ -30,7 +30,7 @@ namespace ClickTix.Empleado
             comboBoxDimension.SelectedIndexChanged += aplicarFiltros;
             comboBoxFechas.SelectedIndexChanged += aplicarFiltros;
             comboBoxPeliculas.SelectedIndexChanged += aplicarFiltros;
-
+            comboBoxTurnos.SelectedIndexChanged += aplicarFiltros;
 
         }
 
@@ -51,34 +51,43 @@ namespace ClickTix.Empleado
             grid_funcionesc.RowPrePaint -= grid_funcionesc_RowPrePaint;
 
             grid_funcionesc.Rows.Clear();
+            notFound.Visible = false;
             List<Funcion> funciones = Funcion_Controller.obtenerTodosPorSucursal();
-
-            foreach (Funcion funcion in funciones)
+            if (funciones.Count == 0)
             {
-                int rowIndex = grid_funcionesc.Rows.Add();
-                grid_funcionesc.Rows[rowIndex].Cells[0].Value = funcion.Id.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[1].Value = funcion.peliculaNombre.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[2].Value = funcion.nroSala.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[3].Value = funcion.dimension.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[4].Value = funcion.idioma.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.precio.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.Fecha.ToShortDateString();
-                grid_funcionesc.Rows[rowIndex].Cells[7].Value = funcion.hora.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[8].Value = Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id);
-                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
-
-                double porcentajeDisponibilidad = 0;
-
-                if (Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id) > 0)
-                {
-                    porcentajeDisponibilidad = ((double)Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id) / Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id)) * 100;
-                }
-
-
-                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
-
-                grid_funcionesc.Rows[rowIndex].Tag = porcentajeDisponibilidad;
+                notFound.Visible = true;
             }
+            else
+            {
+                foreach (Funcion funcion in funciones)
+                {
+
+                    int rowIndex = grid_funcionesc.Rows.Add();
+                    grid_funcionesc.Rows[rowIndex].Cells[0].Value = funcion.Id.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[1].Value = funcion.peliculaNombre.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[2].Value = funcion.nroSala.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[3].Value = funcion.dimension.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[4].Value = funcion.idioma.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.precio.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.Fecha.ToShortDateString();
+                    grid_funcionesc.Rows[rowIndex].Cells[7].Value = funcion.hora.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[8].Value = Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id);
+                    grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
+
+                    double porcentajeDisponibilidad = 0;
+
+                    if (Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id) > 0)
+                    {
+                        porcentajeDisponibilidad = ((double)Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id) / Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id)) * 100;
+                    }
+
+
+                    grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
+
+                    grid_funcionesc.Rows[rowIndex].Tag = porcentajeDisponibilidad;
+                }
+            }
+            
 
             List<string> peliculas = Funcion_Controller.obtenerTodosTitulosPorSucursal();
             peliculas.Insert(0, "Todas las películas");
@@ -92,6 +101,8 @@ namespace ClickTix.Empleado
             dimensiones.Insert(0, "Todas las dimensiones");
             comboBoxDimension.DataSource = dimensiones;
 
+            List<string> turnos = new List<string> { "Todos los turnos", "Mañana", "Tarde", "Noche" };
+            comboBoxTurnos.DataSource = turnos;
             grid_funcionesc.RowPrePaint += grid_funcionesc_RowPrePaint;
         }
 
@@ -103,6 +114,7 @@ namespace ClickTix.Empleado
             string tituloSeleccionado = comboBoxPeliculas.SelectedItem.ToString();
             string fechaSeleccionada = comboBoxFechas.SelectedItem.ToString();
             string dimensionSeleccionada = comboBoxDimension.SelectedItem.ToString();
+            string turnoSeleccionado = comboBoxTurnos.SelectedItem.ToString();
 
             if (tituloSeleccionado != "Todas las películas")
                 filtros.Add("Titulo", tituloSeleccionado);
@@ -112,6 +124,24 @@ namespace ClickTix.Empleado
 
             if (dimensionSeleccionada != "Todas las dimensiones")
                 filtros.Add("Dimension", dimensionSeleccionada);
+            if (turnoSeleccionado != "Todos los turnos")
+            {
+                int idTurno = 0;
+                switch (turnoSeleccionado)
+                {
+                    case "Mañana":
+                        idTurno = 1;
+                        break;
+                    case "Tarde":
+                        idTurno = 2;
+                        break;
+                    case "Noche":
+                        idTurno = 3;
+                        break;
+                }
+
+                filtros.Add("Turno", idTurno);
+            }
 
             List<Funcion> funcionesFiltradas = Funcion_Controller.obtenerPorFiltros(filtros);
 
@@ -120,42 +150,43 @@ namespace ClickTix.Empleado
         private void cargarFuncionesEnGrid(List<Funcion> funciones)
         {
             grid_funcionesc.Rows.Clear();
+            notFound.Visible = false;
 
             grid_funcionesc.RowPrePaint += grid_funcionesc_RowPrePaint;
-
-            foreach (Funcion funcion in funciones)
+            if (funciones.Count == 0)
             {
-                int rowIndex = grid_funcionesc.Rows.Add();
-                grid_funcionesc.Rows[rowIndex].Cells[0].Value = funcion.Id.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[1].Value = funcion.peliculaNombre.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[2].Value = funcion.nroSala.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[3].Value = funcion.dimension.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[4].Value = funcion.idioma.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.precio.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.Fecha.ToShortDateString();
-                grid_funcionesc.Rows[rowIndex].Cells[7].Value = funcion.hora.ToString();
-                grid_funcionesc.Rows[rowIndex].Cells[8].Value = Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id);
-                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
+                notFound.Visible = true;
 
-                double porcentajeDisponibilidad = 0;
-
-                if (Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id) > 0)
+            }
+            else
+            {
+                foreach (Funcion funcion in funciones)
                 {
-                    porcentajeDisponibilidad = ((double)Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id) / Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id)) * 100;
+
+                    int rowIndex = grid_funcionesc.Rows.Add();
+                    grid_funcionesc.Rows[rowIndex].Cells[0].Value = funcion.Id.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[1].Value = funcion.peliculaNombre.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[2].Value = funcion.nroSala.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[3].Value = funcion.dimension.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[4].Value = funcion.idioma.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[5].Value = funcion.precio.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[6].Value = funcion.Fecha.ToShortDateString();
+                    grid_funcionesc.Rows[rowIndex].Cells[7].Value = funcion.hora.ToString();
+                    grid_funcionesc.Rows[rowIndex].Cells[8].Value = Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id);
+                    grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
+
+                    double porcentajeDisponibilidad = 0;
+
+                    if (Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id) > 0)
+                    {
+                        porcentajeDisponibilidad = ((double)Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id) / Asiento_Controller.ObtenerTotalAsientosPorFuncion(funcion.Id)) * 100;
+                    }
+
+
+                    grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
+
+                    grid_funcionesc.Rows[rowIndex].Tag = porcentajeDisponibilidad;
                 }
-
-
-                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
-
-                grid_funcionesc.Rows[rowIndex].Tag = porcentajeDisponibilidad;
-                grid_funcionesc.Rows[rowIndex].Cells[9].Value = "Seleccionar";
-
-                if (Asiento_Controller.ObtenerAsientosDisponibles(funcion.Id) == 0)
-                {
-                    grid_funcionesc.Rows[rowIndex].Cells[9].Value = "No Disponible";
-                    grid_funcionesc.Rows[rowIndex].Cells[9].ReadOnly = true;
-                }
-
             }
         }
 

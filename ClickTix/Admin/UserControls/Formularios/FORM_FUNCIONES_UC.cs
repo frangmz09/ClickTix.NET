@@ -192,10 +192,12 @@ namespace ClickTix.UserControls
             this.combobox_fecha.Enabled = true;
             this.combobox_idioma.Enabled = true;
             this.combobox_dimension.Enabled = true;
+            llenarTurnosDisponibles();
         }
         private void cambioFecha(object sender, EventArgs e)
         {
             funcionActual.Fecha = combobox_fecha.Value.Date;
+            llenarTurnosDisponibles();
 
         }
         private void cambioSucursal(object sender, EventArgs e)
@@ -282,7 +284,7 @@ namespace ClickTix.UserControls
 
             List<int> listaTurnosCompleta= Funcion_Controller.ObtenerTodosLosIdsDeTurno();
 
-            List<int> listaTurnosUsados = Funcion_Controller.ObtenerTurnosPorPeliculaYSala(Funcion_Controller.obtenerIdPelicula( combobox_pelicula), Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal));
+            List<int> listaTurnosUsados = Funcion_Controller.ObtenerTurnosPorPeliculaYSalaYFecha(Funcion_Controller.obtenerIdPelicula( combobox_pelicula), Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal), combobox_fecha.Value.Date);
 
 
             //List<int> listaConcatenada = listaTurnosCompleta.Concat(listaTurnosUsados).ToList();

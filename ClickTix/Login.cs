@@ -19,6 +19,7 @@ namespace ClickTix
         public Login()
         {
             InitializeComponent();
+            this.FormClosed += Login_FormClosed;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -84,6 +85,11 @@ namespace ClickTix
         private void txt_pw_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

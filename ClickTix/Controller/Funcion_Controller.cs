@@ -101,7 +101,7 @@ namespace ClickTix.Modelo
             {
                 ManagerConnection.OpenConnection();
 
-                string query = "select  funcion.id, pelicula.titulo, sala.nro_sala , dimension.dimension, idioma.idioma, dimension.precio, funcion.fecha, turno.hora from funcion left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id left join turno on funcion.turno_id = turno.id where sala.id_sucursal = @id_sucursal and funcion.fecha > NOW();";
+                string query = "select  funcion.id, pelicula.titulo, sala.nro_sala , dimension.dimension, idioma.idioma, dimension.precio, funcion.fecha, turno.hora, funcion.turno_id from funcion left join sala on funcion.id_sala = sala.id left join pelicula on funcion.id_pelicula = pelicula.id left join dimension on funcion.id_dimension = dimension.id left join idioma  on funcion.idioma_funcion = idioma.id left join turno on funcion.turno_id = turno.id where sala.id_sucursal = @id_sucursal and funcion.fecha > NOW();";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -122,6 +122,7 @@ namespace ClickTix.Modelo
                             funcion.precio = reader.GetDecimal("precio");
                             funcion.Fecha = reader.GetDateTime("fecha");
                             funcion.hora = reader.GetTimeSpan("hora");
+                            funcion.Id_Turno = reader.GetInt32("turno_id");
 
                             funciones.Add(funcion);
                         }
@@ -202,6 +203,10 @@ namespace ClickTix.Modelo
         {
             List<Funcion> funciones = obtenerTodosPorSucursal();
 
+            foreach (var item in funciones)
+            {
+                Trace.WriteLine(item.Id_Turno);
+            }
             foreach (var filtro in filtros)
             {
                 switch (filtro.Key)
@@ -215,11 +220,38 @@ namespace ClickTix.Modelo
                     case "Dimension":
                         funciones = funciones.Where(funcion => funcion.dimension == (string)filtro.Value).ToList();
                         break;
+                    case "Turno":
+                        int idTurno = (int)filtro.Value;
+                        if (idTurno==1)
+                        {
+
+                            Trace.WriteLine($"Filtrando por Turno: {idTurno}");
+                            funciones = funciones.Where(funcion => funcion.Id_Turno == idTurno).ToList();
+                            Trace.WriteLine($"Funciones después del filtro: {funciones.Count}");
+                        }
+                        else if (idTurno==2)
+                        {
+                            Trace.WriteLine($"Filtrando por Turno: {idTurno}");
+                            funciones = funciones.Where(funcion => funcion.Id_Turno == 2 || funcion.Id_Turno == 3).ToList();
+                            Trace.WriteLine($"Funciones después del filtro: {funciones.Count}");
+
+
+
+                        }
+                        else
+                        {
+                            Trace.WriteLine($"Filtrando por Turno: {idTurno}");
+                            funciones = funciones.Where(funcion => funcion.Id_Turno == 4 || funcion.Id_Turno == 5).ToList();
+                            Trace.WriteLine($"Funciones después del filtro: {funciones.Count}");
+                        }
+             
+                        break;
                 }
             }
 
             return funciones;
         }
+
 
         public static List<string> obtenerTodasDimensionesPorSucursal()
         {
@@ -732,8 +764,17 @@ namespace ClickTix.Modelo
         }
 
 
-        public static List<int> ObtenerTurnosPorPeliculaYSala(int idPelicula, int idSala)
+        public static List<int> ObtenerTurnosPorPeliculaYSalaYFecha(int idPelicula, int idSala, DateTime fecha)
+
+            
         {
+            Trace.WriteLine(fecha);
+            Trace.WriteLine(fecha);
+            Trace.WriteLine(fecha);
+            Trace.WriteLine(fecha);
+            Trace.WriteLine(fecha);
+            Trace.WriteLine(fecha);
+            Trace.WriteLine(fecha);
             List<int> turnos = new List<int>();
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
@@ -742,12 +783,13 @@ namespace ClickTix.Modelo
 
                 string query = "SELECT turno_id " +
                                "FROM funcion " +
-                               "WHERE id_pelicula = @IdPelicula AND id_sala = @IdSala";
+                               "WHERE id_pelicula = @IdPelicula AND id_sala = @IdSala AND fecha = @Fecha";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
                     command.Parameters.AddWithValue("@IdPelicula", idPelicula);
                     command.Parameters.AddWithValue("@IdSala", idSala);
+                    command.Parameters.AddWithValue("@Fecha", fecha);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
@@ -765,6 +807,7 @@ namespace ClickTix.Modelo
 
             return turnos;
         }
+
 
 
         public static int ObtenerIdSucursalPorIdSala(int idSala)
