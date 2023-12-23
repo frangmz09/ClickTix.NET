@@ -1,5 +1,4 @@
 # ClickTix
-# ClickTix
 
 ClickTix es un sistema de gestión de cines que aborda diversas necesidades, tanto desde la perspectiva de la administración del cine mediante la aplicación de escritorio como desde la experiencia del usuario final a través de su página web. El proyecto tiene como objetivo principal facilitar el proceso de compra de entradas de películas y mejorar la organización administrativa de una empresa de cine.
 
