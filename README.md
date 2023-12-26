@@ -73,5 +73,5 @@ En desarrollo activo, con un gran progreso pero falto de detalles en algunos asp
 
 
 ## Enlace al Demo 🚀
-
-[¡Prueba ClickTix ahora!](link_del_demo)
+Enlace no disponible aun:
+[¡Prueba ClickTix ahora!](link)
