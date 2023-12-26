@@ -1,4 +1,5 @@
 ﻿using ClickTix.Admin.UserControls.ABMs;
+using ClickTix.Admin.UserControls.Formularios;
 using ClickTix.UserControls;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace ClickTix
         private void btn_peliculas_Click(object sender, EventArgs e)
         {
             ABM_PELICULAS_UC abmpeliculas_uc = new ABM_PELICULAS_UC();
+            //FORM_API_PELICULAS abmpeliculas_uc = new FORM_API_PELICULAS(); TEST NUEVA FUNCIONALIDAD
+
             addUserControl(abmpeliculas_uc);
 
         }

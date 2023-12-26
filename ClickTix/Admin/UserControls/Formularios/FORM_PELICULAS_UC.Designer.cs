@@ -49,6 +49,7 @@
             this.back_pelicula = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.addimage_btn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.input_duracion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -66,7 +67,7 @@
             // 
             // addpelicula_btn
             // 
-            this.addpelicula_btn.Location = new System.Drawing.Point(221, 286);
+            this.addpelicula_btn.Location = new System.Drawing.Point(219, 303);
             this.addpelicula_btn.Name = "addpelicula_btn";
             this.addpelicula_btn.Size = new System.Drawing.Size(111, 25);
             this.addpelicula_btn.TabIndex = 46;
@@ -75,28 +76,28 @@
             // 
             // input_titulo
             // 
-            this.input_titulo.Location = new System.Drawing.Point(221, 82);
+            this.input_titulo.Location = new System.Drawing.Point(219, 99);
             this.input_titulo.Name = "input_titulo";
             this.input_titulo.Size = new System.Drawing.Size(268, 20);
             this.input_titulo.TabIndex = 47;
             // 
             // input_descripcion
             // 
-            this.input_descripcion.Location = new System.Drawing.Point(222, 248);
+            this.input_descripcion.Location = new System.Drawing.Point(220, 265);
             this.input_descripcion.Name = "input_descripcion";
             this.input_descripcion.Size = new System.Drawing.Size(267, 20);
             this.input_descripcion.TabIndex = 48;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(375, 222);
+            this.textBox3.Location = new System.Drawing.Point(373, 239);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(0, 20);
             this.textBox3.TabIndex = 49;
             // 
             // input_director
             // 
-            this.input_director.Location = new System.Drawing.Point(221, 120);
+            this.input_director.Location = new System.Drawing.Point(219, 137);
             this.input_director.Name = "input_director";
             this.input_director.Size = new System.Drawing.Size(86, 20);
             this.input_director.TabIndex = 50;
@@ -106,7 +107,7 @@
             this.input_genero.FormattingEnabled = true;
             this.input_genero.Items.AddRange(new object[] {
             "TERROR"});
-            this.input_genero.Location = new System.Drawing.Point(281, 161);
+            this.input_genero.Location = new System.Drawing.Point(279, 178);
             this.input_genero.Name = "input_genero";
             this.input_genero.Size = new System.Drawing.Size(71, 21);
             this.input_genero.TabIndex = 51;
@@ -114,7 +115,7 @@
             // 
             // input_duracion
             // 
-            this.input_duracion.Location = new System.Drawing.Point(221, 161);
+            this.input_duracion.Location = new System.Drawing.Point(219, 178);
             this.input_duracion.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -132,7 +133,7 @@
             "+16",
             "+18",
             "ATP"});
-            this.input_clasificacion.Location = new System.Drawing.Point(358, 161);
+            this.input_clasificacion.Location = new System.Drawing.Point(356, 178);
             this.input_clasificacion.Name = "input_clasificacion";
             this.input_clasificacion.Size = new System.Drawing.Size(71, 21);
             this.input_clasificacion.TabIndex = 53;
@@ -142,14 +143,14 @@
             // 
             this.input_estreno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.input_estreno.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.input_estreno.Location = new System.Drawing.Point(221, 209);
+            this.input_estreno.Location = new System.Drawing.Point(219, 226);
             this.input_estreno.Name = "input_estreno";
             this.input_estreno.Size = new System.Drawing.Size(86, 20);
             this.input_estreno.TabIndex = 54;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(53, 80);
+            this.pictureBox1.Location = new System.Drawing.Point(51, 97);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(152, 204);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -160,7 +161,7 @@
             // 
             this.label_titulo.AutoSize = true;
             this.label_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_titulo.Location = new System.Drawing.Point(218, 65);
+            this.label_titulo.Location = new System.Drawing.Point(216, 82);
             this.label_titulo.Name = "label_titulo";
             this.label_titulo.Size = new System.Drawing.Size(37, 15);
             this.label_titulo.TabIndex = 56;
@@ -171,7 +172,7 @@
             // 
             this.label_director.AutoSize = true;
             this.label_director.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_director.Location = new System.Drawing.Point(219, 105);
+            this.label_director.Location = new System.Drawing.Point(217, 122);
             this.label_director.Name = "label_director";
             this.label_director.Size = new System.Drawing.Size(50, 15);
             this.label_director.TabIndex = 57;
@@ -182,7 +183,7 @@
             // 
             this.label_duracion.AutoSize = true;
             this.label_duracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_duracion.Location = new System.Drawing.Point(219, 144);
+            this.label_duracion.Location = new System.Drawing.Point(217, 161);
             this.label_duracion.Name = "label_duracion";
             this.label_duracion.Size = new System.Drawing.Size(57, 15);
             this.label_duracion.TabIndex = 58;
@@ -193,7 +194,7 @@
             // 
             this.label_categoria.AutoSize = true;
             this.label_categoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_categoria.Location = new System.Drawing.Point(282, 144);
+            this.label_categoria.Location = new System.Drawing.Point(280, 161);
             this.label_categoria.Name = "label_categoria";
             this.label_categoria.Size = new System.Drawing.Size(48, 15);
             this.label_categoria.TabIndex = 59;
@@ -204,7 +205,7 @@
             // 
             this.label_clasificacion.AutoSize = true;
             this.label_clasificacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_clasificacion.Location = new System.Drawing.Point(355, 144);
+            this.label_clasificacion.Location = new System.Drawing.Point(353, 161);
             this.label_clasificacion.Name = "label_clasificacion";
             this.label_clasificacion.Size = new System.Drawing.Size(76, 15);
             this.label_clasificacion.TabIndex = 60;
@@ -215,7 +216,7 @@
             // 
             this.label_estreno.AutoSize = true;
             this.label_estreno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_estreno.Location = new System.Drawing.Point(218, 192);
+            this.label_estreno.Location = new System.Drawing.Point(216, 209);
             this.label_estreno.Name = "label_estreno";
             this.label_estreno.Size = new System.Drawing.Size(102, 15);
             this.label_estreno.TabIndex = 61;
@@ -226,7 +227,7 @@
             // 
             this.label_descripcion.AutoSize = true;
             this.label_descripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_descripcion.Location = new System.Drawing.Point(220, 233);
+            this.label_descripcion.Location = new System.Drawing.Point(218, 250);
             this.label_descripcion.Name = "label_descripcion";
             this.label_descripcion.Size = new System.Drawing.Size(72, 15);
             this.label_descripcion.TabIndex = 62;
@@ -250,7 +251,7 @@
             // 
             // addimage_btn
             // 
-            this.addimage_btn.Location = new System.Drawing.Point(77, 290);
+            this.addimage_btn.Location = new System.Drawing.Point(75, 307);
             this.addimage_btn.Name = "addimage_btn";
             this.addimage_btn.Size = new System.Drawing.Size(111, 25);
             this.addimage_btn.TabIndex = 64;
@@ -258,10 +259,20 @@
             this.addimage_btn.UseVisualStyleBackColor = true;
             this.addimage_btn.Click += new System.EventHandler(this.addimage_btn_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(219, 54);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(154, 25);
+            this.button1.TabIndex = 65;
+            this.button1.Text = "Traer desde internet";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // FORM_PELICULAS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.addimage_btn);
             this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.label_descripcion);
@@ -315,5 +326,6 @@
         private System.Windows.Forms.Button back_pelicula;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button addimage_btn;
+        private System.Windows.Forms.Button button1;
     }
 }

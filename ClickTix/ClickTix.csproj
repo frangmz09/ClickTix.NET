@@ -311,6 +311,12 @@
     <Compile Include="Admin\UserControls\ABMs\ABM_SALAS_UC.Designer.cs">
       <DependentUpon>ABM_SALAS_UC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\UserControls\Formularios\FORM_API_PELICULAS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Admin\UserControls\Formularios\FORM_API_PELICULAS.Designer.cs">
+      <DependentUpon>FORM_API_PELICULAS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin\UserControls\Formularios\FORM_PRECIODIMENSION_UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -471,6 +477,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\UserControls\BIENVENIDA_UC.resx">
       <DependentUpon>BIENVENIDA_UC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Admin\UserControls\Formularios\FORM_API_PELICULAS.resx">
+      <DependentUpon>FORM_API_PELICULAS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Admin\UserControls\Formularios\FORM_EMPLEADOS_UC.resx">
       <DependentUpon>FORM_EMPLEADOS_UC.cs</DependentUpon>
