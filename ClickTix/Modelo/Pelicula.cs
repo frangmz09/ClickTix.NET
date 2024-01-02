@@ -19,6 +19,7 @@ namespace ClickTix.Modelo
         public string titulo { get; set; }
         public string director { get; set; }
         public int duracion { get; set; }
+        [JsonProperty("poster_path")]
         public string imagen { get; set; }
         public int Genero { get; set; }
         public int Clasificacion {  get; set; }

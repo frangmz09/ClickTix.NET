@@ -33,8 +33,11 @@
             this.title = new System.Windows.Forms.Label();
             this.grid_peliculas = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.loadingText = new System.Windows.Forms.Label();
             this.Titulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaDeEstreno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imagen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_peliculas)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +79,8 @@
             this.grid_peliculas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Titulo,
             this.FechaDeEstreno,
+            this.imagen,
+            this.descripcion,
             this.Seleccionar});
             this.grid_peliculas.Location = new System.Drawing.Point(20, 57);
             this.grid_peliculas.Name = "grid_peliculas";
@@ -93,6 +98,19 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // loadingText
+            // 
+            this.loadingText.AutoSize = true;
+            this.loadingText.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.loadingText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadingText.Location = new System.Drawing.Point(224, 137);
+            this.loadingText.Name = "loadingText";
+            this.loadingText.Size = new System.Drawing.Size(125, 25);
+            this.loadingText.TabIndex = 16;
+            this.loadingText.Text = "Cargando...";
+            this.loadingText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.loadingText.Visible = false;
+            // 
             // Titulo
             // 
             this.Titulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -105,6 +123,20 @@
             this.FechaDeEstreno.HeaderText = "Fecha de Estreno";
             this.FechaDeEstreno.Name = "FechaDeEstreno";
             this.FechaDeEstreno.ReadOnly = true;
+            // 
+            // imagen
+            // 
+            this.imagen.HeaderText = "imagen";
+            this.imagen.Name = "imagen";
+            this.imagen.ReadOnly = true;
+            this.imagen.Visible = false;
+            // 
+            // descripcion
+            // 
+            this.descripcion.HeaderText = "descripcion";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            this.descripcion.Visible = false;
             // 
             // Seleccionar
             // 
@@ -120,6 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.loadingText);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.search_films);
@@ -140,8 +173,11 @@
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.DataGridView grid_peliculas;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label loadingText;
         private System.Windows.Forms.DataGridViewTextBoxColumn Titulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaDeEstreno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn imagen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
     }
 }

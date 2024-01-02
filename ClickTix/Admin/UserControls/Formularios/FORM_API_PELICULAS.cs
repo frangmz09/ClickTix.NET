@@ -54,7 +54,7 @@ namespace ClickTix.Admin.UserControls.Formularios
 
                     foreach (Pelicula pelicula in peliculas)
                     {
-                        grid_peliculas.Rows.Add(pelicula.titulo, pelicula.fEstreno, "Seleccionar");
+                        grid_peliculas.Rows.Add(pelicula.titulo, pelicula.fEstreno,pelicula.imagen,pelicula.descripcion, "Seleccionar");
                     }
                 }
                 else
@@ -66,6 +66,10 @@ namespace ClickTix.Admin.UserControls.Formularios
             {
                 MessageBox.Show($"Error en la solicitud: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            button1.Enabled = true;
+            loadingText.Visible = false;
+
         }
 
         private List<Pelicula> DeserializarJson(string json)
@@ -90,14 +94,21 @@ namespace ClickTix.Admin.UserControls.Formularios
             {
                 string titulo = grid_peliculas.Rows[e.RowIndex].Cells["titulo"].Value.ToString();
                 string fechaEstreno = grid_peliculas.Rows[e.RowIndex].Cells["FechaDeEstreno"].Value.ToString();
+                string imagen = grid_peliculas.Rows[e.RowIndex].Cells["imagen"].Value.ToString();
+                string descripcion = grid_peliculas.Rows[e.RowIndex].Cells["descripcion"].Value.ToString();
 
-                MessageBox.Show($"Seleccionaste la película:\nTítulo: {titulo}\nFechaEstreno: {fechaEstreno}", "Película seleccionada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string mensaje = $"Título: {titulo}\nFecha de Estreno: {fechaEstreno}\nImagen: {imagen}\nDescripción: {descripcion}";
+
+                MessageBox.Show(mensaje, "Detalles de la Película", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
+            loadingText.Visible = true;
+            grid_peliculas.Rows.Clear();
             await LoadMovies();
 
         }
