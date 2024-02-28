@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Firebase.Storage;
 using System.Net;
+using ClickTix.Admin.UserControls.Formularios;
 
 namespace ClickTix.UserControls
 {
@@ -37,6 +38,48 @@ namespace ClickTix.UserControls
 
             this.addpelicula_btn.Click += new System.EventHandler(this.Addpelicula_btn_Click);
 
+        }
+
+        public FORM_PELICULAS_UC(Pelicula peliculaAPI)
+        {
+            InitializeComponent();
+            LlenarComboBoxClasificacion();
+            LlenarComboBoxCategoria();
+
+            this.addpelicula_btn.Click += new System.EventHandler(this.Addpelicula_btn_ClickAPI);
+
+            try
+            {
+                string rutaImagen = "http://image.tmdb.org/t/p/w500" + peliculaAPI.imagen;
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(rutaImagen);
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (Stream stream = response.GetResponseStream())
+                {
+                    Image imagen = Image.FromStream(stream);
+                    pictureBox1.Image = imagen;
+
+                    string filePath = peliculaAPI.imagen;
+                    string fileExtension = Path.GetExtension(filePath);
+
+                    pictureBox1.Tag = fileExtension;
+
+                    extensionAntigua = fileExtension;
+                    rutaAntigua = rutaImagen;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al cargar la imagen: {ex.Message}");
+            }
+
+            input_titulo.Text = peliculaAPI.titulo;
+            input_descripcion.Text = peliculaAPI.descripcion;
+
+            if (DateTime.TryParse(peliculaAPI.fEstreno.ToString(), out DateTime fechaEstreno))
+            {
+                input_estreno.Value = fechaEstreno;
+            }
         }
 
 
@@ -68,6 +111,7 @@ namespace ClickTix.UserControls
                     {
                         Image imagen = Image.FromStream(mem);
                         pictureBox1.Image = imagen;
+
                     }
                 }
 
@@ -118,7 +162,7 @@ namespace ClickTix.UserControls
                 int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
 
 
-                string rutaDeGuardadoFirebase = await guardarImagen(id);
+                string rutaDeGuardadoFirebase = await guardarImagen();
 
                 InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, rutaDeGuardadoFirebase, input_estreno.Value);
                 ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
@@ -131,7 +175,35 @@ namespace ClickTix.UserControls
 
         }
 
+        private async void Addpelicula_btn_ClickAPI(object sender, EventArgs e)
+        {
 
+            if (string.IsNullOrWhiteSpace(input_titulo.Text) || string.IsNullOrWhiteSpace(input_director.Text)
+                || input_duracion.Value <= 0 || string.IsNullOrWhiteSpace(input_descripcion.Text)
+                || string.IsNullOrWhiteSpace(input_genero.Text) || string.IsNullOrWhiteSpace(input_clasificacion.Text)
+                || string.IsNullOrWhiteSpace(input_estreno.Text))
+            {
+                MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else
+            {
+                int id = GetMaxID() + 1;
+                int idGenero = ObtenerIdGenero(input_genero.Text);
+                int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
+
+
+                string rutaDeGuardadoFirebase = await guardarImagenAPI();
+
+                InsertarPelicula(id, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, rutaDeGuardadoFirebase, input_estreno.Value);
+                ABM_PELICULAS_UC abmpeliculas = new ABM_PELICULAS_UC();
+                Index_Admin.addUserControl(abmpeliculas);
+
+            }
+
+
+
+
+        }
         private async void Addpelicula_btn_Click2(object sender, EventArgs e)
         {
 
@@ -150,7 +222,7 @@ namespace ClickTix.UserControls
                 int idCategoria = ObtenerIdClasificacion(input_clasificacion.Text);
                 int idpelicula = idDelPanel;
                 Trace.WriteLine(extensionAntigua);
-                string rutaDeGuardadoFirebase = await guardarImagen(idpelicula);
+                string rutaDeGuardadoFirebase = await guardarImagen();
 
                 ActualizarPelicula(idpelicula, input_titulo.Text, input_director.Text, input_duracion.Value, input_descripcion.Text, idGenero, idCategoria, rutaDeGuardadoFirebase, input_estreno.Value);
                 Trace.WriteLine("la ruta es:" + rutaAntigua);
@@ -373,9 +445,9 @@ namespace ClickTix.UserControls
 
 
         }
+       
 
-  
-        private async Task<string> guardarImagen(int idPelicula)
+        private async Task<string> guardarImagen()
 {
     try
     {
@@ -415,7 +487,57 @@ namespace ClickTix.UserControls
 }
 
 
+        private async Task<string> guardarImagenAPI()
+        {
+            try
+            {
+                long timestamp = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
 
+                string rutaDeGuardado = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "Resources\\img\\peliculas\\" + timestamp);
+
+                string extension = pictureBox1.Tag.ToString();
+
+                if (string.IsNullOrEmpty(extension) || !extension.StartsWith("."))
+                {
+                    Console.WriteLine("Extensión de archivo no válida.");
+                    return "";
+                }
+
+                string fileName = timestamp + extension;
+
+                string rutaCompleta = rutaDeGuardado + extension;
+
+                Trace.WriteLine(rutaCompleta);
+                try
+                {
+                    if (pictureBox1.Image != null)
+                    {
+                       
+                        pictureBox1.Image.Save(rutaCompleta);
+                    }
+                    else
+                    {
+                        Console.WriteLine("La imagen en el PictureBox es nula.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al guardar la imagen: {ex.Message}");
+                }
+                FirebaseStorageManager uploader = new FirebaseStorageManager();
+
+
+                string urlImagen = await uploader.SubirImagenAsync(rutaCompleta, fileName);
+                Trace.WriteLine(urlImagen);
+
+                return urlImagen;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al subir la imagen a Firebase Storage: {ex.Message}");
+                return "";
+            }
+        }
 
 
 
@@ -572,30 +694,11 @@ namespace ClickTix.UserControls
             return idClasificacion;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FORM_API_PELICULAS formApiPeliculas = new FORM_API_PELICULAS();
+            Index_Admin.addUserControl(formApiPeliculas);
+        }
     }
 }
 

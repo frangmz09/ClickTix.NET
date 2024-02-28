@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClickTix.Modelo
 {
-    internal class Pelicula
+    public class Pelicula
     {
 
         public Pelicula()

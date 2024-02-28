@@ -30,8 +30,7 @@ namespace ClickTix
 
         private void btn_peliculas_Click(object sender, EventArgs e)
         {
-            //ABM_PELICULAS_UC abmpeliculas_uc = new ABM_PELICULAS_UC();
-            FORM_API_PELICULAS abmpeliculas_uc = new FORM_API_PELICULAS();
+            ABM_PELICULAS_UC abmpeliculas_uc = new ABM_PELICULAS_UC();
 
             addUserControl(abmpeliculas_uc);
 

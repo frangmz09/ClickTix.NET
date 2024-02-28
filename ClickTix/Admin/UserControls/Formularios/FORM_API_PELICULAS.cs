@@ -1,4 +1,5 @@
 ﻿using ClickTix.Modelo;
+using ClickTix.UserControls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,55 @@ namespace ClickTix.Admin.UserControls.Formularios
         }
 
 
-        private async void btnLoadMovies_Click(object sender, EventArgs e)
+    
+        private async Task SearchMovies(string searchTerm)
         {
-            await LoadMovies();
+            HttpClient client = new HttpClient();
+            double minPopularity = 700.0;
+
+            string baseUrl = "https://api.themoviedb.org";
+            string apiKey = "44f9ad3c77d25563ced721e526744397";
+            string language = "es-ES";
+            string region = "AR";
+
+            string url = $"{baseUrl}/3/search/movie" +
+                         $"?api_key={apiKey}" +
+                         $"&language={language}" +
+                         $"&query={Uri.EscapeDataString(searchTerm)}" +
+                         $"&region={region}" +
+                         $"&popularity.gte={minPopularity}";
+
+            Console.WriteLine(url);
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = await response.Content.ReadAsStringAsync();
+
+                    List<Pelicula> peliculas = DeserializarJson(responseData);
+
+                    grid_peliculas.Rows.Clear();
+
+                    foreach (Pelicula pelicula in peliculas)
+                    {
+                        grid_peliculas.Rows.Add(pelicula.titulo, pelicula.fEstreno, pelicula.imagen, pelicula.descripcion, "Seleccionar");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Error en la respuesta: {response.ReasonPhrase}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error en la solicitud: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            button1.Enabled = true;
+            loadingText.Visible = false;
         }
 
         private async Task LoadMovies()
@@ -97,9 +144,16 @@ namespace ClickTix.Admin.UserControls.Formularios
                 string imagen = grid_peliculas.Rows[e.RowIndex].Cells["imagen"].Value.ToString();
                 string descripcion = grid_peliculas.Rows[e.RowIndex].Cells["descripcion"].Value.ToString();
 
-                string mensaje = $"Título: {titulo}\nFecha de Estreno: {fechaEstreno}\nImagen: {imagen}\nDescripción: {descripcion}";
+                Pelicula peliculaApi = new Pelicula();
 
-                MessageBox.Show(mensaje, "Detalles de la Película", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                peliculaApi.titulo = titulo;
+                peliculaApi.fEstreno = fechaEstreno;
+                peliculaApi.imagen = imagen;
+                peliculaApi.descripcion = descripcion;
+
+                FORM_PELICULAS_UC peliculaApiForm = new FORM_PELICULAS_UC(peliculaApi);
+
+                Index_Admin.addUserControl(peliculaApiForm);
             }
         }
 
@@ -109,8 +163,24 @@ namespace ClickTix.Admin.UserControls.Formularios
             button1.Enabled = false;
             loadingText.Visible = true;
             grid_peliculas.Rows.Clear();
-            await LoadMovies();
+            if (search_films.Text == "")
+            {
+                await LoadMovies();
 
+            }
+            else
+            {
+                string searchTerm = search_films.Text;
+                await SearchMovies(searchTerm);
+            }
+
+        }
+
+        private void back_pelicula_Click(object sender, EventArgs e)
+        {
+            FORM_PELICULAS_UC peliculaForm = new FORM_PELICULAS_UC();
+
+            Index_Admin.addUserControl(peliculaForm);
         }
     }
 }
