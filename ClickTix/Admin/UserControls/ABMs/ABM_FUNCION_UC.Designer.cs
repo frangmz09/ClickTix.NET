@@ -41,16 +41,21 @@
             this.Sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.comboboxTiemp = new System.Windows.Forms.ComboBox();
+            this.comboboxSucursales = new System.Windows.Forms.ComboBox();
+            this.label_search = new System.Windows.Forms.Label();
+            this.search_films = new System.Windows.Forms.TextBox();
+            this.notFound = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_funciones)).BeginInit();
             this.SuspendLayout();
             // 
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.title.Location = new System.Drawing.Point(219, 18);
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Location = new System.Drawing.Point(287, 18);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(119, 24);
+            this.title.Size = new System.Drawing.Size(129, 25);
             this.title.TabIndex = 13;
             this.title.Text = "FUNCIONES";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -153,10 +158,61 @@
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Borrar.Width = 50;
             // 
+            // comboboxTiemp
+            // 
+            this.comboboxTiemp.FormattingEnabled = true;
+            this.comboboxTiemp.Location = new System.Drawing.Point(206, 18);
+            this.comboboxTiemp.Name = "comboboxTiemp";
+            this.comboboxTiemp.Size = new System.Drawing.Size(75, 21);
+            this.comboboxTiemp.TabIndex = 80;
+            // 
+            // comboboxSucursales
+            // 
+            this.comboboxSucursales.FormattingEnabled = true;
+            this.comboboxSucursales.Location = new System.Drawing.Point(125, 18);
+            this.comboboxSucursales.Name = "comboboxSucursales";
+            this.comboboxSucursales.Size = new System.Drawing.Size(75, 21);
+            this.comboboxSucursales.TabIndex = 79;
+            // 
+            // label_search
+            // 
+            this.label_search.AutoSize = true;
+            this.label_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_search.Location = new System.Drawing.Point(20, 2);
+            this.label_search.Name = "label_search";
+            this.label_search.Size = new System.Drawing.Size(87, 13);
+            this.label_search.TabIndex = 82;
+            this.label_search.Text = "Buscar peliculas:";
+            this.label_search.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // search_films
+            // 
+            this.search_films.Location = new System.Drawing.Point(23, 18);
+            this.search_films.Name = "search_films";
+            this.search_films.Size = new System.Drawing.Size(96, 20);
+            this.search_films.TabIndex = 81;
+            // 
+            // notFound
+            // 
+            this.notFound.AutoSize = true;
+            this.notFound.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.notFound.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.notFound.ForeColor = System.Drawing.Color.DarkRed;
+            this.notFound.Location = new System.Drawing.Point(42, 167);
+            this.notFound.Name = "notFound";
+            this.notFound.Size = new System.Drawing.Size(486, 39);
+            this.notFound.TabIndex = 83;
+            this.notFound.Text = "No se encontraron funciones";
+            // 
             // ABM_FUNCION_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.notFound);
+            this.Controls.Add(this.label_search);
+            this.Controls.Add(this.search_films);
+            this.Controls.Add(this.comboboxTiemp);
+            this.Controls.Add(this.comboboxSucursales);
             this.Controls.Add(this.title);
             this.Controls.Add(this.add_funcion);
             this.Controls.Add(this.grid_funciones);
@@ -183,5 +239,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Sucursal;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
+        private System.Windows.Forms.ComboBox comboboxTiemp;
+        private System.Windows.Forms.ComboBox comboboxSucursales;
+        private System.Windows.Forms.Label label_search;
+        private System.Windows.Forms.TextBox search_films;
+        private System.Windows.Forms.Label notFound;
     }
 }

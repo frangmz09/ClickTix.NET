@@ -33,10 +33,13 @@ namespace ClickTix.Empleado.UserControls
         double precio = 0;
         List<int> filas = new List<int>();
         List<int> columnas = new List<int>();
+        List<int> idsTicketsRecibidos = new List<int>();
+
         int idFuncionAux;
 
-        public TICKET_UC(int idFuncion, List<int> filasRecibidas, List<int> columnasRecibidas)
+        public TICKET_UC(int idFuncion, List<int> filasRecibidas, List<int> columnasRecibidas, List<int> idsTickets)
         {
+            idsTicketsRecibidos = idsTickets;
             InitializeComponent();
             loadTicketStrings(idFuncion);
             idFuncionAux = idFuncion;
@@ -74,6 +77,7 @@ namespace ClickTix.Empleado.UserControls
         public TICKET_UC(int idTicket)
         {
             InitializeComponent();
+            idsTicketsRecibidos.Add(idTicket);
             Ticket ticket = new Ticket();
             ticket = Ticket_Controller.buscarTicketPorId(idTicket);
             Funcion funcionAuxiliar = Funcion_Controller.buscarFuncionPorId(ticket.id_funcion);
@@ -93,6 +97,13 @@ namespace ClickTix.Empleado.UserControls
             {
                 text_error.Text = "La función de la cual se retiró la entrada ya caducó";
             }
+            else if (ticket.is_withdrawn == 1)
+            {
+                adv_1.Visible = true;
+                button1.Click += button2_Click;
+
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -100,9 +111,16 @@ namespace ClickTix.Empleado.UserControls
             for (int i = 0; i < filas.Count; i++)
             {
                 this.generarPDF(filas[i], columnas[i]);
+                Ticket_Controller.MarcarTicketComoRetirado(idsTicketsRecibidos[i]);
             }
         }
-
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < filas.Count; i++)
+            {
+                this.generarPDF(filas[i], columnas[i]);
+            }
+        }
         private void generarPDF(int fila, int columna)
         {
             SaveFileDialog guardar = new SaveFileDialog();

@@ -45,6 +45,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btn_MenuPrincipal = new System.Windows.Forms.Button();
             this.text_error = new System.Windows.Forms.Label();
+            this.adv_1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -217,10 +218,24 @@
             this.text_error.Size = new System.Drawing.Size(0, 19);
             this.text_error.TabIndex = 21;
             // 
+            // adv_1
+            // 
+            this.adv_1.AutoSize = true;
+            this.adv_1.BackColor = System.Drawing.Color.Transparent;
+            this.adv_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adv_1.ForeColor = System.Drawing.Color.Red;
+            this.adv_1.Location = new System.Drawing.Point(155, 9);
+            this.adv_1.Name = "adv_1";
+            this.adv_1.Size = new System.Drawing.Size(519, 31);
+            this.adv_1.TabIndex = 22;
+            this.adv_1.Text = "Este ticket ya fue previamente impreso";
+            this.adv_1.Visible = false;
+            // 
             // TICKET_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.adv_1);
             this.Controls.Add(this.text_error);
             this.Controls.Add(this.btn_MenuPrincipal);
             this.Controls.Add(this.idioma_ticket);
@@ -263,5 +278,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_MenuPrincipal;
         private System.Windows.Forms.Label text_error;
+        private System.Windows.Forms.Label adv_1;
     }
 }

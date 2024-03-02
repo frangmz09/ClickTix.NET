@@ -39,16 +39,18 @@
             this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label_search = new System.Windows.Forms.Label();
+            this.search_employees = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grid_empleados)).BeginInit();
             this.SuspendLayout();
             // 
             // title
             // 
             this.title.AutoSize = true;
-            this.title.Font = new System.Drawing.Font("Roboto Bk", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(219, 18);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(125, 24);
+            this.title.Size = new System.Drawing.Size(137, 25);
             this.title.TabIndex = 7;
             this.title.Text = "EMPLEADOS";
             this.title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -137,10 +139,30 @@
             this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Borrar.Width = 50;
             // 
+            // label_search
+            // 
+            this.label_search.AutoSize = true;
+            this.label_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_search.Location = new System.Drawing.Point(20, 10);
+            this.label_search.Name = "label_search";
+            this.label_search.Size = new System.Drawing.Size(97, 13);
+            this.label_search.TabIndex = 11;
+            this.label_search.Text = "Buscar empleados:";
+            this.label_search.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // search_employees
+            // 
+            this.search_employees.Location = new System.Drawing.Point(23, 26);
+            this.search_employees.Name = "search_employees";
+            this.search_employees.Size = new System.Drawing.Size(157, 20);
+            this.search_employees.TabIndex = 10;
+            // 
             // ABM_EMPLEADOS_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_search);
+            this.Controls.Add(this.search_employees);
             this.Controls.Add(this.title);
             this.Controls.Add(this.add_empleado);
             this.Controls.Add(this.grid_empleados);
@@ -166,5 +188,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoUsuario;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
+        private System.Windows.Forms.Label label_search;
+        private System.Windows.Forms.TextBox search_employees;
     }
 }

@@ -36,6 +36,7 @@ namespace ClickTix.Controller
                         ticketAuxiliar.fila = reader.GetInt32(3);
                         ticketAuxiliar.columna = reader.GetInt32(4);
                         ticketAuxiliar.precio = reader.GetDouble(5);
+                        ticketAuxiliar.is_withdrawn = reader.GetInt16(8);
 
 
 
@@ -49,24 +50,30 @@ namespace ClickTix.Controller
             ManagerConnection.CloseConnection();
             return ticketAuxiliar;
         }
-        public static bool crearTicket(int idFuncion, int filas, int columnas)
+        public static int crearTicket(int idFuncion, int filas, int columnas)
         {
-            string query = "INSERT INTO ticket (id, id_funcion, fecha, fila, columna, precio_al_momento) " +
-                           "VALUES (@id,@id_funcion, @fecha ,@filas, @columnas, @precio_al_momento)";
+            string abreviatura = Sucursal_Controller.ObtenerAbreviaturaSucursalPorIdFuncion(idFuncion);
+            int id = ObtenerMaxIdTicket() + 1;
+            string query = "INSERT INTO ticket (id, id_funcion, fecha, fila, columna, precio_al_momento, id_label, is_withdrawn) " +
+                           "VALUES (@id,@id_funcion, @fecha ,@filas, @columnas, @precio_al_momento, @id_label, @is_withdrawn)";
 
             MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
 
-            cmd.Parameters.AddWithValue("@id", ObtenerMaxIdTicket() + 1);
+            cmd.Parameters.AddWithValue("@id", id );
             cmd.Parameters.AddWithValue("@id_funcion", idFuncion);
             cmd.Parameters.AddWithValue("@filas", filas);
             cmd.Parameters.AddWithValue("@columnas", columnas);
             cmd.Parameters.AddWithValue("@fecha", DateTime.Now);
             cmd.Parameters.AddWithValue("@precio_al_momento", Funcion_Controller.obtenerPrecioFuncion(idFuncion));
+            cmd.Parameters.AddWithValue("@id_label", abreviatura+id.ToString("D10"));
+            cmd.Parameters.AddWithValue("@is_withdrawn", 0);
+
+
             try
             {
                 ManagerConnection.OpenConnection();
                 cmd.ExecuteNonQuery();
-                return true;
+                return id;
             }
             catch (Exception ex)
             {
@@ -105,5 +112,32 @@ namespace ClickTix.Controller
                 ManagerConnection.CloseConnection();
             }
         }
+
+        public static bool MarcarTicketComoRetirado(int idTicket)
+        {
+            string query = "UPDATE ticket SET is_withdrawn = 1 WHERE id = @id";
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, mysqlConnection);
+                cmd.Parameters.AddWithValue("@id", idTicket);
+
+                try
+                {
+                    ManagerConnection.OpenConnection();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0; 
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al marcar el ticket como retirado: " + ex.Message);
+                }
+                finally
+                {
+                    ManagerConnection.CloseConnection();
+                }
+            }
+        }
+
     }
 }

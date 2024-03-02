@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Controller;
 using ClickTix.Modelo;
 using MySql.Data.MySqlClient;
 using System;
@@ -20,7 +21,45 @@ namespace ClickTix.UserControls
         {
             InitializeComponent();
             cargarEmpleados();
+            search_employees.TextChanged += TxtSearch_TextChanged;
 
+
+        }
+
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = search_employees.Text.Trim().ToLower();
+            List<EmpleadoA> empleadosEncontrados = Empleado_Controller.BuscarEmpleados(searchTerm);
+            CargarEmpleadosEnGrid(empleadosEncontrados);
+        }
+
+        private void CargarEmpleadosEnGrid(List<EmpleadoA> empleados)
+        {
+            grid_empleados.Rows.Clear();
+
+            foreach (EmpleadoA empleado in empleados)
+            {
+                int rowIndex = grid_empleados.Rows.Add();
+
+                grid_empleados.Rows[rowIndex].Cells[0].Value = empleado.Id.ToString();
+                grid_empleados.Rows[rowIndex].Cells[1].Value = empleado.Nombre.ToString();
+                grid_empleados.Rows[rowIndex].Cells[2].Value = empleado.Apellido.ToString();
+                grid_empleados.Rows[rowIndex].Cells[3].Value = Sucursal_Controller.ObtenerNombreSucursalPorID(empleado.Id_Sucursal);
+                grid_empleados.Rows[rowIndex].Cells[4].Value = empleado.Usuario.ToString();
+                if (empleado.is_admin.ToString() == "1")
+                {
+                    grid_empleados.Rows[rowIndex].Cells[5].Value = "Administrador";
+
+                }
+                else
+                {
+
+                    grid_empleados.Rows[rowIndex].Cells[5].Value = "Empleado";
+                }
+                grid_empleados.Rows[rowIndex].Cells[6].Value = "Modificar";
+                grid_empleados.Rows[rowIndex].Cells[7].Value = "Eliminar";
+
+            }
         }
 
         public ABM_EMPLEADOS_UC(int id)

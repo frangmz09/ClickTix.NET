@@ -37,6 +37,9 @@
             this.label_cuit = new System.Windows.Forms.Label();
             this.input_cuit = new System.Windows.Forms.TextBox();
             this.back_pelicula = new System.Windows.Forms.Button();
+            this.label_abr = new System.Windows.Forms.Label();
+            this.input_abr = new System.Windows.Forms.TextBox();
+            this.label_adv = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // title
@@ -53,7 +56,7 @@
             // 
             // addsucursal_btn
             // 
-            this.addsucursal_btn.Location = new System.Drawing.Point(222, 285);
+            this.addsucursal_btn.Location = new System.Drawing.Point(223, 309);
             this.addsucursal_btn.Name = "addsucursal_btn";
             this.addsucursal_btn.Size = new System.Drawing.Size(111, 25);
             this.addsucursal_btn.TabIndex = 33;
@@ -124,10 +127,44 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click);
             // 
+            // label_abr
+            // 
+            this.label_abr.AutoSize = true;
+            this.label_abr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_abr.Location = new System.Drawing.Point(140, 231);
+            this.label_abr.Name = "label_abr";
+            this.label_abr.Size = new System.Drawing.Size(68, 15);
+            this.label_abr.TabIndex = 68;
+            this.label_abr.Text = "Abreviatura";
+            this.label_abr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // input_abr
+            // 
+            this.input_abr.Location = new System.Drawing.Point(143, 248);
+            this.input_abr.Name = "input_abr";
+            this.input_abr.Size = new System.Drawing.Size(268, 20);
+            this.input_abr.TabIndex = 67;
+            // 
+            // label_adv
+            // 
+            this.label_adv.AutoSize = true;
+            this.label_adv.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_adv.ForeColor = System.Drawing.Color.Red;
+            this.label_adv.Location = new System.Drawing.Point(130, 271);
+            this.label_adv.Name = "label_adv";
+            this.label_adv.Size = new System.Drawing.Size(296, 15);
+            this.label_adv.TabIndex = 69;
+            this.label_adv.Text = "No podrá ser cambiada o modificada posteriormente";
+            this.label_adv.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_adv.Click += new System.EventHandler(this.label1_Click_1);
+            // 
             // FORM_SUCURSALES_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label_adv);
+            this.Controls.Add(this.label_abr);
+            this.Controls.Add(this.input_abr);
             this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.label_cuit);
             this.Controls.Add(this.input_cuit);
@@ -155,5 +192,8 @@
         private System.Windows.Forms.Label label_cuit;
         private System.Windows.Forms.TextBox input_cuit;
         private System.Windows.Forms.Button back_pelicula;
+        private System.Windows.Forms.Label label_abr;
+        private System.Windows.Forms.TextBox input_abr;
+        private System.Windows.Forms.Label label_adv;
     }
 }

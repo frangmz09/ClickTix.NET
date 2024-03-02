@@ -1,4 +1,5 @@
 ﻿using ClickTix.Conexion;
+using ClickTix.Controller;
 using iTextSharp.tool.xml.html.head;
 using MySql.Data.MySqlClient;
 using System;
@@ -251,6 +252,80 @@ namespace ClickTix.Modelo
 
             return funciones;
         }
+        public static int obtenerIdSucursalPorIdSala(int idSala)
+        {
+            int idSucursal = -1; // Valor predeterminado en caso de no encontrar la correspondencia
+
+            try
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "SELECT id_sucursal FROM sala WHERE id = @idSala";
+
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+                {
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                    {
+                        command.Parameters.AddWithValue("@idSala", idSala);
+
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            idSucursal = Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el ID de la sucursal desde la sala: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                ManagerConnection.CloseConnection();
+            }
+
+            return idSucursal;
+        }
+        
+        public static List<Funcion> obtenerPorFiltrosABM(Dictionary<string, object> filtros)
+        {
+            List<Funcion> funciones = obtenerTodos();
+
+            foreach (var filtro in filtros)
+            {
+                switch (filtro.Key)
+                {
+                    case "Titulo":
+                        string tituloPelicula = (string)filtro.Value;
+                        funciones = funciones.Where(funcion => Pelicula_Controller.ObtenerIdPeliculasPorTituloParcial(tituloPelicula).Contains(funcion.Id_Pelicula)).ToList();
+                        break;
+                    case "Sucursal":
+                        int idSucursal = (int)filtro.Value;
+                        funciones = funciones.Where(funcion =>
+                            obtenerIdSucursalPorIdSala(funcion.Id_Sala) == idSucursal).ToList();
+                        break;
+                    case "Tiempo":
+                        string tiempo = (string)filtro.Value;
+                        if (tiempo == "Proximas")
+                        {
+                            DateTime fechaActual = DateTime.Now;
+                            funciones = funciones.Where(funcion => funcion.Fecha >= fechaActual).ToList();
+                        }
+                        else if (tiempo == "Pasadas")
+                        {
+                            DateTime fechaActual = DateTime.Now;
+                            funciones = funciones.Where(funcion => funcion.Fecha < fechaActual).ToList();
+                        }
+                        break;
+                }
+            }
+
+            return funciones;
+        }
+
+
 
 
         public static List<string> obtenerTodasDimensionesPorSucursal()

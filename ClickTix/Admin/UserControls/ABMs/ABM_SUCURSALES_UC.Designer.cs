@@ -35,6 +35,7 @@
             this.Nombrev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuitt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccionn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Abreviatura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Salas = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -72,6 +73,7 @@
             this.Nombrev,
             this.Cuitt,
             this.Direccionn,
+            this.Abreviatura,
             this.Salas,
             this.Borrar,
             this.Modificar});
@@ -105,6 +107,12 @@
             this.Direccionn.HeaderText = "Direccion";
             this.Direccionn.Name = "Direccionn";
             this.Direccionn.ReadOnly = true;
+            // 
+            // Abreviatura
+            // 
+            this.Abreviatura.HeaderText = "Abreviatura";
+            this.Abreviatura.Name = "Abreviatura";
+            this.Abreviatura.ReadOnly = true;
             // 
             // Salas
             // 
@@ -160,6 +168,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombrev;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuitt;
         private System.Windows.Forms.DataGridViewTextBoxColumn Direccionn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Abreviatura;
         private System.Windows.Forms.DataGridViewButtonColumn Salas;
         private System.Windows.Forms.DataGridViewButtonColumn Borrar;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;

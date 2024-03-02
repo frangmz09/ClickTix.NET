@@ -12,6 +12,8 @@ namespace ClickTix.Modelo
         public string nombre { get; set; }
         public string cuit { get; set; }
         public string direccion { get; set; }
+        public string abreviatura { get; set; }
+
         public int numerosalas { get; set; }
 
     }

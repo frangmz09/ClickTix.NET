@@ -32,6 +32,9 @@ namespace ClickTix.UserControls
             this.addsucursal_btn.Text = "Modificar";
             this.idDelPanel = id;
             int sucursalID = id;
+            this.label_abr.Visible = false;
+            this.input_abr.Visible = false;
+            this.label_adv.Visible = false;
 
 
             CargarDatosSucursal(sucursalID);
@@ -67,9 +70,20 @@ namespace ClickTix.UserControls
 
              
             if (string.IsNullOrWhiteSpace(input_nombre.Text) || string.IsNullOrWhiteSpace(input_direccion.Text) 
-                || string.IsNullOrWhiteSpace(input_cuit.Text))
+                || string.IsNullOrWhiteSpace(input_cuit.Text) || string.IsNullOrWhiteSpace(input_abr.Text))
             {
                 MessageBox.Show("Los campos deben estar llenos ");
+            }
+            else if (input_abr.Text.Length != 3){
+
+                MessageBox.Show("La abreviatura debe de ser de 3 caracteres");
+
+            }
+            else if (Sucursal_Controller.ValidarExistenciaAbreviatura(input_abr.Text))
+            {
+
+                MessageBox.Show("Ya existe una sucursal con esa abreviatura");
+
             }
             else
             {
@@ -79,6 +93,7 @@ namespace ClickTix.UserControls
                 s.nombre = input_nombre.Text;
                 s.direccion = input_direccion.Text;
                 s.cuit = input_cuit.Text;
+                s.abreviatura = input_abr.Text;
 
                 Sucursal_Controller.CrearSucursal(s);
                 ABM_SUCURSALES_UC sucursales_uc = new ABM_SUCURSALES_UC();
@@ -147,6 +162,11 @@ namespace ClickTix.UserControls
                 MessageBox.Show("Error al cargar los datos de la dimensión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             ManagerConnection.CloseConnection();
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
 
         }
     }

@@ -12,6 +12,33 @@ namespace ClickTix.Conexion
 {
      class Sucursal_Controller
     {
+        public static List<string> obtenerNombresSucursalesSinAdministrador()
+        {
+            List<string> nombresSucursales = new List<string>();
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "SELECT nombre FROM sucursal WHERE nombre <> 'Administradores'";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            nombresSucursales.Add(reader.GetString("nombre"));
+                        }
+                    }
+                }
+
+                ManagerConnection.CloseConnection();
+            }
+
+            return nombresSucursales;
+        }
+
         public static List<Sucursal> obtenerTodos()
         {
             List<Sucursal> sucursales = new List<Sucursal>();
@@ -19,7 +46,7 @@ namespace ClickTix.Conexion
             {
                 ManagerConnection.OpenConnection();
 
-                string query = "SELECT id,nombre,cuit, direccion FROM sucursal";
+                string query = "SELECT id,nombre,cuit, direccion, abreviatura FROM sucursal";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
@@ -33,6 +60,7 @@ namespace ClickTix.Conexion
                             sucursal.nombre = reader.GetString("nombre");
                             sucursal.cuit= reader.GetString("cuit");
                             sucursal.direccion = reader.GetString("direccion");
+                            sucursal.abreviatura = reader.GetString("abreviatura");
                             sucursales.Add(sucursal);
                         }
                     }
@@ -68,17 +96,62 @@ namespace ClickTix.Conexion
             return nombreSucursal;
 
         }
+        public static string ObtenerAbreviaturaSucursalPorIdFuncion(int idFuncion)
+        {
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                mysqlConnection.Open();
+                string query = "SELECT suc.abreviatura FROM funcion f " +
+                               "INNER JOIN sala s ON f.id_sala = s.id " +
+                               "INNER JOIN sucursal suc ON suc.id = s.id_sucursal " +
+                               "WHERE f.id = @idFuncion;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@idFuncion", idFuncion);
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return result.ToString(); 
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }
+            }
+        }
+
+        public static bool ValidarExistenciaAbreviatura(string abv)
+        {
+            bool existeAbreviatura = false;
+            ManagerConnection.OpenConnection();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                string query = "SELECT COUNT(*) FROM sucursal WHERE abreviatura = @abreviatura";
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@abreviatura", abv);
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+                    existeAbreviatura = count > 0;
+                }
+            }
+            ManagerConnection.CloseConnection();
+            return existeAbreviatura;
+        }
 
         public static bool CrearSucursal(Sucursal sucursal)
         {
-            string query = "INSERT INTO sucursal (id, nombre, cuit,direccion) " +
-                           "VALUES (@id, @nombre, @cuit,@direccion)";
+            string query = "INSERT INTO sucursal (id, nombre, cuit,direccion, abreviatura) " +
+                           "VALUES (@id, @nombre, @cuit,@direccion, @abreviatura)";
 
             MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
             cmd.Parameters.AddWithValue("@id",ObtenerMaxIdSucursal()+1);
             cmd.Parameters.AddWithValue("@nombre", sucursal.nombre);
             cmd.Parameters.AddWithValue("@cuit", sucursal.cuit);
             cmd.Parameters.AddWithValue("@direccion", sucursal.direccion);
+            cmd.Parameters.AddWithValue("@abreviatura", sucursal.abreviatura.ToUpper());
+
             try
             {
                 ManagerConnection.OpenConnection();
@@ -133,7 +206,7 @@ namespace ClickTix.Conexion
         {
             ManagerConnection.OpenConnection();
             string query = "UPDATE sucursal " +
-                           "SET nombre = @nombre, cuit = @cuit, direccion = @direccion, numerosalas = @numerosalas " +
+                           "SET nombre = @nombre, cuit = @cuit, direccion = @direccion " +
                            "WHERE id = @id";
 
             MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance());
@@ -142,7 +215,6 @@ namespace ClickTix.Conexion
             cmd.Parameters.AddWithValue("@nombre", sucursal.nombre);
             cmd.Parameters.AddWithValue("@cuit", sucursal.cuit);
             cmd.Parameters.AddWithValue("@direccion", sucursal.direccion);
-            cmd.Parameters.AddWithValue("@numerosalas", sucursal.numerosalas);
 
             try
             {
@@ -237,8 +309,44 @@ namespace ClickTix.Conexion
                 ManagerConnection.CloseConnection();
             }
         }
+        public static int ObtenerIdPorNombre(string nombreSucursal)
+        {
+            int idSucursal = -1; 
 
-        
+            try
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "SELECT id FROM sucursal WHERE nombre = @nombre";
+
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+                {
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                    {
+                        command.Parameters.AddWithValue("@nombre", nombreSucursal);
+
+                        object result = command.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            idSucursal = Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el ID de la sucursal: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                ManagerConnection.CloseConnection();
+            }
+
+            return idSucursal;
+        }
+
+
 
 
     }

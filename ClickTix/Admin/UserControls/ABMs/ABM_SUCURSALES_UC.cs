@@ -37,9 +37,10 @@ namespace ClickTix.UserControls
                 grid_sucursal.Rows[rowIndex].Cells[1].Value = sucursal.nombre.ToString();
                 grid_sucursal.Rows[rowIndex].Cells[2].Value = sucursal.cuit.ToString();
                 grid_sucursal.Rows[rowIndex].Cells[3].Value = sucursal.direccion.ToString();
-                grid_sucursal.Rows[rowIndex].Cells[4].Value = "Salas";
-                grid_sucursal.Rows[rowIndex].Cells[6].Value = "Modificar";
-                grid_sucursal.Rows[rowIndex].Cells[5].Value = "Eliminar";
+                grid_sucursal.Rows[rowIndex].Cells[4].Value = sucursal.abreviatura.ToString();
+                grid_sucursal.Rows[rowIndex].Cells[5].Value = "Salas";
+                grid_sucursal.Rows[rowIndex].Cells[7].Value = "Modificar";
+                grid_sucursal.Rows[rowIndex].Cells[6].Value = "Eliminar";
 
             }
         }

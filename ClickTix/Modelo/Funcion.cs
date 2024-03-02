@@ -24,6 +24,8 @@ namespace ClickTix.Modelo
 
         public string peliculaNombre { get; set; }
 
+        public string sucursalNombre { get; set; }
+
         public Funcion(int id, DateTime fecha, int id_Dimension, int id_Pelicula, int id_Sala, int id_Idioma, int id_Turno)
         {
             Id = id;

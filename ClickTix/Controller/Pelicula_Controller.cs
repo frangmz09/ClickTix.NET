@@ -12,6 +12,43 @@ namespace ClickTix.Controller
 {
     internal class Pelicula_Controller
     {
+        public static List<int> ObtenerIdPeliculasPorTituloParcial(string tituloParcial)
+        {
+            List<int> idsPeliculas = new List<int>();
+
+            try
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "SELECT id FROM pelicula WHERE titulo LIKE @tituloParcial";
+                using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+                {
+                    using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                    {
+                        command.Parameters.AddWithValue("@tituloParcial", "%" + tituloParcial + "%");
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                idsPeliculas.Add(reader.GetInt32("id"));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los IDs de las películas por título parcial: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                ManagerConnection.CloseConnection();
+            }
+
+            return idsPeliculas;
+        }
+
         public static List<Pelicula> BuscarPeliculas(string searchTerm)
         {
             List<Pelicula> peliculasEncontradas = new List<Pelicula>();

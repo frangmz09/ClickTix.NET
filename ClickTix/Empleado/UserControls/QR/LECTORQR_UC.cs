@@ -115,17 +115,14 @@ namespace ClickTix.Empleado.UserControls
             {
                 MessageBox.Show("El campo donde se ingresa el Nro de Ticket está vacío, por favor ingrese un valor.");
             }
-            else if (!int.TryParse(textBox2.Text, out int idTicket))
-            {
-                MessageBox.Show("El valor ingresado no es un número, por favor ingrese un valor del tipo numerico.");
-            }
             else
             {
-                int idTicketInput = int.Parse(textBox2.Text);
-                if (validarExistenciaTicket(idTicketInput))
+                string id_label = textBox2.Text;
+                int idEncontrado = obtenerIdTicketPorLabelID(id_label);
+                if (idEncontrado != -1)
                 {
-                    Trace.WriteLine("EL ID TICKET ES: " + idTicketInput);
-                    TICKET_UC ticket = new TICKET_UC(idTicketInput);
+                    Trace.WriteLine("EL ID TICKET ES: " + idEncontrado);
+                    TICKET_UC ticket = new TICKET_UC(idEncontrado);
                     Index_User.addUserControlUsuario(ticket);
                 }
                 else
@@ -164,6 +161,36 @@ namespace ClickTix.Empleado.UserControls
                 return false;
             }
         }
+        private int obtenerIdTicketPorLabelID(string id)
+        {
+            try
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "SELECT id FROM ticket WHERE id_label = @id";
+
+                MySqlCommand command = new MySqlCommand(query, ManagerConnection.getInstance());
+
+                command.Parameters.AddWithValue("@id", id);
+
+                object resultado = command.ExecuteScalar();
+
+                if (resultado != null && resultado != DBNull.Value)
+                {
+                    ManagerConnection.CloseConnection();
+                    return Convert.ToInt32(resultado);
+                }
+                ManagerConnection.CloseConnection();
+                return -1; 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                ManagerConnection.CloseConnection();
+                return -1; 
+            }
+        }
+
 
         private void back_pelicula_Click(object sender, EventArgs e)
         {

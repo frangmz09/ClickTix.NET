@@ -13,7 +13,9 @@ namespace ClickTix.Modelo
         public DateTime fecha{ get; set; }
         public int fila { get; set; }
         public int columna { get; set; }
+        public int is_withdrawn { get; set; }
         public double precio { get; set; }
+        
 
     }
 }
