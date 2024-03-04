@@ -46,6 +46,7 @@ namespace ClickTix.UserControls
             LlenarComboBoxClasificacion();
             LlenarComboBoxCategoria();
 
+
             this.addpelicula_btn.Click += new System.EventHandler(this.Addpelicula_btn_ClickAPI);
 
             try
@@ -80,21 +81,23 @@ namespace ClickTix.UserControls
             {
                 input_estreno.Value = fechaEstreno;
             }
+
         }
+
 
 
 
         public FORM_PELICULAS_UC(int id)
         {
-
             this.idDelPanel = id;
 
             int peliculaID = id;
             InitializeComponent();
             LlenarComboBoxClasificacion();
             LlenarComboBoxCategoria();
+            button1.Visible = false;
             addpelicula_btn.Click += new EventHandler(this.Addpelicula_btn_Click2);
-            addpelicula_btn.Text = "modificar";
+            addpelicula_btn.Text = "Modificar";
             this.title.Text = "INGRESE DATOS PARA ACTUALIZAR UNA PELICULA";
 
           

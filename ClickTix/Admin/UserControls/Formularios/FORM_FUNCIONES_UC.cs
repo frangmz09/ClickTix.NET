@@ -15,6 +15,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ClickTix.UserControls
 {
@@ -25,6 +26,7 @@ namespace ClickTix.UserControls
         Funcion funcionActual = new Funcion();
         private int idDelPanel;
         Image imagenCargada;
+        List<string> peliculaList;
         public FORM_FUNCIONES_UC()
         {
             funcionActual = null;
@@ -143,8 +145,7 @@ namespace ClickTix.UserControls
 
             funcionActual = new Funcion();
             funcionActual.Fecha = combobox_fecha.Value.Date;
-            Funcion_Controller.llenarCamposAddFuncion(combobox_pelicula, combobox_turno, combobox_sucursal, combobox_dimension, combobox_idioma);
-
+            this.peliculaList = Funcion_Controller.llenarCamposAddFuncion(combobox_pelicula, combobox_turno, combobox_sucursal, combobox_dimension, combobox_idioma);
 
             combobox_pelicula.SelectedIndexChanged += cambioPelicula;
             combobox_fecha.ValueChanged += cambioFecha;
@@ -167,38 +168,67 @@ namespace ClickTix.UserControls
 
         private void cambioPelicula(object sender, EventArgs e)
         {
-            funcionActual.Id_Pelicula = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
-            Trace.WriteLine(funcionActual.Id_Pelicula);
+            int idABuscar = Funcion_Controller.obtenerIdPelicula(combobox_pelicula);
 
-            
-            try
+            if (idABuscar!=0)
             {
-                string rutaImagen = Pelicula_Controller.obtenerFileName(Pelicula_Controller.obtenerIdPorNombre(combobox_pelicula.Text));
-                using (WebClient webClient = new WebClient())
+                funcionActual.Id_Pelicula = idABuscar;
+                Trace.WriteLine(funcionActual.Id_Pelicula);
+
+
+                try
                 {
-                    byte[] data = webClient.DownloadData(rutaImagen);
-                    using (MemoryStream mem = new MemoryStream(data))
+                    string rutaImagen = Pelicula_Controller.obtenerFileName(Pelicula_Controller.obtenerIdPorNombre(combobox_pelicula.Text));
+                    using (WebClient webClient = new WebClient())
                     {
-                        Image imagen = Image.FromStream(mem);
-                        pictureBox1.Image = imagen;
+                        byte[] data = webClient.DownloadData(rutaImagen);
+                        using (MemoryStream mem = new MemoryStream(data))
+                        {
+                            Image imagen = Image.FromStream(mem);
+                            pictureBox1.Image = imagen;
+                        }
                     }
                 }
-            }
-            catch
-            {
+                catch
+                {
+
+                }
+                this.combobox_sucursal.Enabled = true;
+                this.combobox_fecha.Enabled = true;
+                this.combobox_idioma.Enabled = false;
+                this.combobox_dimension.Enabled = false;
+                this.combobox_sala.Enabled = false;
+                funcionActual.Id_Turno = 0;
+
+                combobox_turno.Enabled = false;
+                combobox_turno.SelectedItem = null;
+                combobox_turno.Text = "";
 
             }
-            this.combobox_sucursal.Enabled = true;
-            this.combobox_fecha.Enabled = true;
-            this.combobox_idioma.Enabled = true;
-            this.combobox_dimension.Enabled = true;
-            llenarTurnosDisponibles();
+
         }
         private void cambioFecha(object sender, EventArgs e)
         {
-            funcionActual.Fecha = combobox_fecha.Value.Date;
             llenarTurnosDisponibles();
+            
 
+
+            funcionActual.Fecha = combobox_fecha.Value.Date;
+            this.combobox_sucursal.Enabled = true;
+            
+            this.combobox_idioma.Enabled = false;
+            combobox_idioma.SelectedItem = null;
+            combobox_idioma.Text = "";
+            this.combobox_dimension.Enabled = false;
+            combobox_dimension.SelectedItem = null;
+            combobox_dimension.Text = "";
+            this.combobox_sala.Enabled = true;
+            combobox_sala.SelectedItem = null;
+            combobox_sala.Text = "";
+
+            combobox_turno.Enabled=false;
+            combobox_turno.SelectedItem = null;
+            combobox_turno.Text = "";
         }
         private void cambioSucursal(object sender, EventArgs e)
         {
@@ -212,14 +242,30 @@ namespace ClickTix.UserControls
             combobox_turno.Enabled = false;
             combobox_turno.SelectedItem = null;
             combobox_turno.Text = "";
+
+
+            this.combobox_turno.Enabled = false;
+            this.combobox_fecha.Enabled = true;
+            this.combobox_idioma.Enabled = false;
+            this.combobox_dimension.Enabled = false;
+
         }
         private void cambioTurno(object sender, EventArgs e)
         {
             funcionActual.Id_Turno = Funcion_Controller.ObtenerIdTurno(combobox_turno);
+            this.combobox_idioma.Enabled = true;
+            this.combobox_dimension.Enabled = true;
         }
         private void cambioSala(object sender, EventArgs e)
         {
             funcionActual.Id_Sala = Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal);
+            funcionActual.Id_Turno = 0;
+
+            combobox_turno.Enabled = false;
+            combobox_turno.SelectedItem = null;
+            combobox_turno.Text = "";
+
+
             llenarTurnosDisponibles();
         }
         private void cambioIdioma(object sender, EventArgs e)
@@ -286,14 +332,6 @@ namespace ClickTix.UserControls
 
             List<int> listaTurnosUsados = Funcion_Controller.ObtenerTurnosPorPeliculaYSalaYFecha(Funcion_Controller.obtenerIdPelicula( combobox_pelicula), Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal), combobox_fecha.Value.Date);
 
-
-            //List<int> listaConcatenada = listaTurnosCompleta.Concat(listaTurnosUsados).ToList();
-
-            //List<int> listaSinDuplicados = listaConcatenada.Distinct().ToList();
-
-
-            //List<int> lista1 = new List<int> { 1, 2, 3, 4, 5, 6 };
-            //List<int> lista2 = new List<int> { 4, 5, 6, 7, 8, 9 };
 
             List<int> listaSinRepetidos = listaTurnosCompleta
                 .Union(listaTurnosUsados)

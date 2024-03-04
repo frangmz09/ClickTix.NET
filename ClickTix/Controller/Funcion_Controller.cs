@@ -360,12 +360,15 @@ namespace ClickTix.Modelo
 
             return dimensiones;
         }
-        public static void llenarCamposAddFuncion(ComboBox peliculas, ComboBox turnos, ComboBox sucursal, ComboBox dimension,ComboBox idioma) {
-            llenarPeliculas(peliculas);
+        public static List<String> llenarCamposAddFuncion(ComboBox peliculas, ComboBox turnos, ComboBox sucursal, ComboBox dimension,ComboBox idioma) {
+            List<string> listaPeliculas = obtenerListaPeliculas();
+            peliculas.Items.AddRange(listaPeliculas.ToArray());
             llenarTurnos(turnos);
             llenarSucursales(sucursal);
             llenarDimensiones(dimension);
             llenarIdiomas(idioma);
+
+            return listaPeliculas;
         }
 
         public static string ObtenerHorarioPorID(int idTurno)
@@ -394,27 +397,31 @@ namespace ClickTix.Modelo
         }
 
 
-        private static void llenarPeliculas(ComboBox combobox_pelicula)
+        private static List<string> obtenerListaPeliculas()
         {
+            List<string> listaPeliculas = new List<string>();
+
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
-                string query = "SELECT * FROM pelicula;";
+                ManagerConnection.OpenConnection();
+                string query = "SELECT titulo FROM pelicula;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                 {
-                    MySqlDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        combobox_pelicula.Items.Add(reader.GetString(1));
+                        while (reader.Read())
+                        {
+                            listaPeliculas.Add(reader.GetString(0));
+                        }
                     }
-
-                    reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
+
+            return listaPeliculas;
         }
+
 
         public static int obtenerIdPelicula(ComboBox combobox_pelicula) {
 
@@ -422,7 +429,7 @@ namespace ClickTix.Modelo
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT id FROM pelicula where titulo=@nombre_seleccionado;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -437,7 +444,7 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
             return idReturn;
         }
@@ -448,7 +455,7 @@ namespace ClickTix.Modelo
             int idReturn = 0;
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT id FROM idioma where idioma=@idioma_seleccionado;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -463,7 +470,7 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
             return idReturn;        
         }
@@ -526,7 +533,7 @@ namespace ClickTix.Modelo
             {
                 using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
-                    mysqlConnection.Open();
+                    ManagerConnection.OpenConnection();
                     string query = "SELECT id FROM turno WHERE hora = @fecha_seleccionada;";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -590,7 +597,7 @@ namespace ClickTix.Modelo
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "select nro_sala, sala.id from sucursal " +
                     "inner join sala " +
                     "on sucursal.id = sala.id_sucursal " +
@@ -610,7 +617,7 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
 
             return idReturn;
@@ -624,7 +631,7 @@ namespace ClickTix.Modelo
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "select id_sala from funcion where id = @idFuncion";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -640,7 +647,7 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
 
             return idReturn;
@@ -650,7 +657,7 @@ namespace ClickTix.Modelo
             combobox_sala.Items.Clear();
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "select nro_sala from sucursal " +
                     "inner join sala " +
                     "on sucursal.id = sala.id_sucursal " +
@@ -669,7 +676,7 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
             combobox_sala.Enabled = true;
         }
@@ -677,7 +684,7 @@ namespace ClickTix.Modelo
         private static void llenarTurnos(ComboBox combobox_turno) {
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT * FROM turno;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -691,7 +698,7 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -701,9 +708,9 @@ namespace ClickTix.Modelo
         {
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
 
-                
+
                 if (turnos.Count > 0)
                 {
                    
@@ -724,7 +731,7 @@ namespace ClickTix.Modelo
                     }
                 }
 
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -815,7 +822,7 @@ namespace ClickTix.Modelo
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT id FROM turno;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -832,7 +839,7 @@ namespace ClickTix.Modelo
                         }
                     }
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
 
             return idsDeTurno;
@@ -854,7 +861,7 @@ namespace ClickTix.Modelo
 
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
 
                 string query = "SELECT turno_id " +
                                "FROM funcion " +
@@ -889,7 +896,7 @@ namespace ClickTix.Modelo
         {
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT s.id_sucursal FROM funcion f " +
                                "INNER JOIN sala s ON f.id_sala = s.id " +
                                "WHERE f.id_sala = @IdSala;";
@@ -908,7 +915,7 @@ namespace ClickTix.Modelo
                         return -1; // Por ejemplo, -1 podría indicar que no se encontró la sala.
                     }
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -920,7 +927,7 @@ namespace ClickTix.Modelo
         {
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT * FROM idioma;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -934,14 +941,14 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
         }
         private static void llenarDimensiones(ComboBox combobox_dimension)
         {
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT * FROM dimension;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -955,7 +962,7 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
         }
 
@@ -963,7 +970,7 @@ namespace ClickTix.Modelo
         {
             using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
             {
-                mysqlConnection.Open();
+                ManagerConnection.OpenConnection();
                 string query = "SELECT * FROM sucursal where id <> 0;";
 
                 using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
@@ -977,7 +984,7 @@ namespace ClickTix.Modelo
 
                     reader.Close();
                 }
-                mysqlConnection.Close();
+                ManagerConnection.CloseConnection();
             }
         }
         public static int crearFuncion(Funcion funcion)
@@ -1071,7 +1078,7 @@ namespace ClickTix.Modelo
             {
                 using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
                 {
-                    mysqlConnection.Open();
+                    ManagerConnection.OpenConnection();
 
                     
                     string deleteAsientoQuery = "DELETE FROM asiento WHERE id_funcion = @id";

@@ -23,7 +23,7 @@ namespace ClickTix.Modelo
                 {
                     ManagerConnection.OpenConnection();
 
-                    string query =  "SELECT id, nombre, apellido, usuario, is_admin, id_sucursal FROM usuario_sistema WHERE LOWER(nombre) LIKE @searchTerm OR LOWER(apellido) LIKE @searchTerm ";
+                    string query = "SELECT u.id, u.nombre, u.apellido, u.usuario, u.is_admin, u.id_sucursal, s.nombre AS nombre_sucursal FROM usuario_sistema u JOIN sucursal s ON u.id_sucursal = s.id WHERE LOWER(u.nombre) LIKE @searchTerm OR LOWER(u.apellido) LIKE @searchTerm OR LOWER(s.nombre) LIKE @searchTerm";
 
                     using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
                     {
@@ -147,8 +147,8 @@ namespace ClickTix.Modelo
         }
         public static bool CrearEmpleado(EmpleadoA empleado)
         {
-            string query = "INSERT INTO usuario_sistema (id,nombre, apellido, pass, id_sucursal, usuario) " +
-                           "VALUES (@id,@nombre, @apellido, @pass, @id_sucursal, @usuario)";
+            string query = "INSERT INTO usuario_sistema (id,nombre, apellido, pass, id_sucursal, usuario, is_admin) " +
+                           "VALUES (@id,@nombre, @apellido, @pass, @id_sucursal, @usuario, @is_admin)";
 
             MySqlCommand cmd = new MySqlCommand(query, ManagerConnection.getInstance()) ;
             cmd.Parameters.AddWithValue("@id", ObtenerMaxIdEmpleado() + 1);
@@ -157,6 +157,8 @@ namespace ClickTix.Modelo
             cmd.Parameters.AddWithValue("@pass", empleado.Pass);
             cmd.Parameters.AddWithValue("@id_sucursal", empleado.Id_Sucursal);
             cmd.Parameters.AddWithValue("@usuario", empleado.Usuario);
+            cmd.Parameters.AddWithValue("@is_admin", empleado.is_admin);
+
 
             try
             {
