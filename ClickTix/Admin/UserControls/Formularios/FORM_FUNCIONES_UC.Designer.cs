@@ -46,6 +46,7 @@
             this.combobox_sucursal = new System.Windows.Forms.ComboBox();
             this.label_sucursal = new System.Windows.Forms.Label();
             this.back_pelicula = new System.Windows.Forms.Button();
+            this.traer_turnos_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -223,10 +224,21 @@
             this.back_pelicula.UseVisualStyleBackColor = true;
             this.back_pelicula.Click += new System.EventHandler(this.back_pelicula_Click_1);
             // 
+            // traer_turnos_btn
+            // 
+            this.traer_turnos_btn.Location = new System.Drawing.Point(462, 156);
+            this.traer_turnos_btn.Name = "traer_turnos_btn";
+            this.traer_turnos_btn.Size = new System.Drawing.Size(90, 35);
+            this.traer_turnos_btn.TabIndex = 65;
+            this.traer_turnos_btn.Text = "Traer turnos disponibles";
+            this.traer_turnos_btn.UseVisualStyleBackColor = true;
+            this.traer_turnos_btn.Click += new System.EventHandler(this.traer_turnos_btn_Click);
+            // 
             // FORM_FUNCIONES_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.traer_turnos_btn);
             this.Controls.Add(this.back_pelicula);
             this.Controls.Add(this.label_sucursal);
             this.Controls.Add(this.combobox_sucursal);
@@ -274,5 +286,6 @@
         private System.Windows.Forms.ComboBox combobox_sucursal;
         private System.Windows.Forms.Label label_sucursal;
         private System.Windows.Forms.Button back_pelicula;
+        private System.Windows.Forms.Button traer_turnos_btn;
     }
 }

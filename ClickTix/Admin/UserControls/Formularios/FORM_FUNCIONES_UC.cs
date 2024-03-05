@@ -198,6 +198,10 @@ namespace ClickTix.UserControls
                 this.combobox_idioma.Enabled = false;
                 this.combobox_dimension.Enabled = false;
                 this.combobox_sala.Enabled = false;
+                combobox_sala.SelectedItem = null;
+                combobox_sala.Text = "";
+
+                funcionActual.Id_Sala = 0;
                 funcionActual.Id_Turno = 0;
 
                 combobox_turno.Enabled = false;
@@ -209,7 +213,6 @@ namespace ClickTix.UserControls
         }
         private void cambioFecha(object sender, EventArgs e)
         {
-            llenarTurnosDisponibles();
             
 
 
@@ -226,9 +229,18 @@ namespace ClickTix.UserControls
             combobox_sala.SelectedItem = null;
             combobox_sala.Text = "";
 
+
+            combobox_sucursal.SelectedItem = null;
+            combobox_sucursal.Text = "";
+
+
+
             combobox_turno.Enabled=false;
             combobox_turno.SelectedItem = null;
             combobox_turno.Text = "";
+
+            this.combobox_idioma.Enabled = false;
+            this.combobox_dimension.Enabled = false;
         }
         private void cambioSucursal(object sender, EventArgs e)
         {
@@ -264,9 +276,6 @@ namespace ClickTix.UserControls
             combobox_turno.Enabled = false;
             combobox_turno.SelectedItem = null;
             combobox_turno.Text = "";
-
-
-            llenarTurnosDisponibles();
         }
         private void cambioIdioma(object sender, EventArgs e)
         {
@@ -320,43 +329,35 @@ namespace ClickTix.UserControls
 
         }
 
-        private void llenarTurnosDisponibles()
-        {
-            combobox_turno.Items.Clear();
-            this.combobox_turno.Enabled = true;
-            int idSucursal = Funcion_Controller.ObtenerIdSucursalPorIdSala(Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal));
-
-
-
-            List<int> listaTurnosCompleta= Funcion_Controller.ObtenerTodosLosIdsDeTurno();
-
-            List<int> listaTurnosUsados = Funcion_Controller.ObtenerTurnosPorPeliculaYSalaYFecha(Funcion_Controller.obtenerIdPelicula( combobox_pelicula), Funcion_Controller.obtenerIdSala(combobox_sala, combobox_sucursal), combobox_fecha.Value.Date);
-
-
-            List<int> listaSinRepetidos = listaTurnosCompleta
-                .Union(listaTurnosUsados)
-                .Except(listaTurnosCompleta.Intersect(listaTurnosUsados))
-                .ToList();
-
-
-            List<int> listaTurnosDisponibles = listaSinRepetidos;
-
-            foreach (int valor in listaTurnosDisponibles)
-            {
-                Console.WriteLine(valor);
-            }
-
-
-            Funcion_Controller.LlenarTurnos(combobox_turno, listaTurnosDisponibles);
-
-
-
-        }
-
+        
         private void back_pelicula_Click_1(object sender, EventArgs e)
         {
             ABM_FUNCION_UC abmfuncion = new ABM_FUNCION_UC();
             Index_Admin.addUserControl(abmfuncion);
         }
+
+        private void traer_turnos_btn_Click(object sender, EventArgs e)
+        {
+            if (combobox_sucursal.SelectedItem == null || string.IsNullOrEmpty(combobox_fecha.Text) || string.IsNullOrEmpty(combobox_sala.Text))
+            {
+                MessageBox.Show("Por favor, complete los campos FECHA, SUCURSAL y SALA.", "Campos Vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!DateTime.TryParse(combobox_fecha.Text, out DateTime fechaSeleccionada))
+            {
+                MessageBox.Show("Formato de fecha no válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            combobox_turno.Enabled =   true;
+            combobox_turno.Items.Clear();
+
+            List<int> turnosNoDisponibles = Funcion_Controller.obtenerTurnosNoDisponiblesPorFechaYSala(fechaSeleccionada, funcionActual.Id_Sala);
+            List<int> turnos = Funcion_Controller.ObtenerTodosLosIdsDeTurno();
+
+            List<int> turnosDisponibles = turnos.Except(turnosNoDisponibles).ToList();
+            Funcion_Controller.LlenarTurnos(combobox_turno, turnosDisponibles);
+
+        }
+
     }
 }

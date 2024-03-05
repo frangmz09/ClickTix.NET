@@ -93,6 +93,13 @@ namespace ClickTix.Empleado.UserControls
             idioma_ticket.Text = idioma;
             precio_ticket.Text = precio.ToString();
             DateTime fechaHoraFuncion = new DateTime(fecha.Year, fecha.Month, fecha.Day, int.Parse(hora.Split(':')[0]), int.Parse(hora.Split(':')[1]), 0);
+            int SucursalActual = (int)Program.logeado.Id_sucursal;
+            
+            if (Funcion_Controller.ObtenerIdSucursalPorIdFuncion(ticket.id_funcion) != SucursalActual)
+            {
+                error_sucursal.Visible = true;
+                button1.Enabled = false;
+            }
             if (DateTime.Now > fechaHoraFuncion)
             {
                 text_error.Text = "La función de la cual se retiró la entrada ya caducó";

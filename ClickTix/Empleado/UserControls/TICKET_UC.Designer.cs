@@ -46,6 +46,7 @@
             this.btn_MenuPrincipal = new System.Windows.Forms.Button();
             this.text_error = new System.Windows.Forms.Label();
             this.adv_1 = new System.Windows.Forms.Label();
+            this.error_sucursal = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -231,10 +232,24 @@
             this.adv_1.Text = "Este ticket ya fue previamente impreso";
             this.adv_1.Visible = false;
             // 
+            // error_sucursal
+            // 
+            this.error_sucursal.AutoSize = true;
+            this.error_sucursal.BackColor = System.Drawing.Color.Transparent;
+            this.error_sucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.error_sucursal.ForeColor = System.Drawing.Color.Red;
+            this.error_sucursal.Location = new System.Drawing.Point(492, 140);
+            this.error_sucursal.Name = "error_sucursal";
+            this.error_sucursal.Size = new System.Drawing.Size(305, 20);
+            this.error_sucursal.TabIndex = 23;
+            this.error_sucursal.Text = "Este ticket pertenece a otra sucursal";
+            this.error_sucursal.Visible = false;
+            // 
             // TICKET_UC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.error_sucursal);
             this.Controls.Add(this.adv_1);
             this.Controls.Add(this.text_error);
             this.Controls.Add(this.btn_MenuPrincipal);
@@ -279,5 +294,6 @@
         private System.Windows.Forms.Button btn_MenuPrincipal;
         private System.Windows.Forms.Label text_error;
         private System.Windows.Forms.Label adv_1;
+        private System.Windows.Forms.Label error_sucursal;
     }
 }

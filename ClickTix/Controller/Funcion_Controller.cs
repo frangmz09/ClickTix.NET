@@ -167,7 +167,35 @@ namespace ClickTix.Modelo
 
             return peliculas;
         }
-        
+        public static List<int> obtenerTurnosNoDisponiblesPorFechaYSala(DateTime fecha, int idSala)
+        {
+            List<int> turnos = new List<int>();
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                ManagerConnection.OpenConnection();
+
+                string query = "SELECT funcion.turno_id FROM funcion JOIN sala ON funcion.id_sala = sala.id JOIN sucursal ON sucursal.id = sala.id_sucursal JOIN turno ON turno.id = funcion.turno_id WHERE funcion.fecha = @fecha AND funcion.id_sala = @id_sala;";
+
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@fecha", fecha);
+                    command.Parameters.AddWithValue("@id_sala", idSala);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int idTurno = reader.GetInt32("turno_id");
+                            turnos.Add(idTurno);
+                        }
+                    }
+                }
+                ManagerConnection.CloseConnection();
+            }
+
+            return turnos;
+        }
+
         public static List<string> obtenerTodasFechasPorSucursal()
         {
             List<string> fechas = new List<string>();
@@ -1229,6 +1257,39 @@ namespace ClickTix.Modelo
 
             return funcionAuxiliar;
         }
+
+        public static int ObtenerIdSucursalPorIdFuncion(int idFuncion)
+        {
+            int idSucursal = -1;
+
+            ManagerConnection.OpenConnection();
+
+            string query = @"SELECT sucursal.id 
+                     FROM funcion
+                     JOIN sala ON funcion.id_sala = sala.id
+                     JOIN sucursal ON sucursal.id = sala.id_sucursal 
+                     WHERE funcion.id = @idFuncion";
+
+            using (MySqlConnection mysqlConnection = ManagerConnection.getInstance())
+            {
+                using (MySqlCommand command = new MySqlCommand(query, mysqlConnection))
+                {
+                    command.Parameters.AddWithValue("@idFuncion", idFuncion);
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        idSucursal = Convert.ToInt32(result);
+                    }
+                }
+            }
+
+            ManagerConnection.CloseConnection();
+
+            return idSucursal;
+        }
+
 
 
 
