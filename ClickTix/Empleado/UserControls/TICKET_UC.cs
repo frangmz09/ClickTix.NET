@@ -20,6 +20,8 @@ using System.IO;
 using iTextSharp.tool.xml.html;
 using ClickTix.Controller;
 using ClickTix.UserControls;
+using Org.BouncyCastle.Utilities;
+using static System.Net.WebRequestMethods;
 
 namespace ClickTix.Empleado.UserControls
 {
@@ -115,33 +117,15 @@ namespace ClickTix.Empleado.UserControls
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < filas.Count; i++)
-            {
-                this.generarPDF(filas[i], columnas[i]);
-                Ticket_Controller.MarcarTicketComoRetirado(idsTicketsRecibidos[i]);
-            }
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < filas.Count; i++)
-            {
-                this.generarPDF(filas[i], columnas[i]);
-            }
-        }
-        private void generarPDF(int fila, int columna)
-        {
             SaveFileDialog guardar = new SaveFileDialog();
             guardar.FileName = DateTime.Now.ToString("ddMMyyyyHHmmss") + ".pdf";
-            string html = Properties.Resources.ticket;
-            html = html.Replace("@nroSalaTicket", nrosala_ticket.Text);
-            html = html.Replace("@tituloTicket", nombre_pelicula_ticket.Text);
-            html = html.Replace("@fechaTicket", fecha_ticket.Text);
-            html = html.Replace("@horaTicket", hora_ticket.Text);
-            html = html.Replace("@filaTicket", fila.ToString());
-            html = html.Replace("@columnaTicket", columna.ToString());
-            html = html.Replace("@precioTicket", precio_ticket.Text);
-            html = html.Replace("@nombreSucursalTicket", Empleado_Controller.nombreSucursalFuncion(idFuncionAux));
-            html = html.Replace("@cuitSucursalTicket", Empleado_Controller.cuitSucursalFuncion(idFuncionAux));
+
+            string content= "";
+            for (int i = 0; i < filas.Count; i++)
+            {
+                content += generarPDF(filas[i],columnas[i]);
+                Ticket_Controller.MarcarTicketComoRetirado(idsTicketsRecibidos[i]);
+            }
 
             if (guardar.ShowDialog() == DialogResult.OK)
             {
@@ -158,7 +142,7 @@ namespace ClickTix.Empleado.UserControls
                     //img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 60);
                     //pdfDoc.Add(img);
 
-                    using (StringReader sr = new StringReader(html))
+                    using (StringReader sr = new StringReader(content))
                     {
                         XMLWorkerHelper.GetInstance().ParseXHtml(Writer, pdfDoc, sr);
                     }
@@ -166,6 +150,24 @@ namespace ClickTix.Empleado.UserControls
                     stream.Close();
                 }
             }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < filas.Count; i++)
+            {
+                this.generarPDF(filas[i], columnas[i]);
+            }
+        }
+        private string generarPDF(int fila, int columna)
+        {
+            string content = "< h1 > ClickTix </ h1 >" +
+        "< hr />\r\n        < h1 >< strong > Sala: "+ nrosala_ticket.Text + " </ strong ></ h1 >\r\n        < h2 >< strong > "+ nombre_pelicula_ticket.Text + " </ strong ></ h2 >\r\n        < h3 >< strong > "+ fecha_ticket.Text + " "+ hora_ticket.Text + " </ strong > </ h3 >\r\n        < p >< strong > " +
+        "Fila:"+ fila + " Butaca: "+ columna + "</ strong > </ p >\r\n        < p >< strong > Precio:$"+ precio_ticket.Text + " </ strong > </ p >\r\n        < hr />\r\n        < p >< strong > "+ Empleado_Controller.nombreSucursalFuncion(idFuncionAux) + " </ strong > </ p >\r\n        < p >< strong > "+ Empleado_Controller.cuitSucursalFuncion(idFuncionAux) + " </ strong > </ p >";
+            string html = Properties.Resources.ticket;
+            html = html.Replace("@content", content);
+
+            return html;
+            
         }
 
         private void loadTicketStrings(int idFuncion)

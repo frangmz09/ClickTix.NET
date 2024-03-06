@@ -50,7 +50,7 @@ namespace ClickTix.Controller
             ManagerConnection.CloseConnection();
             return ticketAuxiliar;
         }
-        public static int crearTicket(int idFuncion, int filas, int columnas)
+        public static int crearTicket(int idFuncion, int filas, int columnas, int idLabel)
         {
             string abreviatura = Sucursal_Controller.ObtenerAbreviaturaSucursalPorIdFuncion(idFuncion);
             int id = ObtenerMaxIdTicket() + 1;
@@ -65,7 +65,7 @@ namespace ClickTix.Controller
             cmd.Parameters.AddWithValue("@columnas", columnas);
             cmd.Parameters.AddWithValue("@fecha", DateTime.Now);
             cmd.Parameters.AddWithValue("@precio_al_momento", Funcion_Controller.obtenerPrecioFuncion(idFuncion));
-            cmd.Parameters.AddWithValue("@id_label", abreviatura+id.ToString("D10"));
+            cmd.Parameters.AddWithValue("@id_label", abreviatura+ idLabel.ToString("D10"));
             cmd.Parameters.AddWithValue("@is_withdrawn", 0);
 
 
