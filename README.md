@@ -69,9 +69,3 @@ En desarrollo activo, con un gran progreso pero falto de detalles en algunos asp
 - **Email:** [frangomez0409@gmail.com](mailto:frangomez0409@gmail.com)
 - **LinkedIn:** [![LinkedIn](https://img.shields.io/badge/Franco%20G%C3%B3mez%20Delgado-black?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/francogomezdelgado/)
 
-
-
-
-## Enlace al Demo 🚀
-Enlace no disponible aun:
-[¡Prueba ClickTix ahora!](link)
